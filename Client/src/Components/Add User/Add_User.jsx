@@ -1,0 +1,242 @@
+import React, { useState } from 'react';
+import UserIcon from '../../../../Storage/Add_User.jpg';
+
+function Add_User() {
+    const [formData, setFormData] = useState({
+        fullName: '',
+        email: '',
+        address: '',
+        dob: '',
+        gender: '',
+        mobNo: '',
+        qualification: '',
+        username: '',
+        password: '',
+        confirmPassword: '',
+        workLocation: '',
+        department: '',
+        role: '',
+    });
+
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setFormData((prevData) => ({
+            ...prevData,
+            [name]: value,
+        }));
+    };
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        // Handle form submission logic here
+        console.log(formData);
+    };
+
+    return (
+        <div className="relative isolate p-6 lg:px-8 bg-gradient-to-r from-blue-800 to-blue-600">
+            <div className="absolute inset-x-0 -top-40 -z-10 transform-gpu overflow-hidden blur-3xl sm:-top-80" aria-hidden="true">
+                <div
+                    className="relative left-[calc(50%-11rem)] aspect-[1155/678] w-[36.125rem] -translate-x-1/2 rotate-[30deg] bg-gradient-to-tr from-[#ff80b5] to-[#9089fc] opacity-30 sm:left-[calc(50%-30rem)] sm:w-[72.1875rem]"
+                    style={{
+                        clipPath: 'polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)',
+                    }}
+                ></div>
+            </div>
+
+            {/* Header Section */}
+            <div className="mx-auto max-w-2xl sm:py-48 text-center">
+                <h1 className="text-white text-5xl font-bold mb-4">Add New User</h1>
+                <p className="text-gray-300 text-lg">Please fill out the form below to add a new user.</p>
+            </div>
+
+            {/* Centered Image Section */}
+            <div className="flex justify-center mb-6">
+                <img
+                    className="object-cover object-center rounded-full h-32 w-32 md:h-48 md:w-48 border-4 border-white shadow-lg"
+                    alt="User Icon"
+                    src={UserIcon}
+                />
+            </div>
+
+            {/* Form Section with added background color and margin at the bottom */}
+            <section className="bg-gray-100 shadow-lg rounded-lg p-8 mx-4 md:mx-8 mb-8">
+                <form className="grid grid-cols-1 gap-6 md:grid-cols-2 md:gap-8" onSubmit={handleSubmit}>
+                    {/* Form Fields */}
+                    <div className="flex flex-col mb-4">
+                        <label className="text-gray-800 font-semibold mb-2" htmlFor="fullName">Full Name</label>
+                        <input
+                            type="text"
+                            id="fullName"
+                            name="fullName"
+                            value={formData.fullName}
+                            onChange={handleChange}
+                            className="p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                            required
+                        />
+                    </div>
+                    <div className="flex flex-col mb-4">
+                        <label className="text-gray-800 font-semibold mb-2" htmlFor="email">Email</label>
+                        <input
+                            type="email"
+                            id="email"
+                            name="email"
+                            value={formData.email}
+                            onChange={handleChange}
+                            className="p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                            required
+                        />
+                    </div>
+                    <div className="flex flex-col mb-4">
+                        <label className="text-gray-800 font-semibold mb-2" htmlFor="address">Address</label>
+                        <input
+                            type="text"
+                            id="address"
+                            name="address"
+                            value={formData.address}
+                            onChange={handleChange}
+                            className="p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                            required
+                        />
+                    </div>
+                    <div className="flex flex-col mb-4">
+                        <label className="text-gray-800 font-semibold mb-2" htmlFor="dob">Date of Birth</label>
+                        <input
+                            type="date"
+                            id="dob"
+                            name="dob"
+                            value={formData.dob}
+                            onChange={handleChange}
+                            className="p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                            required
+                        />
+                    </div>
+                    <div className="flex flex-col mb-4">
+                        <label className="text-gray-800 font-semibold mb-2" htmlFor="gender">Gender</label>
+                        <select
+                            id="gender"
+                            name="gender"
+                            value={formData.gender}
+                            onChange={handleChange}
+                            className="p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                            required
+                        >
+                            <option value="">Select Gender</option>
+                            <option value="male">Male</option>
+                            <option value="female">Female</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                    <div className="flex flex-col mb-4">
+                        <label className="text-gray-800 font-semibold mb-2" htmlFor="mobNo">Mobile Number</label>
+                        <input
+                            type="text"
+                            id="mobNo"
+                            name="mobNo"
+                            value={formData.mobNo}
+                            onChange={handleChange}
+                            className="p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                            required
+                        />
+                    </div>
+                    <div className="flex flex-col mb-4">
+                        <label className="text-gray-800 font-semibold mb-2" htmlFor="qualification">Qualification</label>
+                        <input
+                            type="text"
+                            id="qualification"
+                            name="qualification"
+                            value={formData.qualification}
+                            onChange={handleChange}
+                            className="p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                            required
+                        />
+                    </div>
+                    <div className="flex flex-col mb-4">
+                        <label className="text-gray-800 font-semibold mb-2" htmlFor="username">Username</label>
+                        <input
+                            type="text"
+                            id="username"
+                            name="username"
+                            value={formData.username}
+                            onChange={handleChange}
+                            className="p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                            required
+                        />
+                    </div>
+                    <div className="flex flex-col mb-4">
+                        <label className="text-gray-800 font-semibold mb-2" htmlFor="password">Password</label>
+                        <input
+                            type="password"
+                            id="password"
+                            name="password"
+                            value={formData.password}
+                            onChange={handleChange}
+                            className="p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                            required
+                        />
+                    </div>
+                    <div className="flex flex-col mb-4">
+                        <label className="text-gray-800 font-semibold mb-2" htmlFor="confirmPassword">Confirm Password</label>
+                        <input
+                            type="password"
+                            id="confirmPassword"
+                            name="confirmPassword"
+                            value={formData.confirmPassword}
+                            onChange={handleChange}
+                            className="p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                            required
+                        />
+                    </div>
+                    <div className="flex flex-col mb-4">
+                        <label className="text-gray-800 font-semibold mb-2" htmlFor="workLocation">Work Location</label>
+                        <select
+                            id="workLocation"
+                            name="workLocation"
+                            value={formData.workLocation}
+                            onChange={handleChange}
+                            className="p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                            required
+                        >
+                            <option value="">Select Location</option>
+                            <option value="remote">Remote</option>
+                            <option value="office">Office</option>
+                        </select>
+                    </div>
+                    <div className="flex flex-col mb-4">
+                        <label className="text-gray-800 font-semibold mb-2" htmlFor="department">Department</label>
+                        <input
+                            type="text"
+                            id="department"
+                            name="department"
+                            value={formData.department}
+                            onChange={handleChange}
+                            className="p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                            required
+                        />
+                    </div>
+                    <div className="flex flex-col mb-4">
+                        <label className="text-gray-800 font-semibold mb-2" htmlFor="role">Role</label>
+                        <input
+                            type="text"
+                            id="role"
+                            name="role"
+                            value={formData.role}
+                            onChange={handleChange}
+                            className="p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                            required
+                        />
+                    </div>
+                    <div className="col-span-2">
+                        <button
+                            type="submit"
+                            className="w-full py-3 bg-indigo-600 text-white font-semibold rounded-md hover:bg-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-700"
+                        >
+                            Add User
+                        </button>
+                    </div>
+                </form>
+            </section>
+        </div>
+    );
+}
+
+export default Add_User;
