@@ -103,7 +103,7 @@ function Home() {
                                 <span
                                     className="text-white group-hover:opacity-100 group-hover:duration-1000 duration-100 opacity-0 absolute top-2.5 left-6 z-10"
                                 >Explore!</span
-                                >
+                                > 
                             </button>
                         </div>
                     </div>
