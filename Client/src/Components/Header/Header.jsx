@@ -63,6 +63,7 @@ function Header() {
                         <a href="#" className="text-sm font-semibold text-gray-900">Group</a>
                         <a href="#" className="text-sm font-semibold text-gray-900">Submit Report</a>
                         <a href="#" className="text-sm font-semibold text-gray-900">Projects</a>
+                        <a href="/adduser" className="text-sm font-semibold text-gray-900">Add User</a>
                     </div>
 
                     {/* Profile Icon and Bell Section */}
@@ -158,6 +159,9 @@ function Header() {
                         </a>
                         <a href="#" className="block px-3 py-2 text-base font-semibold text-gray-900 hover:bg-gray-100">
                             Projects
+                        </a>
+                        <a href="/adduser" className="block px-3 py-2 text-base font-semibold text-gray-900 hover:bg-gray-100">
+                            Add User
                         </a>
                         <div className="flex flex-col gap-7">
                             <div className="flex items-center justify-between w-full">
