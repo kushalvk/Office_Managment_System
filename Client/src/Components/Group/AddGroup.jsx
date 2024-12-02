@@ -1,7 +1,7 @@
 
 
 import React, { useState } from 'react';
-import GroupIcon from '../../../../Storage/groups.png';
+import GroupIcon from '../../../../Storage/Add_User.jpg';
 
 function Add_Group() {
     // Form data state
