@@ -5,8 +5,10 @@ function AddTask() {
     const [task, setTask] = useState({
         title: "",
         description: "",
-        employeeName: "",
         completionDate: "",
+        type: "task", // Default to "task"
+        groupName: "", // For project type only
+        employeeName: "",
     });
 
     const options = [
@@ -51,7 +53,7 @@ function AddTask() {
                     }}
                 ></div>
             </div>
-            <h1 className="text-white text-4xl font-bold mb-4 mt-20">Add Task</h1>
+            <h1 className="text-white text-4xl font-bold mb-4 mt-20">Add Work</h1>
             <form className="space-y-6 bg-white p-6 rounded-lg shadow-lg">
                 <div>
                     <label className="block text-sm font-medium text-gray-700">Title</label>
@@ -74,6 +76,50 @@ function AddTask() {
                         placeholder="Enter task description"
                     />
                 </div>
+                <div>
+                    <label className="block text-sm font-medium text-gray-700">Completion Date</label>
+                    <input
+                        type="date"
+                        name="completionDate"
+                        value={task.completionDate}
+                        onChange={handleInputChange}
+                        className="w-full mt-1 p-2 border rounded-md"
+                    />
+                </div>
+                <div>
+                    <label className="block text-sm font-medium text-gray-700">Type</label>
+                    <select
+                        name="type"
+                        value={task.type}
+                        onChange={handleInputChange}
+                        className="w-full mt-1 p-2 border rounded-md"
+                    >
+                        <option value="task">Task</option>
+                        <option value="project">Project</option>
+                    </select>
+                </div>
+
+                {task.type === "project" && (
+                    <>
+                        <div>
+                            <label className="block text-sm font-medium text-gray-700">Group Name</label>
+                            <select
+                                name="groupName"
+                                value={task.groupName}
+                                onChange={handleInputChange}
+                                className="w-full mt-1 p-2 border rounded-md"
+                            >
+                                <option value="">Select Group</option>
+                                <option value="Group A">Group A</option>
+                                <option value="Group B">Group B</option>
+                                <option value="Group C">Group C</option>
+                                {/* Add other group options as needed */}
+                            </select>
+                        </div>
+                    </>
+                )}
+
+
                 <div>
                     <label className="block text-sm font-medium text-gray-700">Assigned to</label>
                     <div className="relative">
@@ -123,16 +169,7 @@ function AddTask() {
                         )}
                     </div>
                 </div>
-                <div>
-                    <label className="block text-sm font-medium text-gray-700">Completion Date</label>
-                    <input
-                        type="date"
-                        name="completionDate"
-                        value={task.completionDate}
-                        onChange={handleInputChange}
-                        className="w-full mt-1 p-2 border rounded-md"
-                    />
-                </div>
+
                 <button
                     type="button"
                     onClick={handleSubmit}

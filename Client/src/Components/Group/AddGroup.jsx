@@ -100,7 +100,7 @@ function Add_Group() {
 
             {/* Header Section */}
             <div className="mx-auto max-w-2xl sm:py-48 text-center">
-                <h1 className="text-white text-5xl font-bold mb-4">Add New Group</h1>
+                <h1 className="text-white text-3xl sm:text-5xl font-bold mb-4">Add New Group</h1>
                 <p className="text-gray-300 text-lg">Please fill out the form below to add a new group.</p>
             </div>
 
@@ -196,13 +196,12 @@ function Add_Group() {
                         </div>
                     )}
                     <div className="col-span-2">
-                        <button
-                            type="button"
-                            onClick={handleAddMember}
-                            className="w-[12vw] py-3 bg-green-600 text-white font-semibold rounded-md hover:bg-green-500 focus:outline-none focus:ring-2 focus:ring-green-700"
-                        >
-                            Add Member
-                        </button>
+                    <button
+                        onClick={handleAddMember}
+                        className="bg-green-600 text-white px-4 py-2 rounded-md mb-4"
+                    >
+                        Add Member
+                    </button>
                     </div>
                     <div className="flex flex-col mb-4">
                         <label className="text-gray-800 font-semibold mb-2" htmlFor="createdBy">Created By</label>

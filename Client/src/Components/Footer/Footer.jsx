@@ -21,16 +21,16 @@ function Footer() {
                         <h2 className="title-font font-medium text-gray-900 tracking-widest text-sm mb-3">AUTHENTICATION</h2>
                         <nav className="list-none mb-10  ">
                             <li>
-                                <a className="text-gray-600 hover:text-gray-800">Home</a>
+                                <a href="/" className="text-gray-600 hover:text-gray-800">Home</a>
                             </li>
                             <li>
-                                <a className="text-gray-600 hover:text-gray-800">Login</a>
+                                <a href="/login" className="text-gray-600 hover:text-gray-800">Login</a>
                             </li>
                             <li>
-                                <a className="text-gray-600 hover:text-gray-800">Profile</a>
+                                <a href="/profile" className="text-gray-600 hover:text-gray-800">Profile</a>
                             </li>
                             <li>
-                                <a className="text-gray-600 hover:text-gray-800">Location</a>
+                                <a href="/Show-requirment" className="text-gray-600 hover:text-gray-800">Requirments</a>
                             </li>
                         </nav>
                     </div>
@@ -38,16 +38,16 @@ function Footer() {
                         <h2 className="title-font font-medium text-gray-900 tracking-widest text-sm mb-3">OFFICE</h2>
                         <nav className="list-none mb-10">
                             <li>
-                                <a className="text-gray-600 hover:text-gray-800">Task</a>
+                                <a href="/show-all-tasks" className="text-gray-600 hover:text-gray-800">Task</a>
                             </li>
                             <li>
-                                <a className="text-gray-600 hover:text-gray-800">Projects</a>
+                                <a href="/Show-all-project" className="text-gray-600 hover:text-gray-800">Projects</a>
                             </li>
                             <li>
-                                <a className="text-gray-600 hover:text-gray-800">Group</a>
+                                <a href="/show-group" className="text-gray-600 hover:text-gray-800">Group</a>
                             </li>
                             <li>
-                                <a className="text-gray-600 hover:text-gray-800">Report</a>
+                                <a href="/all-reports" className="text-gray-600 hover:text-gray-800">Report</a>
                             </li>
                         </nav>
                     </div>
@@ -55,16 +55,16 @@ function Footer() {
                         <h2 className="title-font font-medium text-gray-900 tracking-widest text-sm mb-3">YOUR SATISFACTION</h2>
                         <nav className="list-none mb-10">
                             <li>
-                                <a className="text-gray-600 hover:text-gray-800">Facilities</a>
+                                <a href="#" className="text-gray-600 hover:text-gray-800">Facilities</a>
                             </li>
                             <li>
-                                <a className="text-gray-600 hover:text-gray-800">Blog / News</a>
+                                <a href="#" className="text-gray-600 hover:text-gray-800">Blog / News</a>
                             </li>
                             <li>
-                                <a className="text-gray-600 hover:text-gray-800">Contact Us</a>
+                                <a href="#" className="text-gray-600 hover:text-gray-800">Contact Us</a>
                             </li>
                             <li>
-                                <a className="text-gray-600 hover:text-gray-800">About Us</a>
+                                <a href="#" className="text-gray-600 hover:text-gray-800">About Us</a>
                             </li>
                         </nav>
                     </div>
@@ -72,16 +72,16 @@ function Footer() {
                         <h2 className="title-font font-medium text-gray-900 tracking-widest text-sm mb-3">BEAUTY</h2>
                         <nav className="list-none mb-10">
                             <li>
-                                <a className="text-gray-600 hover:text-gray-800">Photos</a>
+                                <a href="#" className="text-gray-600 hover:text-gray-800">Photos</a>
                             </li>
                             <li>
-                                <a className="text-gray-600 hover:text-gray-800">Polices</a>
+                                <a href="#" className="text-gray-600 hover:text-gray-800">Polices</a>
                             </li>
                             <li>
-                                <a className="text-gray-600 hover:text-gray-800">Privacy Polices</a>
+                                <a href="#" className="text-gray-600 hover:text-gray-800">Privacy Polices</a>
                             </li>
                             <li>
-                                <a className="text-gray-600 hover:text-gray-800">Terms & Condition</a>
+                                <a href="#" className="text-gray-600 hover:text-gray-800">Terms & Condition</a>
                             </li>
                         </nav>
                     </div>
@@ -91,7 +91,7 @@ function Footer() {
                 <div className="container mx-auto py-4 px-5 flex flex-wrap flex-col sm:flex-row">
                     <p className="text-gray-500 text-sm text-center sm:text-left">© 2020 By Kushal & Harshad —
                         <a href="https://twitter.com/knyttneve" rel="noopener noreferrer" className="text-gray-600 ml-1"
-                           target="_blank">@knyttneve</a>
+                           target="_blank">@Prime Hub</a>
                     </p>
                     <span className="inline-flex sm:ml-auto sm:mt-0 mt-2 justify-center sm:justify-start">
                         <a className="text-gray-500">

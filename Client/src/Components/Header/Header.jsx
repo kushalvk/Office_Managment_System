@@ -16,6 +16,11 @@ function Header() {
         navigate('/login');
     }
 
+    // Handle Profile
+    const handleProfile = () => {
+        navigate('/profile')
+    }
+
     return (
         <>
             <header className="absolute inset-x-0 top-0 z-50">
@@ -60,10 +65,11 @@ function Header() {
                     <div className="hidden lg:flex lg:gap-x-12">
                         <a href="/" className="text-sm font-semibold text-gray-900">Home</a>
                         <a href="/show-all-tasks" className="text-sm font-semibold text-gray-900">Tasks</a>
-                        <a href="/show-group" className="text-sm font-semibold text-gray-900">Group</a>
-                        <a href="#" className="text-sm font-semibold text-gray-900">Submit Report</a>
-                        <a href="#" className="text-sm font-semibold text-gray-900">Projects</a>
+                        <a href="/sallary" className="text-sm font-semibold text-gray-900">Sallary</a>
+                        <a href="/all-reports" className="text-sm font-semibold text-gray-900">Reports</a>
+                        <a href="/Show-all-project" className="text-sm font-semibold text-gray-900">Projects</a>
                         <a href="/adduser" className="text-sm font-semibold text-gray-900">Add User</a>
+                        <a href="/add-work" className="text-sm font-semibold text-gray-900">Add Work</a>
                     </div>
 
                     {/* Profile Icon and Bell Section */}
@@ -103,6 +109,7 @@ function Header() {
                                 className="h-full w-full rounded-full object-cover border-2 border-gray-200"
                                 src="https://wallpapers.com/images/hd/professional-profile-pictures-1080-x-1080-460wjhrkbwdcp1ig.jpg"
                                 alt="Profile"
+                                onClick={handleProfile}
                             />
                         </button>
                         <button
@@ -157,17 +164,20 @@ function Header() {
                         <a href="/show-all-tasks" className="block px-3 py-2 text-base font-semibold text-gray-900 hover:bg-gray-100">
                             Tasks
                         </a>
-                        <a href="/show-group" className="block px-3 py-2 text-base font-semibold text-gray-900 hover:bg-gray-100">
-                            Group
+                        <a href="/sallary" className="block px-3 py-2 text-base font-semibold text-gray-900 hover:bg-gray-100">
+                            Sallary
                         </a>
-                        <a href="#" className="block px-3 py-2 text-base font-semibold text-gray-900 hover:bg-gray-100">
-                            Submit Report
+                        <a href="/all-reports" className="block px-3 py-2 text-base font-semibold text-gray-900 hover:bg-gray-100">
+                            Reports
                         </a>
-                        <a href="#" className="block px-3 py-2 text-base font-semibold text-gray-900 hover:bg-gray-100">
+                        <a href="/Show-all-project" className="block px-3 py-2 text-base font-semibold text-gray-900 hover:bg-gray-100">
                             Projects
                         </a>
                         <a href="/adduser" className="block px-3 py-2 text-base font-semibold text-gray-900 hover:bg-gray-100">
                             Add User
+                        </a>
+                        <a href="/add-work" className="block px-3 py-2 text-base font-semibold text-gray-900 hover:bg-gray-100">
+                            Add Work
                         </a>
                         <div className="flex flex-col gap-7">
                             <div className="flex items-center justify-between w-full">

@@ -45,7 +45,7 @@ function Add_User() {
 
             {/* Header Section */}
             <div className="mx-auto max-w-2xl sm:py-48 text-center">
-                <h1 className="text-white text-5xl font-bold mb-4">Add New User</h1>
+                <h1 className="text-white text-3xl sm:text-5xl font-bold mb-4">Add New User</h1>
                 <p className="text-gray-300 text-lg">Please fill out the form below to add a new user.</p>
             </div>
 
@@ -58,7 +58,7 @@ function Add_User() {
                 />
             </div>
 
-            {/* Form Section with added background color and margin at the bottom */}
+            {/* Form Section */}
             <section className="bg-gray-100 shadow-lg rounded-lg p-8 mx-4 md:mx-8 mb-8">
                 <form className="grid grid-cols-1 gap-6 md:grid-cols-2 md:gap-8" onSubmit={handleSubmit}>
                     {/* Form Fields */}
@@ -188,18 +188,15 @@ function Add_User() {
                     </div>
                     <div className="flex flex-col mb-4">
                         <label className="text-gray-800 font-semibold mb-2" htmlFor="workLocation">Work Location</label>
-                        <select
+                        <input
+                            type="text"
                             id="workLocation"
                             name="workLocation"
                             value={formData.workLocation}
                             onChange={handleChange}
                             className="p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
                             required
-                        >
-                            <option value="">Select Location</option>
-                            <option value="remote">Remote</option>
-                            <option value="office">Office</option>
-                        </select>
+                        />
                     </div>
                     <div className="flex flex-col mb-4">
                         <label className="text-gray-800 font-semibold mb-2" htmlFor="department">Department</label>
@@ -225,12 +222,9 @@ function Add_User() {
                             required
                         />
                     </div>
-                    <div className="col-span-2">
-                        <button
-                            type="submit"
-                            className="w-full py-3 bg-indigo-600 text-white font-semibold rounded-md hover:bg-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-700"
-                        >
-                            Add User
+                    <div className="flex justify-center mb-4 md:col-span-2">
+                        <button type="submit" className="bg-blue-600 text-white p-3 rounded-lg shadow-md hover:bg-blue-700 transition duration-300">
+                            Submit
                         </button>
                     </div>
                 </form>
