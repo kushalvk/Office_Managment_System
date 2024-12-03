@@ -59,8 +59,8 @@ function Header() {
                     {/* Desktop Navigation Links */}
                     <div className="hidden lg:flex lg:gap-x-12">
                         <a href="/" className="text-sm font-semibold text-gray-900">Home</a>
-                        <a href="#" className="text-sm font-semibold text-gray-900">Tasks</a>
-                        <a href="/addgroup" className="text-sm font-semibold text-gray-900">Group</a>
+                        <a href="/show-all-tasks" className="text-sm font-semibold text-gray-900">Tasks</a>
+                        <a href="/show-group" className="text-sm font-semibold text-gray-900">Group</a>
                         <a href="#" className="text-sm font-semibold text-gray-900">Submit Report</a>
                         <a href="#" className="text-sm font-semibold text-gray-900">Projects</a>
                         <a href="/adduser" className="text-sm font-semibold text-gray-900">Add User</a>
@@ -154,10 +154,10 @@ function Header() {
                         <a href="/" className="block px-3 py-2 text-base font-semibold text-gray-900 hover:bg-gray-100">
                             Home
                         </a>
-                        <a href="#" className="block px-3 py-2 text-base font-semibold text-gray-900 hover:bg-gray-100">
+                        <a href="/show-all-tasks" className="block px-3 py-2 text-base font-semibold text-gray-900 hover:bg-gray-100">
                             Tasks
                         </a>
-                        <a href="/addgroup" className="block px-3 py-2 text-base font-semibold text-gray-900 hover:bg-gray-100">
+                        <a href="/show-group" className="block px-3 py-2 text-base font-semibold text-gray-900 hover:bg-gray-100">
                             Group
                         </a>
                         <a href="#" className="block px-3 py-2 text-base font-semibold text-gray-900 hover:bg-gray-100">

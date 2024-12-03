@@ -8,6 +8,10 @@ import Login from "./Components/Login/Login.jsx";
 import Add_User from './Components/Add User/Add_User.jsx';
 import Add_Group from './Components/Group/AddGroup.jsx';
 import Notification from './Components/Notification/Notification.jsx';
+import AddNotification from './Components/Notification/Add_Notification.jsx';
+import Show_All_Groups from './Components/Group/Show_Groups.jsx';
+import Show_All_Task from './Components/Task/Show_All_Task.jsx';
+import AddTask from './Components/Task/Add_Task.jsx';
 
 const router = createBrowserRouter(
     createRoutesFromElements(
@@ -15,9 +19,12 @@ const router = createBrowserRouter(
             <Route path='/' element={<Home/>}/>
             <Route path='/login' element={<Login/>}/>
             <Route path='/adduser' element={<Add_User/>}/>
-            <Route path='/addgroup' element={<Add_Group/>}/>
+            <Route path='/add-group' element={<Add_Group/>}/>
             <Route path='/notification' element={<Notification/>}/>
-
+            <Route path='/add-notification' element={<AddNotification/>}/>
+            <Route path='/show-group' element={<Show_All_Groups/>}/>
+            <Route path='/show-all-tasks' element={<Show_All_Task/>}/>
+            <Route path='/add-task' element={<AddTask/>}/>
         </Route>
     )
 )

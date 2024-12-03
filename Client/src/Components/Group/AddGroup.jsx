@@ -1,7 +1,5 @@
-
-
 import React, { useState } from 'react';
-import GroupIcon from '../../../../Storage/Add_User.jpg';
+import GroupIcon from '../../../../Storage/Group_Icon.jpg';
 
 function Add_Group() {
     // Form data state
@@ -90,10 +88,10 @@ function Add_Group() {
     };
 
     return (
-        <div className="relative isolate p-6 lg:px-8 bg-gradient-to-r from-green-800 to-green-600">
+        <div className="relative isolate p-6 lg:px-8 bg-gradient-to-r from-blue-800 to-blue-600">
             <div className="absolute inset-x-0 -top-40 -z-10 transform-gpu overflow-hidden blur-3xl sm:-top-80" aria-hidden="true">
                 <div
-                    className="relative left-[calc(50%-11rem)] aspect-[1155/678] w-[36.125rem] -translate-x-1/2 rotate-[30deg] bg-gradient-to-tr from-[#80ff80] to-[#00ff00] opacity-30 sm:left-[calc(50%-30rem)] sm:w-[72.1875rem]"
+                    className="relative left-[calc(50%-11rem)] aspect-[1155/678] w-[36.125rem] -translate-x-1/2 rotate-[30deg] bg-gradient-to-tr from-[#ff80b5] to-[#9089fc] opacity-30 sm:left-[calc(50%-30rem)] sm:w-[72.1875rem]"
                     style={{
                         clipPath: 'polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)',
                     }}
@@ -197,7 +195,6 @@ function Add_Group() {
                             {error}
                         </div>
                     )}
-                    {/* Add Member Button */}
                     <div className="col-span-2">
                         <button
                             type="button"
@@ -207,8 +204,6 @@ function Add_Group() {
                             Add Member
                         </button>
                     </div>
-                    {/* Other form fields */}
-                    {/* Rest of form fields */}
                     <div className="flex flex-col mb-4">
                         <label className="text-gray-800 font-semibold mb-2" htmlFor="createdBy">Created By</label>
                         <input
