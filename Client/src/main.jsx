@@ -15,7 +15,7 @@ import AddTask from './Components/Add_Work/Add_Work.jsx';
 import All_Staff from './Components/All_Staff/All_Staff.jsx';
 import ShowAllReports from './Components/Report/Show_all_report.jsx';
 import SubmitReport from './Components/Report/Submit_report.jsx';
-import AllProjects from './Project/Show_All_Projects.jsx';
+import AllProjects from './Components/Project/Show_All_Projects.jsx';
 import AllRequirements from './Components/Requrment/All_Requirment.jsx';
 import AddRequirement from './Components/Requrment/Submit_Requrment.jsx';
 import SalaryPage from './Components/Sallary/Sallary.jsx';

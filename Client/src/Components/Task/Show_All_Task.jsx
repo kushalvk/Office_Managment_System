@@ -22,7 +22,7 @@ function ShowTask() {
             </div>
             <h1 className="text-white text-4xl font-bold mb-4 mt-20">All Tasks</h1>
             <button
-                onClick={() => navigate("/add-task")}
+                onClick={() => navigate("/add-work")}
                 className=" py-2 px-4 rounded-lg shadow-md hover:shadow-lg transition-transform duration-300 hover:scale-105 bg-green-600 text-white font-semibold hover:bg-green-500 focus:outline-none focus:ring-2 focus:ring-green-700"
             >
                 Add Task
