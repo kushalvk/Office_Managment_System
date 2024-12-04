@@ -57,13 +57,13 @@ function Footer() {
                                 <a href="/facilities" className="text-gray-600 hover:text-gray-800">Facilities</a>
                             </li>
                             <li>
-                                <a href="#" className="text-gray-600 hover:text-gray-800">Blog / News</a>
+                                <a href="/blognews" className="text-gray-600 hover:text-gray-800">Blog / News</a>
                             </li>
                             <li>
-                                <a href="#" className="text-gray-600 hover:text-gray-800">Contact Us</a>
+                                <a href="/contactus" className="text-gray-600 hover:text-gray-800">Contact Us</a>
                             </li>
                             <li>
-                                <a href="#" className="text-gray-600 hover:text-gray-800">About Us</a>
+                                <a href="/aboutus" className="text-gray-600 hover:text-gray-800">About Us</a>
                             </li>
                         </nav>
                     </div>

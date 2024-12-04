@@ -21,6 +21,10 @@ import AddRequirement from './Components/Requrment/Submit_Requrment.jsx';
 import SalaryPage from './Components/Sallary/Sallary.jsx';
 import UserProfile from './Components/Profile/Profile.jsx';
 import Facilities from './Components/Facilities/Facilities.jsx';
+import BlogNews from './Components/Blog_News/Blog_News.jsx';
+import AddBlogNews from './Components/Blog_News/Add_Blog_News.jsx';
+import AboutUs from './Components/About_Us/About_Us.jsx';
+import ContactUs from './Components/Contact_Us/Contact_Us.jsx';
 
 const router = createBrowserRouter(
     createRoutesFromElements(
@@ -43,6 +47,10 @@ const router = createBrowserRouter(
             <Route path='/sallary' element={<SalaryPage/>}/>
             <Route path='/profile' element={<UserProfile/>}/>
             <Route path='/facilities' element={<Facilities/>}/>
+            <Route path='/blognews' element={<BlogNews/>}/>
+            <Route path='/addblognews' element={<AddBlogNews/>}/>
+            <Route path='/aboutus' element={<AboutUs/>}/>
+            <Route path='/contactus' element={<ContactUs/>}/>
         </Route>
     )
 )
