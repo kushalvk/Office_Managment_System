@@ -18,7 +18,7 @@ function UserProfile() {
     const navigate = useNavigate();
 
     return (
-        <div className="relative isolate p-16 lg:px-8 bg-gradient-to-r from-blue-800 to-blue-600 min-h-screen">
+        <div className="relative isolate p-16 lg:px-8 bg-gradient-to-r from-blue-800 to-blue-400 min-h-screen">
             <div
                 className="absolute inset-x-0 -top-40 -z-10 transform-gpu overflow-hidden blur-3xl sm:-top-80"
                 aria-hidden="true"

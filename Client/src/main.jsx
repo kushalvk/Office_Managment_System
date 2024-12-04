@@ -20,6 +20,7 @@ import AllRequirements from './Components/Requrment/All_Requirment.jsx';
 import AddRequirement from './Components/Requrment/Submit_Requrment.jsx';
 import SalaryPage from './Components/Sallary/Sallary.jsx';
 import UserProfile from './Components/Profile/Profile.jsx';
+import Facilities from './Components/Facilities/Facilities.jsx';
 
 const router = createBrowserRouter(
     createRoutesFromElements(
@@ -41,6 +42,7 @@ const router = createBrowserRouter(
             <Route path='/submit-requrment' element={<AddRequirement/>}/>
             <Route path='/sallary' element={<SalaryPage/>}/>
             <Route path='/profile' element={<UserProfile/>}/>
+            <Route path='/facilities' element={<Facilities/>}/>
         </Route>
     )
 )
