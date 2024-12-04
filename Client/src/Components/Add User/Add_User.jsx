@@ -16,6 +16,8 @@ function Add_User() {
         workLocation: '',
         department: '',
         role: '',
+        profilePhoto: null,
+        resume: null,
     });
 
     const handleChange = (e) => {
@@ -219,6 +221,31 @@ function Add_User() {
                             value={formData.role}
                             onChange={handleChange}
                             className="p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                            required
+                        />
+                    </div>
+                    <div className="flex flex-col mb-4">
+                        <label className="text-gray-800 font-semibold mb-2" htmlFor="profilePhoto">Profile Photo</label>
+                        <input
+                            type="file"
+                            id="profilePhoto"
+                            name="profilePhoto"
+                            onChange={handleChange}
+                            className="p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                            accept="image/*"
+                            required
+                        />
+                    </div>
+                    {/* Add Resume */}
+                    <div className="flex flex-col mb-4">
+                        <label className="text-gray-800 font-semibold mb-2" htmlFor="resume">Resume</label>
+                        <input
+                            type="file"
+                            id="resume"
+                            name="resume"
+                            onChange={handleChange}
+                            className="p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                            accept=".pdf,.doc,.docx"
                             required
                         />
                     </div>
