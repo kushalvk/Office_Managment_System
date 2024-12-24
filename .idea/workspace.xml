@@ -6,7 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="404eb4d8-f181-44b4-a139-a07b064bd629" name="Changes" comment="Merge pull request #2 from Kumhar-Harshad/main&#10;&#10;ADD: Profile.jsx">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/main.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/main.jsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -28,6 +28,7 @@
     </option>
     <option name="PUSH_AUTO_UPDATE" value="true" />
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="UPDATE_TYPE" value="REBASE" />
   </component>
   <component name="GitHubPullRequestSearchHistory">{
   &quot;lastFilter&quot;: {
@@ -100,6 +101,9 @@
       <workItem from="1733051596657" duration="618000" />
       <workItem from="1733058689124" duration="210000" />
       <workItem from="1733119228258" duration="85000" />
+      <workItem from="1733556713245" duration="21000" />
+      <workItem from="1733556762701" duration="998000" />
+      <workItem from="1733568735208" duration="3116000" />
     </task>
     <task id="LOCAL-00001" summary="Merge pull request #2 from Kumhar-Harshad/main&#10;&#10;ADD: Profile.jsx">
       <option name="closed" value="true" />
