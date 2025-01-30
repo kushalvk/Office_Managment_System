@@ -38,12 +38,6 @@ function Notification() {
                                 <p className="text-sm font-medium text-gray-800">{notification.message}</p>
                                 <p className="text-xs text-gray-500 mt-1">{notification.date}</p>
                             </div>
-                            <button
-                                onClick={() => navigate("/view-project/" + project.id)}
-                                className="ml-4 hover:text-white  py-2 px-4 rounded-lg shadow-md hover:shadow-lg transition-transform duration-300 hover:scale-105 bg-green-600 text-white font-semibold hover:bg-green-500 focus:outline-none focus:ring-2 focus:ring-green-700"
-                            >
-                                View
-                            </button>
                         </div>
                     ))}
                 </div>

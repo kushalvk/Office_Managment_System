@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import {useState} from "react";
+import {useNavigate} from "react-router-dom";
 
 function AllProjects() {
     const [projects, setProjects] = useState([
@@ -22,9 +22,31 @@ function AllProjects() {
     ]);
     const navigate = useNavigate();
 
+    // Function to mark a project as complete
+    const completeProject = (id) => {
+        setProjects((prevProjects) =>
+            prevProjects.map((project) =>
+                project.id === id ? {...project, status: "Complete"} : project
+            )
+        );
+        alert(`Project ${id} marked as complete!`);
+    };
+
+    // Function to handle viewing project details
+    const viewProjectDetails = (id) => {
+        navigate(`/view-details/${id}`);
+    };
+
+    // Function to handle deleting a project
+    const deleteProject = (id) => {
+        alert(`Are you sure you want to delete Project ${id}?`);
+        setProjects((prevProjects) => prevProjects.filter((project) => project.id !== id));
+    };
+
     return (
         <div className="relative isolate p-6 lg:px-8 bg-gradient-to-r from-blue-800 to-blue-400 min-h-screen">
-            <div className="absolute inset-x-0 -top-40 -z-10 transform-gpu overflow-hidden blur-3xl sm:-top-80" aria-hidden="true">
+            <div className="absolute inset-x-0 -top-40 -z-10 transform-gpu overflow-hidden blur-3xl sm:-top-80"
+                 aria-hidden="true">
                 <div
                     className="relative left-[calc(50%-11rem)] aspect-[1155/678] w-[36.125rem] -translate-x-1/2 rotate-[30deg] bg-gradient-to-tr from-[#ff80b5] to-[#9089fc] opacity-30 sm:left-[calc(50%-30rem)] sm:w-[72.1875rem]"
                     style={{
@@ -58,12 +80,31 @@ function AllProjects() {
                                 Status: {project.status}
                             </p>
                         </div>
-                        <button
-                            onClick={() => navigate("/view-project/" + project.id)}
-                            className="ml-4 hover:text-white  py-2 px-4 rounded-lg shadow-md hover:shadow-lg transition-transform duration-300 hover:scale-105 bg-green-600 text-white font-semibold hover:bg-green-500 focus:outline-none focus:ring-2 focus:ring-green-700"
-                        >
-                            View
-                        </button>
+                        <div>
+                            {/* Complete Button */}
+                            {project.status !== "Complete" && (
+                                <button
+                                    onClick={() => completeProject(project.id)}
+                                    className="ml-4 hover:text-white py-2 px-4 rounded-lg shadow-md hover:shadow-lg transition-transform duration-300 hover:scale-105 bg-blue-600 text-white font-semibold hover:bg-blue-500 focus:outline-none focus:ring-2 focus:ring-green-700"
+                                >
+                                    Complete
+                                </button>
+                            )}
+                            {/* View Button */}
+                            <button
+                                onClick={() => viewProjectDetails(project.id)}
+                                className="ml-4 hover:text-white py-2 px-4 rounded-lg shadow-md hover:shadow-lg transition-transform duration-300 hover:scale-105 bg-green-600 text-white font-semibold hover:bg-green-500 focus:outline-none focus:ring-2 focus:ring-green-700"
+                            >
+                                View
+                            </button>
+                            {/* Delete Button */}
+                            <button
+                                onClick={() => deleteProject(project.id)}
+                                className="ml-4 hover:text-white py-2 px-4 rounded-lg shadow-md hover:shadow-lg transition-transform duration-300 hover:scale-105 bg-red-600 text-white font-semibold hover:bg-red-500 focus:outline-none focus:ring-2 focus:ring-green-700"
+                            >
+                                Delete
+                            </button>
+                        </div>
                     </div>
                 ))}
             </div>

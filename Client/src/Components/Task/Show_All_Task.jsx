@@ -1,18 +1,61 @@
-import { useNavigate } from "react-router-dom";
-import { useState } from "react";
+import {useNavigate} from "react-router-dom";
+import {useState} from "react";
 
 function ShowTask() {
     const [tasks, setTasks] = useState([
-        { id: 1, title: "Task 1", description: "Complete the report by EOD.", employeeName: "John Doe", completionDate: "11-11-2024", status: "Pending" },
-        { id: 2, title: "Task 2", description: "Prepare presentation slides.", employeeName: "Jane Smith", completionDate: "12-11-2024", status: "Complete" },
-        { id: 3, title: "Task 3", description: "Review project proposal.", employeeName: "Emily Johnson", completionDate: "13-11-2024", status: "Pending" },
+        {
+            id: 1,
+            title: "Task 1",
+            description: "Complete the report by EOD.",
+            employeeName: "John Doe",
+            completionDate: "11-11-2024",
+            status: "Pending"
+        },
+        {
+            id: 2,
+            title: "Task 2",
+            description: "Prepare presentation slides.",
+            employeeName: "Jane Smith",
+            completionDate: "12-11-2024",
+            status: "Complete"
+        },
+        {
+            id: 3,
+            title: "Task 3",
+            description: "Review project proposal.",
+            employeeName: "Emily Johnson",
+            completionDate: "13-11-2024",
+            status: "Pending"
+        },
     ]);
 
     const navigate = useNavigate();
 
+    // Function to mark a task as complete
+    const completeTask = (id) => {
+        setTasks((prevTasks) =>
+            prevTasks.map((task) =>
+                task.id === id ? {...task, status: "Complete"} : task
+            )
+        );
+        alert(`Task ${id} marked as complete!`);
+    };
+
+    // Function to handle viewing task details
+    const viewTaskDetails = (id) => {
+        navigate(`/view-details/${id}`);
+    };
+
+    // Function to handle deleting a project
+    const deleteTask = (id) => {
+        alert(`Are you sure you want to delete Task ${id}?`);
+        setTasks((prevTasks) => prevTasks.filter((task) => task.id !== id));
+    };
+
     return (
         <div className="relative isolate p-6 lg:px-8 bg-gradient-to-r from-blue-800 to-blue-400 min-h-screen">
-            <div className="absolute inset-x-0 -top-40 -z-10 transform-gpu overflow-hidden blur-3xl sm:-top-80" aria-hidden="true">
+            <div className="absolute inset-x-0 -top-40 -z-10 transform-gpu overflow-hidden blur-3xl sm:-top-80"
+                 aria-hidden="true">
                 <div
                     className="relative left-[calc(50%-11rem)] aspect-[1155/678] w-[36.125rem] -translate-x-1/2 rotate-[30deg] bg-gradient-to-tr from-[#ff80b5] to-[#9089fc] opacity-30 sm:left-[calc(50%-30rem)] sm:w-[72.1875rem]"
                     style={{
@@ -45,6 +88,31 @@ function ShowTask() {
                             >
                                 Status: {task.status}
                             </p>
+                        </div>
+                        <div>
+                            {/* Complete Button */}
+                            {task.status !== "Complete" && (
+                                <button
+                                    onClick={() => completeTask(task.id)}
+                                    className="ml-4 hover:text-white py-2 px-4 rounded-lg shadow-md hover:shadow-lg transition-transform duration-300 hover:scale-105 bg-blue-600 text-white font-semibold hover:bg-blue-500 focus:outline-none focus:ring-2 focus:ring-green-700"
+                                >
+                                    Complete
+                                </button>
+                            )}
+                            {/* View Button */}
+                            <button
+                                onClick={() => viewTaskDetails(task.id)}
+                                className="ml-4 hover:text-white py-2 px-4 rounded-lg shadow-md hover:shadow-lg transition-transform duration-300 hover:scale-105 bg-green-600 text-white font-semibold hover:bg-green-500 focus:outline-none focus:ring-2 focus:ring-green-700"
+                            >
+                                View
+                            </button>
+                            {/* Delete Button */}
+                            <button
+                                onClick={() => deleteTask(task.id)}
+                                className="ml-4 hover:text-white py-2 px-4 rounded-lg shadow-md hover:shadow-lg transition-transform duration-300 hover:scale-105 bg-red-600 text-white font-semibold hover:bg-red-500 focus:outline-none focus:ring-2 focus:ring-green-700"
+                            >
+                                Delete
+                            </button>
                         </div>
                     </div>
                 ))}

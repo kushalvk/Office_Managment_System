@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, {useState} from 'react';
 import UserIcon from '../../../../Storage/Add_User.jpg';
 
 function Add_User() {
@@ -21,7 +21,7 @@ function Add_User() {
     });
 
     const handleChange = (e) => {
-        const { name, value } = e.target;
+        const {name, value} = e.target;
         setFormData((prevData) => ({
             ...prevData,
             [name]: value,
@@ -36,7 +36,8 @@ function Add_User() {
 
     return (
         <div className="relative isolate p-6 lg:px-8 bg-gradient-to-r from-blue-800 to-blue-400">
-            <div className="absolute inset-x-0 -top-40 -z-10 transform-gpu overflow-hidden blur-3xl sm:-top-80" aria-hidden="true">
+            <div className="absolute inset-x-0 -top-40 -z-10 transform-gpu overflow-hidden blur-3xl sm:-top-80"
+                 aria-hidden="true">
                 <div
                     className="relative left-[calc(50%-11rem)] aspect-[1155/678] w-[36.125rem] -translate-x-1/2 rotate-[30deg] bg-gradient-to-tr from-[#ff80b5] to-[#9089fc] opacity-30 sm:left-[calc(50%-30rem)] sm:w-[72.1875rem]"
                     style={{
@@ -141,7 +142,8 @@ function Add_User() {
                         />
                     </div>
                     <div className="flex flex-col mb-4">
-                        <label className="text-gray-800 font-semibold mb-2" htmlFor="qualification">Qualification</label>
+                        <label className="text-gray-800 font-semibold mb-2"
+                               htmlFor="qualification">Qualification</label>
                         <input
                             type="text"
                             id="qualification"
@@ -177,7 +179,8 @@ function Add_User() {
                         />
                     </div>
                     <div className="flex flex-col mb-4">
-                        <label className="text-gray-800 font-semibold mb-2" htmlFor="confirmPassword">Confirm Password</label>
+                        <label className="text-gray-800 font-semibold mb-2" htmlFor="confirmPassword">Confirm
+                            Password</label>
                         <input
                             type="password"
                             id="confirmPassword"
@@ -214,15 +217,19 @@ function Add_User() {
                     </div>
                     <div className="flex flex-col mb-4">
                         <label className="text-gray-800 font-semibold mb-2" htmlFor="role">Role</label>
-                        <input
-                            type="text"
+                        <select
                             id="role"
                             name="role"
                             value={formData.role}
                             onChange={handleChange}
                             className="p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
                             required
-                        />
+                        >
+                            <option value="" disabled>Select Role</option>
+                            {/* Placeholder option */}
+                            <option value="Employee">Employee</option>
+                            <option value="Manager">Manager</option>
+                        </select>
                     </div>
                     <div className="flex flex-col mb-4">
                         <label className="text-gray-800 font-semibold mb-2" htmlFor="profilePhoto">Profile Photo</label>
@@ -250,7 +257,8 @@ function Add_User() {
                         />
                     </div>
                     <div className="flex justify-center mb-4 md:col-span-2">
-                        <button type="submit" className="bg-blue-600 text-white p-3 rounded-lg shadow-md hover:bg-blue-700 transition duration-300">
+                        <button type="submit"
+                                className="bg-blue-600 text-white p-3 rounded-lg shadow-md hover:bg-blue-700 transition duration-300">
                             Submit
                         </button>
                     </div>

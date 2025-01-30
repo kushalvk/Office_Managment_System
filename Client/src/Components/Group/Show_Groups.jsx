@@ -21,7 +21,7 @@ function ShowAllGroups() {
                 ></div>
             </div>
             {/* Header */}
-            <div className="mx-auto max-w-2xl sm:py-48 text-center">
+            <div className="mx-auto max-w-2xl pt-48 text-center">
                 <h1 className="text-white text-3xl sm:text-5xl font-bold mb-4">Show All Groups</h1>
                 <p className="text-gray-300 text-lg">Here is the list of all groups.</p>
             </div>
@@ -30,7 +30,7 @@ function ShowAllGroups() {
             <div className="flex justify-center my-6">
                 <button
                     onClick={() => navigate('/add-group')} // Navigate to Add_Group
-                    className="px-6 py-2 text-white bg-blue-600 hover:bg-blue-700 rounded-md text-lg"
+                    className="px-6 py-2 text-white bg-green-600 hover:bg-green-700 rounded-md text-lg"
                 >
                     Add New Group
                 </button>
@@ -42,6 +42,12 @@ function ShowAllGroups() {
                     <div key={group.id} className="p-4 mb-4 border-b border-gray-200">
                         <h2 className="text-xl font-bold text-gray-700">{group.name}</h2>
                         <p className="text-gray-600">{group.description}</p>
+                        <button
+                            onClick={() => navigate(`/group-details/${group.id}`)} // Navigate to Group Details
+                            className="mt-2 px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700"
+                        >
+                            Details
+                        </button>
                     </div>
                 ))}
             </div>

@@ -30,6 +30,8 @@ import Photos from "./Components/Photos/Photos.jsx";
 import Policies from "./Components/Polices/Policies.jsx";
 import Privacy_Policies from "./Components/Privacy_Policies/Privacy_Policies.jsx";
 import Terms_Condition from "./Components/Terms_Condition/Terms_Condition.jsx";
+import View_Task from "./Components/Task/View_Task.jsx";
+import GroupDetails from "./Components/Group/Group_Details.jsx";
 
 const router = createBrowserRouter(
     createRoutesFromElements(
@@ -61,6 +63,8 @@ const router = createBrowserRouter(
             <Route path='/polices' element={<Policies/>}/>
             <Route path='/privacy-polices' element={<Privacy_Policies/>}/>
             <Route path='/terms-condition' element={<Terms_Condition/>}/>
+            <Route path='/view-details/:id' element={<View_Task/>}/>
+            <Route path="/group-details/:id" element={<GroupDetails />} />
         </Route>
     )
 )
