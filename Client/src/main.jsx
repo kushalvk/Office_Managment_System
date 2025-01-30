@@ -26,6 +26,10 @@ import AddBlogNews from './Components/Blog_News/Add_Blog_News.jsx';
 import AboutUs from './Components/About_Us/About_Us.jsx';
 import ContactUs from './Components/Contact_Us/Contact_Us.jsx';
 import AdminDashboard from './Components/Dashbored/Dashbored.jsx';
+import Photos from "./Components/Photos/Photos.jsx";
+import Policies from "./Components/Polices/Policies.jsx";
+import Privacy_Policies from "./Components/Privacy_Policies/Privacy_Policies.jsx";
+import Terms_Condition from "./Components/Terms_Condition/Terms_Condition.jsx";
 
 const router = createBrowserRouter(
     createRoutesFromElements(
@@ -53,6 +57,10 @@ const router = createBrowserRouter(
             <Route path='/aboutus' element={<AboutUs/>}/>
             <Route path='/contactus' element={<ContactUs/>}/>
             <Route path='/admindashbored' element={<AdminDashboard/>}/>
+            <Route path='/photos' element={<Photos/>}/>
+            <Route path='/polices' element={<Policies/>}/>
+            <Route path='/privacy-polices' element={<Privacy_Policies/>}/>
+            <Route path='/terms-condition' element={<Terms_Condition/>}/>
         </Route>
     )
 )

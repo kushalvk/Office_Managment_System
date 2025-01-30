@@ -17,15 +17,28 @@ function AllRequirements() {
             reason: "Reason for requirement 2",
             username: "Tom Cook",
             date: "2024-12-02",
-            status: "Not Approved",
+            status: "Pending",
+        },
+        {
+            id: 3,
+            name: "Requirement 3",
+            reason: "Reason for requirement 3",
+            username: "Tom Cook",
+            date: "2024-12-02",
+            status: "Cancelled",
         },
     ]);
 
     const navigate = useNavigate();
 
+    const updateStatus = (id, newStatus) => {
+        setRequirements(requirements.map(req => req.id === id ? { ...req, status: newStatus } : req));
+    };
+
     return (
         <div className="relative isolate p-6 lg:px-8 bg-gradient-to-r from-blue-800 to-blue-400 min-h-screen">
-            <div className="absolute inset-x-0 -top-40 -z-10 transform-gpu overflow-hidden blur-3xl sm:-top-80" aria-hidden="true">
+            <div className="absolute inset-x-0 -top-40 -z-10 transform-gpu overflow-hidden blur-3xl sm:-top-80"
+                 aria-hidden="true">
                 <div
                     className="relative left-[calc(50%-11rem)] aspect-[1155/678] w-[36.125rem] -translate-x-1/2 rotate-[30deg] bg-gradient-to-tr from-[#ff80b5] to-[#9089fc] opacity-30 sm:left-[calc(50%-30rem)] sm:w-[72.1875rem]"
                     style={{
@@ -53,18 +66,30 @@ function AllRequirements() {
                             <p className="text-xs text-gray-500 mt-1">Date: {requirement.date}</p>
                             <p
                                 className={`text-sm font-medium mt-1 ${
-                                    requirement.status === "Approved" ? "text-green-600" : "text-red-600"
-                                }`}
+                                    requirement.status === "Approved" ? "text-green-600" :
+                                        requirement.status === "Cancelled" ? "text-red-600" : "text-gray-600"}`}
                             >
                                 Status: {requirement.status}
                             </p>
                         </div>
-                        <button
-                            onClick={() => navigate("/view-project/" + project.id)}
-                            className="ml-4 hover:text-white  py-2 px-4 rounded-lg shadow-md hover:shadow-lg transition-transform duration-300 hover:scale-105 bg-green-600 text-white font-semibold hover:bg-green-500 focus:outline-none focus:ring-2 focus:ring-green-700"
-                        >
-                            View
-                        </button>
+                        <div>
+                            {requirement.status === "Pending" && (
+                                <>
+                                    <button
+                                        onClick={() => updateStatus(requirement.id, "Approved")}
+                                        className="ml-4 hover:text-white my-2 py-2 px-4 rounded-lg shadow-md hover:shadow-lg transition-transform duration-300 hover:scale-105 bg-green-600 text-white font-semibold hover:bg-green-500 focus:outline-none focus:ring-2 focus:ring-green-700"
+                                    >
+                                        Approve
+                                    </button>
+                                    <button
+                                        onClick={() => updateStatus(requirement.id, "Cancelled")}
+                                        className="ml-4 hover:text-white my-2 py-2 px-4 rounded-lg shadow-md hover:shadow-lg transition-transform duration-300 hover:scale-105 bg-red-600 text-white font-semibold hover:bg-red-500 focus:outline-none focus:ring-2 focus:ring-green-700"
+                                    >
+                                        Cancel
+                                    </button>
+                                </>
+                            )}
+                        </div>
                     </div>
                 ))}
             </div>
