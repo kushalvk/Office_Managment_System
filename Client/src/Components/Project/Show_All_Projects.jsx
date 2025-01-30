@@ -1,5 +1,5 @@
-import {useState} from "react";
-import {useNavigate} from "react-router-dom";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 function AllProjects() {
     const [projects, setProjects] = useState([
@@ -26,7 +26,7 @@ function AllProjects() {
     const completeProject = (id) => {
         setProjects((prevProjects) =>
             prevProjects.map((project) =>
-                project.id === id ? {...project, status: "Complete"} : project
+                project.id === id ? { ...project, status: "Complete" } : project
             )
         );
         alert(`Project ${id} marked as complete!`);
@@ -39,14 +39,14 @@ function AllProjects() {
 
     // Function to handle deleting a project
     const deleteProject = (id) => {
-        alert(`Are you sure you want to delete Project ${id}?`);
-        setProjects((prevProjects) => prevProjects.filter((project) => project.id !== id));
+        if (window.confirm(`Are you sure you want to delete Project ${id}?`)) {
+            setProjects((prevProjects) => prevProjects.filter((project) => project.id !== id));
+        }
     };
 
     return (
         <div className="relative isolate p-6 lg:px-8 bg-gradient-to-r from-blue-800 to-blue-400 min-h-screen">
-            <div className="absolute inset-x-0 -top-40 -z-10 transform-gpu overflow-hidden blur-3xl sm:-top-80"
-                 aria-hidden="true">
+            <div className="absolute inset-x-0 -top-40 -z-10 transform-gpu overflow-hidden blur-3xl sm:-top-80" aria-hidden="true">
                 <div
                     className="relative left-[calc(50%-11rem)] aspect-[1155/678] w-[36.125rem] -translate-x-1/2 rotate-[30deg] bg-gradient-to-tr from-[#ff80b5] to-[#9089fc] opacity-30 sm:left-[calc(50%-30rem)] sm:w-[72.1875rem]"
                     style={{
@@ -54,7 +54,7 @@ function AllProjects() {
                     }}
                 ></div>
             </div>
-            <h1 className="text-white text-4xl font-bold mb-4 mt-20">All Projects</h1>
+            <h1 className="text-white text-3xl sm:text-4xl font-bold mb-4 mt-20">All Projects</h1>
             <button
                 onClick={() => navigate("/add-work")}
                 className="py-2 px-4 rounded-lg shadow-md hover:shadow-lg transition-transform duration-300 hover:scale-105 bg-green-600 text-white font-semibold hover:bg-green-500 focus:outline-none focus:ring-2 focus:ring-green-700"
@@ -65,10 +65,10 @@ function AllProjects() {
                 {projects.map((project) => (
                     <div
                         key={project.id}
-                        className="flex items-center justify-between bg-white p-4 rounded-lg shadow-md transform transition-transform duration-300 hover:-translate-y-1 hover:scale-105 hover:shadow-2xl"
+                        className="flex flex-col sm:flex-row items-start sm:items-center justify-between bg-white p-4 rounded-lg shadow-md transform transition-transform duration-300 hover:-translate-y-1 hover:scale-105 hover:shadow-xl"
                     >
-                        <div className="flex flex-col">
-                            <h4 className="text-2xl font-bold text-gray-800">{project.title}</h4>
+                        <div className="flex flex-col mb-2 sm:mb-0">
+                            <h4 className="text-xl sm:text-2xl font-bold text-gray-800">{project.title}</h4>
                             <p className="text-sm font-medium text-gray-800">{project.description}</p>
                             <p className="text-xs text-gray-500 mt-1">Completion Date: {project.completionDate}</p>
                             <p className="text-xs text-gray-500 mt-1">Assigned to: {project.assignedTo}</p>
@@ -80,12 +80,12 @@ function AllProjects() {
                                 Status: {project.status}
                             </p>
                         </div>
-                        <div>
+                        <div className="flex flex-wrap gap-2">
                             {/* Complete Button */}
                             {project.status !== "Complete" && (
                                 <button
                                     onClick={() => completeProject(project.id)}
-                                    className="ml-4 hover:text-white py-2 px-4 rounded-lg shadow-md hover:shadow-lg transition-transform duration-300 hover:scale-105 bg-blue-600 text-white font-semibold hover:bg-blue-500 focus:outline-none focus:ring-2 focus:ring-green-700"
+                                    className="ml-0 sm:ml-4 mb-2 sm:mb-0 hover:text-white py-2 px-4 rounded-lg shadow-md hover:shadow-lg transition-transform duration-300 hover:scale-105 bg-blue-600 text-white font-semibold hover:bg-blue-500 focus:outline-none focus:ring-2 focus:ring-green-700"
                                 >
                                     Complete
                                 </button>
@@ -93,14 +93,14 @@ function AllProjects() {
                             {/* View Button */}
                             <button
                                 onClick={() => viewProjectDetails(project.id)}
-                                className="ml-4 hover:text-white py-2 px-4 rounded-lg shadow-md hover:shadow-lg transition-transform duration-300 hover:scale-105 bg-green-600 text-white font-semibold hover:bg-green-500 focus:outline-none focus:ring-2 focus:ring-green-700"
+                                className="ml-0 sm:ml-4 mb-2 sm:mb-0 hover:text-white py-2 px-4 rounded-lg shadow-md hover:shadow-lg transition-transform duration-300 hover:scale-105 bg-green-600 text-white font-semibold hover:bg-green-500 focus:outline-none focus:ring-2 focus:ring-green-700"
                             >
                                 View
                             </button>
                             {/* Delete Button */}
                             <button
                                 onClick={() => deleteProject(project.id)}
-                                className="ml-4 hover:text-white py-2 px-4 rounded-lg shadow-md hover:shadow-lg transition-transform duration-300 hover:scale-105 bg-red-600 text-white font-semibold hover:bg-red-500 focus:outline-none focus:ring-2 focus:ring-green-700"
+                                className="ml-0 sm:ml-4 mb-2 sm:mb-0 hover:text-white py-2 px-4 rounded-lg shadow-md hover:shadow-lg transition-transform duration-300 hover:scale-105 bg-red-600 text-white font-semibold hover:bg-red-500 focus:outline-none focus:ring-2 focus:ring-red-700"
                             >
                                 Delete
                             </button>

@@ -4,18 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="404eb4d8-f181-44b4-a139-a07b064bd629" name="Changes" comment="ADD: Photos,Policies,Privacy Policies,Terms &amp; Condition Pages&#10;Update: Requirment Page">
-      <change afterPath="$PROJECT_DIR$/Client/src/Components/Custom/Alert.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Client/src/Components/Group/Group_Details.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Client/src/Components/Task/View_Task.jsx" afterDir="false" />
+    <list default="true" id="404eb4d8-f181-44b4-a139-a07b064bd629" name="Changes" comment="ADD: Group details, View Task pages UPDATE: Add user,Add group,Notification, Profile, Project,Task Pages.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/src/Components/Group/AddGroup.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/Components/Group/AddGroup.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/src/Components/Group/Show_Groups.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/Components/Group/Show_Groups.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/src/Components/Notification/Notification.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/Components/Notification/Notification.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/src/Components/Profile/Profile.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/Components/Profile/Profile.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/src/Components/Project/Show_All_Projects.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/Components/Project/Show_All_Projects.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/src/Components/Task/Show_All_Task.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/Components/Task/Show_All_Task.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/src/main.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/main.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/Components/Header/Header.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/Components/Header/Header.jsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -51,6 +42,9 @@
     &quot;accountId&quot;: &quot;afde608d-8f07-4a9d-b51b-7a126629525d&quot;
   }
 }</component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
+  </component>
   <component name="ProjectColorInfo">{
   &quot;customColor&quot;: &quot;&quot;,
   &quot;associatedIndex&quot;: 7
@@ -114,7 +108,7 @@
       <workItem from="1733556762701" duration="998000" />
       <workItem from="1733568735208" duration="3116000" />
       <workItem from="1738211544078" duration="3450000" />
-      <workItem from="1738238298138" duration="7263000" />
+      <workItem from="1738238298138" duration="8330000" />
     </task>
     <task id="LOCAL-00001" summary="Merge pull request #2 from Kumhar-Harshad/main&#10;&#10;ADD: Profile.jsx">
       <option name="closed" value="true" />
@@ -132,7 +126,15 @@
       <option name="project" value="LOCAL" />
       <updated>1738214805342</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="ADD: Group details, View Task pages UPDATE: Add user,Add group,Notification, Profile, Project,Task Pages.">
+      <option name="closed" value="true" />
+      <created>1738250007838</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1738250007838</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -142,6 +144,7 @@
     <MESSAGE value="Merge pull request #2 from Kumhar-Harshad/main&#10;&#10;ADD: Add_User Page" />
     <MESSAGE value="Merge pull request #2 from Kumhar-Harshad/main&#10;&#10;ADD: Profile.jsx" />
     <MESSAGE value="ADD: Photos,Policies,Privacy Policies,Terms &amp; Condition Pages&#10;Update: Requirment Page" />
-    <option name="LAST_COMMIT_MESSAGE" value="ADD: Photos,Policies,Privacy Policies,Terms &amp; Condition Pages&#10;Update: Requirment Page" />
+    <MESSAGE value="ADD: Group details, View Task pages UPDATE: Add user,Add group,Notification, Profile, Project,Task Pages." />
+    <option name="LAST_COMMIT_MESSAGE" value="ADD: Group details, View Task pages UPDATE: Add user,Add group,Notification, Profile, Project,Task Pages." />
   </component>
 </project>

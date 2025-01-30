@@ -115,7 +115,7 @@ function Add_Group() {
 
             {/* Form Section */}
             <section className="bg-gray-100 shadow-lg rounded-lg p-8 mx-4 md:mx-8 mb-8">
-                <form className="grid grid-cols-1 gap-6 md:grid-cols-2 md:gap-8" onSubmit={handleSubmit}>
+                <form className="sm:flex md:grid grid-cols-1 gap-6 md:grid-cols-2 md:gap-8" onSubmit={handleSubmit}>
                     {/* Form Fields */}
                     <div className="flex flex-col mb-4">
                         <label className="text-gray-800 font-semibold mb-2" htmlFor="groupName">Group Name</label>
@@ -198,7 +198,7 @@ function Add_Group() {
                     <div className="col-span-2">
                     <button
                         onClick={handleAddMember}
-                        className="bg-green-600 text-white px-4 py-2 rounded-md mb-4"
+                        className="bg-green-600 text-white px-4 py-2 rounded-md mb-4 mt-2"
                     >
                         Add Member
                     </button>
