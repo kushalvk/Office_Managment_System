@@ -32,6 +32,7 @@ import Privacy_Policies from "./Components/Privacy_Policies/Privacy_Policies.jsx
 import Terms_Condition from "./Components/Terms_Condition/Terms_Condition.jsx";
 import View_Task from "./Components/Task/View_Task.jsx";
 import GroupDetails from "./Components/Group/Group_Details.jsx";
+import ForgotPassword from './Components/Login/Forgate_Password.jsx';
 
 const router = createBrowserRouter(
     createRoutesFromElements(
@@ -65,6 +66,7 @@ const router = createBrowserRouter(
             <Route path='/terms-condition' element={<Terms_Condition/>}/>
             <Route path='/view-details/:id' element={<View_Task/>}/>
             <Route path="/group-details/:id" element={<GroupDetails />} />
+            <Route path="/forgot-password" element={<ForgotPassword />} />
         </Route>
     )
 )

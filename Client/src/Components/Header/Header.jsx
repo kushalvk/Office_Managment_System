@@ -188,6 +188,7 @@ function Header() {
                                             className="h-full w-full rounded-full object-cover border-2 border-gray-200"
                                             src="https://wallpapers.com/images/hd/professional-profile-pictures-1080-x-1080-460wjhrkbwdcp1ig.jpg"
                                             alt="Profile"
+                                            onClick={handleProfile}
                                         />
                                     </button>
                                     <div className="flex flex-col ml-3">

@@ -1,4 +1,35 @@
-function Login() {
+import React, { useState } from "react";
+
+function ForgotPassword() {
+    // State to manage form data
+    const [formData, setFormData] = useState({
+        email: "",
+        newPassword: "",
+        confirmPassword: "",
+    });
+
+    // Handle input changes
+    const handleInputChange = (e) => {
+        const { name, value } = e.target;
+        setFormData({
+            ...formData,
+            [name]: value,
+        });
+    };
+
+    // Handle form submission
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        // Add validation logic here (e.g., check if passwords match)
+        if (formData.newPassword !== formData.confirmPassword) {
+            alert("Passwords do not match!");
+            return;
+        }
+        // Submit the form data (e.g., send to an API)
+        console.log("Form Data Submitted:", formData);
+        alert("Password reset successful!");
+    };
+
     return (
         <>
             <div className="relative isolate px-6 pt-14 lg:px-8">
@@ -15,14 +46,14 @@ function Login() {
                 </div>
                 <div className="mx-auto max-w-md py-32 sm:py-48 lg:py-56">
                     <div className="text-center">
-                        <h1 className="text-balance text-5xl font-semibold tracking-tight text-gray-900 sm:text-7xl">
-                            Welcome!
+                        <h1 className="text-balance text-4xl font-semibold tracking-tight text-gray-900 sm:text-5xl">
+                            Reset Password
                         </h1>
                         <p className="mt-4 text-lg font-medium text-gray-500 sm:text-xl">
-                            Please log in to continue.
+                            Enter your new password below.
                         </p>
                     </div>
-                    <form className="mt-10 space-y-6" action="#" method="POST">
+                    <form className="mt-10 space-y-6" onSubmit={handleSubmit}>
                         <div>
                             <label
                                 htmlFor="email"
@@ -39,50 +70,51 @@ function Login() {
                                     required
                                     className="block w-full rounded-md border-gray-300 px-4 py-2 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                                     placeholder="you@example.com"
+                                    value={formData.email}
+                                    onChange={handleInputChange}
                                 />
                             </div>
                         </div>
                         <div>
                             <label
-                                htmlFor="password"
+                                htmlFor="newPassword"
                                 className="block text-sm font-medium text-gray-700"
                             >
-                                Password
+                                New Password
                             </label>
                             <div className="mt-2">
                                 <input
-                                    id="password"
-                                    name="password"
+                                    id="newPassword"
+                                    name="newPassword"
                                     type="password"
-                                    autoComplete="current-password"
+                                    autoComplete="new-password"
                                     required
                                     className="block w-full rounded-md border-gray-300 px-4 py-2 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-                                    placeholder="••••••••"
+                                    placeholder="Enter new password"
+                                    value={formData.newPassword}
+                                    onChange={handleInputChange}
                                 />
                             </div>
                         </div>
-                        <div className="flex items-center justify-between">
-                            <div className="flex items-center">
+                        <div>
+                            <label
+                                htmlFor="confirmPassword"
+                                className="block text-sm font-medium text-gray-700"
+                            >
+                                Confirm Password
+                            </label>
+                            <div className="mt-2">
                                 <input
-                                    id="remember-me"
-                                    name="remember-me"
-                                    type="checkbox"
-                                    className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+                                    id="confirmPassword"
+                                    name="confirmPassword"
+                                    type="password"
+                                    autoComplete="new-password"
+                                    required
+                                    className="block w-full rounded-md border-gray-300 px-4 py-2 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                                    placeholder="Confirm new password"
+                                    value={formData.confirmPassword}
+                                    onChange={handleInputChange}
                                 />
-                                <label
-                                    htmlFor="remember-me"
-                                    className="ml-2 block text-sm text-gray-900"
-                                >
-                                    Remember me
-                                </label>
-                            </div>
-                            <div className="text-sm">
-                                <a
-                                    href="/forgot-password"
-                                    className="font-medium text-indigo-600 hover:text-indigo-500"
-                                >
-                                    Forgot your password?
-                                </a>
                             </div>
                         </div>
                         <div>
@@ -90,17 +122,17 @@ function Login() {
                                 type="submit"
                                 className="flex w-full justify-center rounded-md bg-indigo-600 px-4 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                             >
-                                Log In
+                                Reset Password
                             </button>
                         </div>
                     </form>
                     <p className="mt-10 text-center text-sm text-gray-500">
-                        Don’t have an account?{' '}
+                        Remember your password?{' '}
                         <a
-                            href="#"
+                            href="/login"
                             className="font-medium text-indigo-600 hover:text-indigo-500"
                         >
-                            Talk to Your Manager
+                            Log in
                         </a>
                     </p>
                 </div>
@@ -117,7 +149,7 @@ function Login() {
                 </div>
             </div>
         </>
-    )
+    );
 }
 
-export default Login
+export default ForgotPassword;
