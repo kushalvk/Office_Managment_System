@@ -14,11 +14,13 @@ function Header() {
     // Handle Login
     const HandleLogin = () => {
         navigate('/login');
+        setMenuOpen(false)
     }
 
     // Handle Profile
     const handleProfile = () => {
         navigate('/profile')
+        setMenuOpen(false)
     }
 
     return (
