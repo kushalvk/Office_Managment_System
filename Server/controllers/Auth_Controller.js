@@ -17,20 +17,6 @@ const addUser = async (req, res) => {
             department,
             role,
         } = req.body;
-        console.log({
-            fullName,
-            email,
-            address,
-            dob,
-            gender,
-            mobNo,
-            qualification,
-            username,
-            password,
-            workLocation,
-            department,
-            role,
-        });
 
         if (!username || !email || !password) {
             return res.status(400).json({ message: "Please provide all Fields" })
@@ -38,12 +24,15 @@ const addUser = async (req, res) => {
 
         const existingUser = await UserModel.findOne({ email })
         if (existingUser) {
-            return res.status(400).json({ messgae: "This email allready ragistared"})
+            return res.status(400).json({ messgae: "This email allready ragistared" })
         }
 
         const hashpass = await bcrypt.hash(password, 12);
 
-        const user = await UserModel.create({
+        const profilePhoto = req.files["profilePhoto"] ? req.files["profilePhoto"][0].filename : null;
+        const resume = req.files["resume"] ? req.files["resume"][0].filename : null;
+
+        UserModel.create({
             fullName,
             email,
             address,
@@ -56,9 +45,11 @@ const addUser = async (req, res) => {
             workLocation,
             department,
             role,
+            profilePhoto,
+            resume
         })
-        await user.save()
-        res.status(201).send({ message: "User Added Sucessfully", user})
+            .then((user) => res.json({ message: "User Added Sucessfully", user }))
+            .catch((err) => res.json(err))
 
     } catch (error) {
         res.status(500).send({ message: "Error to ragistered User : Controller", error })

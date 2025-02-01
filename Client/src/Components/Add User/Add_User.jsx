@@ -1,5 +1,6 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import UserIcon from '../../../../Storage/Add_User.jpg';
+import { addUser } from '../../Services/AuthService';
 
 function Add_User() {
     const [formData, setFormData] = useState({
@@ -21,23 +22,48 @@ function Add_User() {
     });
 
     const handleChange = (e) => {
-        const {name, value} = e.target;
+        const { name, value, files } = e.target;
         setFormData((prevData) => ({
             ...prevData,
-            [name]: value,
+            [name]: files ? files[0] : value,
         }));
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        // Handle form submission logic here
-        console.log(formData);
+
+        if (formData.password === formData.confirmPassword) {
+            const form = new FormData();
+            form.append("fullName", formData.fullName)
+            form.append("email", formData.email)
+            form.append("address", formData.address)
+            form.append("dob", formData.dob)
+            form.append("gender", formData.gender)
+            form.append("mobNo", formData.mobNo)
+            form.append("qualification", formData.qualification)
+            form.append("username", formData.username)
+            form.append("password", formData.password)
+            form.append("workLocation", formData.workLocation)
+            form.append("department", formData.department)
+            form.append("role", formData.role)
+            form.append("profilePhoto", formData.profilePhoto)
+            form.append("resume", formData.resume)
+
+            try {
+                await addUser(form);
+                alert("User Added Sucessfully")
+            } catch (e) {
+                console.log(e)
+            }
+        } else {
+            alert("password dose't match")
+        }
     };
 
     return (
         <div className="relative isolate p-6 lg:px-8 bg-gradient-to-r from-blue-800 to-blue-400">
             <div className="absolute inset-x-0 -top-40 -z-10 transform-gpu overflow-hidden blur-3xl sm:-top-80"
-                 aria-hidden="true">
+                aria-hidden="true">
                 <div
                     className="relative left-[calc(50%-11rem)] aspect-[1155/678] w-[36.125rem] -translate-x-1/2 rotate-[30deg] bg-gradient-to-tr from-[#ff80b5] to-[#9089fc] opacity-30 sm:left-[calc(50%-30rem)] sm:w-[72.1875rem]"
                     style={{
@@ -63,7 +89,7 @@ function Add_User() {
 
             {/* Form Section */}
             <section className="bg-gray-100 shadow-lg rounded-lg p-8 mx-4 md:mx-8 mb-8">
-                <form className="grid grid-cols-1 gap-6 md:grid-cols-2 md:gap-8" onSubmit={handleSubmit}>
+                <form className="grid grid-cols-1 gap-6 md:grid-cols-2 md:gap-8" onSubmit={handleSubmit} method="POST" >
                     {/* Form Fields */}
                     <div className="flex flex-col mb-4">
                         <label className="text-gray-800 font-semibold mb-2" htmlFor="fullName">Full Name</label>
@@ -143,7 +169,7 @@ function Add_User() {
                     </div>
                     <div className="flex flex-col mb-4">
                         <label className="text-gray-800 font-semibold mb-2"
-                               htmlFor="qualification">Qualification</label>
+                            htmlFor="qualification">Qualification</label>
                         <input
                             type="text"
                             id="qualification"
@@ -258,7 +284,7 @@ function Add_User() {
                     </div>
                     <div className="flex justify-center mb-4 md:col-span-2">
                         <button type="submit"
-                                className="bg-blue-600 text-white p-3 rounded-lg shadow-md hover:bg-blue-700 transition duration-300">
+                            className="bg-blue-600 text-white p-3 rounded-lg shadow-md hover:bg-blue-700 transition duration-300">
                             Submit
                         </button>
                     </div>

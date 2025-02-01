@@ -1,5 +1,4 @@
-const mongoose = require("mongoose")
-const jwt = require("jsonwebtoken")
+const mongoose = require("mongoose");
 
 const UserSchema = new mongoose.Schema({
     fullName: {
@@ -9,10 +8,9 @@ const UserSchema = new mongoose.Schema({
 
     email: {
         type: String,
-        required: true,
-        unique: true
+        required: true
     },
-    
+
     address: {
         type: String,
         required: true
@@ -55,46 +53,25 @@ const UserSchema = new mongoose.Schema({
 
     department: {
         type: String,
-        required: true,
+        required: true
     },
 
     role: {
         type: String,
-        required: true,
-        enum: ['employee', 'manager'],
-        default: 'employee'
+        enum: ['Manager', 'Employee'],
+        default: 'Employee'
     },
 
     profilePhoto: {
         type: String,
-        // required: true,
+        // required: true
     },
 
     resume: {
         type: String,
-        // required: true,
+        // required: true
     },
+})
 
-},{timestamps: true})
-
-// UserSchema.methods.generateAuthToken = async function () {
-//     try {
-//         const token = jwt.sign(
-//             {
-//                 username: this.username,
-//                 email: this.email,
-//                 role: this.role,
-//             },
-//             process.env.JWT_TOKEN,
-//             {
-//                 expiresIn: '1h'
-//             }
-//         )
-//         return token;
-//     } catch (error) {
-//         console.log(error);
-//     }
-// }
-
-const UserModel = mongoose.model("Users", UserSchema)
+const UserModel = mongoose.model("users", UserSchema)
 module.exports = UserModel

@@ -6,7 +6,7 @@ require("dotenv").config();
 
 const app = express();
 const corsOptions = {
-    origin: ['*'],
+    origin: [process.env.FRONT_URL],
     methods: ['GET','HEAD','PUT','PATCH','POST','DELETE'],
     credentials: true,
     allowedHeaders: ['Content-Type', 'Authorization', 'X-Auth-Token', 'Origin'],
