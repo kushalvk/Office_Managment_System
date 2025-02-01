@@ -1,7 +1,7 @@
 const bcrypt = require('bcrypt');
 const UserModel = require('../models/UserSchema');
 
-const addUser = async (req, res) => {
+const addUserController = async (req, res) => {
     try {
         const {
             fullName,
@@ -56,4 +56,32 @@ const addUser = async (req, res) => {
     }
 }
 
-module.exports = { addUser }
+const loginController = async (req, res) => {
+    try {
+        const { username, password } = req.body;
+
+        if(!username || !password) {
+            return res.status(400).send({ message: "Enter Username & Password"});
+        }
+
+        const user = await UserModel.findOne({username})
+
+        if (!user) {
+            return res.status(404).send({ message: "User not found"});
+        }
+
+        const isMatch = await bcrypt.compare(password, user.password)
+
+        if (!isMatch) {
+            return res.status(400).send({ message: "Your Password does't match"});
+        }
+
+        const token = await user.generateAuthToken();
+
+        res.status(200).send({ message: "User Login sucessfully", token, user})
+    } catch (error) {
+        res.status(500).send({ message: "Error to Login User : Controller", error })
+    }
+}
+
+module.exports = { addUserController, loginController }

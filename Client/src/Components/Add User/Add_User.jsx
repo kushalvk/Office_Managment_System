@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import UserIcon from '../../../../Storage/Add_User.jpg';
 import { addUser } from '../../Services/AuthService';
+import { useNavigate } from 'react-router-dom';
 
 function Add_User() {
     const [formData, setFormData] = useState({
@@ -20,6 +21,7 @@ function Add_User() {
         profilePhoto: null,
         resume: null,
     });
+    const [Error, setError] = useState('');
 
     const handleChange = (e) => {
         const { name, value, files } = e.target;
@@ -53,10 +55,10 @@ function Add_User() {
                 await addUser(form);
                 alert("User Added Sucessfully")
             } catch (e) {
-                console.log(e)
+                setError(e.message);
             }
         } else {
-            alert("password dose't match")
+            setError("Password dose't match")
         }
     };
 
@@ -89,6 +91,7 @@ function Add_User() {
 
             {/* Form Section */}
             <section className="bg-gray-100 shadow-lg rounded-lg p-8 mx-4 md:mx-8 mb-8">
+                {Error ? <p className='text-red-600 font-bold flex justify-center'>{Error}</p> : null}
                 <form className="grid grid-cols-1 gap-6 md:grid-cols-2 md:gap-8" onSubmit={handleSubmit} method="POST" >
                     {/* Form Fields */}
                     <div className="flex flex-col mb-4">
@@ -282,6 +285,7 @@ function Add_User() {
                             required
                         />
                     </div>
+                    {Error ? <p className='text-red-600 font-bold flex justify-center'>{Error}</p> : null}
                     <div className="flex justify-center mb-4 md:col-span-2">
                         <button type="submit"
                             className="bg-blue-600 text-white p-3 rounded-lg shadow-md hover:bg-blue-700 transition duration-300">

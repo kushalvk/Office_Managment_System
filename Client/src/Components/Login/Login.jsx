@@ -1,4 +1,40 @@
+import { useState } from "react"
+import { login } from "../../Services/AuthService";
+import { useNavigate } from 'react-router-dom';
+
 function Login() {
+
+    const [form, setForm] = useState({
+        username: '',
+        password: ''
+    })
+    const navigate = useNavigate();
+
+    // const [error, setError] = useState('Not Login')
+
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setForm((prevData) => ({
+            ...prevData,
+            [name]: value,
+        }));
+    };
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+
+        try {
+            const {token, user} = await login(form);
+            localStorage.setItem("token", token);
+            localStorage.setItem("role", user.role);
+            localStorage.setItem("username", user.username);
+            localStorage.setItem("email", user.email);
+            navigate("/");
+        } catch (e) {
+            console.log(e.message);
+        }
+    };
+
     return (
         <>
             <div className="relative isolate px-6 pt-14 lg:px-8">
@@ -22,23 +58,24 @@ function Login() {
                             Please log in to continue.
                         </p>
                     </div>
-                    <form className="mt-10 space-y-6" action="#" method="POST">
+                    <form onSubmit={handleSubmit} className="mt-10 space-y-6" action="#" method="POST">
                         <div>
                             <label
-                                htmlFor="email"
+                                htmlFor="username"
                                 className="block text-sm font-medium text-gray-700"
                             >
-                                Email address
+                                Username
                             </label>
                             <div className="mt-2">
                                 <input
-                                    id="email"
-                                    name="email"
-                                    type="email"
-                                    autoComplete="email"
+                                    id="username"
+                                    name="username"
+                                    type="username"
+                                    autoComplete="username"
                                     required
                                     className="block w-full rounded-md border-gray-300 px-4 py-2 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-                                    placeholder="you@example.com"
+                                    placeholder="you@123"
+                                    onChange={handleChange}
                                 />
                             </div>
                         </div>
@@ -58,6 +95,7 @@ function Login() {
                                     required
                                     className="block w-full rounded-md border-gray-300 px-4 py-2 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                                     placeholder="••••••••"
+                                    onChange={handleChange}
                                 />
                             </div>
                         </div>
