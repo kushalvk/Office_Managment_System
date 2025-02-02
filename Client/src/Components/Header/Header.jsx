@@ -132,8 +132,11 @@ function Header() {
                                 <button className="relative h-16 w-16">
                                     <img
                                         className="h-full w-full rounded-full object-cover border-2 border-gray-200"
-                                        src={`${import.meta.env.VITE_REACT_APP_BACKEND_BASEURL}/${loggedin.profilePhoto
-                                        }`}
+                                        src={
+                                            loggedin.profilePhoto
+                                                ? `${import.meta.env.VITE_REACT_APP_BACKEND_BASEURL}/${loggedin.profilePhoto}`
+                                                : "https://www.pngmart.com/files/23/Profile-PNG-Photo.png"
+                                        }
                                         alt="Profile"
                                         onClick={handleProfile}
                                     />
@@ -207,8 +210,11 @@ function Header() {
                                     <button className="mt-5 ml-3 relative h-16 w-16">
                                         <img
                                             className="h-full w-full rounded-full object-cover border-2 border-gray-200"
-                                            src={`${import.meta.env.VITE_REACT_APP_BACKEND_BASEURL}/${loggedin.profilePhoto
-                                            }`}
+                                            src={
+                                                loggedin.profilePhoto
+                                                    ? `${import.meta.env.VITE_REACT_APP_BACKEND_BASEURL}/${loggedin.profilePhoto}`
+                                                    : "https://www.pngmart.com/files/23/Profile-PNG-Photo.png"
+                                            }
                                             alt="Profile"
                                             onClick={handleProfile}
                                         />

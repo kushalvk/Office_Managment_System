@@ -12,7 +12,6 @@ function All_Staff() {
             try {
                 const staff = await allStaff()
                 setStaff(staff.employees)
-                // console.log(staff)
             } catch (e) {
                 console.log(e)
             }
@@ -45,8 +44,11 @@ function All_Staff() {
                         className="bg-white p-4 rounded-lg shadow-md transform transition-transform duration-300 hover:-translate-y-1 hover:scale-105 hover:shadow-2xl"
                     >
                         <img
-                            src={`${import.meta.env.VITE_REACT_APP_BACKEND_BASEURL}/${employee.profilePhoto}
-                            `}
+                            src={
+                                employee.profilePhoto
+                                    ? `${import.meta.env.VITE_REACT_APP_BACKEND_BASEURL}/${employee.profilePhoto}`
+                                    : "https://www.pngmart.com/files/23/Profile-PNG-Photo.png"
+                            }
                             alt={employee.fullName
                             }
                             className="w-16 h-16 rounded-full mx-auto mb-4"

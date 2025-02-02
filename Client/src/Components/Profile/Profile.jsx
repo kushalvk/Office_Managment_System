@@ -40,7 +40,7 @@ function UserProfile() {
     const [isEditing, setIsEditing] = useState(false);
 
     const handleInputChange = (e) => {
-        const { name, value, files } = e.target;
+        const {name, value, files} = e.target;
 
         if (files) {
             setLoggedin((prevUser) => ({
@@ -217,7 +217,11 @@ function UserProfile() {
                         {/* Display Profile Photo */}
                         <div className="flex flex-col items-center">
                             <img
-                                src={`${import.meta.env.VITE_REACT_APP_BACKEND_BASEURL}/${loggedin.profilePhoto}`}
+                                src={
+                                    loggedin.profilePhoto
+                                        ? `${import.meta.env.VITE_REACT_APP_BACKEND_BASEURL}/${loggedin.profilePhoto}`
+                                        : "https://www.pngmart.com/files/23/Profile-PNG-Photo.png"
+                                }
                                 alt="Profile Photo"
                                 className="w-24 h-24 rounded-full"
                             />

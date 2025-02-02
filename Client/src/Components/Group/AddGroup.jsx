@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import GroupIcon from '../../../../Storage/Group_Icon.jpg';
+import {allStaff} from "../../Services/AuthService.js";
 
 function Add_Group() {
     // Form data state
@@ -13,83 +14,95 @@ function Add_Group() {
         status: '',
     });
 
-    // Members state
     const [members, setMembers] = useState([]);
     const [error, setError] = useState('');
-
-    // Dropdown state
+    const [options, setOptions] = useState([])
     const [isOpen, setIsOpen] = useState(false);
     const [selectedOption, setSelectedOption] = useState({
-        name: 'Select an employee',
-        image: '#'
+        username: 'Select an employee',
+        profilePhoto: 'https://www.pngmart.com/files/23/Profile-PNG-Photo.png'
     });
+    // console.log(members)
 
-    const options = [
-        {
-            name: 'Wade Cooper',
-            image: 'https://images.unsplash.com/photo-1491528323818-fdd1faba62cc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80'
-        },
-        {
-            name: 'Tom Cook',
-            image: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80'
-        },
-    ];
+    useEffect(() => {
+        const Staff = async () => {
+            try {
+                const staff = await allStaff()
+                setOptions(staff.employees)
+            } catch (e) {
+                console.log(e)
+            }
+        }
+        Staff();
+    }, [])
 
-    // Handle form data changes
     const handleChange = (e) => {
-        const { name, value } = e.target;
+        const {name, value} = e.target;
         setFormData((prevData) => ({
             ...prevData,
             [name]: value,
         }));
     };
 
-    // Handle dropdown selection
     const handleSelect = (option) => {
-        setSelectedOption(option);
+        setSelectedOption({
+            ...option,
+            profilePhoto: option.profilePhoto
+                ? `${import.meta.env.VITE_REACT_APP_BACKEND_BASEURL}/${option.profilePhoto}`
+                : "https://www.pngmart.com/files/23/Profile-PNG-Photo.png",
+        });
         setIsOpen(false);
     };
 
-    // Handle form submission
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log(formData);
+
+        const usernames = members.map((member) => member.username);
+
+        const updatedFormData = {
+            ...formData,
+            members: usernames,
+        };
+
+        setFormData(updatedFormData);
+
+        console.log(updatedFormData);
     };
 
-    // Add member to table with validation
     const handleAddMember = () => {
-        if (selectedOption.name === 'Select an employee') {
+        if (selectedOption.username === 'Select an employee') {
             setError('Please select an employee to add.');
             return;
         }
 
-        // Check if the selected member already exists in the list
-        const memberExists = members.some(member => member.name === selectedOption.name);
+        const memberExists = members.some(member => member.username === selectedOption.username);
         if (memberExists) {
             setError('This member has already been added.');
             return;
         }
 
-        // Add member if not already present
         setMembers((prevMembers) => [
             ...prevMembers,
             {
-                name: selectedOption.name,
-                image: selectedOption.image,
+                username: selectedOption.username,
+                profilePhoto: selectedOption.profilePhoto,
             }
         ]);
         setError('');
-        setSelectedOption({ name: 'Select an employee', image: '#' });
+        setSelectedOption({
+            username: 'Select an employee',
+            profilePhoto: "https://www.pngmart.com/files/23/Profile-PNG-Photo.png"
+        });
     };
 
-    // Handle member deletion
-    const handleDeleteMember = (name) => {
-        setMembers((prevMembers) => prevMembers.filter(member => member.name !== name));
+    const handleDeleteMember = (username) => {
+        setMembers((prevMembers) => prevMembers.filter(member => member.username !== username));
     };
 
     return (
         <div className="relative isolate h-full p-6 lg:px-8 bg-gradient-to-r from-blue-800 to-blue-400">
-            <div className="absolute inset-x-0 -top-40 -z-10 transform-gpu overflow-hidden blur-3xl sm:-top-80" aria-hidden="true">
+            <div className="absolute inset-x-0 -top-40 -z-10 transform-gpu overflow-hidden blur-3xl sm:-top-80"
+                 aria-hidden="true">
                 <div
                     className="relative left-[calc(50%-11rem)] aspect-[1155/678] w-[36.125rem] -translate-x-1/2 rotate-[30deg] bg-gradient-to-tr from-[#ff80b5] to-[#9089fc] opacity-30 sm:left-[calc(50%-30rem)] sm:w-[72.1875rem]"
                     style={{
@@ -150,11 +163,11 @@ function Add_Group() {
                             >
                                 <span className="flex items-center">
                                     <img
-                                        src={selectedOption.image}
-                                        alt={selectedOption.name}
+                                        src={selectedOption.profilePhoto}
+                                        alt={selectedOption.username}
                                         className="w-5 h-5 rounded-full mr-2"
                                     />
-                                    <span>{selectedOption.name}</span>
+                                    <span>{selectedOption.username}</span>
                                 </span>
                                 <svg
                                     className="w-4 h-4 text-gray-500"
@@ -178,11 +191,15 @@ function Add_Group() {
                                             onClick={() => handleSelect(option)}
                                         >
                                             <img
-                                                src={option.image}
-                                                alt={option.name}
+                                                src={
+                                                    option.profilePhoto
+                                                        ? `${import.meta.env.VITE_REACT_APP_BACKEND_BASEURL}/${option.profilePhoto}`
+                                                        : "https://www.pngmart.com/files/23/Profile-PNG-Photo.png"
+                                                }
+                                                alt={option.username}
                                                 className="w-5 h-5 rounded-full mr-2"
                                             />
-                                            <span>{option.name}</span>
+                                            <span>{option.username}</span>
                                         </li>
                                     ))}
                                 </ul>
@@ -196,12 +213,12 @@ function Add_Group() {
                         </div>
                     )}
                     <div className="col-span-2">
-                    <button
-                        onClick={handleAddMember}
-                        className="bg-green-600 text-white px-4 py-2 rounded-md mb-4 mt-2"
-                    >
-                        Add Member
-                    </button>
+                        <button
+                            onClick={handleAddMember}
+                            className="bg-green-600 text-white px-4 py-2 rounded-md mb-4 mt-2"
+                        >
+                            Add Member
+                        </button>
                     </div>
                     <div className="flex flex-col mb-4">
                         <label className="text-gray-800 font-semibold mb-2" htmlFor="createdBy">Created By</label>
@@ -274,33 +291,33 @@ function Add_Group() {
                     <h2 className="text-center text-2xl font-semibold mb-4">Added Members</h2>
                     <table className="min-w-full border-collapse">
                         <thead>
-                            <tr>
-                                <th className="border p-2">Name</th>
-                                <th className="border p-2">Image</th>
-                                <th className="border p-2">Action</th>
-                            </tr>
+                        <tr>
+                            <th className="border p-2">Name</th>
+                            <th className="border p-2">Image</th>
+                            <th className="border p-2">Action</th>
+                        </tr>
                         </thead>
                         <tbody>
-                            {members.map((member, index) => (
-                                <tr key={index}>
-                                    <td className="border p-2 text-center">{member.name}</td>
-                                    <td className="border p-2 flex justify-center">
-                                        <img
-                                            src={member.image}
-                                            alt={member.name}
-                                            className="w-10 h-10 rounded-full"
-                                        />
-                                    </td>
-                                    <td className="border p-2 text-center">
-                                        <button
-                                            onClick={() => handleDeleteMember(member.name)}
-                                            className="text-red-600 hover:text-red-800"
-                                        >
-                                            Delete
-                                        </button>
-                                    </td>
-                                </tr>
-                            ))}
+                        {members.map((member, index) => (
+                            <tr key={index}>
+                                <td className="border p-2 text-center">{member.username}</td>
+                                <td className="border p-2 flex justify-center">
+                                    <img
+                                        src={member.profilePhoto}
+                                        alt={member.username}
+                                        className="w-10 h-10 rounded-full"
+                                    />
+                                </td>
+                                <td className="border p-2 text-center">
+                                    <button
+                                        onClick={() => handleDeleteMember(member.username)}
+                                        className="text-red-600 hover:text-red-800"
+                                    >
+                                        Delete
+                                    </button>
+                                </td>
+                            </tr>
+                        ))}
                         </tbody>
                     </table>
                 </div>

@@ -25,6 +25,13 @@ function Sidebar() {
             }
         }
         logged();
+
+        if (loggedin.profilePhoto === "undefined") {
+            localStorage.clear();
+            navigate('/login');
+        } else if (!localStorage.getItem("token")) {
+            navigate('/login');
+        }
     }, [])
 
     return (
@@ -34,8 +41,11 @@ function Sidebar() {
                     <button className="relative h-13 w-16 mt-3">
                         <img
                             className="h-full w-full rounded-full object-cover border-2 border-gray-200"
-                            src={`${import.meta.env.VITE_REACT_APP_BACKEND_BASEURL}/${loggedin.profilePhoto
-                            }`}
+                            src={
+                                loggedin.profilePhoto
+                                    ? `${import.meta.env.VITE_REACT_APP_BACKEND_BASEURL}/${loggedin.profilePhoto}`
+                                    : "https://www.pngmart.com/files/23/Profile-PNG-Photo.png"
+                            }
                             alt="Profile"
                             onClick={handleProfile}
                         />
