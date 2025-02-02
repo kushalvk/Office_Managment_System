@@ -4,6 +4,40 @@ import { addUser } from '../../Services/AuthService';
 import { useNavigate } from 'react-router-dom';
 
 function Add_User() {
+
+    const qualificationOptions = [
+        { value: "", label: "Select Qualification" },
+        { value: "High School", label: "High School" },
+        { value: "Diploma", label: "Diploma" },
+        { value: "Bachelor's Degree", label: "Bachelor's Degree" },
+        { value: "Master's Degree", label: "Master's Degree" },
+        { value: "PhD", label: "PhD" },
+        { value: "Other", label: "Other" },
+    ];
+
+    const departmentOptions = [
+        { value: "", label: "Select Department" },
+        { value: "Human Resources", label: "Human Resources" },
+        { value: "Finance", label: "Finance" },
+        { value: "Information Technology", label: "Information Technology" },
+        { value: "Marketing", label: "Marketing" },
+        { value: "Sales", label: "Sales" },
+        { value: "Operations", label: "Operations" },
+        { value: "Customer Support", label: "Customer Support" },
+        { value: "Research and Development", label: "Research and Development" },
+        { value: "Legal", label: "Legal" },
+        { value: "Administration", label: "Administration" },
+    ];
+
+    const workLocationOptions = [
+        { value: "", label: "Select Work Location" },
+        { value: "Office", label: "Office" },
+        { value: "Remote", label: "Remote" },
+        { value: "Hybrid", label: "Hybrid" },
+        { value: "On-Site", label: "On-Site" },
+        { value: "Client Location", label: "Client Location" },
+    ];
+
     const [formData, setFormData] = useState({
         fullName: '',
         email: '',
@@ -22,6 +56,7 @@ function Add_User() {
         resume: null,
     });
     const [Error, setError] = useState('');
+    const navigate = useNavigate();
 
     const handleChange = (e) => {
         const { name, value, files } = e.target;
@@ -54,6 +89,7 @@ function Add_User() {
             try {
                 await addUser(form);
                 alert("User Added Sucessfully")
+                navigate("/all-staff");
             } catch (e) {
                 setError(e.message);
             }
@@ -63,7 +99,7 @@ function Add_User() {
     };
 
     return (
-        <div className="relative isolate p-6 lg:px-8 bg-gradient-to-r from-blue-800 to-blue-400">
+        <div className="relative isolate h-full p-6 lg:px-8 bg-gradient-to-r from-blue-800 to-blue-400">
             <div className="absolute inset-x-0 -top-40 -z-10 transform-gpu overflow-hidden blur-3xl sm:-top-80"
                 aria-hidden="true">
                 <div
@@ -75,7 +111,7 @@ function Add_User() {
             </div>
 
             {/* Header Section */}
-            <div className="mx-auto max-w-2xl sm:py-48 text-center">
+            <div className="mx-auto max-w-2xl p-5 text-center">
                 <h1 className="text-white text-3xl sm:text-5xl font-bold mb-4">Add New User</h1>
                 <p className="text-gray-300 text-lg">Please fill out the form below to add a new user.</p>
             </div>
@@ -92,7 +128,7 @@ function Add_User() {
             {/* Form Section */}
             <section className="bg-gray-100 shadow-lg rounded-lg p-8 mx-4 md:mx-8 mb-8">
                 {Error ? <p className='text-red-600 font-bold flex justify-center'>{Error}</p> : null}
-                <form className="grid grid-cols-1 gap-6 md:grid-cols-2 md:gap-8" onSubmit={handleSubmit} method="POST" >
+                <form className="grid grid-cols-1 gap-6 md:grid-cols-2 md:gap-8" onSubmit={handleSubmit} method="POST">
                     {/* Form Fields */}
                     <div className="flex flex-col mb-4">
                         <label className="text-gray-800 font-semibold mb-2" htmlFor="fullName">Full Name</label>
@@ -172,16 +208,21 @@ function Add_User() {
                     </div>
                     <div className="flex flex-col mb-4">
                         <label className="text-gray-800 font-semibold mb-2"
-                            htmlFor="qualification">Qualification</label>
-                        <input
-                            type="text"
+                               htmlFor="qualification">Qualification</label>
+                        <select
                             id="qualification"
                             name="qualification"
                             value={formData.qualification}
                             onChange={handleChange}
                             className="p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
                             required
-                        />
+                        >
+                            {qualificationOptions.map((option) => (
+                                <option key={option.value} value={option.value}>
+                                    {option.label}
+                                </option>
+                            ))}
+                        </select>
                     </div>
                     <div className="flex flex-col mb-4">
                         <label className="text-gray-800 font-semibold mb-2" htmlFor="username">Username</label>
@@ -222,27 +263,37 @@ function Add_User() {
                     </div>
                     <div className="flex flex-col mb-4">
                         <label className="text-gray-800 font-semibold mb-2" htmlFor="workLocation">Work Location</label>
-                        <input
-                            type="text"
+                        <select
                             id="workLocation"
                             name="workLocation"
                             value={formData.workLocation}
                             onChange={handleChange}
                             className="p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
                             required
-                        />
+                        >
+                            {workLocationOptions.map((option) => (
+                                <option key={option.value} value={option.value}>
+                                    {option.label}
+                                </option>
+                            ))}
+                        </select>
                     </div>
                     <div className="flex flex-col mb-4">
                         <label className="text-gray-800 font-semibold mb-2" htmlFor="department">Department</label>
-                        <input
-                            type="text"
+                        <select
                             id="department"
                             name="department"
                             value={formData.department}
                             onChange={handleChange}
                             className="p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
                             required
-                        />
+                        >
+                            {departmentOptions.map((option) => (
+                                <option key={option.value} value={option.value}>
+                                    {option.label}
+                                </option>
+                            ))}
+                        </select>
                     </div>
                     <div className="flex flex-col mb-4">
                         <label className="text-gray-800 font-semibold mb-2" htmlFor="role">Role</label>
@@ -288,7 +339,7 @@ function Add_User() {
                     {Error ? <p className='text-red-600 font-bold flex justify-center'>{Error}</p> : null}
                     <div className="flex justify-center mb-4 md:col-span-2">
                         <button type="submit"
-                            className="bg-blue-600 text-white p-3 rounded-lg shadow-md hover:bg-blue-700 transition duration-300">
+                                className="bg-blue-600 text-white p-3 rounded-lg shadow-md hover:bg-blue-700 transition duration-300">
                             Submit
                         </button>
                     </div>

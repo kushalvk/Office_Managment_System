@@ -1,33 +1,39 @@
-import React, { useState } from "react";
+import React, {useState} from "react";
+import {forgotPassword} from "../../Services/AuthService.js";
+import {useNavigate} from "react-router-dom";
 
 function ForgotPassword() {
-    // State to manage form data
+
     const [formData, setFormData] = useState({
         email: "",
         newPassword: "",
         confirmPassword: "",
     });
+    const [Error, setError] = useState('');
+    const navigate = useNavigate();
 
-    // Handle input changes
     const handleInputChange = (e) => {
-        const { name, value } = e.target;
+        const {name, value} = e.target;
         setFormData({
             ...formData,
             [name]: value,
         });
     };
 
-    // Handle form submission
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        // Add validation logic here (e.g., check if passwords match)
-        if (formData.newPassword !== formData.confirmPassword) {
-            alert("Passwords do not match!");
-            return;
+
+        try {
+            if (formData.newPassword === formData.confirmPassword) {
+                await forgotPassword(formData);
+                alert("Password reset successful!");
+                navigate("/login");
+            } else {
+                setError("Passwords do not match!");
+            }
+        } catch (e) {
+            setError(e.message);
         }
-        // Submit the form data (e.g., send to an API)
-        console.log("Form Data Submitted:", formData);
-        alert("Password reset successful!");
     };
 
     return (
@@ -53,6 +59,7 @@ function ForgotPassword() {
                             Enter your new password below.
                         </p>
                     </div>
+                    {Error ? <p className='text-red-600 font-bold flex justify-center'>{Error}</p> : null}
                     <form className="mt-10 space-y-6" onSubmit={handleSubmit}>
                         <div>
                             <label

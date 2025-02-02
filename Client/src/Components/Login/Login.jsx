@@ -1,4 +1,4 @@
-import { useState } from "react"
+import React, { useState } from "react"
 import { login } from "../../Services/AuthService";
 import { useNavigate } from 'react-router-dom';
 
@@ -10,7 +10,7 @@ function Login() {
     })
     const navigate = useNavigate();
 
-    // const [error, setError] = useState('Not Login')
+    const [Error, setError] = useState('')
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -28,10 +28,14 @@ function Login() {
             localStorage.setItem("token", token);
             localStorage.setItem("role", user.role);
             localStorage.setItem("username", user.username);
-            localStorage.setItem("email", user.email);
-            navigate("/");
+            if (user.role === "Manager") {
+                navigate("/dashbored");
+            } else {
+                navigate("/");
+            }
+            location.reload();
         } catch (e) {
-            console.log(e.message);
+            setError(e.message);
         }
     };
 
@@ -58,6 +62,7 @@ function Login() {
                             Please log in to continue.
                         </p>
                     </div>
+                    {Error ? <p className='text-red-600 font-bold flex justify-center'>{Error}</p> : null}
                     <form onSubmit={handleSubmit} className="mt-10 space-y-6" action="#" method="POST">
                         <div>
                             <label

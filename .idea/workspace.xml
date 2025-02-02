@@ -5,22 +5,52 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="404eb4d8-f181-44b4-a139-a07b064bd629" name="Changes" comment="ADD: Group details, View Task pages UPDATE: Add user,Add group,Notification, Profile, Project,Task Pages.">
+      <change afterPath="$PROJECT_DIR$/Client/src/Components/Header/Sidebar.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/Client/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/Client/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/Client/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/Client/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/postcss.config.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/App.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/App.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/Components/About_Us/About_Us.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/Components/About_Us/About_Us.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Client/src/Components/Add User/Add_User.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/Components/Add User/Add_User.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/src/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/index.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/tailwind.config.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/vite.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/Client/vite.config.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/Components/Add_Work/Add_Work.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/Components/Add_Work/Add_Work.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/Components/All_Staff/All_Staff.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/Components/All_Staff/All_Staff.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/Components/Blog_News/Add_Blog_News.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/Components/Blog_News/Add_Blog_News.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/Components/Blog_News/Blog_News.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/Components/Blog_News/Blog_News.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/Components/Contact_Us/Contact_Us.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/Components/Contact_Us/Contact_Us.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/Components/Dashbored/Dashbored.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/Components/Dashbored/Dashbored.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/Components/Facilities/Facilities.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/Components/Facilities/Facilities.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/Components/Group/AddGroup.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/Components/Group/AddGroup.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/Components/Group/Group_Details.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/Components/Group/Group_Details.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/Components/Group/Show_Groups.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/Components/Group/Show_Groups.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/Components/Header/Header.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/Components/Header/Header.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/Components/Login/Forgate_Password.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/Components/Login/Forgate_Password.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/Components/Login/Login.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/Components/Login/Login.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/Components/Notification/Add_Notification.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/Components/Notification/Add_Notification.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/Components/Notification/Notification.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/Components/Notification/Notification.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/Components/Photos/Photos.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/Components/Photos/Photos.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/Components/Polices/Policies.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/Components/Polices/Policies.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/Components/Privacy_Policies/Privacy_Policies.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/Components/Privacy_Policies/Privacy_Policies.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/Components/Profile/Profile.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/Components/Profile/Profile.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/Components/Project/Show_All_Projects.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/Components/Project/Show_All_Projects.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/Components/Report/Show_all_report.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/Components/Report/Show_all_report.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/Components/Report/Submit_report.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/Components/Report/Submit_report.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/Components/Requrment/All_Requirment.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/Components/Requrment/All_Requirment.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/Components/Requrment/Submit_Requrment.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/Components/Requrment/Submit_Requrment.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/Components/Sallary/Sallary.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/Components/Sallary/Sallary.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/Components/Task/Show_All_Task.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/Components/Task/Show_All_Task.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/Components/Task/View_Task.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/Components/Task/View_Task.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/Components/Terms_Condition/Terms_Condition.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/Components/Terms_Condition/Terms_Condition.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/Services/AuthService.js" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/Services/AuthService.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/Services/Error.js" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/Services/Error.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/main.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/main.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Server/controllers/Auth_Controller.js" beforeDir="false" afterPath="$PROJECT_DIR$/Server/controllers/Auth_Controller.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Server/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/Server/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/models/UserSchema.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/Server/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/Server/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/middlewares/authMiddleware.js" beforeDir="false" afterPath="$PROJECT_DIR$/Server/middlewares/authMiddleware.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Server/routers/Auth_Route.js" beforeDir="false" afterPath="$PROJECT_DIR$/Server/routers/Auth_Route.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/uplodes/1738410362023_Ram.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/uplodes/1738410362027_Kushal Resume.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/uplodes/1738426000125_VK.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/uplodes/1738426000127_Kushal Resume.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/uplodes/1738433939776_Ram.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/uplodes/1738433939778_Kushal Resume.pdf" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -30,8 +60,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="JSX File" />
         <option value="JavaScript File" />
+        <option value="JSX File" />
       </list>
     </option>
   </component>
@@ -128,6 +158,7 @@
       <workItem from="1738384362804" duration="1537000" />
       <workItem from="1738417199143" duration="103000" />
       <workItem from="1738424343457" duration="12000" />
+      <workItem from="1738468096538" duration="23705000" />
     </task>
     <task id="LOCAL-00001" summary="Merge pull request #2 from Kumhar-Harshad/main&#10;&#10;ADD: Profile.jsx">
       <option name="closed" value="true" />

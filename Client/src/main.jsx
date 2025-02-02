@@ -59,7 +59,6 @@ const router = createBrowserRouter(
             <Route path='/addblognews' element={<AddBlogNews/>}/>
             <Route path='/aboutus' element={<AboutUs/>}/>
             <Route path='/contactus' element={<ContactUs/>}/>
-            <Route path='/admindashbored' element={<AdminDashboard/>}/>
             <Route path='/photos' element={<Photos/>}/>
             <Route path='/polices' element={<Policies/>}/>
             <Route path='/privacy-polices' element={<Privacy_Policies/>}/>
@@ -67,6 +66,7 @@ const router = createBrowserRouter(
             <Route path='/view-details/:id' element={<View_Task/>}/>
             <Route path="/group-details/:id" element={<GroupDetails />} />
             <Route path="/forgot-password" element={<ForgotPassword />} />
+            <Route path="/dashbored" element={<AdminDashboard />} />
         </Route>
     )
 )

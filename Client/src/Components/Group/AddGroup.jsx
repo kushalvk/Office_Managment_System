@@ -88,7 +88,7 @@ function Add_Group() {
     };
 
     return (
-        <div className="relative isolate p-6 lg:px-8 bg-gradient-to-r from-blue-800 to-blue-400">
+        <div className="relative isolate h-full p-6 lg:px-8 bg-gradient-to-r from-blue-800 to-blue-400">
             <div className="absolute inset-x-0 -top-40 -z-10 transform-gpu overflow-hidden blur-3xl sm:-top-80" aria-hidden="true">
                 <div
                     className="relative left-[calc(50%-11rem)] aspect-[1155/678] w-[36.125rem] -translate-x-1/2 rotate-[30deg] bg-gradient-to-tr from-[#ff80b5] to-[#9089fc] opacity-30 sm:left-[calc(50%-30rem)] sm:w-[72.1875rem]"
@@ -99,7 +99,7 @@ function Add_Group() {
             </div>
 
             {/* Header Section */}
-            <div className="mx-auto max-w-2xl pt-40 pb-2 text-center">
+            <div className="mx-auto max-w-2xl p-5 text-center">
                 <h1 className="text-white text-3xl sm:text-5xl font-bold mb-4">Add New Group</h1>
                 <p className="text-gray-300 text-lg">Please fill out the form below to add a new group.</p>
             </div>

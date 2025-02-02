@@ -2,32 +2,16 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 function AdminDashboard() {
-  return (
-    <div className="flex h-screen bg-gray-100">
-      {/* Sidebar */}
-      <div className="w-64 bg-blue-800 text-white p-6 pt-[7vw]">
-        <h2 className="text-2xl font-bold text-center mb-10">Admin Dashboard</h2>
-        <ul className="space-y-6">
-          <li>
-            <Link to="/dashboard" className="hover:bg-blue-700 p-2 rounded-md block">Dashboard</Link>
-          </li>
-          <li>
-            <Link to="/users" className="hover:bg-blue-700 p-2 rounded-md block">Users</Link>
-          </li>
-          <li>
-            <Link to="/reports" className="hover:bg-blue-700 p-2 rounded-md block">Reports</Link>
-          </li>
-          <li>
-            <Link to="/settings" className="hover:bg-blue-700 p-2 rounded-md block">Settings</Link>
-          </li>
-        </ul>
-      </div>
 
+  const username = localStorage.getItem("username");
+
+  return (
+    <div className="flex h-full bg-gray-100">
       {/* Main Content */}
-      <div className="flex-1 p-6 pt-[7vw]">
+      <div className="flex-1 p-6">
         {/* Header */}
         <div className="flex justify-between items-center mb-6">
-          <h1 className="text-3xl font-semibold text-gray-800">Welcome, Admin</h1>
+          <h1 className="text-3xl font-semibold text-gray-800">Welcome, Manager {username && username} </h1>
         </div>
 
         {/* Dashboard Cards */}

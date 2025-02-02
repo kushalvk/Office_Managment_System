@@ -1,64 +1,197 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import {useEffect, useState} from "react";
+import {loggedUser, updateUserProfile} from "../../Services/AuthService.js";
 
 function UserProfile() {
-    const [user, setUser] = useState({
-        id: 1,
-        fullName: "John Doe",
-        username: "johndoe123",
-        dob: "1990-05-15",
-        phoneNumber: "+1 234 567 890",
-        address: "123 Main St, Springfield, IL",
-        city: "Springfield",
-        role: "Admin",
-        document: "document1.pdf",
-        loginPhoto: "https://via.placeholder.com/150",
-    });
 
+    const qualificationOptions = [
+        {value: "", label: "Select Qualification"},
+        {value: "High School", label: "High School"},
+        {value: "Diploma", label: "Diploma"},
+        {value: "Bachelor's Degree", label: "Bachelor's Degree"},
+        {value: "Master's Degree", label: "Master's Degree"},
+        {value: "PhD", label: "PhD"},
+        {value: "Other", label: "Other"},
+    ];
+
+    const departmentOptions = [
+        {value: "", label: "Select Department"},
+        {value: "Human Resources", label: "Human Resources"},
+        {value: "Finance", label: "Finance"},
+        {value: "Information Technology", label: "Information Technology"},
+        {value: "Marketing", label: "Marketing"},
+        {value: "Sales", label: "Sales"},
+        {value: "Operations", label: "Operations"},
+        {value: "Customer Support", label: "Customer Support"},
+        {value: "Research and Development", label: "Research and Development"},
+        {value: "Legal", label: "Legal"},
+        {value: "Administration", label: "Administration"},
+    ];
+
+    const workLocationOptions = [
+        {value: "", label: "Select Work Location"},
+        {value: "Office", label: "Office"},
+        {value: "Remote", label: "Remote"},
+        {value: "Hybrid", label: "Hybrid"},
+        {value: "On-Site", label: "On-Site"},
+        {value: "Client Location", label: "Client Location"},
+    ];
+
+    const [loggedin, setLoggedin] = useState({});
     const [isEditing, setIsEditing] = useState(false);
-    const navigate = useNavigate();
 
-    // Handle input changes
     const handleInputChange = (e) => {
-        const { name, value } = e.target;
-        setUser((prevUser) => ({ ...prevUser, [name]: value }));
+        const { name, value, files } = e.target;
+
+        if (files) {
+            setLoggedin((prevUser) => ({
+                ...prevUser,
+                [name]: files[0],
+            }));
+        } else {
+            setLoggedin((prevUser) => ({
+                ...prevUser,
+                [name]: value,
+            }));
+        }
     };
 
-    // Handle form submission
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        setIsEditing(false);
-        console.log("Updated User Data:", user);
+
+        try {
+            const formData = new FormData();
+
+            for (const key in loggedin) {
+                if (loggedin[key] !== null && loggedin[key] !== undefined) {
+                    formData.append(key, loggedin[key]);
+                }
+            }
+
+            const response = await updateUserProfile(loggedin._id, formData);
+
+            setLoggedin(response);
+            setIsEditing(false);
+            alert("Profile updated successfully!");
+            location.reload();
+        } catch (error) {
+            console.error("Error updating profile:", error.message);
+            alert("Failed to update profile. Please try again.");
+        }
     };
+
+    useEffect(() => {
+        const logged = async () => {
+            try {
+                setLoggedin(await loggedUser());
+            } catch (e) {
+                console.log(e.message);
+            }
+        }
+        logged();
+    }, [])
 
     return (
-        <div className="relative isolate p-6 lg:px-8 bg-gradient-to-r from-blue-800 to-blue-400 min-h-screen flex flex-col items-center justify-center">
+        <div
+            className="relative isolate h-full p-6 lg:px-8 bg-gradient-to-r from-blue-800 to-blue-400 min-h-screen flex flex-col items-center justify-center">
             <h1 className="text-2xl font-bold text-center md:mt-14 text-white">{isEditing ? "Edit Profile" : "User Profile"}</h1>
             <div className="bg-white p-6 rounded-lg shadow-lg max-w-4xl w-full space-y-6 mt-5">
-                <div className="flex flex-col items-center">
-                    <img
-                        src={user.loginPhoto || "https://via.placeholder.com/150"}
-                        alt="Login Photo"
-                        className="w-24 h-24 rounded-full"
-                    />
-                </div>
                 {isEditing ? (
                     <form onSubmit={handleSubmit} className="space-y-4">
-                        {Object.keys(user).map((key) => (
-                            key !== "id" && key !== "loginPhoto" && (
+                        {/* Profile Photo Upload */}
+                        <div className="flex flex-col">
+                            <label className="font-semibold text-gray-700 capitalize">Profile Photo:</label>
+                            <input
+                                type="file"
+                                name="profilePhoto"
+                                onChange={handleInputChange}
+                                className="border rounded px-3 py-2 w-full"
+                                accept="image/*"
+                            />
+                        </div>
+
+                        {/* Qualification Dropdown */}
+                        <div className="flex flex-col">
+                            <label className="font-semibold text-gray-700 capitalize">Qualification:</label>
+                            <select
+                                name="qualification"
+                                value={loggedin.qualification || ""}
+                                onChange={handleInputChange}
+                                className="border rounded px-3 py-2 w-full"
+                            >
+                                {qualificationOptions.map((option) => (
+                                    <option key={option.value} value={option.value}>
+                                        {option.label}
+                                    </option>
+                                ))}
+                            </select>
+                        </div>
+
+                        {/* Department Dropdown */}
+                        <div className="flex flex-col">
+                            <label className="font-semibold text-gray-700 capitalize">Department:</label>
+                            <select
+                                name="department"
+                                value={loggedin.department || ""}
+                                onChange={handleInputChange}
+                                className="border rounded px-3 py-2 w-full"
+                            >
+                                {departmentOptions.map((option) => (
+                                    <option key={option.value} value={option.value}>
+                                        {option.label}
+                                    </option>
+                                ))}
+                            </select>
+                        </div>
+
+                        {/* Work Location Dropdown */}
+                        <div className="flex flex-col">
+                            <label className="font-semibold text-gray-700 capitalize">Work Location:</label>
+                            <select
+                                name="workLocation"
+                                value={loggedin.workLocation || ""}
+                                onChange={handleInputChange}
+                                className="border rounded px-3 py-2 w-full"
+                            >
+                                {workLocationOptions.map((option) => (
+                                    <option key={option.value} value={option.value}>
+                                        {option.label}
+                                    </option>
+                                ))}
+                            </select>
+                        </div>
+
+                        {/* Other Fields */}
+                        {Object.keys(loggedin).map((key) => (
+                            key !== "_id" && key !== "password" && key !== "profilePhoto" && key !== "__v" &&
+                            key !== "qualification" && key !== "department" && key !== "workLocation" && (
                                 <div key={key} className="flex flex-col">
-                                    <label className="font-semibold text-gray-700 capitalize">{key.replace(/([A-Z])/g, ' $1').trim()}:</label>
+                                    <label className="font-semibold text-gray-700 capitalize">
+                                        {key.replace(/([A-Z])/g, ' $1').trim()}:
+                                    </label>
                                     {key === "role" ? (
-                                        <select name={key} value={user[key]} onChange={handleInputChange} className="border rounded px-3 py-2 w-full">
+                                        <select
+                                            name={key}
+                                            value={loggedin[key]}
+                                            onChange={handleInputChange}
+                                            className="border rounded px-3 py-2 w-full"
+                                        >
                                             <option value="Admin">Admin</option>
                                             <option value="Employee">Employee</option>
                                             <option value="Manager">Manager</option>
                                         </select>
+                                    ) : key === "resume" ? (
+                                        <input
+                                            type="file"
+                                            name={key}
+                                            onChange={handleInputChange}
+                                            className="border rounded px-3 py-2 w-full"
+                                            accept=".pdf,.doc,.docx"
+                                        />
                                     ) : (
                                         <input
                                             type={key === "dob" ? "date" : "text"}
                                             name={key}
-                                            value={user[key]}
+                                            value={loggedin[key]}
                                             onChange={handleInputChange}
                                             className="border rounded px-3 py-2 w-full"
                                         />
@@ -66,23 +199,55 @@ function UserProfile() {
                                 </div>
                             )
                         ))}
+
+                        {/* Save and Cancel Buttons */}
                         <div className="flex justify-center gap-4">
-                            <button type="submit" className="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-500">Save Changes</button>
-                            <button type="button" onClick={() => setIsEditing(false)} className="bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-400">Cancel</button>
+                            <button type="submit"
+                                    className="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-500">
+                                Save Changes
+                            </button>
+                            <button type="button" onClick={() => setIsEditing(false)}
+                                    className="bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-400">
+                                Cancel
+                            </button>
                         </div>
                     </form>
                 ) : (
                     <div className="space-y-4">
-                        {Object.keys(user).map((key) => (
-                            key !== "id" && key !== "loginPhoto" && (
+                        {/* Display Profile Photo */}
+                        <div className="flex flex-col items-center">
+                            <img
+                                src={`${import.meta.env.VITE_REACT_APP_BACKEND_BASEURL}/${loggedin.profilePhoto}`}
+                                alt="Profile Photo"
+                                className="w-24 h-24 rounded-full"
+                            />
+                        </div>
+
+                        {/* Display Other Fields */}
+                        {Object.keys(loggedin).map((key) => (
+                            key !== "_id" && key !== "password" && key !== "profilePhoto" && key !== "__v" && (
                                 <div key={key} className="flex justify-between">
-                                    <span className="font-semibold text-gray-700 capitalize">{key.replace(/([A-Z])/g, ' $1').trim()}:</span>
-                                    <span className="text-gray-600">{user[key]}</span>
+                    <span className="font-semibold text-gray-700 capitalize">
+                        {key.replace(/([A-Z])/g, ' $1').trim()}:
+                    </span>
+                                    {key === "resume" ? (
+                                        <a href={`${import.meta.env.VITE_REACT_APP_BACKEND_BASEURL}/${loggedin[key]}`}
+                                           className="text-blue-600" target="_blank">
+                                            Click to show resume
+                                        </a>
+                                    ) : (
+                                        <span className="text-gray-600">{loggedin[key]}</span>
+                                    )}
                                 </div>
                             )
                         ))}
+
+                        {/* Edit Profile Button */}
                         <div className="flex justify-center">
-                            <button onClick={() => setIsEditing(true)} className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-500">Edit Profile</button>
+                            <button onClick={() => setIsEditing(true)}
+                                    className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-500">
+                                Edit Profile
+                            </button>
                         </div>
                     </div>
                 )}

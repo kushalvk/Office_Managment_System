@@ -25,7 +25,7 @@ function Policies() {
     ];
 
     return (
-        <div className="relative isolate pt-12 p-6 lg:px-8 bg-gradient-to-r from-blue-800 to-blue-400 min-h-screen">
+        <div className="relative isolate h-full pt-12 p-6 lg:px-8 bg-gradient-to-r from-blue-800 to-blue-400 min-h-screen">
             {/* Header */}
             <h1 className="text-white text-4xl font-bold text-center mb-6 mt-10">Company Policies</h1>
 

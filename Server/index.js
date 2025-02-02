@@ -14,6 +14,7 @@ const corsOptions = {
   };
 app.use(cors(corsOptions));
 app.use(express.json());
+app.use(express.static("uplodes"))
 
 if (mongoose.connect(process.env.MONGODB_URL)) {
     console.log("Prime_Hub Database connected");

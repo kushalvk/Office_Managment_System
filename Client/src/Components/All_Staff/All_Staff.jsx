@@ -1,63 +1,29 @@
-import { useNavigate } from "react-router-dom";
-import { useState } from "react";
+import {useNavigate} from "react-router-dom";
+import {useEffect, useState} from "react";
+import {allStaff} from "../../Services/AuthService.js";
 
 function All_Staff() {
-    const [staff, setStaff] = useState([
-        {
-            id: 1,
-            name: "John Doe",
-            position: "Manager",
-            email: "john.doe@example.com",
-            phone: "+1-234-567-890",
-            image: "https://images.unsplash.com/photo-1491528323818-fdd1faba62cc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
-        },
-        {
-            id: 2,
-            name: "Jane Smith",
-            position: "Receptionist",
-            email: "jane.smith@example.com",
-            phone: "+1-987-654-321",
-            image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
-        },
-        {
-            id: 3,
-            name: "Emily Johnson",
-            position: "Housekeeper",
-            email: "emily.johnson@example.com",
-            phone: "+1-345-678-901",
-            image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
-        },
-        {
-            id: 1,
-            name: "John Doe",
-            position: "Manager",
-            email: "john.doe@example.com",
-            phone: "+1-234-567-890",
-            image: "https://images.unsplash.com/photo-1491528323818-fdd1faba62cc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
-        },
-        {
-            id: 2,
-            name: "Jane Smith",
-            position: "Receptionist",
-            email: "jane.smith@example.com",
-            phone: "+1-987-654-321",
-            image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
-        },
-        {
-            id: 3,
-            name: "Emily Johnson",
-            position: "Housekeeper",
-            email: "emily.johnson@example.com",
-            phone: "+1-345-678-901",
-            image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
-        },
-    ]);
+    const [staff, setStaff] = useState([]);
 
     const navigate = useNavigate();
 
+    useEffect(() => {
+        const Staff = async () => {
+            try {
+                const staff = await allStaff()
+                setStaff(staff.employees)
+                // console.log(staff)
+            } catch (e) {
+                console.log(e)
+            }
+        }
+        Staff()
+    }, [])
+
     return (
-        <div className="relative isolate p-6 lg:px-8 bg-gradient-to-r from-blue-800 to-blue-400 min-h-screen">
-            <div className="absolute inset-x-0 -top-40 -z-10 transform-gpu overflow-hidden blur-3xl sm:-top-80" aria-hidden="true">
+        <div className="relative isolate h-full p-6 lg:px-8 bg-gradient-to-r from-blue-800 to-blue-400 min-h-screen">
+            <div className="absolute inset-x-0 -top-40 -z-10 transform-gpu overflow-hidden blur-3xl sm:-top-80"
+                 aria-hidden="true">
                 <div
                     className="relative left-[calc(50%-11rem)] aspect-[1155/678] w-[36.125rem] -translate-x-1/2 rotate-[30deg] bg-gradient-to-tr from-[#ff80b5] to-[#9089fc] opacity-30 sm:left-[calc(50%-30rem)] sm:w-[72.1875rem]"
                     style={{
@@ -73,20 +39,25 @@ function All_Staff() {
                 Add Staff
             </button>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-6">
-                {staff.map((employee) => (
+                {staff.map((employee, idx) => (
                     <div
-                        key={employee.id}
+                        key={idx}
                         className="bg-white p-4 rounded-lg shadow-md transform transition-transform duration-300 hover:-translate-y-1 hover:scale-105 hover:shadow-2xl"
                     >
                         <img
-                            src={employee.image}
-                            alt={employee.name}
+                            src={`${import.meta.env.VITE_REACT_APP_BACKEND_BASEURL}/${employee.profilePhoto}
+                            `}
+                            alt={employee.fullName
+                            }
                             className="w-16 h-16 rounded-full mx-auto mb-4"
                         />
-                        <h4 className="text-xl font-bold text-gray-800 text-center">{employee.name}</h4>
-                        <p className="text-sm text-gray-700 text-center">{employee.position}</p>
+                        <h4 className="text-xl font-bold text-gray-800 text-center">{employee.fullName
+                        }</h4>
+                        <p className="text-sm text-gray-700 text-center">{employee.role
+                        }</p>
+                        <p className="text-sm text-gray-700 mt-2"><strong>Department:</strong> {employee.department}</p>
                         <p className="text-sm text-gray-700 mt-2"><strong>Email:</strong> {employee.email}</p>
-                        <p className="text-sm text-gray-700 mt-2"><strong>Phone:</strong> {employee.phone}</p>
+                        <p className="text-sm text-gray-700 mt-2"><strong>Phone:</strong> {employee.mobNo}</p>
                     </div>
                 ))}
             </div>
