@@ -152,4 +152,4 @@ const allStaff = async (req, res) => {
     }
 }
 
-module.exports = { addUserController, loginController, forgotPasswordController, loggedUser, updateProfile, allStaff }
+module.exports = { addUserController, loginController, forgotPasswordController, loggedUser, updateProfile, allStaff };

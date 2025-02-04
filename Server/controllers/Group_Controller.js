@@ -1,0 +1,38 @@
+const GroupModel = require('../models/GroupSchema');
+const tty = require("node:tty");
+
+const addGroupController = async (req, res) => {
+    try {
+        const form = req.body;
+
+        await GroupModel.create({ ...form })
+            .then(() => res.status(200).send({ message: "Group Added successfully" }))
+            .catch(err => res.status(500).send({ message: "Fail to Add Group : Controller ", err}));
+    } catch (error) {
+        res.status(500).send({ message: "Error to Add Group : Controller ", error })
+    }
+}
+
+const allGroupController = async (req, res) => {
+    try {
+        await GroupModel.find()
+            .then((groups) => res.status(200).send({ message: "Group fetch successfully ", groups }))
+            .catch(err => res.status(500).send({ message: "Fail to fetch groups : Controller ", err}));
+    } catch (error) {
+        res.status(500).send({ message: "Error to fetch All Groups : Controller", error });
+    }
+}
+
+const fetchGroupByIdController = async (req, res) => {
+    try {
+        const { id } = req.params;
+
+        await GroupModel.findById( id )
+            .then((group) => res.status(200).send({ message: "Group found successfully ", group }))
+            .catch(error => res.status(500).send({ message: "group not found : Controller", error}));
+    } catch (error) {
+        res.status(500).send({ message: "Error to fetch All Groups : Controller", error });
+    }
+}
+
+module.exports = { addGroupController, allGroupController, fetchGroupByIdController };

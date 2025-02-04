@@ -26,7 +26,6 @@ function Login() {
         try {
             const {token, user} = await login(form);
             localStorage.setItem("token", token);
-            localStorage.setItem("role", user.role);
             localStorage.setItem("username", user.username);
             if (user.role === "Manager") {
                 navigate("/dashbored");

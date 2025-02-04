@@ -54,7 +54,7 @@ export const allStaff = async () => {
     try {
         const response = await axios.get(`${import.meta.env.VITE_REACT_APP_BACKEND_BASEURL}/all-staff`)
         return response.data;
-    } catch (e) {
-        console.log(e)
+    } catch (err) {
+        error(err)
     }
 }

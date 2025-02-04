@@ -7,7 +7,12 @@ function Sidebar() {
     const [loggedin, setLoggedin] = useState({});
 
     const handleProfile = () => {
-        navigate('/profile')
+        if (loggedin) {
+            navigate('/profile')
+        } else {
+            alert("Your session is Expired Logged in First");
+            navigate('/login')
+        }
     }
 
     const HandleLogout = () => {
@@ -73,9 +78,6 @@ function Sidebar() {
                     </li>
                     <li>
                         <Link to="/show-group" className="hover:bg-blue-700 p-2 rounded-md block">Group</Link>
-                    </li>
-                    <li>
-                        <Link to="/all-reports" className="hover:bg-blue-700 p-2 rounded-md block">Report</Link>
                     </li>
                     <li>
                         <Link to="/Show-requirment" className="hover:bg-blue-700 p-2 rounded-md block">Requerment</Link>

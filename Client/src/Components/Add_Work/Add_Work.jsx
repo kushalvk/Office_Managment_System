@@ -1,183 +1,268 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import React, {useEffect, useState} from "react";
+import {useNavigate} from "react-router-dom";
+import {allStaff} from "../../Services/AuthService.js";
 
 function AddTask() {
+
+    const groupOptions = ["Group A", "Group B", "Group C"];
+    const [employeeOptions, setEmployeeOption] = useState([]);
+    const [members, setMembers] = useState([]);
+    const [selectedGroup, setSelectedGroup] = useState("");
+    const [formErrors, setFormErrors] = useState({});
+    const [isOpen, setIsOpen] = useState(false);
+    const [error, setError] = useState('');
+    // const navigate = useNavigate();
+    const [selectedOption, setSelectedOption] = useState({
+        username: 'Select an employee',
+        profilePhoto: 'https://www.pngmart.com/files/23/Profile-PNG-Photo.png'
+    });
+
     const [task, setTask] = useState({
         title: "",
         description: "",
         completionDate: "",
-        type: "task", // Default to "task"
-        groupName: "", // For project type only
-        employeeName: "",
+        type: "task",
+        groups: [],
+        employees: [],
     });
 
-    const options = [
-        {
-            name: "Wade Cooper",
-            image: "https://images.unsplash.com/photo-1491528323818-fdd1faba62cc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
-        },
-        {
-            name: "Tom Cook",
-            image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
-        },
-    ];
+    useEffect(() => {
+        const fetchStaff = async () => {
+            try {
+                const staff = await allStaff();
+                setEmployeeOption(staff.employees);
+            } catch (e) {
+                console.log(e);
+            }
+        };
+        fetchStaff();
+    }, []);
 
-    const [selectedEmployee, setSelectedEmployee] = useState(options[0]);
-    const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-
-    const navigate = useNavigate();
-
-    const handleInputChange = (e) => {
-        const { name, value } = e.target;
-        setTask((prevTask) => ({ ...prevTask, [name]: value }));
+    const handleInputChange = ({target: {name, value}}) => {
+        setTask(prevTask => ({...prevTask, [name]: value}));
     };
 
-    const handleEmployeeSelect = (employee) => {
-        setSelectedEmployee(employee);
-        setTask((prevTask) => ({ ...prevTask, employeeName: employee.name }));
-        setIsDropdownOpen(false);
+    const addGroup = () => {
+        if (task.groups.includes(selectedGroup)) {
+            setError("This group has already been added.")
+        } else if (selectedGroup === "") {
+            setError("Please select an group to add.")
+        } else if (selectedGroup && !task.groups.includes(selectedGroup)) {
+            setTask(prevTask => ({...prevTask, groups: [...prevTask.groups, selectedGroup]}));
+            setSelectedGroup("");
+            setError("")
+        }
     };
 
-    const handleSubmit = () => {
-        console.log("Task added:", task);
-        navigate("/show-task");
+    const addEmployee = () => {
+        if (selectedOption.username === 'Select an employee') {
+            setError('Please select an employee to add.');
+            return;
+        }
+
+        const memberExists = members.some(member => member.username === selectedOption.username);
+        if (memberExists) {
+            setError('This member has already been added.');
+            return;
+        }
+
+        setMembers((prevMembers) => [
+            ...prevMembers,
+            {
+                username: selectedOption.username,
+                profilePhoto: selectedOption.profilePhoto,
+            }
+        ]);
+        setError('')
+        setSelectedOption({
+            username: 'Select an employee',
+            profilePhoto: "https://www.pngmart.com/files/23/Profile-PNG-Photo.png"
+        });
+    };
+
+    const removeItem = (itemType, item) => {
+        setTask(prevTask => ({
+            ...prevTask,
+            [itemType]: prevTask[itemType].filter(i => i !== item),
+        }));
+    };
+
+    const validateForm = () => {
+        const errors = {};
+        if (!task.title) errors.title = "Title is required.";
+        if (!task.completionDate) errors.completionDate = "Completion date is required.";
+
+        setFormErrors(errors);
+        return Object.keys(errors).length === 0;
+    };
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+
+        const usernames = members.map((member) => member.username);
+
+        const finaltask = {
+            ...task,
+            employees: usernames,
+        };
+
+        if (validateForm()) {
+            console.log("Final Task:", finaltask);
+            // navigate("/show-task");
+        }
+    };
+
+    const handleSelect = (option) => {
+        setSelectedOption({
+            ...option,
+            profilePhoto: option.profilePhoto
+                ? `${import.meta.env.VITE_REACT_APP_BACKEND_BASEURL}/${option?.profilePhoto}`
+                : "https://www.pngmart.com/files/23/Profile-PNG-Photo.png",
+        });
+        setIsOpen(false);
+    };
+
+    const handleDeleteMember = (username) => {
+        setMembers((prevMembers) => prevMembers.filter(member => member.username !== username));
     };
 
     return (
-        <div className="relative isolate h-full p-6 lg:px-8 bg-gradient-to-r from-blue-800 to-blue-400 min-h-screen">
-            <div className="absolute inset-x-0 -top-40 -z-10 transform-gpu overflow-hidden blur-3xl sm:-top-80" aria-hidden="true">
-                <div
-                    className="relative left-[calc(50%-11rem)] aspect-[1155/678] w-[36.125rem] -translate-x-1/2 rotate-[30deg] bg-gradient-to-tr from-[#ff80b5] to-[#9089fc] opacity-30 sm:left-[calc(50%-30rem)] sm:w-[72.1875rem]"
-                    style={{
-                        clipPath: "polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)",
-                    }}
-                ></div>
-            </div>
-            <h1 className="text-white text-4xl font-bold mb-4 mt-20">Add Work</h1>
-            <form className="space-y-6 bg-white p-6 rounded-lg shadow-lg">
-                <div>
-                    <label className="block text-sm font-medium text-gray-700">Title</label>
+        <div className="min-h-screen h-full p-6 bg-gradient-to-r from-blue-800 to-blue-400 flex justify-center items-center">
+            <div className="w-full max-w-3xl bg-white p-6 rounded-lg shadow-lg">
+                <h1 className="text-3xl font-bold text-gray-700 mb-6">Add Work</h1>
+                <form className="space-y-4" onSubmit={handleSubmit}>
+                    <label className="block text-sm font-medium text-gray-700">Work Title</label>
                     <input
                         type="text"
                         name="title"
+                        placeholder="Work Title"
                         value={task.title}
                         onChange={handleInputChange}
-                        className="w-full mt-1 p-2 border rounded-md"
-                        placeholder="Enter task title"
+                        className={`w-full p-2 border rounded-md ${formErrors.title ? 'border-red-500' : ''}`}
                     />
-                </div>
-                <div>
-                    <label className="block text-sm font-medium text-gray-700">Description</label>
+                    {formErrors.title && <p className="text-red-500">{formErrors.title}</p>}
+
+                    <label className="block text-sm font-medium text-gray-700">Work Description</label>
                     <textarea
                         name="description"
+                        placeholder="Work Description"
                         value={task.description}
                         onChange={handleInputChange}
-                        className="w-full mt-1 p-2 border rounded-md"
-                        placeholder="Enter task description"
+                        className="w-full p-2 border rounded-md"
                     />
-                </div>
-                <div>
+
                     <label className="block text-sm font-medium text-gray-700">Completion Date</label>
                     <input
                         type="date"
                         name="completionDate"
                         value={task.completionDate}
                         onChange={handleInputChange}
-                        className="w-full mt-1 p-2 border rounded-md"
+                        className={`w-full p-2 border rounded-md ${formErrors.completionDate ? 'border-red-500' : ''}`}
                     />
-                </div>
-                <div>
-                    <label className="block text-sm font-medium text-gray-700">Type</label>
-                    <select
-                        name="type"
-                        value={task.type}
-                        onChange={handleInputChange}
-                        className="w-full mt-1 p-2 border rounded-md"
-                    >
+                    {formErrors.completionDate && <p className="text-red-500">{formErrors.completionDate}</p>}
+
+                    <label className="block text-sm font-medium text-gray-700">Work Type</label>
+                    <select name="type" value={task.type} onChange={handleInputChange}
+                            className="w-full p-2 border rounded-md">
                         <option value="task">Task</option>
                         <option value="project">Project</option>
                     </select>
-                </div>
 
-                {task.type === "project" && (
-                    <>
-                        <div>
-                            <label className="block text-sm font-medium text-gray-700">Group Name</label>
-                            <select
-                                name="groupName"
-                                value={task.groupName}
-                                onChange={handleInputChange}
-                                className="w-full mt-1 p-2 border rounded-md"
+                    {task.type === "project" && (
+                        <>
+                            <label className="block text-sm font-medium text-gray-700">Group Names</label>
+                            <div className="flex space-x-2">
+                                <select className="p-2 border rounded-md flex-grow" value={selectedGroup}
+                                        onChange={(e) => setSelectedGroup(e.target.value)}>
+                                    <option value="">Select Group</option>
+                                    {groupOptions.map((group, index) => (
+                                        <option key={index} value={group}>{group}</option>
+                                    ))}
+                                </select>
+                                <button type="button" onClick={addGroup}
+                                        className="p-2 bg-green-500 text-white rounded-md w-[10vw]">+
+                                </button>
+                            </div>
+                        </>
+                    )}
+
+                    {/* Employee Selection */}
+                    <div className="relative mt-2">
+                        <label className="block text-sm font-medium text-gray-900">Assigned to</label>
+                        <div className="flex relative space-x-2">
+                            <button
+                                type="button"
+                                className="w-full bg-white border rounded-md py-2 pl-3 pr-2 text-left text-gray-900 flex items-center justify-between"
+                                onClick={() => setIsOpen(!isOpen)}
                             >
-                                <option value="">Select Group</option>
-                                <option value="Group A">Group A</option>
-                                <option value="Group B">Group B</option>
-                                <option value="Group C">Group C</option>
-                                {/* Add other group options as needed */}
-                            </select>
+                                <span className="flex items-center">
+                                    <img src={selectedOption.profilePhoto} alt={selectedOption.username}
+                                         className="w-5 h-5 rounded-full mr-2"/>
+                                    <span>{selectedOption.username}</span>
+                                </span>
+                            </button>
+                            {isOpen && (
+                                <ul className="absolute z-10 mt-1 w-full bg-white border rounded-md shadow-lg max-h-56 overflow-auto">
+                                    {employeeOptions.map((option, index) => (
+                                        <li
+                                            key={index}
+                                            className="flex items-center cursor-pointer py-2 px-3 hover:bg-gray-200"
+                                            onClick={() => handleSelect(option)}
+                                        >
+                                            <img src={
+                                                option.profilePhoto
+                                                    ? `${import.meta.env.VITE_REACT_APP_BACKEND_BASEURL}/${option.profilePhoto}`
+                                                    : "https://www.pngmart.com/files/23/Profile-PNG-Photo.png"
+                                            } alt={option.username} className="w-5 h-5 rounded-full mr-2"/>
+                                            <span>{option.username}</span>
+                                        </li>
+                                    ))}
+                                </ul>
+                            )}
+                            <button type="button" onClick={addEmployee}
+                                    className="p-2 bg-green-500 text-white rounded-md w-[12vw]">+
+                            </button>
                         </div>
-                    </>
-                )}
-
-
-                <div>
-                    <label className="block text-sm font-medium text-gray-700">Assigned to</label>
-                    <div className="relative">
-                        <button
-                            type="button"
-                            className="w-full bg-white border rounded-md py-2 pl-3 pr-2 text-left flex items-center justify-between"
-                            onClick={() => setIsDropdownOpen(!isDropdownOpen)}
-                        >
-                            <span className="flex items-center">
-                                <img
-                                    src={selectedEmployee.image}
-                                    alt={selectedEmployee.name}
-                                    className="w-5 h-5 rounded-full mr-2"
-                                />
-                                {selectedEmployee.name}
-                            </span>
-                            <svg
-                                className="w-4 h-4 text-gray-500"
-                                viewBox="0 0 16 16"
-                                fill="currentColor"
-                                aria-hidden="true"
-                            >
-                                <path
-                                    fillRule="evenodd"
-                                    d="M5.22 10.22a.75.75 0 0 1 1.06 0L8 11.94l1.72-1.72a.75.75 0 1 1 1.06 1.06l-2.25 2.25a.75.75 0 0 1-1.06 0l-2.25-2.25a.75.75 0 0 1 0-1.06ZM10.78 5.78a.75.75 0 0 1-1.06 0L8 4.06 6.28 5.78a.75.75 0 0 1-1.06-1.06l2.25-2.25a.75.75 0 0 1 1.06 0l2.25 2.25a.75.75 0 0 1 0 1.06Z"
-                                    clipRule="evenodd"
-                                />
-                            </svg>
-                        </button>
-                        {isDropdownOpen && (
-                            <ul className="absolute z-10 mt-1 w-full bg-white border rounded-md shadow-lg max-h-56 overflow-auto">
-                                {options.map((option, index) => (
-                                    <li
-                                        key={index}
-                                        className="flex items-center cursor-pointer py-2 px-3 hover:bg-gray-200"
-                                        onClick={() => handleEmployeeSelect(option)}
-                                    >
-                                        <img
-                                            src={option.image}
-                                            alt={option.name}
-                                            className="w-5 h-5 rounded-full mr-2"
-                                        />
-                                        {option.name}
-                                    </li>
-                                ))}
-                            </ul>
-                        )}
                     </div>
-                </div>
+                    {error && (
+                        <div className="col-span-2 mt-4 text-red-600">
+                            {error}
+                        </div>
+                    )}
 
-                <button
-                    type="button"
-                    onClick={handleSubmit}
-                    className="w-full py-2 bg-green-600 text-white font-bold rounded-lg hover:bg-green-500"
-                >
-                    Add Task
-                </button>
-            </form>
+                    {/* Group & Employee List */}
+                    <div className="mt-4">
+                        {task.groups.length > 0 && <h3 className="text-gray-700 font-semibold">Groups:</h3>}
+                        {task.groups.map((group, index) => (
+                            <div key={index} className="flex justify-between p-2 bg-gray-200 rounded-md mt-1">
+                                {group}
+                                <button onClick={() => removeItem('groups', group)} className="text-red-500">Remove
+                                </button>
+                            </div>
+                        ))}
+
+                        {members.length > 0 &&
+                            <h3 className="text-gray-700 font-semibold mt-3">Assigned Employees:</h3>}
+                        {members.map((employee, index) => (
+                            <div key={index} className="flex justify-between p-2 bg-gray-200 rounded-md mt-1">
+                                <span className="flex items-center">
+                                    <img src={employee.profilePhoto} alt={employee.username}
+                                         className="w-5 h-5 rounded-full mr-2"/>
+                                    {employee.username}
+                                </span>
+                                <button onClick={() => handleDeleteMember(employee.username)}
+                                        className="text-red-500">Remove
+                                </button>
+                            </div>
+                        ))}
+                    </div>
+
+                    <button type="submit"
+                            className="w-full py-2 bg-blue-600 text-white font-bold rounded-lg hover:bg-blue-500">Add
+                        Task
+                    </button>
+                </form>
+            </div>
         </div>
     );
 }

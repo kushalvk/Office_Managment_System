@@ -4,13 +4,27 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="404eb4d8-f181-44b4-a139-a07b064bd629" name="Changes" comment="ADD: Uplodes Folder">
+    <list default="true" id="404eb4d8-f181-44b4-a139-a07b064bd629" name="Changes" comment="ADD: Update in Group file">
+      <change afterPath="$PROJECT_DIR$/Client/src/Services/GroupService.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Server/controllers/Group_Controller.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Server/models/GroupSchema.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Server/routers/Group_Route.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/src/Components/All_Staff/All_Staff.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/Components/All_Staff/All_Staff.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/App.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/App.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/Components/Add_Work/Add_Work.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/Components/Add_Work/Add_Work.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/Components/Footer/Footer.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/Components/Footer/Footer.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Client/src/Components/Group/AddGroup.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/Components/Group/AddGroup.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/Components/Group/Group_Details.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/Components/Group/Group_Details.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/Components/Group/Show_Groups.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/Components/Group/Show_Groups.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Client/src/Components/Header/Header.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/Components/Header/Header.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Client/src/Components/Header/Sidebar.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/Components/Header/Sidebar.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/Components/Login/Login.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/Components/Login/Login.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Client/src/Components/Profile/Profile.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/Components/Profile/Profile.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/Services/AuthService.js" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/Services/AuthService.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/controllers/Auth_Controller.js" beforeDir="false" afterPath="$PROJECT_DIR$/Server/controllers/Auth_Controller.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/Server/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/models/UserSchema.js" beforeDir="false" afterPath="$PROJECT_DIR$/Server/models/UserSchema.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -20,8 +34,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="JavaScript File" />
         <option value="JSX File" />
+        <option value="JavaScript File" />
       </list>
     </option>
   </component>
@@ -118,7 +132,11 @@
       <workItem from="1738384362804" duration="1537000" />
       <workItem from="1738417199143" duration="103000" />
       <workItem from="1738424343457" duration="12000" />
-      <workItem from="1738468096538" duration="31872000" />
+      <workItem from="1738468096538" duration="32222000" />
+      <workItem from="1738551333606" duration="641000" />
+      <workItem from="1738553526279" duration="1878000" />
+      <workItem from="1738580914246" duration="1051000" />
+      <workItem from="1738640855500" duration="27038000" />
     </task>
     <task id="LOCAL-00001" summary="Merge pull request #2 from Kumhar-Harshad/main&#10;&#10;ADD: Profile.jsx">
       <option name="closed" value="true" />
@@ -160,7 +178,15 @@
       <option name="project" value="LOCAL" />
       <updated>1738501826580</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="ADD: Update in Group file">
+      <option name="closed" value="true" />
+      <created>1738521617124</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1738521617124</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -173,6 +199,7 @@
     <MESSAGE value="ADD: Group details, View Task pages UPDATE: Add user,Add group,Notification, Profile, Project,Task Pages." />
     <MESSAGE value="ADD: Complate Auth with backend and also a sidebar diffrentiat for Manager." />
     <MESSAGE value="ADD: Uplodes Folder" />
-    <option name="LAST_COMMIT_MESSAGE" value="ADD: Uplodes Folder" />
+    <MESSAGE value="ADD: Update in Group file" />
+    <option name="LAST_COMMIT_MESSAGE" value="ADD: Update in Group file" />
   </component>
 </project>

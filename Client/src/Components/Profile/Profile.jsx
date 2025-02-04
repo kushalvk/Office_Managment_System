@@ -163,7 +163,7 @@ function UserProfile() {
                         {/* Other Fields */}
                         {Object.keys(loggedin).map((key) => (
                             key !== "_id" && key !== "password" && key !== "profilePhoto" && key !== "__v" &&
-                            key !== "qualification" && key !== "department" && key !== "workLocation" && (
+                            key !== "qualification" && key !== "department" && key !== "workLocation" && key !== "updatedAt" && key !== "createdAt" && (
                                 <div key={key} className="flex flex-col">
                                     <label className="font-semibold text-gray-700 capitalize">
                                         {key.replace(/([A-Z])/g, ' $1').trim()}:
@@ -229,7 +229,7 @@ function UserProfile() {
 
                         {/* Display Other Fields */}
                         {Object.keys(loggedin).map((key) => (
-                            key !== "_id" && key !== "password" && key !== "profilePhoto" && key !== "__v" && (
+                            key !== "_id" && key !== "password" && key !== "profilePhoto" && key !== "updatedAt" && key !== "createdAt" && key !== "__v" && (
                                 <div key={key} className="flex justify-between">
                     <span className="font-semibold text-gray-700 capitalize">
                         {key.replace(/([A-Z])/g, ' $1').trim()}:
@@ -245,6 +245,20 @@ function UserProfile() {
                                 </div>
                             )
                         ))}
+                        {loggedin.createdAt && (
+                            <div className="flex justify-between">
+                                <span className="font-semibold text-gray-700">Account Created:</span>
+                                <span
+                                    className="text-gray-600">{new Date(loggedin.createdAt).toLocaleDateString()}</span>
+                            </div>
+                        )}
+                        {loggedin.updatedAt && (
+                            <div className="flex justify-between">
+                                <span className="font-semibold text-gray-700">Last Updated:</span>
+                                <span
+                                    className="text-gray-600">{new Date(loggedin.updatedAt).toLocaleDateString()}</span>
+                            </div>
+                        )}
 
                         {/* Edit Profile Button */}
                         <div className="flex justify-center">

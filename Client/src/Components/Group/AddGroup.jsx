@@ -1,19 +1,25 @@
 import React, {useEffect, useState} from 'react';
 import GroupIcon from '../../../../Storage/Group_Icon.jpg';
 import {allStaff} from "../../Services/AuthService.js";
+import {addGroup} from "../../Services/GroupService.js";
+import {useNavigate} from "react-router-dom";
 
 function Add_Group() {
+
+    const username = localStorage.getItem('username');
+
     // Form data state
     const [formData, setFormData] = useState({
         groupName: '',
         description: '',
         members: '',
-        createdBy: '',
+        createdBy: username,
         creationDate: '',
         groupType: '',
-        status: '',
+        groupStatus: '',
     });
 
+    const navigate = useNavigate();
     const [members, setMembers] = useState([]);
     const [error, setError] = useState('');
     const [options, setOptions] = useState([])
@@ -22,7 +28,6 @@ function Add_Group() {
         username: 'Select an employee',
         profilePhoto: 'https://www.pngmart.com/files/23/Profile-PNG-Photo.png'
     });
-    // console.log(members)
 
     useEffect(() => {
         const Staff = async () => {
@@ -54,7 +59,7 @@ function Add_Group() {
         setIsOpen(false);
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
 
         const usernames = members.map((member) => member.username);
@@ -66,7 +71,14 @@ function Add_Group() {
 
         setFormData(updatedFormData);
 
-        console.log(updatedFormData);
+        try {
+            const responce = await addGroup(updatedFormData);
+            alert(responce.message);
+            navigate("/show-group");
+        } catch (error) {
+            console.error("Error updating profile:", error.message);
+            alert("Failed to update profile. Please try again.");
+        }
     };
 
     const handleAddMember = () => {
@@ -222,15 +234,7 @@ function Add_Group() {
                     </div>
                     <div className="flex flex-col mb-4">
                         <label className="text-gray-800 font-semibold mb-2" htmlFor="createdBy">Created By</label>
-                        <input
-                            type="text"
-                            id="createdBy"
-                            name="createdBy"
-                            value={formData.createdBy}
-                            onChange={handleChange}
-                            className="p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
-                            required
-                        />
+                        <label className="p-3 rounded-md">{username}</label>
                     </div>
                     <div className="flex flex-col mb-4">
                         <label className="text-gray-800 font-semibold mb-2" htmlFor="creationDate">Creation Date</label>
@@ -238,6 +242,7 @@ function Add_Group() {
                             type="date"
                             id="creationDate"
                             name="creationDate"
+                            min={new Date().toISOString().split("T")[0]}
                             value={formData.creationDate}
                             onChange={handleChange}
                             className="p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
@@ -260,11 +265,11 @@ function Add_Group() {
                         </select>
                     </div>
                     <div className="flex flex-col mb-4">
-                        <label className="text-gray-800 font-semibold mb-2" htmlFor="status">Status</label>
+                        <label className="text-gray-800 font-semibold mb-2" htmlFor="groupStatus">Status</label>
                         <select
-                            id="status"
-                            name="status"
-                            value={formData.status}
+                            id="groupStatus"
+                            name="groupStatus"
+                            value={formData.groupStatus}
                             onChange={handleChange}
                             className="p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
                             required
