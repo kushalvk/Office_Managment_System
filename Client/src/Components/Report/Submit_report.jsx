@@ -1,30 +1,32 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import {addReport} from "../../Services/ReportService.js";
 
 function SubmitReport() {
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
-    const [document, setDocument] = useState(null);
     const [startDate, setStartDate] = useState("");
     const [endDate, setEndDate] = useState("");
-
+    const [reportdocument, setReportDocument] = useState(null);
     const navigate = useNavigate();
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
+        try {
+            const report = new FormData();
+            report.append("reportdocument", reportdocument)
+            report.append("title", title)
+            report.append("description", description)
+            report.append("startDate", startDate)
+            report.append("endDate", endDate)
 
-        const newReport = {
-            title,
-            description,
-            document: document.name,
-            startDate,
-            endDate,
-            approved: false,
-        };
-
-        // Normally, you would save the new report to the backend or state here
-        console.log("New report submitted:", newReport);
-        navigate("/show-all-reports");
+            await addReport(report)
+            alert("New report submitted!");
+            navigate("/all-reports");
+        } catch (e) {
+            console.log(e);
+            alert("Fail to add report")
+        }
     };
 
     return (
@@ -66,7 +68,8 @@ function SubmitReport() {
                     <label className="text-white font-medium text-lg">Document</label>
                     <input
                         type="file"
-                        onChange={(e) => setDocument(e.target.files[0])}
+                        name="reportdocument"
+                        onChange={(e) => setReportDocument(e.target.files[0])}
                         className="p-3 rounded-lg bg-white text-gray-800"
                         required
                     />
@@ -79,6 +82,7 @@ function SubmitReport() {
                         value={startDate}
                         onChange={(e) => setStartDate(e.target.value)}
                         className="p-3 rounded-lg bg-white text-gray-800"
+                        max={new Date().toISOString().split("T")[0]}
                         required
                     />
                 </div>
@@ -90,6 +94,7 @@ function SubmitReport() {
                         value={endDate}
                         onChange={(e) => setEndDate(e.target.value)}
                         className="p-3 rounded-lg bg-white text-gray-800"
+                        min={new Date().toISOString().split("T")[0]}
                         required
                     />
                 </div>

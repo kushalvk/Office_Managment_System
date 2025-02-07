@@ -4,6 +4,7 @@ const cors = require("cors");
 const authRouters = require('./routers/Auth_Route');
 const GroupRouters = require('./routers/Group_Route');
 const WorkRouters = require('./routers/Work_Route');
+const ReportRouters = require('./routers/Report_Route');
 require("dotenv").config();
 
 const app = express();
@@ -29,6 +30,8 @@ app.use(authRouters);
 app.use(GroupRouters);
 
 app.use(WorkRouters);
+
+app.use(ReportRouters)
 
 app.get("/", (red,res) => {
     res.json(" Hello from Prime Hub Server ! ")

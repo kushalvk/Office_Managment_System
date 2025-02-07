@@ -1,0 +1,51 @@
+const ReportsModel = require("../models/ReportSchema");
+
+const addReportController = async (req, res) => {
+    try {
+        const { title, description, startDate, endDate } = req.body;
+
+        const reportDocument = req.file ? req.file.filename : null;
+
+        ReportsModel.create({ title, description, reportDocument, startDate, endDate })
+            .then(() => res.status(200).send({message: "Report Added successfully"}))
+            .catch((err) => res.status(500).send({message: "Fail to Add Report : Controller ", err}));
+    } catch (error) {
+        res.status(500).send({message: "Error to add Report : Controller ", error});
+    }
+}
+
+const allReportController = async (req, res) => {
+    try {
+        ReportsModel.find()
+            .then((reports) => res.status(200).send({ reports }))
+            .catch((err) => res.status(500).send({message: "Fail to fetch Reports : Controller ", err}));
+    } catch (error) {
+        res.status(500).send({message: "Error to fetch Report : Controller ", error});
+    }
+}
+
+const approveReportController = async (req, res) => {
+    try {
+        const { id } = req.params;
+
+        ReportsModel.findByIdAndUpdate(id, { approve: true })
+            .then(() => res.status(200).send({message: "Report Approved successfully "}))
+            .catch((err) => res.status(500).send({message: "Fail to Approve Reports : Controller ", err}));
+    } catch (error) {
+        res.status(500).send({message: "Error to Approve Report : Controller ", error});
+    }
+}
+
+const deleteReportController = async (req, res) => {
+    try {
+        const { id } = req.params;
+
+        ReportsModel.findByIdAndDelete(id)
+            .then(() => res.status(200).send({message: "Report Deleted successfully "}))
+            .catch((err) => res.status(500).send({message: "Fail to Delete Reports : Controller ", err}));
+    } catch (error) {
+        res.status(500).send({message: "Error to Delete Report : Controller ", error});
+    }
+}
+
+module.exports = {addReportController, allReportController, approveReportController, deleteReportController}

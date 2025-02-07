@@ -111,7 +111,7 @@ function AddTask() {
             try {
                 await addWork(finaltask);
                 alert("Work Add Successfully");
-                // navigate("/show-task");
+                location.reload();
             } catch (error) {
                 console.log(error);
                 alert("Failed to Add Work. Please try again.");
@@ -164,6 +164,7 @@ function AddTask() {
                         name="completionDate"
                         value={task.completionDate}
                         onChange={handleInputChange}
+                        min={new Date().toISOString().split("T")[0]}
                         className={`w-full p-2 border rounded-md ${formErrors.completionDate ? 'border-red-500' : ''}`}
                     />
                     {formErrors.completionDate && <p className="text-red-500">{formErrors.completionDate}</p>}
