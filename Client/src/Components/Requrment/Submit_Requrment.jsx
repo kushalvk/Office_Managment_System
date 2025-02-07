@@ -1,13 +1,15 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import {addRequrment} from "../../Services/RequrmentService.js";
 
 function AddRequirement() {
+
+    const uname = localStorage.getItem("username");
+
     const [requirement, setRequirement] = useState({
         name: "",
         reason: "",
-        username: "",
-        date: "",
-        status: "not approved",
+        username: uname,
     });
 
     const handleInputChange = (e) => {
@@ -15,9 +17,15 @@ function AddRequirement() {
         setRequirement((prevRequirement) => ({ ...prevRequirement, [name]: value }));
     };
 
-    const handleSubmit = () => {
-        console.log("Requirement added:", requirement);
-        navigate("/all-requirements");
+    const handleSubmit = async () => {
+        try {
+            await addRequrment(requirement);
+            alert("Requirement added successfully");
+            navigate("/Show-requirment");
+        } catch (e) {
+            console.log(e);
+            alert("Fail to add requirement");
+        }
     };
 
     const navigate = useNavigate();
@@ -64,16 +72,7 @@ function AddRequirement() {
                         onChange={handleInputChange}
                         className="w-full mt-1 p-2 border rounded-md"
                         placeholder="Enter username"
-                    />
-                </div>
-                <div>
-                    <label className="block text-sm font-medium text-gray-700">Date</label>
-                    <input
-                        type="date"
-                        name="date"
-                        value={requirement.date}
-                        onChange={handleInputChange}
-                        className="w-full mt-1 p-2 border rounded-md"
+                        disabled
                     />
                 </div>
                 <button

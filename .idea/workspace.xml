@@ -4,15 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="404eb4d8-f181-44b4-a139-a07b064bd629" name="Changes" comment="ADD: Backend of Task, Projects &amp; Works.">
-      <change afterPath="$PROJECT_DIR$/Client/src/Services/ReportService.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Server/controllers/Report_Controller.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Server/models/ReportSchema.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Server/routers/Report_Route.js" afterDir="false" />
+    <list default="true" id="404eb4d8-f181-44b4-a139-a07b064bd629" name="Changes" comment="ADD: Uplodes.">
+      <change afterPath="$PROJECT_DIR$/Client/src/Services/RequrmentService.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Server/controllers/Requrment_Controller.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Server/models/RequirmentSchema.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Server/routers/Requrment_Route.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/src/Components/Add_Work/Add_Work.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/Components/Add_Work/Add_Work.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/src/Components/Report/Show_all_report.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/Components/Report/Show_all_report.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/src/Components/Report/Submit_report.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/Components/Report/Submit_report.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/Components/Requrment/All_Requirment.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/Components/Requrment/All_Requirment.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/Components/Requrment/Submit_Requrment.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/Components/Requrment/Submit_Requrment.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Server/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/Server/index.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -129,7 +128,8 @@
       <workItem from="1738729139245" duration="634000" />
       <workItem from="1738764726518" duration="4362000" />
       <workItem from="1738814419139" duration="5052000" />
-      <workItem from="1738903033382" duration="14912000" />
+      <workItem from="1738903033382" duration="18713000" />
+      <workItem from="1738936647463" duration="171000" />
     </task>
     <task id="LOCAL-00001" summary="Merge pull request #2 from Kumhar-Harshad/main&#10;&#10;ADD: Profile.jsx">
       <option name="closed" value="true" />
@@ -195,7 +195,23 @@
       <option name="project" value="LOCAL" />
       <updated>1738925308875</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="ADD: Backend of Reports.">
+      <option name="closed" value="true" />
+      <created>1738932711904</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1738932711904</updated>
+    </task>
+    <task id="LOCAL-00010" summary="ADD: Uplodes.">
+      <option name="closed" value="true" />
+      <created>1738932737793</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1738932737793</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -211,6 +227,8 @@
     <MESSAGE value="ADD: Update in Group file" />
     <MESSAGE value="ADD: Backend of Group all section and update frontend of add work" />
     <MESSAGE value="ADD: Backend of Task, Projects &amp; Works." />
-    <option name="LAST_COMMIT_MESSAGE" value="ADD: Backend of Task, Projects &amp; Works." />
+    <MESSAGE value="ADD: Backend of Reports." />
+    <MESSAGE value="ADD: Uplodes." />
+    <option name="LAST_COMMIT_MESSAGE" value="ADD: Uplodes." />
   </component>
 </project>

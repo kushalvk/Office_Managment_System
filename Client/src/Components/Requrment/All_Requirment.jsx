@@ -1,38 +1,33 @@
-import { useState } from "react";
+import {useEffect, useState} from "react";
 import { useNavigate } from "react-router-dom";
+import {allRequrments, updteRequrments} from "../../Services/RequrmentService.js";
 
 function AllRequirements() {
-    const [requirements, setRequirements] = useState([
-        {
-            id: 1,
-            name: "Requirement 1",
-            reason: "Reason for requirement 1",
-            username: "Wade Cooper",
-            date: "2024-12-01",
-            status: "Approved",
-        },
-        {
-            id: 2,
-            name: "Requirement 2",
-            reason: "Reason for requirement 2",
-            username: "Tom Cook",
-            date: "2024-12-02",
-            status: "Pending",
-        },
-        {
-            id: 3,
-            name: "Requirement 3",
-            reason: "Reason for requirement 3",
-            username: "Tom Cook",
-            date: "2024-12-02",
-            status: "Cancelled",
-        },
-    ]);
+    const [requirements, setRequirements] = useState([]);
+
+    useEffect(() => {
+        const requrments = async () => {
+            try {
+                setRequirements(await allRequrments());
+            } catch (e) {
+                console.log(e);
+                alert("Failed to fetch requirements");
+            }
+        }
+        requrments();
+    }, []);
 
     const navigate = useNavigate();
 
-    const updateStatus = (id, newStatus) => {
-        setRequirements(requirements.map(req => req.id === id ? { ...req, status: newStatus } : req));
+    const updateStatus = async (id, newStatus) => {
+        try {
+            await updteRequrments(id, newStatus);
+            setRequirements(requirements.map(req => req._id === id ? { ...req, requrmentStatus: newStatus } : req));
+            alert(`Requrment ${newStatus} successfully.`);
+        } catch (e) {
+            console.log(e);
+            alert(`Failed to ${newStatus} Requrment. Please try again.`);
+        }
     };
 
     return (
@@ -54,35 +49,35 @@ function AllRequirements() {
                 Add Requirement
             </button>
             <div className="space-y-4 mt-6">
-                {requirements.map((requirement) => (
+                {requirements.map((requirement, idx) => (
                     <div
-                        key={requirement.id}
+                        key={idx}
                         className="flex items-center justify-between bg-white p-4 rounded-lg shadow-md transform transition-transform duration-300 hover:-translate-y-1 hover:scale-105 hover:shadow-2xl"
                     >
                         <div className="flex flex-col">
                             <h4 className="text-2xl font-bold text-gray-800">{requirement.name}</h4>
                             <p className="text-sm font-medium text-gray-800">{requirement.reason}</p>
                             <p className="text-xs text-gray-500 mt-1">Username: {requirement.username}</p>
-                            <p className="text-xs text-gray-500 mt-1">Date: {requirement.date}</p>
+                            <p className="text-xs text-gray-500 mt-1">Date: {new  Date(requirement.date).toLocaleDateString()}</p>
                             <p
                                 className={`text-sm font-medium mt-1 ${
-                                    requirement.status === "Approved" ? "text-green-600" :
-                                        requirement.status === "Cancelled" ? "text-red-600" : "text-gray-600"}`}
+                                    requirement.requrmentStatus === "Approved" ? "text-green-600" :
+                                        requirement.requrmentStatus === "Cancelled" ? "text-red-600" : "text-gray-600"}`}
                             >
-                                Status: {requirement.status}
+                                Status: {requirement.requrmentStatus}
                             </p>
                         </div>
                         <div>
-                            {requirement.status === "Pending" && (
+                            {requirement.requrmentStatus === "Pending" && (
                                 <>
                                     <button
-                                        onClick={() => updateStatus(requirement.id, "Approved")}
+                                        onClick={() => updateStatus(requirement._id, "Approved")}
                                         className="ml-4 hover:text-white my-2 py-2 px-4 rounded-lg shadow-md hover:shadow-lg transition-transform duration-300 hover:scale-105 bg-green-600 text-white font-semibold hover:bg-green-500 focus:outline-none focus:ring-2 focus:ring-green-700"
                                     >
                                         Approve
                                     </button>
                                     <button
-                                        onClick={() => updateStatus(requirement.id, "Cancelled")}
+                                        onClick={() => updateStatus(requirement._id, "Cancelled")}
                                         className="ml-4 hover:text-white my-2 py-2 px-4 rounded-lg shadow-md hover:shadow-lg transition-transform duration-300 hover:scale-105 bg-red-600 text-white font-semibold hover:bg-red-500 focus:outline-none focus:ring-2 focus:ring-green-700"
                                     >
                                         Cancel
