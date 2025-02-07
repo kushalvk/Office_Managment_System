@@ -1,55 +1,54 @@
-import { useNavigate } from "react-router-dom";
-import { useState } from "react";
+import {useNavigate} from "react-router-dom";
+import {useEffect, useState} from "react";
+import {completeById, deleteTaskById, fetchallTasks} from "../../Services/WorkService.js";
 
 function ShowTask() {
-    const [tasks, setTasks] = useState([
-        {
-            id: 1,
-            title: "Task 1",
-            description: "Complete the report by EOD.",
-            employeeName: "John Doe",
-            completionDate: "11-11-2024",
-            status: "Pending",
-        },
-        {
-            id: 2,
-            title: "Task 2",
-            description: "Prepare presentation slides.",
-            employeeName: "Jane Smith",
-            completionDate: "12-11-2024",
-            status: "Complete",
-        },
-        {
-            id: 3,
-            title: "Task 3",
-            description: "Review project proposal.",
-            employeeName: "Emily Johnson",
-            completionDate: "13-11-2024",
-            status: "Pending",
-        },
-    ]);
-
+    const [tasks, setTasks] = useState([]);
     const navigate = useNavigate();
 
-    // Function to mark a task as complete
-    const completeTask = (id) => {
-        setTasks((prevTasks) =>
-            prevTasks.map((task) =>
-                task.id === id ? { ...task, status: "Complete" } : task
-            )
-        );
-        alert(`Task ${id} marked as complete!`);
+    useEffect(() => {
+        const tasks = async () => {
+            try {
+                const response = await fetchallTasks();
+                setTasks(response.tasks);
+            } catch (e) {
+                console.log(e);
+            }
+        }
+        tasks();
+    },[])
+
+    const completeTask = async (id) => {
+        try {
+            await completeById(id);
+
+            setTasks((prevTasks) =>
+                prevTasks.map((task) =>
+                    task._id === id ? { ...task, workStatus: "complete" } : task
+                )
+            );
+
+            alert(`Selected Task marked as complete!`);
+        } catch (e) {
+            console.log(e);
+            alert(`Fail complete task!`);
+        }
     };
 
-    // Function to handle viewing task details
     const viewTaskDetails = (id) => {
         navigate(`/view-details/${id}`);
     };
 
-    // Function to handle deleting a task
-    const deleteTask = (id) => {
-        if (window.confirm(`Are you sure you want to delete Task ${id}?`)) {
-            setTasks((prevTasks) => prevTasks.filter((task) => task.id !== id));
+    const deleteTask = async (id) => {
+        if (window.confirm(`Are you sure you want to delete this Task?`)) {
+            try {
+                await deleteTaskById(id);
+                setTasks((prevTasks) => prevTasks.filter((task) => task._id !== id));
+                alert("Task Deleted successfully");
+            } catch (e) {
+                console.log(e);
+                alert("Fail to Delete Task");
+            }
         }
     };
 
@@ -86,9 +85,9 @@ function ShowTask() {
 
             {/* Task List */}
             <div className="space-y-4 mt-6 max-w-xl mx-auto">
-                {tasks.map((task) => (
+                {tasks.map((task, idx) => (
                     <div
-                        key={task.id}
+                        key={idx}
                         className="flex flex-col sm:flex-row items-start justify-between bg-white p-4 rounded-lg shadow-md transform transition-transform duration-300 hover:-translate-y-1 hover:scale-105 hover:shadow-xl"
                     >
                         {/* Task Details */}
@@ -100,28 +99,26 @@ function ShowTask() {
                                 {task.description}
                             </p>
                             <p className="text-sm text-gray-700 mt-1">
-                                Assigned to: {task.employeeName}
-                            </p>
-                            <p className="text-sm text-gray-700 mt-1">
-                                Completion Date: {task.completionDate}
+                                Completion Date: {new Date(task.completionDate).toLocaleDateString()}
                             </p>
                             <p
                                 className={`text-sm font-medium mt-1 ${
-                                    task.status === "Complete"
+                                    task.workStatus
+                                    === "complete"
                                         ? "text-green-600"
                                         : "text-red-600"
                                 }`}
                             >
-                                Status: {task.status}
+                                Status: {task.workStatus}
                             </p>
                         </div>
 
                         {/* Buttons */}
                         <div className="flex sm:flex-row gap-2 mt-4 sm:mt-0 sm:ml-4">
                             {/* Complete Button */}
-                            {task.status !== "Complete" && (
+                            {task.workStatus !== "complete" && (
                                 <button
-                                    onClick={() => completeTask(task.id)}
+                                    onClick={() => completeTask(task._id)}
                                     className="py-2 px-4 rounded-lg shadow-md hover:shadow-lg transition-transform duration-300 hover:scale-105 bg-blue-600 text-white font-semibold hover:bg-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-700"
                                 >
                                     Complete
@@ -130,7 +127,7 @@ function ShowTask() {
 
                             {/* View Button */}
                             <button
-                                onClick={() => viewTaskDetails(task.id)}
+                                onClick={() => viewTaskDetails(task._id)}
                                 className="py-2 px-4 rounded-lg shadow-md hover:shadow-lg transition-transform duration-300 hover:scale-105 bg-green-600 text-white font-semibold hover:bg-green-500 focus:outline-none focus:ring-2 focus:ring-green-700"
                             >
                                 View
@@ -138,7 +135,7 @@ function ShowTask() {
 
                             {/* Delete Button */}
                             <button
-                                onClick={() => deleteTask(task.id)}
+                                onClick={() => deleteTask(task._id)}
                                 className="py-2 px-4 rounded-lg shadow-md hover:shadow-lg transition-transform duration-300 hover:scale105 bg-red-600 text-white font-semibold hover:bg-red-500 focus:outline-none focus:ring2 focus:ring-red-700"
                             >
                                 Delete

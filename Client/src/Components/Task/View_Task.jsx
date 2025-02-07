@@ -1,51 +1,26 @@
-import { useParams, useNavigate } from "react-router-dom";
-import { useState, useEffect } from "react";
+import {useParams, useNavigate} from "react-router-dom";
+import React, {useState, useEffect} from "react";
+import {fetchTaskById} from "../../Services/WorkService.js";
 
 function ViewTask() {
-    const { id } = useParams(); // Get the task ID from the URL
+    const {id} = useParams(); // Get the task ID from the URL
     const navigate = useNavigate();
     const [task, setTask] = useState(null);
 
-    // Mock data for tasks (replace with API call in real app)
-    const tasks = [
-        {
-            id: 1,
-            title: "Task 1",
-            description: "Complete the report by EOD.",
-            employeeName: "John Doe",
-            completionDate: "11-11-2024",
-            status: "Pending",
-        },
-        {
-            id: 2,
-            title: "Task 2",
-            description: "Prepare presentation slides.",
-            employeeName: "Jane Smith",
-            completionDate: "12-11-2024",
-            status: "Complete",
-        },
-        {
-            id: 3,
-            title: "Task 3",
-            description: "Review project proposal.",
-            employeeName: "Emily Johnson",
-            completionDate: "13-11-2024",
-            status: "Pending",
-        },
-    ];
-
-    // Fetch the task details based on the ID
     useEffect(() => {
-        const foundTask = tasks.find((task) => task.id === parseInt(id));
-        if (foundTask) {
-            setTask(foundTask);
-        } else {
-            navigate("/not-found"); // Redirect if task is not found
+        const task = async () => {
+            try {
+                const response = await fetchTaskById(id);
+                setTask(response.tasks);
+            } catch (e) {
+                console.log(e)
+            }
         }
-    }, [id, navigate]);
+        task();
+    }, [id]);
 
     if (!task) {
-        return <div>Loading...</div>; // Show loading state while fetching task
+        return <div>Loading...</div>;
     }
 
     return (
@@ -68,14 +43,24 @@ function ViewTask() {
             <div className="bg-white p-6 rounded-lg shadow-md max-w-4xl mx-auto space-y-4">
                 <h2 className="text-2xl text-gray-800"><b>Title:</b> {task.title}</h2>
                 <p className="text-sm text-gray-800"><b>Description:</b> {task.description}</p>
-                <p className="text-sm text-gray-700"><b>Assigned to:</b> {task.employeeName}</p>
-                <p className="text-sm text-gray-700"><b>Completion Date:</b> {task.completionDate}</p>
+                <p className="text-sm text-gray-700">
+                    <b>Assigned to:</b>
+                    <ul className="list-disc list-inside text-gray-600 mt-3">
+                        {task.empoyeeName.map((employee, index) => (<li key={index}>{employee}</li>))}
+                    </ul>
+                </p>
+                <p className="text-sm text-gray-700"><b>Completion
+                    Date:</b> {new Date(task.completionDate).toLocaleDateString()}</p>
+                <p className="text-sm text-gray-700"><b>Creation
+                    Date:</b> {new Date(task.createdAt).toLocaleDateString()}</p>
+                {task.createdAt !== task.updatedAt && <p className="text-sm text-gray-700"><b>Updation
+                    Date:</b> {new Date(task.updatedAt).toLocaleDateString()}</p>}
                 <p
                     className={`text-sm font-medium ${
-                        task.status === "Complete" ? "text-green-600" : "text-red-600"
+                        task.workStatus === "complete" ? "text-green-600" : "text-red-600"
                     }`}
                 >
-                    <b>Status:</b> {task.status}
+                    <b>Status:</b> {task.workStatus}
                 </p>
             </div>
 

@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from "react";
 import {useNavigate} from "react-router-dom";
 import {allStaff} from "../../Services/AuthService.js";
+import {addWork} from "../../Services/WorkService.js";
 
 function AddTask() {
 
@@ -21,9 +22,9 @@ function AddTask() {
         title: "",
         description: "",
         completionDate: "",
-        type: "task",
-        groups: [],
-        employees: [],
+        worktype: "task",
+        groupName: [],
+        empoyeeName: [],
     });
 
     useEffect(() => {
@@ -43,12 +44,12 @@ function AddTask() {
     };
 
     const addGroup = () => {
-        if (task.groups.includes(selectedGroup)) {
+        if (task.groupName.includes(selectedGroup)) {
             setError("This group has already been added.")
         } else if (selectedGroup === "") {
             setError("Please select an group to add.")
-        } else if (selectedGroup && !task.groups.includes(selectedGroup)) {
-            setTask(prevTask => ({...prevTask, groups: [...prevTask.groups, selectedGroup]}));
+        } else if (selectedGroup && !task.groupName.includes(selectedGroup)) {
+            setTask(prevTask => ({...prevTask, groupName: [...prevTask.groupName, selectedGroup]}));
             setSelectedGroup("");
             setError("")
         }
@@ -96,19 +97,25 @@ function AddTask() {
         return Object.keys(errors).length === 0;
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
 
         const usernames = members.map((member) => member.username);
 
         const finaltask = {
             ...task,
-            employees: usernames,
+            empoyeeName: usernames,
         };
 
         if (validateForm()) {
-            console.log("Final Task:", finaltask);
-            // navigate("/show-task");
+            try {
+                await addWork(finaltask);
+                alert("Work Add Successfully");
+                // navigate("/show-task");
+            } catch (error) {
+                console.log(error);
+                alert("Failed to Add Work. Please try again.");
+            }
         }
     };
 
@@ -162,13 +169,13 @@ function AddTask() {
                     {formErrors.completionDate && <p className="text-red-500">{formErrors.completionDate}</p>}
 
                     <label className="block text-sm font-medium text-gray-700">Work Type</label>
-                    <select name="type" value={task.type} onChange={handleInputChange}
+                    <select name="worktype" value={task.worktype} onChange={handleInputChange}
                             className="w-full p-2 border rounded-md">
                         <option value="task">Task</option>
                         <option value="project">Project</option>
                     </select>
 
-                    {task.type === "project" && (
+                    {task.worktype === "project" && (
                         <>
                             <label className="block text-sm font-medium text-gray-700">Group Names</label>
                             <div className="flex space-x-2">
@@ -232,11 +239,11 @@ function AddTask() {
 
                     {/* Group & Employee List */}
                     <div className="mt-4">
-                        {task.groups.length > 0 && <h3 className="text-gray-700 font-semibold">Groups:</h3>}
-                        {task.groups.map((group, index) => (
+                        {task.groupName.length > 0 && <h3 className="text-gray-700 font-semibold">Groups:</h3>}
+                        {task.groupName.map((group, index) => (
                             <div key={index} className="flex justify-between p-2 bg-gray-200 rounded-md mt-1">
                                 {group}
-                                <button onClick={() => removeItem('groups', group)} className="text-red-500">Remove
+                                <button onClick={() => removeItem('groupName', group)} className="text-red-500">Remove
                                 </button>
                             </div>
                         ))}

@@ -1,5 +1,4 @@
 const GroupModel = require('../models/GroupSchema');
-const tty = require("node:tty");
 
 const addGroupController = async (req, res) => {
     try {

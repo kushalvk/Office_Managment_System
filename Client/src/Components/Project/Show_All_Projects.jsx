@@ -1,35 +1,38 @@
-import { useState } from "react";
+import {useEffect, useState} from "react";
 import { useNavigate } from "react-router-dom";
+import {completeById, fetchallProjects, fetchallTasks} from "../../Services/WorkService.js";
 
 function AllProjects() {
-    const [projects, setProjects] = useState([
-        {
-            id: 1,
-            title: "Project 1",
-            description: "Description of Project 1",
-            completionDate: "12-15-2024",
-            assignedTo: "Wade Cooper",
-            status: "Pending",
-        },
-        {
-            id: 2,
-            title: "Project 2",
-            description: "Description of Project 2",
-            completionDate: "01-10-2025",
-            assignedTo: "Tom Cook",
-            status: "Complete",
-        },
-    ]);
+    const [projects, setProjects] = useState([]);
     const navigate = useNavigate();
 
-    // Function to mark a project as complete
-    const completeProject = (id) => {
-        setProjects((prevProjects) =>
-            prevProjects.map((project) =>
-                project.id === id ? { ...project, status: "Complete" } : project
-            )
-        );
-        alert(`Project ${id} marked as complete!`);
+    useEffect(() => {
+        const projects = async () => {
+            try {
+                const response = await fetchallProjects();
+                setProjects(response.projects);
+            } catch (e) {
+                console.log(e);
+            }
+        }
+        projects();
+    },[])
+
+    const completeProject = async (id) => {
+        try {
+            await completeById(id);
+
+            setProjects((prevProjects) =>
+                prevProjects.map((project) =>
+                    project._id === id ? { ...project, workStatus: "complete" } : project
+                )
+            );
+
+            alert(`Selected Project marked as complete!`);
+        } catch (e) {
+            console.log(e);
+            alert(`Fail complete Project!`);
+        }
     };
 
     // Function to handle viewing project details
@@ -70,21 +73,20 @@ function AllProjects() {
                         <div className="flex flex-col mb-2 sm:mb-0">
                             <h4 className="text-xl sm:text-2xl font-bold text-gray-800">{project.title}</h4>
                             <p className="text-sm font-medium text-gray-800">{project.description}</p>
-                            <p className="text-xs text-gray-500 mt-1">Completion Date: {project.completionDate}</p>
-                            <p className="text-xs text-gray-500 mt-1">Assigned to: {project.assignedTo}</p>
+                            <p className="text-xs text-gray-500 mt-1">Completion Date: {new Date(project.completionDate).toLocaleDateString()}</p>
                             <p
                                 className={`text-sm font-medium mt-1 ${
-                                    project.status === "Complete" ? "text-green-600" : "text-red-600"
+                                    project.workStatus === "complete" ? "text-green-600" : "text-red-600"
                                 }`}
                             >
-                                Status: {project.status}
+                                Status: {project.workStatus}
                             </p>
                         </div>
                         <div className="flex flex-wrap gap-2">
                             {/* Complete Button */}
-                            {project.status !== "Complete" && (
+                            {project.workStatus !== "complete" && (
                                 <button
-                                    onClick={() => completeProject(project.id)}
+                                    onClick={() => completeProject(project._id)}
                                     className="ml-0 sm:ml-4 mb-2 sm:mb-0 hover:text-white py-2 px-4 rounded-lg shadow-md hover:shadow-lg transition-transform duration-300 hover:scale-105 bg-blue-600 text-white font-semibold hover:bg-blue-500 focus:outline-none focus:ring-2 focus:ring-green-700"
                                 >
                                     Complete
@@ -92,14 +94,14 @@ function AllProjects() {
                             )}
                             {/* View Button */}
                             <button
-                                onClick={() => viewProjectDetails(project.id)}
+                                onClick={() => viewProjectDetails(project._id)}
                                 className="ml-0 sm:ml-4 mb-2 sm:mb-0 hover:text-white py-2 px-4 rounded-lg shadow-md hover:shadow-lg transition-transform duration-300 hover:scale-105 bg-green-600 text-white font-semibold hover:bg-green-500 focus:outline-none focus:ring-2 focus:ring-green-700"
                             >
                                 View
                             </button>
                             {/* Delete Button */}
                             <button
-                                onClick={() => deleteProject(project.id)}
+                                onClick={() => deleteProject(project._id)}
                                 className="ml-0 sm:ml-4 mb-2 sm:mb-0 hover:text-white py-2 px-4 rounded-lg shadow-md hover:shadow-lg transition-transform duration-300 hover:scale-105 bg-red-600 text-white font-semibold hover:bg-red-500 focus:outline-none focus:ring-2 focus:ring-red-700"
                             >
                                 Delete
