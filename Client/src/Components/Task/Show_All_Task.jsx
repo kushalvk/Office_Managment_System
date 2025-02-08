@@ -1,22 +1,49 @@
 import {useNavigate} from "react-router-dom";
 import {useEffect, useState} from "react";
-import {completeById, deleteTaskById, fetchallTasks} from "../../Services/WorkService.js";
+import {completeById, deleteTaskById, fetchallTasks, fetchemployeeTasks} from "../../Services/WorkService.js";
+import {loggedUser} from "../../Services/AuthService.js";
 
 function ShowTask() {
     const [tasks, setTasks] = useState([]);
     const navigate = useNavigate();
+    const [loggedin, setLoggedin] = useState(null);
+    const username = localStorage.getItem("username");
 
     useEffect(() => {
-        const tasks = async () => {
+        const logged = async () => {
             try {
-                const response = await fetchallTasks();
-                setTasks(response.tasks);
+                setLoggedin(await loggedUser());
             } catch (e) {
-                console.log(e);
+                console.log(e.message);
+                setLoggedin(null);
             }
         }
-        tasks();
-    },[])
+        logged();
+    }, [])
+
+    useEffect(() => {
+        if (loggedin?.role === "Manager") {
+            const alltasks = async () => {
+                try {
+                    const response = await fetchallTasks();
+                    setTasks(response.tasks);
+                } catch (e) {
+                    console.log(e);
+                }
+            }
+            alltasks();
+        } else {
+            const emptasks = async () => {
+                try {
+                    const response = await fetchemployeeTasks(username);
+                    setTasks(response.tasks);
+                } catch (e) {
+                    console.log(e);
+                }
+            }
+            emptasks();
+        }
+    },[loggedin, username])
 
     const completeTask = async (id) => {
         try {

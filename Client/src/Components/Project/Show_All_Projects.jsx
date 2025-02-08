@@ -1,22 +1,49 @@
 import {useEffect, useState} from "react";
 import { useNavigate } from "react-router-dom";
-import {completeById, fetchallProjects, fetchallTasks} from "../../Services/WorkService.js";
+import {completeById, fetchallProjects, fetchallTasks, fetchemployeeProjects} from "../../Services/WorkService.js";
+import {loggedUser} from "../../Services/AuthService.js";
 
 function AllProjects() {
     const [projects, setProjects] = useState([]);
     const navigate = useNavigate();
+    const [loggedin, setLoggedin] = useState(null);
+    const username = localStorage.getItem("username");
 
     useEffect(() => {
-        const projects = async () => {
+        const logged = async () => {
             try {
-                const response = await fetchallProjects();
-                setProjects(response.projects);
+                setLoggedin(await loggedUser());
             } catch (e) {
-                console.log(e);
+                console.log(e.message);
+                setLoggedin(null);
             }
         }
-        projects();
-    },[])
+        logged();
+    }, [])
+
+    useEffect(() => {
+        if (loggedin?.role === "Manager") {
+            const allprojects = async () => {
+                try {
+                    const response = await fetchallProjects();
+                    setProjects(response.projects);
+                } catch (e) {
+                    console.log(e);
+                }
+            }
+            allprojects();
+        } else {
+            const empprojects = async () => {
+                try {
+                    const response = await fetchemployeeProjects(username);
+                    setProjects(response.projects);
+                } catch (e) {
+                    console.log(e);
+                }
+            }
+            empprojects();
+        }
+    },[loggedin, username])
 
     const completeProject = async (id) => {
         try {
@@ -35,12 +62,10 @@ function AllProjects() {
         }
     };
 
-    // Function to handle viewing project details
     const viewProjectDetails = (id) => {
         navigate(`/view-details/${id}`);
     };
 
-    // Function to handle deleting a project
     const deleteProject = (id) => {
         if (window.confirm(`Are you sure you want to delete Project ${id}?`)) {
             setProjects((prevProjects) => prevProjects.filter((project) => project.id !== id));
@@ -65,9 +90,9 @@ function AllProjects() {
                 Add Project
             </button>
             <div className="space-y-4 mt-6">
-                {projects.map((project) => (
+                {projects.map((project, idx) => (
                     <div
-                        key={project.id}
+                        key={idx}
                         className="flex flex-col sm:flex-row items-start sm:items-center justify-between bg-white p-4 rounded-lg shadow-md transform transition-transform duration-300 hover:-translate-y-1 hover:scale-105 hover:shadow-xl"
                     >
                         <div className="flex flex-col mb-2 sm:mb-0">

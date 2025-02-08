@@ -3,7 +3,7 @@ import React, {useState, useEffect} from "react";
 import {fetchTaskById} from "../../Services/WorkService.js";
 
 function ViewTask() {
-    const {id} = useParams(); // Get the task ID from the URL
+    const {id} = useParams();
     const navigate = useNavigate();
     const [task, setTask] = useState(null);
 
@@ -45,9 +45,24 @@ function ViewTask() {
                 <p className="text-sm text-gray-800"><b>Description:</b> {task.description}</p>
                 <p className="text-sm text-gray-700">
                     <b>Assigned to:</b>
-                    <ul className="list-disc list-inside text-gray-600 mt-3">
-                        {task.empoyeeName.map((employee, index) => (<li key={index}>{employee}</li>))}
-                    </ul>
+                    <div className={"flex gap-4 mt-3"}>
+                        {task.groupName.length > 0 && (
+                            <div>
+                                <p className={"text-blue-700 font-bold"}>Group Name:</p>
+                                <ul className="list-disc list-inside text-gray-600 mt-3">
+                                    {task.groupName.map((group, index) => (<li key={index}>{group}</li>))}
+                                </ul>
+                            </div>
+                        )}
+                        {task.empoyeeName.length > 0 && (
+                            <div>
+                                <p className={"text-blue-700 font-bold"}>Employee:</p>
+                                <ul className="list-disc list-inside text-gray-600 mt-3">
+                                    {task.empoyeeName.map((employee, index) => (<li key={index}>{employee}</li>))}
+                                </ul>
+                            </div>
+                        )}
+                    </div>
                 </p>
                 <p className="text-sm text-gray-700"><b>Completion
                     Date:</b> {new Date(task.completionDate).toLocaleDateString()}</p>

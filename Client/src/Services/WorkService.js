@@ -54,3 +54,21 @@ export const fetchallProjects = async () => {
         error(err)
     }
 }
+
+export const fetchemployeeTasks = async (username) => {
+    try {
+        const response = await axios.get(`${import.meta.env.VITE_REACT_APP_BACKEND_BASEURL}/employee-tasks`, { params: { username } });
+        return response.data;
+    } catch (err) {
+        error(err)
+    }
+}
+
+export const fetchemployeeProjects = async (username) => {
+    try {
+        const response = await axios.get(`${import.meta.env.VITE_REACT_APP_BACKEND_BASEURL}/employee-projects`, { params: { username } });
+        return response.data;
+    } catch (err) {
+        error(err)
+    }
+}

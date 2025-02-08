@@ -4,15 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="404eb4d8-f181-44b4-a139-a07b064bd629" name="Changes" comment="ADD: Uplodes.">
-      <change afterPath="$PROJECT_DIR$/Client/src/Services/RequrmentService.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Server/controllers/Requrment_Controller.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Server/models/RequirmentSchema.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Server/routers/Requrment_Route.js" afterDir="false" />
+    <list default="true" id="404eb4d8-f181-44b4-a139-a07b064bd629" name="Changes" comment="ADD: Backed of requrments.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/src/Components/Requrment/All_Requirment.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/Components/Requrment/All_Requirment.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/src/Components/Requrment/Submit_Requrment.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/Components/Requrment/Submit_Requrment.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/Server/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/Components/Project/Show_All_Projects.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/Components/Project/Show_All_Projects.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/Components/Task/Show_All_Task.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/Components/Task/Show_All_Task.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/Components/Task/View_Task.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/Components/Task/View_Task.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/Services/WorkService.js" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/Services/WorkService.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/controllers/Work_Controller.js" beforeDir="false" afterPath="$PROJECT_DIR$/Server/controllers/Work_Controller.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/routers/Work_Route.js" beforeDir="false" afterPath="$PROJECT_DIR$/Server/routers/Work_Route.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -129,7 +128,9 @@
       <workItem from="1738764726518" duration="4362000" />
       <workItem from="1738814419139" duration="5052000" />
       <workItem from="1738903033382" duration="18713000" />
-      <workItem from="1738936647463" duration="171000" />
+      <workItem from="1738936647463" duration="1738000" />
+      <workItem from="1738989671425" duration="77000" />
+      <workItem from="1739009834201" duration="12031000" />
     </task>
     <task id="LOCAL-00001" summary="Merge pull request #2 from Kumhar-Harshad/main&#10;&#10;ADD: Profile.jsx">
       <option name="closed" value="true" />
@@ -211,7 +212,15 @@
       <option name="project" value="LOCAL" />
       <updated>1738932737793</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="ADD: Backed of requrments.">
+      <option name="closed" value="true" />
+      <created>1738938614474</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1738938614474</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -229,6 +238,7 @@
     <MESSAGE value="ADD: Backend of Task, Projects &amp; Works." />
     <MESSAGE value="ADD: Backend of Reports." />
     <MESSAGE value="ADD: Uplodes." />
-    <option name="LAST_COMMIT_MESSAGE" value="ADD: Uplodes." />
+    <MESSAGE value="ADD: Backed of requrments." />
+    <option name="LAST_COMMIT_MESSAGE" value="ADD: Backed of requrments." />
   </component>
 </project>

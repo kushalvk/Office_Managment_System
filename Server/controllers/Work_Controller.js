@@ -1,4 +1,5 @@
 const WorkModel = require('../models/WorkSchema');
+const GroupModel = require('../models/GroupSchema');
 
 const addWorkController = async (req, res) => {
     try {
@@ -68,4 +69,40 @@ const deleteTaskController = async (req, res) => {
     }
 }
 
-module.exports = {addWorkController, allTasksController, taskByIdController, completeController, deleteTaskController, allProjectsController}
+const employeeProjectsController = async (req, res) => {
+    try {
+        const { username } = req.query;
+        const groups = await GroupModel.find({ members: username }).select("groupName");
+        const groupNames = groups.map(group => group.groupName);
+
+        const projects = await WorkModel.find({
+            worktype: "project",
+            $or: [
+                { groupName: { $in: groupNames } },
+                { employeeName: { $in: [username] } }
+            ]
+        });
+
+        res.status(200).send({ projects });
+    } catch (error) {
+        res.status(500).send({ message: "Error to Fetch Tasks : Controller ", error });
+    }
+}
+
+const employeeTasksController = async (req, res) => {
+    try {
+        const { username } = req.query;
+
+        const tasks = await WorkModel.find({
+            worktype: "task",
+            empoyeeName: { $in: [username] }
+        });
+
+        res.status(200).send({ tasks });
+    } catch (error) {
+        console.error("Error fetching tasks:", error);
+        res.status(500).send({ message: "Error fetching tasks", error });
+    }
+};
+
+module.exports = {addWorkController, allTasksController, taskByIdController, completeController, deleteTaskController, allProjectsController, employeeTasksController, employeeProjectsController}
