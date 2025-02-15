@@ -1,6 +1,6 @@
 const express = require('express')
 const {addWorkController, allTasksController, taskByIdController, completeController, deleteTaskController,
-    allProjectsController, employeeTasksController, employeeProjectsController
+    allProjectsController, employeeTasksController, employeeProjectsController, generateDescriptionController
 } = require("../controllers/Work_Controller");
 
 const router = express.Router()
@@ -20,5 +20,7 @@ router.get('/all-projects', allProjectsController)
 router.get('/employee-tasks', employeeTasksController)
 
 router.get('/employee-projects', employeeProjectsController)
+
+router.post('/generate-description', generateDescriptionController)
 
 module.exports = router
