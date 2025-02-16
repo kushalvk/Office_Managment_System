@@ -72,3 +72,34 @@ export const fetchemployeeProjects = async (username) => {
         error(err)
     }
 }
+
+export const generateWorkDescription = async (title) => {
+    try {
+        const response = await axios.post(
+            `${import.meta.env.VITE_REACT_APP_BACKEND_BASEURL}/generate-description`,
+            { title }
+        );
+
+        if (response.data.description) {
+            let cleanedDescription = response.data.description;
+
+            // Remove bold markdown formatting (**text**)
+            cleanedDescription = cleanedDescription.replace(/\*\*(.*?)\*\*/g, "$1");
+
+            // Remove blockquote formatting ("> text")
+            cleanedDescription = cleanedDescription.replace(/^>\s?/gm, "");
+
+            // Remove labels like "Concise:", "Slightly more detailed:"
+            cleanedDescription = cleanedDescription.replace(/^\s*[^:]+:\s*/g, "");
+
+            // Remove bullet points ("* " or "- ")
+            cleanedDescription = cleanedDescription.replace(/^\s*[-*]\s+/gm, "");
+
+            return cleanedDescription.trim();
+        } else {
+            alert("No description generated. Try again.");
+        }
+    } catch (err) {
+        error(err)
+    }
+}

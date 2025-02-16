@@ -1,8 +1,6 @@
 import React, {useEffect, useState} from "react";
-import {useNavigate} from "react-router-dom";
 import {allStaff} from "../../Services/AuthService.js";
-import {addWork} from "../../Services/WorkService.js";
-import axios from "axios";
+import {addWork, generateWorkDescription} from "../../Services/WorkService.js";
 
 function AddTask() {
 
@@ -14,7 +12,6 @@ function AddTask() {
     const [isOpen, setIsOpen] = useState(false);
     const [error, setError] = useState('');
     const [loading, setLoading] = useState(false);
-    // const navigate = useNavigate();
     const [selectedOption, setSelectedOption] = useState({
         username: 'Select an employee', profilePhoto: 'https://www.pngmart.com/files/23/Profile-PNG-Photo.png'
     });
@@ -120,6 +117,7 @@ function AddTask() {
         setMembers((prevMembers) => prevMembers.filter(member => member.username !== username));
     };
 
+    // Ai
     const generateDescription = async () => {
         if (task.title.length < 3) {
             alert("Please enter at least 3 characters for the title.");
@@ -128,13 +126,8 @@ function AddTask() {
 
         setLoading(true);
         try {
-            const response = await axios.post(`${import.meta.env.VITE_REACT_APP_BACKEND_BASEURL}/generate-description`, { title: task.title });
-
-            if (response.data.description) {
-                setTask(prevTask => ({ ...prevTask, description: response.data.description }));
-            } else {
-                alert("No description generated. Try again.");
-            }
+            const response = await generateWorkDescription(task.title);
+            setTask(prevTask => ({ ...prevTask, description: response.trim() }));
         } catch (error) {
             console.error("Error fetching AI description:", error);
             alert("Error generating description. Please try again.");

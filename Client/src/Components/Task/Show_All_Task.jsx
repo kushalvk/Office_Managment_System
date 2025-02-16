@@ -122,9 +122,6 @@ function ShowTask() {
                             <h4 className="text-xl sm:text-2xl font-bold text-gray-800">
                                 {task.title}
                             </h4>
-                            <p className="text-sm sm:text-base font-medium text-gray-800">
-                                {task.description}
-                            </p>
                             <p className="text-sm text-gray-700 mt-1">
                                 Completion Date: {new Date(task.completionDate).toLocaleDateString()}
                             </p>

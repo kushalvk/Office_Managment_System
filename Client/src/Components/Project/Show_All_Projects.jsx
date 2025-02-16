@@ -97,7 +97,6 @@ function AllProjects() {
                     >
                         <div className="flex flex-col mb-2 sm:mb-0">
                             <h4 className="text-xl sm:text-2xl font-bold text-gray-800">{project.title}</h4>
-                            <p className="text-sm font-medium text-gray-800">{project.description}</p>
                             <p className="text-xs text-gray-500 mt-1">Completion Date: {new Date(project.completionDate).toLocaleDateString()}</p>
                             <p
                                 className={`text-sm font-medium mt-1 ${
