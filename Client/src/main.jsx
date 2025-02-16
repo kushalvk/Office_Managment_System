@@ -34,6 +34,7 @@ import View_Task from "./Components/Task/View_Task.jsx";
 import GroupDetails from "./Components/Group/Group_Details.jsx";
 import ForgotPassword from './Components/Login/Forgate_Password.jsx';
 import Add_Salary from "./Components/Sallary/Add_Salary.jsx";
+import AddFacility from "./Components/Facilities/Add_Facilities.jsx";
 
 const router = createBrowserRouter(
     createRoutesFromElements(
@@ -69,6 +70,7 @@ const router = createBrowserRouter(
             <Route path="/forgot-password" element={<ForgotPassword />} />
             <Route path="/dashbored" element={<AdminDashboard />} />
             <Route path="/add-salary" element={<Add_Salary />} />
+            <Route path="/add-facility" element={<AddFacility />} />
         </Route>
     )
 )

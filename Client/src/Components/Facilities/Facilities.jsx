@@ -1,34 +1,51 @@
 import { useNavigate } from "react-router-dom";
+import {useEffect, useState} from "react";
+import {fetchFacilities} from "../../Services/FacilitiesService.js";
 
 function Facilities() {
     const navigate = useNavigate();
 
-    const facilities = [
-        {
-            id: 1,
-            name: "Conference Room",
-            description: "A fully equipped conference room with a seating capacity of 20 people.",
-            image: "https://via.placeholder.com/150",
-        },
-        {
-            id: 2,
-            name: "Cafeteria",
-            description: "A spacious cafeteria with healthy and delicious food options.",
-            image: "https://via.placeholder.com/150",
-        },
-        {
-            id: 3,
-            name: "Parking Lot",
-            description: "Dedicated parking space for employees and visitors.",
-            image: "https://via.placeholder.com/150",
-        },
-        {
-            id: 4,
-            name: "IT Support Room",
-            description: "On-site IT support services for technical issues.",
-            image: "https://via.placeholder.com/150",
-        },
-    ];
+    const [facilities, setFacilities] = useState([
+        // {
+        //     id: 1,
+        //     name: "Conference Room",
+        //     description: "A fully equipped conference room with a seating capacity of 20 people.",
+        //     image: "https://via.placeholder.com/150",
+        // },
+        // {
+        //     id: 2,
+        //     name: "Cafeteria",
+        //     description: "A spacious cafeteria with healthy and delicious food options.",
+        //     image: "https://via.placeholder.com/150",
+        // },
+        // {
+        //     id: 3,
+        //     name: "Parking Lot",
+        //     description: "Dedicated parking space for employees and visitors.",
+        //     image: "https://via.placeholder.com/150",
+        // },
+        // {
+        //     id: 4,
+        //     name: "IT Support Room",
+        //     description: "On-site IT support services for technical issues.",
+        //     image: "https://via.placeholder.com/150",
+        // },
+    ]);
+
+    useEffect(() => {
+
+        const faciilities = async () => {
+            try {
+                setFacilities(await fetchFacilities());
+                // const response = await fetchFacilities();
+                // console.log(response);
+            } catch (e) {
+                console.log(e);
+                alert("Fail to load Facilities");
+            }
+        }
+        faciilities();
+    }, [])
 
     return (
         <div className="relative isolate h-full pt-12 p-6 lg:px-8 bg-gradient-to-r from-blue-800 to-blue-400 min-h-screen">
@@ -51,33 +68,34 @@ function Facilities() {
 
             {/* Facilities List */}
             <div className="bg-white p-6 rounded-lg shadow-lg max-w-4xl mx-auto space-y-6 mt-8">
-                {facilities.map((facility) => (
+                {facilities.map((facility, idx) => (
                     <div
-                        key={facility.id}
+                        key={idx}
                         className="flex items-center space-x-4 p-4 bg-gray-50 rounded-lg shadow-md"
                     >
                         <img
-                            src={facility.image || "https://via.placeholder.com/150"}
-                            alt={facility.name}
+                            src={facility.image
+                                ? `${import.meta.env.VITE_REACT_APP_BACKEND_BASEURL}/${facility.image}`
+                                : "https://dummyimage.com/150x150/cccccc/ffffff&text=No+Image"}
+                            alt={facility.title || "Facility Image"}
                             className="w-24 h-24 rounded-lg object-cover"
                         />
                         <div className="flex flex-col">
-                            <h2 className="text-lg font-bold text-gray-800">{facility.name}</h2>
+                            <h2 className="text-lg font-bold text-gray-800">{facility.title}</h2>
                             <p className="text-gray-600">{facility.description}</p>
                         </div>
                     </div>
                 ))}
             </div>
 
-            {/* Add Facility Button */}
-            {/* <div className="flex justify-center mt-10">
+            <div className="flex justify-center mt-10">
                 <button
                     onClick={() => navigate("/add-facility")}
-                    className="py-2 px-6 rounded-lg shadow-md hover:shadow-lg transition-transform duration-300 hover:scale-105 bg-blue-600 text-white font-semibold hover:bg-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-700"
+                    className="py-2 px-6 rounded-lg shadow-md hover:shadow-lg transition-transform duration-300 hover:scale-105 bg-green-600 text-white font-semibold hover:bg-green-500 focus:outline-none focus:ring-2 focus:ring-green-700"
                 >
                     Add New Facility
                 </button>
-            </div> */}
+            </div>
         </div>
     );
 }

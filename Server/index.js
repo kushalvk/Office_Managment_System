@@ -8,6 +8,7 @@ const ReportRouters = require('./routers/Report_Route');
 const RequrmentRouters = require('./routers/Requrment_Route');
 const NotificationRouters = require('./routers/Notification_Route');
 const SalaryRouters = require('./routers/Salary_Route');
+const FacilitiesRouters = require('./routers/Facilities_Router');
 require("dotenv").config();
 
 const app = express();
@@ -41,6 +42,8 @@ app.use(RequrmentRouters);
 app.use(NotificationRouters);
 
 app.use(SalaryRouters);
+
+app.use(FacilitiesRouters);
 
 app.get("/", (red,res) => {
     res.json(" Hello from Prime Hub Server ! ")
