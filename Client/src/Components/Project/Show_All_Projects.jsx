@@ -1,6 +1,11 @@
 import {useEffect, useState} from "react";
-import { useNavigate } from "react-router-dom";
-import {completeById, fetchallProjects, fetchallTasks, fetchemployeeProjects} from "../../Services/WorkService.js";
+import {useNavigate} from "react-router-dom";
+import {
+    completeById,
+    deleteWorkById,
+    fetchallProjects,
+    fetchemployeeProjects
+} from "../../Services/WorkService.js";
 import {loggedUser} from "../../Services/AuthService.js";
 
 function AllProjects() {
@@ -43,7 +48,7 @@ function AllProjects() {
             }
             empprojects();
         }
-    },[loggedin, username])
+    }, [loggedin, username])
 
     const completeProject = async (id) => {
         try {
@@ -51,7 +56,7 @@ function AllProjects() {
 
             setProjects((prevProjects) =>
                 prevProjects.map((project) =>
-                    project._id === id ? { ...project, workStatus: "complete" } : project
+                    project._id === id ? {...project, workStatus: "complete"} : project
                 )
             );
 
@@ -66,15 +71,23 @@ function AllProjects() {
         navigate(`/view-details/${id}`);
     };
 
-    const deleteProject = (id) => {
-        if (window.confirm(`Are you sure you want to delete Project ${id}?`)) {
-            setProjects((prevProjects) => prevProjects.filter((project) => project.id !== id));
+    const deleteProject = async (id) => {
+        if (window.confirm(`Are you sure you want to delete this Project?`)) {
+            try {
+                await deleteWorkById(id);
+                setProjects((prevProjects) => prevProjects.filter((project) => project._id !== id));
+                alert("Project Deleted successfully");
+            } catch (e) {
+                console.log(e);
+                alert("Fail to Delete Project");
+            }
         }
     };
 
     return (
         <div className="relative isolate h-full p-6 lg:px-8 bg-gradient-to-r from-blue-800 to-blue-400 min-h-screen">
-            <div className="absolute inset-x-0 -top-40 -z-10 transform-gpu overflow-hidden blur-3xl sm:-top-80" aria-hidden="true">
+            <div className="absolute inset-x-0 -top-40 -z-10 transform-gpu overflow-hidden blur-3xl sm:-top-80"
+                 aria-hidden="true">
                 <div
                     className="relative left-[calc(50%-11rem)] aspect-[1155/678] w-[36.125rem] -translate-x-1/2 rotate-[30deg] bg-gradient-to-tr from-[#ff80b5] to-[#9089fc] opacity-30 sm:left-[calc(50%-30rem)] sm:w-[72.1875rem]"
                     style={{
@@ -97,7 +110,8 @@ function AllProjects() {
                     >
                         <div className="flex flex-col mb-2 sm:mb-0">
                             <h4 className="text-xl sm:text-2xl font-bold text-gray-800">{project.title}</h4>
-                            <p className="text-xs text-gray-500 mt-1">Completion Date: {new Date(project.completionDate).toLocaleDateString()}</p>
+                            <p className="text-xs text-gray-500 mt-1">Completion
+                                Date: {new Date(project.completionDate).toLocaleDateString()}</p>
                             <p
                                 className={`text-sm font-medium mt-1 ${
                                     project.workStatus === "complete" ? "text-green-600" : "text-red-600"

@@ -88,9 +88,12 @@ function Header() {
                     {/* Desktop Navigation Links */}
                     <div className="hidden lg:flex lg:gap-x-12">
                         <a href="/" className="text-sm font-semibold text-gray-900">Home</a>
-                        <a href="/show-all-tasks" className="text-sm font-semibold text-gray-900">Tasks</a>
-                        <a href="/all-reports" className="text-sm font-semibold text-gray-900">Reports</a>
-                        <a href="/Show-all-project" className="text-sm font-semibold text-gray-900">Projects</a>
+                        <a href="/show-group" className="text-sm font-semibold text-gray-900">Group</a>
+                        {loggedin && (<><a href="/show-all-tasks"
+                                           className="text-sm font-semibold text-gray-900">Tasks</a>
+                            <a href="/all-reports" className="text-sm font-semibold text-gray-900">Reports</a>
+                            <a href="/Show-all-project"
+                               className="text-sm font-semibold text-gray-900">Projects</a></>)}
                     </div>
 
                     {/* Profile Icon and Bell Section */}
@@ -197,18 +200,23 @@ function Header() {
                         <a href="/" className="block px-3 py-2 text-base font-semibold text-gray-900 hover:bg-gray-100">
                             Home
                         </a>
-                        <a href="/show-all-tasks"
-                           className="block px-3 py-2 text-base font-semibold text-gray-900 hover:bg-gray-100">
-                            Tasks
+                        <a href="/show-group" className="block px-3 py-2 text-base font-semibold text-gray-900 hover:bg-gray-100">
+                            Group
                         </a>
-                        <a href="/all-reports"
-                           className="block px-3 py-2 text-base font-semibold text-gray-900 hover:bg-gray-100">
-                            Reports
-                        </a>
-                        <a href="/Show-all-project"
-                           className="block px-3 py-2 text-base font-semibold text-gray-900 hover:bg-gray-100">
-                            Projects
-                        </a>
+                        {loggedin && (<>
+                            <a href="/show-all-tasks"
+                               className="block px-3 py-2 text-base font-semibold text-gray-900 hover:bg-gray-100">
+                                Tasks
+                            </a>
+                            <a href="/all-reports"
+                               className="block px-3 py-2 text-base font-semibold text-gray-900 hover:bg-gray-100">
+                                Reports
+                            </a>
+                            <a href="/Show-all-project"
+                               className="block px-3 py-2 text-base font-semibold text-gray-900 hover:bg-gray-100">
+                                Projects
+                            </a>
+                        </>)}
                         <div className="flex flex-col gap-7">
                             {loggedin && <div className="flex items-center justify-between w-full">
                                 <div className="flex items-center">

@@ -1,16 +1,22 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import {addNotification} from "../../Services/NotificationService.js";
 
 function AddNotification() {
     const [title, setTitle] = useState("");
     const [message, setMessage] = useState("");
-    const [date, setDate] = useState("");
     const navigate = useNavigate();
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log({ title, message, date });
-        navigate("/notifications"); 
+        try {
+            await addNotification({ title, message });
+            alert("Notification added successfully!");
+            navigate("/notification");
+        } catch (e) {
+            console.log(e);
+            alert("Fail to add Notification");
+        }
     };
 
     return (
@@ -44,16 +50,6 @@ function AddNotification() {
                             onChange={(e) => setMessage(e.target.value)}
                             className="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                             placeholder="Enter message"
-                            required
-                        />
-                    </div>
-                    <div>
-                        <label className="block text-gray-700 font-medium mb-2">Date</label>
-                        <input
-                            type="date"
-                            value={date}
-                            onChange={(e) => setDate(e.target.value)}
-                            className="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                             required
                         />
                     </div>

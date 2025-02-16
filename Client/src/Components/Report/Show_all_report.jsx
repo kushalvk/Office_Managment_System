@@ -3,26 +3,7 @@ import {useNavigate} from "react-router-dom";
 import {allReports, approveReports, deleteReports} from "../../Services/ReportService.js";
 
 function ShowAllReports() {
-    const [reports, setReports] = useState([
-        // {
-        //     id: 1,
-        //     title: "Project Report 1",
-        //     description: "Description of Project Report 1",
-        //     document: "document1.pdf",
-        //     startDate: "2024-01-01",
-        //     endDate: "2024-01-30",
-        //     approved: false,
-        // },
-        // {
-        //     id: 2,
-        //     title: "Project Report 2",
-        //     description: "Description of Project Report 2",
-        //     document: "document2.pdf",
-        //     startDate: "2024-02-01",
-        //     endDate: "2024-02-28",
-        //     approved: true,
-        // },
-    ]);
+    const [reports, setReports] = useState([]);
 
     useEffect(() => {
         const reports = async () => {
@@ -107,6 +88,8 @@ function ShowAllReports() {
                             >
                                 View
                             </a>
+
+
                             {!report.approve ? (
                                 <button
                                     onClick={() => handleApprove(report._id)}

@@ -1,13 +1,36 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import {fetchNotifications, deleteNotification} from "../../Services/NotificationService.js";
 
 function Notification() {
-    const [notifications, setNotifications] = useState([
-        { id: 1, title: "Project 1", message: "Your task 'Project X' has been updated.", date: "11-11-2024" },
-        { id: 2, title: "Project 2", message: "A new user 'John Doe' has been added.", date: "7-07-2024" },
-        { id: 3, title: "Task 1", message: "You have a new comment on your report.", date: "5-05-2024" },
-    ]);
+    const [notifications, setNotifications] = useState([]);
     const navigate = useNavigate();
+
+    useEffect(() => {
+        const getNotifications = async () => {
+            try {
+                const response = await fetchNotifications();
+                setNotifications(response);
+            } catch (e) {
+                console.log(e);
+                alert("Failed to fetch notifications");
+            }
+        };
+        getNotifications();
+    }, []);
+
+    const handleDelete = async (id) => {
+        if (window.confirm("Are you sure you want to delete this notification?")) {
+            try {
+                await deleteNotification(id);
+                setNotifications(notifications.filter(notification => notification._id !== id));
+                alert("Notification deleted successfully!");
+            } catch (err) {
+                console.error("Error deleting notification:", err);
+                alert("Failed to delete notification.");
+            }
+        }
+    };
 
     return (
         <>
@@ -23,21 +46,27 @@ function Notification() {
                 <h1 className="text-white text-4xl font-bold mb-4 mt-20">Notifications</h1>
                 <button
                     onClick={() => navigate("/add-notification")}
-                    className=" py-2 px-4 rounded-lg shadow-md hover:shadow-lg transition-transform duration-300 hover:scale-105 bg-green-600 text-white font-semibold hover:bg-green-500 focus:outline-none focus:ring-2 focus:ring-green-700"
+                    className="py-2 px-4 rounded-lg shadow-md hover:shadow-lg transition-transform duration-300 hover:scale-105 bg-green-600 text-white font-semibold hover:bg-green-500 focus:outline-none focus:ring-2 focus:ring-green-700"
                 >
                     Add Notification
                 </button>
                 <div className="space-y-4 mt-6">
-                    {notifications.map(notification => (
+                    {notifications.map((notification, idx) => (
                         <div
-                            key={notification.id}
+                            key={idx}
                             className="flex items-center justify-between bg-white p-4 rounded-lg shadow-md transform transition-transform duration-300 hover:-translate-y-1 hover:scale-105 hover:shadow-2xl"
                         >
                             <div className="flex flex-col">
                                 <h4 className="text-2xl font-bold text-gray-800">{notification.title}</h4>
                                 <p className="text-sm font-medium text-gray-800">{notification.message}</p>
-                                <p className="text-xs text-gray-500 mt-1">{notification.date}</p>
+                                <p className="text-xs text-gray-500 mt-1">{new Date(notification.createdAt).toLocaleDateString()}</p>
                             </div>
+                            <button
+                                onClick={() => handleDelete(notification._id)}
+                                className="px-4 py-2 text-white bg-red-600 hover:bg-red-700 rounded-lg text-sm font-semibold transition duration-300"
+                            >
+                                Delete
+                            </button>
                         </div>
                     ))}
                 </div>

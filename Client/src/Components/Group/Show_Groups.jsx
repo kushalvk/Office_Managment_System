@@ -80,8 +80,8 @@ function ShowAllGroups() {
                 {groups.length === 0 ? (
                     <p className="text-center">No Groups Available.</p>
                 ) : (
-                    groups.map((group) => (
-                        <div key={group.id} className="p-4 mb-4 border-b border-gray-200">
+                    groups.map((group, idx) => (
+                        <div key={idx} className="p-4 mb-4 border-b border-gray-200">
                             <h2 className="text-xl font-bold text-gray-700">{group.groupName}</h2>
                             <p className="text-gray-600">{group.description}</p>
                             <button

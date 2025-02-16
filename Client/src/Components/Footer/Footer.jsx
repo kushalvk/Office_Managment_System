@@ -51,6 +51,10 @@ function Footer() {
                                         <a href="/Show-requirment"
                                            className="text-gray-600 hover:text-gray-800">Requirments</a>
                                     </li>
+                                    {loggedin?.role === 'Manager' && (<li>
+                                        <a href="/notification"
+                                           className="text-gray-600 hover:text-gray-800">Notification</a>
+                                    </li>)}
                                 </>
                             }
                         </nav>

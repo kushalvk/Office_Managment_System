@@ -27,3 +27,12 @@ export const fetchGroupById = async (id) => {
         error(err)
     }
 }
+
+export const deleteGroup = async (id) => {
+    try {
+        const response = await axios.delete(`${import.meta.env.VITE_REACT_APP_BACKEND_BASEURL}/delete-groups-by-id/${id}`);
+        return response.data;
+    } catch (err) {
+        error(err)
+    }
+};

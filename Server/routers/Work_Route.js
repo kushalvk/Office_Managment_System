@@ -1,6 +1,8 @@
 const express = require('express')
-const {addWorkController, allTasksController, taskByIdController, completeController, deleteTaskController,
-    allProjectsController, employeeTasksController, employeeProjectsController, generateDescriptionController
+const {
+    addWorkController, allTasksController, taskByIdController, completeController,
+    allProjectsController, employeeTasksController, employeeProjectsController, generateDescriptionController,
+    deleteWorkController
 } = require("../controllers/Work_Controller");
 
 const router = express.Router()
@@ -13,7 +15,7 @@ router.get('/taskId/:id', taskByIdController)
 
 router.post('/complete-ById/:id', completeController)
 
-router.delete('/delete-task-ById/:id', deleteTaskController)
+router.delete('/delete-work-ById/:id', deleteWorkController)
 
 router.get('/all-projects', allProjectsController)
 

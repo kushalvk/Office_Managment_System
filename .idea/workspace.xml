@@ -4,10 +4,32 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="404eb4d8-f181-44b4-a139-a07b064bd629" name="Changes" comment="ADD: Intigrate Ai In add work description.">
+    <list default="true" id="404eb4d8-f181-44b4-a139-a07b064bd629" name="Changes" comment="UPDATE: Ai generated responce.">
+      <change afterPath="$PROJECT_DIR$/Client/src/Services/NotificationService.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Server/controllers/Notification_Controller.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Server/models/NotificationSchema.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Server/routers/Notification_Route.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/src/Components/Add_Work/Add_Work.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/Components/Add_Work/Add_Work.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/Components/All_Staff/All_Staff.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/Components/All_Staff/All_Staff.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/Components/Footer/Footer.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/Components/Footer/Footer.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/Components/Group/Group_Details.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/Components/Group/Group_Details.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/Components/Group/Show_Groups.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/Components/Group/Show_Groups.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/Components/Header/Header.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/Components/Header/Header.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/Components/Notification/Add_Notification.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/Components/Notification/Add_Notification.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/Components/Notification/Notification.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/Components/Notification/Notification.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/Components/Project/Show_All_Projects.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/Components/Project/Show_All_Projects.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/Components/Report/Show_all_report.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/Components/Report/Show_all_report.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/Components/Task/Show_All_Task.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/Components/Task/Show_All_Task.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/Services/AuthService.js" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/Services/AuthService.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/Services/GroupService.js" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/Services/GroupService.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Client/src/Services/WorkService.js" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/Services/WorkService.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/controllers/Auth_Controller.js" beforeDir="false" afterPath="$PROJECT_DIR$/Server/controllers/Auth_Controller.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/controllers/Group_Controller.js" beforeDir="false" afterPath="$PROJECT_DIR$/Server/controllers/Group_Controller.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/controllers/Work_Controller.js" beforeDir="false" afterPath="$PROJECT_DIR$/Server/controllers/Work_Controller.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/Server/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/routers/Auth_Route.js" beforeDir="false" afterPath="$PROJECT_DIR$/Server/routers/Auth_Route.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/routers/Group_Route.js" beforeDir="false" afterPath="$PROJECT_DIR$/Server/routers/Group_Route.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/routers/Work_Route.js" beforeDir="false" afterPath="$PROJECT_DIR$/Server/routers/Work_Route.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -59,22 +81,23 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;project.propVCSSupport.DirectoryMappings&quot;,
-    &quot;ts.external.directory.path&quot;: &quot;C:\\Program Files\\JetBrains\\WebStorm 2024.2.4\\plugins\\javascript-plugin\\jsLanguageServicesImpl\\external&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Node.js.Show_All_Task.jsx.executor": "Debug",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "git-widget-placeholder": "main",
+    "ignore.virus.scanning.warn.message": "true",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "project.propVCSSupport.DirectoryMappings",
+    "ts.external.directory.path": "C:\\Program Files\\JetBrains\\WebStorm 2024.2.4\\plugins\\javascript-plugin\\jsLanguageServicesImpl\\external",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="D:\Projects\Office_Managment_System\Storage" />
@@ -130,7 +153,7 @@
       <workItem from="1739618206829" duration="2099000" />
       <workItem from="1739621654900" duration="683000" />
       <workItem from="1739622438919" duration="8800000" />
-      <workItem from="1739678960537" duration="1710000" />
+      <workItem from="1739678960537" duration="13462000" />
     </task>
     <task id="LOCAL-00001" summary="Merge pull request #2 from Kumhar-Harshad/main&#10;&#10;ADD: Profile.jsx">
       <option name="closed" value="true" />
@@ -236,7 +259,15 @@
       <option name="project" value="LOCAL" />
       <updated>1739647171938</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="UPDATE: Ai generated responce.">
+      <option name="closed" value="true" />
+      <created>1739681037945</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1739681037945</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -257,6 +288,7 @@
     <MESSAGE value="ADD: Backed of requrments." />
     <MESSAGE value="ADD: Backed of for logged User Task and Project." />
     <MESSAGE value="ADD: Intigrate Ai In add work description." />
-    <option name="LAST_COMMIT_MESSAGE" value="ADD: Intigrate Ai In add work description." />
+    <MESSAGE value="UPDATE: Ai generated responce." />
+    <option name="LAST_COMMIT_MESSAGE" value="UPDATE: Ai generated responce." />
   </component>
 </project>

@@ -37,9 +37,9 @@ export const completeById = async (id) => {
     }
 }
 
-export const deleteTaskById = async (id) => {
+export const deleteWorkById = async (id) => {
     try {
-        const response = await axios.delete(`${import.meta.env.VITE_REACT_APP_BACKEND_BASEURL}/delete-task-ById/${id}`);
+        const response = await axios.delete(`${import.meta.env.VITE_REACT_APP_BACKEND_BASEURL}/delete-work-ById/${id}`);
         return response.data;
     } catch (err) {
         error(err)

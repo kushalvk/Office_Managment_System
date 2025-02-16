@@ -34,4 +34,16 @@ const fetchGroupByIdController = async (req, res) => {
     }
 }
 
-module.exports = { addGroupController, allGroupController, fetchGroupByIdController };
+const deleteGroupById = async (req, res) => {
+    try {
+        const { id } = req.params;
+
+        await GroupModel.findByIdAndDelete( id )
+            .then(() => res.status(200).send({ message: "Group deleted successfully " }))
+            .catch(err => res.status(500).send({ message: "Fail to delete Group : Controller ", err}));
+    } catch (err) {
+        res.status(500).send({message: "Error to Delete Group : Controller ", err});
+    }
+}
+
+module.exports = { addGroupController, allGroupController, fetchGroupByIdController, deleteGroupById };

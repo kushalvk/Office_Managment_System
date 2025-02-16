@@ -1,5 +1,7 @@
 const express = require('express')
-const { addUserController, loginController, forgotPasswordController, loggedUser, updateProfile, allStaff} = require('../controllers/Auth_Controller')
+const { addUserController, loginController, forgotPasswordController, loggedUser, updateProfile, allStaff,
+    deleteStaffByIdController
+} = require('../controllers/Auth_Controller')
 const { default: upload } = require('../middlewares/uploadMiddleware')
 const {verifyToken} = require("../middlewares/authMiddleware");
 
@@ -16,5 +18,7 @@ router.get('/loggeduser', verifyToken, loggedUser)
 router.post('/update-profile/:id', upload.fields([{ name: "profilePhoto", maxCount: 1}, { name: "resume", maxCount: 1}]), updateProfile)
 
 router.get('/all-staff', allStaff)
+
+router.delete('/delete-staff-by-id/:id', deleteStaffByIdController)
 
 module.exports = router

@@ -58,7 +58,7 @@ const completeController = async (req, res) => {
     }
 }
 
-const deleteTaskController = async (req, res) => {
+const deleteWorkController = async (req, res) => {
     try {
         const {id} = req.params;
 
@@ -132,7 +132,7 @@ module.exports = {
     allTasksController,
     taskByIdController,
     completeController,
-    deleteTaskController,
+    deleteWorkController,
     allProjectsController,
     employeeTasksController,
     employeeProjectsController,
