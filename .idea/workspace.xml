@@ -4,32 +4,20 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="404eb4d8-f181-44b4-a139-a07b064bd629" name="Changes" comment="UPDATE: Ai generated responce.">
-      <change afterPath="$PROJECT_DIR$/Client/src/Services/NotificationService.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Server/controllers/Notification_Controller.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Server/models/NotificationSchema.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Server/routers/Notification_Route.js" afterDir="false" />
+    <list default="true" id="404eb4d8-f181-44b4-a139-a07b064bd629" name="Changes" comment="ADD: Uplodes">
+      <change afterPath="$PROJECT_DIR$/Client/src/Components/Sallary/Add_Salary.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Client/src/Services/SalaryService.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Server/controllers/Salary_Controller.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Server/models/SalarySchema.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Server/routers/Salary_Route.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/src/Components/All_Staff/All_Staff.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/Components/All_Staff/All_Staff.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/src/Components/Footer/Footer.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/Components/Footer/Footer.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/src/Components/Group/Group_Details.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/Components/Group/Group_Details.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/src/Components/Group/Show_Groups.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/Components/Group/Show_Groups.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/src/Components/Header/Header.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/Components/Header/Header.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/src/Components/Notification/Add_Notification.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/Components/Notification/Add_Notification.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/src/Components/Notification/Notification.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/Components/Notification/Notification.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/src/Components/Project/Show_All_Projects.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/Components/Project/Show_All_Projects.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/src/Components/Report/Show_all_report.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/Components/Report/Show_all_report.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/src/Components/Task/Show_All_Task.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/Components/Task/Show_All_Task.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/src/Services/AuthService.js" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/Services/AuthService.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/src/Services/GroupService.js" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/Services/GroupService.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/src/Services/WorkService.js" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/Services/WorkService.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/controllers/Auth_Controller.js" beforeDir="false" afterPath="$PROJECT_DIR$/Server/controllers/Auth_Controller.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/controllers/Group_Controller.js" beforeDir="false" afterPath="$PROJECT_DIR$/Server/controllers/Group_Controller.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/controllers/Work_Controller.js" beforeDir="false" afterPath="$PROJECT_DIR$/Server/controllers/Work_Controller.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/Client/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/Client/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/Components/Sallary/Sallary.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/Components/Sallary/Sallary.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/main.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/main.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Server/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/Server/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/routers/Auth_Route.js" beforeDir="false" afterPath="$PROJECT_DIR$/Server/routers/Auth_Route.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/routers/Group_Route.js" beforeDir="false" afterPath="$PROJECT_DIR$/Server/routers/Group_Route.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/routers/Work_Route.js" beforeDir="false" afterPath="$PROJECT_DIR$/Server/routers/Work_Route.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/Server/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/Server/package.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -153,7 +141,7 @@
       <workItem from="1739618206829" duration="2099000" />
       <workItem from="1739621654900" duration="683000" />
       <workItem from="1739622438919" duration="8800000" />
-      <workItem from="1739678960537" duration="13462000" />
+      <workItem from="1739678960537" duration="24749000" />
     </task>
     <task id="LOCAL-00001" summary="Merge pull request #2 from Kumhar-Harshad/main&#10;&#10;ADD: Profile.jsx">
       <option name="closed" value="true" />
@@ -267,7 +255,23 @@
       <option name="project" value="LOCAL" />
       <updated>1739681037945</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="ADD: Notifiaction Page with font-end and back-end and change other pages..">
+      <option name="closed" value="true" />
+      <created>1739709422502</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1739709422502</updated>
+    </task>
+    <task id="LOCAL-00016" summary="ADD: Uplodes">
+      <option name="closed" value="true" />
+      <created>1739709531464</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1739709531464</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -289,6 +293,8 @@
     <MESSAGE value="ADD: Backed of for logged User Task and Project." />
     <MESSAGE value="ADD: Intigrate Ai In add work description." />
     <MESSAGE value="UPDATE: Ai generated responce." />
-    <option name="LAST_COMMIT_MESSAGE" value="UPDATE: Ai generated responce." />
+    <MESSAGE value="ADD: Notifiaction Page with font-end and back-end and change other pages.." />
+    <MESSAGE value="ADD: Uplodes" />
+    <option name="LAST_COMMIT_MESSAGE" value="ADD: Uplodes" />
   </component>
 </project>

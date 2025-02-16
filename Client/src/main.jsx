@@ -33,6 +33,7 @@ import Terms_Condition from "./Components/Terms_Condition/Terms_Condition.jsx";
 import View_Task from "./Components/Task/View_Task.jsx";
 import GroupDetails from "./Components/Group/Group_Details.jsx";
 import ForgotPassword from './Components/Login/Forgate_Password.jsx';
+import Add_Salary from "./Components/Sallary/Add_Salary.jsx";
 
 const router = createBrowserRouter(
     createRoutesFromElements(
@@ -67,6 +68,7 @@ const router = createBrowserRouter(
             <Route path="/group-details/:id" element={<GroupDetails />} />
             <Route path="/forgot-password" element={<ForgotPassword />} />
             <Route path="/dashbored" element={<AdminDashboard />} />
+            <Route path="/add-salary" element={<Add_Salary />} />
         </Route>
     )
 )
