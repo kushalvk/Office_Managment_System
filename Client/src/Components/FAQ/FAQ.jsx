@@ -27,9 +27,9 @@ function FAQ() {
             <h1 className="text-white text-4xl font-bold text-center mb-6 mt-10">Frequently Asked Questions</h1>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6 mt-8">
-                {faqs.map((faq) => (
+                {faqs.map((faq, idx) => (
                     <div
-                        key={faq.id}
+                        key={idx}
                         className="bg-white rounded-lg shadow-md p-6 transform transition-transform duration-300 hover:-translate-y-1 hover:scale-105 hover:shadow-2xl"
                     >
                         <h2 className="text-xl font-bold text-gray-800">{faq.question}</h2>
