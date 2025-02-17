@@ -35,6 +35,8 @@ import GroupDetails from "./Components/Group/Group_Details.jsx";
 import ForgotPassword from './Components/Login/Forgate_Password.jsx';
 import Add_Salary from "./Components/Sallary/Add_Salary.jsx";
 import AddFacility from "./Components/Facilities/Add_Facilities.jsx";
+import FAQ from "./Components/FAQ/FAQ.jsx";
+import Add_FAQ from "./Components/FAQ/Add_FAQ.jsx";
 
 const router = createBrowserRouter(
     createRoutesFromElements(
@@ -71,6 +73,8 @@ const router = createBrowserRouter(
             <Route path="/dashbored" element={<AdminDashboard />} />
             <Route path="/add-salary" element={<Add_Salary />} />
             <Route path="/add-facility" element={<AddFacility />} />
+            <Route path="/faq" element={<FAQ />} />
+            <Route path="/add-faq" element={<Add_FAQ />} />
         </Route>
     )
 )
