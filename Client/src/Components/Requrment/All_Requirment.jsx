@@ -1,9 +1,23 @@
 import {useEffect, useState} from "react";
-import { useNavigate } from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 import {allRequrments, updteRequrments} from "../../Services/RequrmentService.js";
+import {loggedUser} from "../../Services/AuthService.js";
 
 function AllRequirements() {
     const [requirements, setRequirements] = useState([]);
+    const [loggedin, setLoggedin] = useState(null);
+
+    useEffect(() => {
+        const logged = async () => {
+            try {
+                setLoggedin(await loggedUser());
+            } catch (e) {
+                console.log(e.message);
+                setLoggedin(null);
+            }
+        }
+        logged();
+    }, [])
 
     useEffect(() => {
         const requrments = async () => {
@@ -22,7 +36,7 @@ function AllRequirements() {
     const updateStatus = async (id, newStatus) => {
         try {
             await updteRequrments(id, newStatus);
-            setRequirements(requirements.map(req => req._id === id ? { ...req, requrmentStatus: newStatus } : req));
+            setRequirements(requirements.map(req => req._id === id ? {...req, requrmentStatus: newStatus} : req));
             alert(`Requrment ${newStatus} successfully.`);
         } catch (e) {
             console.log(e);
@@ -58,7 +72,7 @@ function AllRequirements() {
                             <h4 className="text-2xl font-bold text-gray-800">{requirement.name}</h4>
                             <p className="text-sm font-medium text-gray-800">{requirement.reason}</p>
                             <p className="text-xs text-gray-500 mt-1">Username: {requirement.username}</p>
-                            <p className="text-xs text-gray-500 mt-1">Date: {new  Date(requirement.date).toLocaleDateString()}</p>
+                            <p className="text-xs text-gray-500 mt-1">Date: {new Date(requirement.date).toLocaleDateString()}</p>
                             <p
                                 className={`text-sm font-medium mt-1 ${
                                     requirement.requrmentStatus === "Approved" ? "text-green-600" :
@@ -67,24 +81,26 @@ function AllRequirements() {
                                 Status: {requirement.requrmentStatus}
                             </p>
                         </div>
-                        <div>
-                            {requirement.requrmentStatus === "Pending" && (
-                                <>
-                                    <button
-                                        onClick={() => updateStatus(requirement._id, "Approved")}
-                                        className="ml-4 hover:text-white my-2 py-2 px-4 rounded-lg shadow-md hover:shadow-lg transition-transform duration-300 hover:scale-105 bg-green-600 text-white font-semibold hover:bg-green-500 focus:outline-none focus:ring-2 focus:ring-green-700"
-                                    >
-                                        Approve
-                                    </button>
-                                    <button
-                                        onClick={() => updateStatus(requirement._id, "Cancelled")}
-                                        className="ml-4 hover:text-white my-2 py-2 px-4 rounded-lg shadow-md hover:shadow-lg transition-transform duration-300 hover:scale-105 bg-red-600 text-white font-semibold hover:bg-red-500 focus:outline-none focus:ring-2 focus:ring-green-700"
-                                    >
-                                        Cancel
-                                    </button>
-                                </>
-                            )}
-                        </div>
+                        {loggedin?.role === "Manager" && (<>
+                            <div>
+                                {requirement.requrmentStatus === "Pending" && (
+                                    <>
+                                        <button
+                                            onClick={() => updateStatus(requirement._id, "Approved")}
+                                            className="ml-4 hover:text-white my-2 py-2 px-4 rounded-lg shadow-md hover:shadow-lg transition-transform duration-300 hover:scale-105 bg-green-600 text-white font-semibold hover:bg-green-500 focus:outline-none focus:ring-2 focus:ring-green-700"
+                                        >
+                                            Approve
+                                        </button>
+                                        <button
+                                            onClick={() => updateStatus(requirement._id, "Cancelled")}
+                                            className="ml-4 hover:text-white my-2 py-2 px-4 rounded-lg shadow-md hover:shadow-lg transition-transform duration-300 hover:scale-105 bg-red-600 text-white font-semibold hover:bg-red-500 focus:outline-none focus:ring-2 focus:ring-green-700"
+                                        >
+                                            Cancel
+                                        </button>
+                                    </>
+                                )}
+                            </div>
+                        </>)}
                     </div>
                 ))}
             </div>

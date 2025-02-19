@@ -1,13 +1,27 @@
-import React, { useEffect, useState } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import React, {useEffect, useState} from 'react';
+import {useParams, useNavigate} from 'react-router-dom';
 import {fetchGroupById, deleteGroup} from "../../Services/GroupService.js";
+import {loggedUser} from "../../Services/AuthService.js";
 
 function GroupDetails() {
-    const { id } = useParams();
+    const {id} = useParams();
     const navigate = useNavigate();
 
     const [group, setGroup] = useState(null);
     const [loading, setLoading] = useState(false);
+    const [loggedin, setLoggedin] = useState(null);
+
+    useEffect(() => {
+        const logged = async () => {
+            try {
+                setLoggedin(await loggedUser());
+            } catch (e) {
+                console.log(e.message);
+                setLoggedin(null);
+            }
+        }
+        logged();
+    }, [])
 
     useEffect(() => {
         const fetchGroup = async () => {
@@ -68,17 +82,20 @@ function GroupDetails() {
                 <p className="text-gray-600 mt-2"><b>Created By: </b>{group.createdBy}</p>
                 <p className="text-gray-600 mt-2"><b>Created At: </b>{new Date(group.createdAt).toLocaleString()}</p>
                 {group.createdAt !== group.updatedAt && (
-                    <p className="text-gray-600 mt-2"><b>Updated At: </b>{new Date(group.updatedAt).toLocaleString()}</p>
+                    <p className="text-gray-600 mt-2"><b>Updated At: </b>{new Date(group.updatedAt).toLocaleString()}
+                    </p>
                 )}
                 <p className="text-gray-600 mt-2">
                     <b>Group Type: </b>
-                    <span className={`px-2 py-1 rounded-md text-white ${group.groupType === 'public' ? 'bg-red-500' : 'bg-green-500'}`}>
+                    <span
+                        className={`px-2 py-1 rounded-md text-white ${group.groupType === 'public' ? 'bg-red-500' : 'bg-green-500'}`}>
                         {group.groupType}
                     </span>
                 </p>
                 <p className="text-gray-600 mt-2">
                     <b>Group Status: </b>
-                    <span className={`px-2 py-1 rounded-md text-white ${group.groupStatus === 'active' ? 'bg-green-500' : 'bg-red-500'}`}>
+                    <span
+                        className={`px-2 py-1 rounded-md text-white ${group.groupStatus === 'active' ? 'bg-green-500' : 'bg-red-500'}`}>
                         {group.groupStatus}
                     </span>
                 </p>
@@ -102,13 +119,15 @@ function GroupDetails() {
                 >
                     Back to Groups
                 </button>
-                <button
-                    onClick={handleDelete}
-                    className="px-6 py-2 text-white bg-red-600 hover:bg-red-700 rounded-md text-lg"
-                    disabled={loading}
-                >
-                    {loading ? "Deleting..." : "Delete Group"}
-                </button>
+                {loggedin?.role === "Manager" && (<>
+                    <button
+                        onClick={handleDelete}
+                        className="px-6 py-2 text-white bg-red-600 hover:bg-red-700 rounded-md text-lg"
+                        disabled={loading}
+                    >
+                        {loading ? "Deleting..." : "Delete Group"}
+                    </button>
+                </>)}
             </div>
         </div>
     );

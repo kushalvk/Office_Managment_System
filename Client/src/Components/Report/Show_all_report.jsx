@@ -1,9 +1,23 @@
 import {useEffect, useState} from "react";
 import {useNavigate} from "react-router-dom";
 import {allReports, approveReports, deleteReports} from "../../Services/ReportService.js";
+import {loggedUser} from "../../Services/AuthService.js";
 
 function ShowAllReports() {
     const [reports, setReports] = useState([]);
+    const [loggedin, setLoggedin] = useState(null);
+
+    useEffect(() => {
+        const logged = async () => {
+            try {
+                setLoggedin(await loggedUser());
+            } catch (e) {
+                console.log(e.message);
+                setLoggedin(null);
+            }
+        }
+        logged();
+    }, [])
 
     useEffect(() => {
         const reports = async () => {
@@ -89,22 +103,23 @@ function ShowAllReports() {
                                 View
                             </a>
 
-
-                            {!report.approve ? (
-                                <button
-                                    onClick={() => handleApprove(report._id)}
-                                    className="ml-4 text-yellow-600 hover:text-yellow-800 focus:outline-none"
-                                >
-                                    Approve
-                                </button>
-                            ) : (
-                                <button
-                                    onClick={() => handleDelete(report._id)}
-                                    className="ml-4 text-red-600 hover:text-red-800 focus:outline-none"
-                                >
-                                    Delete
-                                </button>
-                            )}
+                            {loggedin?.role === "Manager" && (<>
+                                {!report.approve ? (
+                                    <button
+                                        onClick={() => handleApprove(report._id)}
+                                        className="ml-4 text-yellow-600 hover:text-yellow-800 focus:outline-none"
+                                    >
+                                        Approve
+                                    </button>
+                                ) : (
+                                    <button
+                                        onClick={() => handleDelete(report._id)}
+                                        className="ml-4 text-red-600 hover:text-red-800 focus:outline-none"
+                                    >
+                                        Delete
+                                    </button>
+                                )}
+                            </>)}
                         </div>
                     </div>
                 ))}

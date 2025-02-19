@@ -1,10 +1,24 @@
-import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import {useEffect, useState} from "react";
+import {useNavigate} from "react-router-dom";
 import {fetchNotifications, deleteNotification} from "../../Services/NotificationService.js";
+import {loggedUser} from "../../Services/AuthService.js";
 
 function Notification() {
     const [notifications, setNotifications] = useState([]);
     const navigate = useNavigate();
+    const [loggedin, setLoggedin] = useState(null);
+
+    useEffect(() => {
+        const logged = async () => {
+            try {
+                setLoggedin(await loggedUser());
+            } catch (e) {
+                console.log(e.message);
+                setLoggedin(null);
+            }
+        }
+        logged();
+    }, [])
 
     useEffect(() => {
         const getNotifications = async () => {
@@ -34,8 +48,10 @@ function Notification() {
 
     return (
         <>
-            <div className="relative isolate h-full p-6 lg:px-8 bg-gradient-to-r from-blue-800 to-blue-400 min-h-screen">
-                <div className="absolute inset-x-0 -top-40 -z-10 transform-gpu overflow-hidden blur-3xl sm:-top-80" aria-hidden="true">
+            <div
+                className="relative isolate h-full p-6 lg:px-8 bg-gradient-to-r from-blue-800 to-blue-400 min-h-screen">
+                <div className="absolute inset-x-0 -top-40 -z-10 transform-gpu overflow-hidden blur-3xl sm:-top-80"
+                     aria-hidden="true">
                     <div
                         className="relative left-[calc(50%-11rem)] aspect-[1155/678] w-[36.125rem] -translate-x-1/2 rotate-[30deg] bg-gradient-to-tr from-[#ff80b5] to-[#9089fc] opacity-30 sm:left-[calc(50%-30rem)] sm:w-[72.1875rem]"
                         style={{
@@ -44,12 +60,14 @@ function Notification() {
                     ></div>
                 </div>
                 <h1 className="text-white text-4xl font-bold mb-4 mt-20">Notifications</h1>
-                <button
-                    onClick={() => navigate("/add-notification")}
-                    className="py-2 px-4 rounded-lg shadow-md hover:shadow-lg transition-transform duration-300 hover:scale-105 bg-green-600 text-white font-semibold hover:bg-green-500 focus:outline-none focus:ring-2 focus:ring-green-700"
-                >
-                    Add Notification
-                </button>
+                {loggedin?.role === "Manager" && (<>
+                    <button
+                        onClick={() => navigate("/add-notification")}
+                        className="py-2 px-4 rounded-lg shadow-md hover:shadow-lg transition-transform duration-300 hover:scale-105 bg-green-600 text-white font-semibold hover:bg-green-500 focus:outline-none focus:ring-2 focus:ring-green-700"
+                    >
+                        Add Notification
+                    </button>
+                </>)}
                 <div className="space-y-4 mt-6">
                     {notifications.map((notification, idx) => (
                         <div
@@ -61,12 +79,14 @@ function Notification() {
                                 <p className="text-sm font-medium text-gray-800">{notification.message}</p>
                                 <p className="text-xs text-gray-500 mt-1">{new Date(notification.createdAt).toLocaleDateString()}</p>
                             </div>
-                            <button
-                                onClick={() => handleDelete(notification._id)}
-                                className="px-4 py-2 text-white bg-red-600 hover:bg-red-700 rounded-lg text-sm font-semibold transition duration-300"
-                            >
-                                Delete
-                            </button>
+                            {loggedin?.role === "Manager" && (<>
+                                <button
+                                    onClick={() => handleDelete(notification._id)}
+                                    className="px-4 py-2 text-white bg-red-600 hover:bg-red-700 rounded-lg text-sm font-semibold transition duration-300"
+                                >
+                                    Delete
+                                </button>
+                            </>)}
                         </div>
                     ))}
                 </div>

@@ -114,64 +114,66 @@ function ShowTask() {
                 </button>
             </div>)}
 
-            {!loggedin ? <h1 className={"flex justify-center text-red-500 font-bold text-2xl"}>Please Loggin First...!</h1> : <>
-                <div className="space-y-4 mt-6 max-w-xl mx-auto">
-                    {tasks.map((task, idx) => (
-                        <div
-                            key={idx}
-                            className="flex flex-col sm:flex-row items-start justify-between bg-white p-4 rounded-lg shadow-md transform transition-transform duration-300 hover:-translate-y-1 hover:scale-105 hover:shadow-xl"
-                        >
-                            {/* Task Details */}
-                            <div className="flex-grow">
-                                <h4 className="text-xl sm:text-2xl font-bold text-gray-800">
-                                    {task.title}
-                                </h4>
-                                <p className="text-sm text-gray-700 mt-1">
-                                    Completion Date: {new Date(task.completionDate).toLocaleDateString()}
-                                </p>
-                                <p
-                                    className={`text-sm font-medium mt-1 ${
-                                        task.workStatus
-                                        === "complete"
-                                            ? "text-green-600"
-                                            : "text-red-600"
-                                    }`}
-                                >
-                                    Status: {task.workStatus}
-                                </p>
-                            </div>
-
-                            {/* Buttons */}
-                            <div className="flex sm:flex-row gap-2 mt-4 sm:mt-0 sm:ml-4">
-
-                                {task.workStatus !== "complete" && (
-                                    <button
-                                        onClick={() => completeTask(task._id)}
-                                        className="py-2 px-4 rounded-lg shadow-md hover:shadow-lg transition-transform duration-300 hover:scale-105 bg-blue-600 text-white font-semibold hover:bg-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-700"
+            {!loggedin ?
+                <h1 className={"flex justify-center text-red-500 font-bold text-2xl"}>Please Loggin First...!</h1> : <>
+                    <div className="space-y-4 mt-6 max-w-xl mx-auto">
+                        {tasks.map((task, idx) => (
+                            <div
+                                key={idx}
+                                className="flex flex-col sm:flex-row items-start justify-between bg-white p-4 rounded-lg shadow-md transform transition-transform duration-300 hover:-translate-y-1 hover:scale-105 hover:shadow-xl"
+                            >
+                                {/* Task Details */}
+                                <div className="flex-grow">
+                                    <h4 className="text-xl sm:text-2xl font-bold text-gray-800">
+                                        {task.title}
+                                    </h4>
+                                    <p className="text-sm text-gray-700 mt-1">
+                                        Completion Date: {new Date(task.completionDate).toLocaleDateString()}
+                                    </p>
+                                    <p
+                                        className={`text-sm font-medium mt-1 ${
+                                            task.workStatus
+                                            === "complete"
+                                                ? "text-green-600"
+                                                : "text-red-600"
+                                        }`}
                                     >
-                                        Complete
+                                        Status: {task.workStatus}
+                                    </p>
+                                </div>
+
+                                {/* Buttons */}
+                                <div className="flex sm:flex-row gap-2 mt-4 sm:mt-0 sm:ml-4">
+
+                                    <button
+                                        onClick={() => viewTaskDetails(task._id)}
+                                        className="py-2 px-4 rounded-lg shadow-md hover:shadow-lg transition-transform duration-300 hover:scale-105 bg-green-600 text-white font-semibold hover:bg-green-500 focus:outline-none focus:ring-2 focus:ring-green-700"
+                                    >
+                                        View
                                     </button>
-                                )}
+                                    {loggedin?.role === "Manager" && (<>
+                                        {task.workStatus !== "complete" && (
+                                            <button
+                                                onClick={() => completeTask(task._id)}
+                                                className="py-2 px-4 rounded-lg shadow-md hover:shadow-lg transition-transform duration-300 hover:scale-105 bg-blue-600 text-white font-semibold hover:bg-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-700"
+                                            >
+                                                Complete
+                                            </button>
+                                        )}
 
-                                <button
-                                    onClick={() => viewTaskDetails(task._id)}
-                                    className="py-2 px-4 rounded-lg shadow-md hover:shadow-lg transition-transform duration-300 hover:scale-105 bg-green-600 text-white font-semibold hover:bg-green-500 focus:outline-none focus:ring-2 focus:ring-green-700"
-                                >
-                                    View
-                                </button>
+                                        <button
+                                            onClick={() => deleteTask(task._id)}
+                                            className="py-2 px-4 rounded-lg shadow-md hover:shadow-lg transition-transform duration-300 hover:scale105 bg-red-600 text-white font-semibold hover:bg-red-500 focus:outline-none focus:ring2 focus:ring-red-700"
+                                        >
+                                            Delete
+                                        </button>
+                                    </>)}
 
-                                {loggedin?.role === "Manager" && (<button
-                                    onClick={() => deleteTask(task._id)}
-                                    className="py-2 px-4 rounded-lg shadow-md hover:shadow-lg transition-transform duration-300 hover:scale105 bg-red-600 text-white font-semibold hover:bg-red-500 focus:outline-none focus:ring2 focus:ring-red-700"
-                                >
-                                    Delete
-                                </button>)}
-
+                                </div>
                             </div>
-                        </div>
-                    ))}
-                </div>
-            </>}
+                        ))}
+                    </div>
+                </>}
         </div>
     );
 }

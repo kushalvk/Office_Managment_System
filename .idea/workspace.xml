@@ -4,18 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="404eb4d8-f181-44b4-a139-a07b064bd629" name="Changes" comment="ADD: Facility Back-end.">
-      <change afterPath="$PROJECT_DIR$/Client/src/Components/FAQ/Add_FAQ.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Client/src/Components/FAQ/FAQ.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Client/src/Services/FaqService.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Server/controllers/FAQ_Controller.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Server/models/FAQSchema.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Server/routers/FAQ_Route.js" afterDir="false" />
+    <list default="true" id="404eb4d8-f181-44b4-a139-a07b064bd629" name="Changes" comment="UPDATE: FAQ Front-end.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/src/Components/Contact_Us/Contact_Us.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/Components/Contact_Us/Contact_Us.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/src/Components/Footer/Footer.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/Components/Footer/Footer.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/src/main.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/main.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/Server/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/Components/Group/Group_Details.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/Components/Group/Group_Details.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/Components/Notification/Notification.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/Components/Notification/Notification.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/Components/Project/Show_All_Projects.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/Components/Project/Show_All_Projects.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/Components/Report/Show_all_report.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/Components/Report/Show_all_report.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/Components/Requrment/All_Requirment.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/Components/Requrment/All_Requirment.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/Components/Task/View_Task.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/Components/Task/View_Task.jsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -141,7 +137,9 @@
       <workItem from="1739622438919" duration="8800000" />
       <workItem from="1739678960537" duration="29351000" />
       <workItem from="1739764634958" duration="1351000" />
-      <workItem from="1739815020608" duration="1486000" />
+      <workItem from="1739815020608" duration="1985000" />
+      <workItem from="1739894676058" duration="2093000" />
+      <workItem from="1739937203865" duration="1682000" />
     </task>
     <task id="LOCAL-00001" summary="Merge pull request #2 from Kumhar-Harshad/main&#10;&#10;ADD: Profile.jsx">
       <option name="closed" value="true" />
@@ -287,7 +285,23 @@
       <option name="project" value="LOCAL" />
       <updated>1739734188638</updated>
     </task>
-    <option name="localTasksCounter" value="19" />
+    <task id="LOCAL-00019" summary="ADD: FAQ Page Front-end &amp; Back-end also add MAP.">
+      <option name="closed" value="true" />
+      <created>1739816835768</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1739816835768</updated>
+    </task>
+    <task id="LOCAL-00020" summary="UPDATE: FAQ Front-end.">
+      <option name="closed" value="true" />
+      <created>1739816909790</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1739816909790</updated>
+    </task>
+    <option name="localTasksCounter" value="21" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -313,6 +327,8 @@
     <MESSAGE value="ADD: Uplodes" />
     <MESSAGE value="ADD: Salary Page and Payment Gateway." />
     <MESSAGE value="ADD: Facility Back-end." />
-    <option name="LAST_COMMIT_MESSAGE" value="ADD: Facility Back-end." />
+    <MESSAGE value="ADD: FAQ Page Front-end &amp; Back-end also add MAP." />
+    <MESSAGE value="UPDATE: FAQ Front-end." />
+    <option name="LAST_COMMIT_MESSAGE" value="UPDATE: FAQ Front-end." />
   </component>
 </project>

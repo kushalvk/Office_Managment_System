@@ -96,12 +96,14 @@ function AllProjects() {
                 ></div>
             </div>
             <h1 className="text-white text-3xl sm:text-4xl font-bold mb-4 mt-20">All Projects</h1>
-            <button
-                onClick={() => navigate("/add-work")}
-                className="py-2 px-4 rounded-lg shadow-md hover:shadow-lg transition-transform duration-300 hover:scale-105 bg-green-600 text-white font-semibold hover:bg-green-500 focus:outline-none focus:ring-2 focus:ring-green-700"
-            >
-                Add Project
-            </button>
+            {loggedin?.role === "Manager" && (<>
+                <button
+                    onClick={() => navigate("/add-work")}
+                    className="py-2 px-4 rounded-lg shadow-md hover:shadow-lg transition-transform duration-300 hover:scale-105 bg-green-600 text-white font-semibold hover:bg-green-500 focus:outline-none focus:ring-2 focus:ring-green-700"
+                >
+                    Add Project
+                </button>
+            </>)}
             <div className="space-y-4 mt-6">
                 {projects.map((project, idx) => (
                     <div
@@ -121,29 +123,28 @@ function AllProjects() {
                             </p>
                         </div>
                         <div className="flex flex-wrap gap-2">
-                            {/* Complete Button */}
-                            {project.workStatus !== "complete" && (
-                                <button
-                                    onClick={() => completeProject(project._id)}
-                                    className="ml-0 sm:ml-4 mb-2 sm:mb-0 hover:text-white py-2 px-4 rounded-lg shadow-md hover:shadow-lg transition-transform duration-300 hover:scale-105 bg-blue-600 text-white font-semibold hover:bg-blue-500 focus:outline-none focus:ring-2 focus:ring-green-700"
-                                >
-                                    Complete
-                                </button>
-                            )}
-                            {/* View Button */}
                             <button
                                 onClick={() => viewProjectDetails(project._id)}
                                 className="ml-0 sm:ml-4 mb-2 sm:mb-0 hover:text-white py-2 px-4 rounded-lg shadow-md hover:shadow-lg transition-transform duration-300 hover:scale-105 bg-green-600 text-white font-semibold hover:bg-green-500 focus:outline-none focus:ring-2 focus:ring-green-700"
                             >
                                 View
                             </button>
-                            {/* Delete Button */}
-                            <button
-                                onClick={() => deleteProject(project._id)}
-                                className="ml-0 sm:ml-4 mb-2 sm:mb-0 hover:text-white py-2 px-4 rounded-lg shadow-md hover:shadow-lg transition-transform duration-300 hover:scale-105 bg-red-600 text-white font-semibold hover:bg-red-500 focus:outline-none focus:ring-2 focus:ring-red-700"
-                            >
-                                Delete
-                            </button>
+                            {loggedin?.role === "Manager" && (<>
+                                {project.workStatus !== "complete" && (
+                                    <button
+                                        onClick={() => completeProject(project._id)}
+                                        className="ml-0 sm:ml-4 mb-2 sm:mb-0 hover:text-white py-2 px-4 rounded-lg shadow-md hover:shadow-lg transition-transform duration-300 hover:scale-105 bg-blue-600 text-white font-semibold hover:bg-blue-500 focus:outline-none focus:ring-2 focus:ring-green-700"
+                                    >
+                                        Complete
+                                    </button>
+                                )}
+                                <button
+                                    onClick={() => deleteProject(project._id)}
+                                    className="ml-0 sm:ml-4 mb-2 sm:mb-0 hover:text-white py-2 px-4 rounded-lg shadow-md hover:shadow-lg transition-transform duration-300 hover:scale-105 bg-red-600 text-white font-semibold hover:bg-red-500 focus:outline-none focus:ring-2 focus:ring-red-700"
+                                >
+                                    Delete
+                                </button>
+                            </>)}
                         </div>
                     </div>
                 ))}
