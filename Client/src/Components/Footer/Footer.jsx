@@ -31,7 +31,8 @@ function Footer() {
                         />
                         <span className="ml-3 text-xl">Prime Hub</span>
                     </a>
-                    <p className="mt-2 text-sm text-gray-500">Discover how we're transforming workplaces globally.</p>
+                    <p className="mt-2 text-sm text-gray-500">Discover how we&#39;re transforming workplaces
+                        globally.</p>
                 </div>
                 <div className="flex-grow flex flex-wrap md:pl-20 -mb-10 md:mt-0 mt-10 md:text-left text-center">
                     <div className="lg:w-1/4 md:w-1/2 w-full px-4">
@@ -97,12 +98,14 @@ function Footer() {
                             <li>
                                 <a href="/contactus" className="text-gray-600 hover:text-gray-800">Contact Us</a>
                             </li>
-                            <li>
-                                <a href="/aboutus" className="text-gray-600 hover:text-gray-800">About Us</a>
-                            </li>
-                            <li>
-                                <a href="/faq" className="text-gray-600 hover:text-gray-800">FAQ's</a>
-                            </li>
+                            {loggedin && (<>
+                                <li>
+                                    <a href="/aboutus" className="text-gray-600 hover:text-gray-800">About Us</a>
+                                </li>
+                                <li>
+                                    <a href="/faq" className="text-gray-600 hover:text-gray-800">FAQ&#39;s</a>
+                                </li>
+                            </>)}
                         </nav>
                     </div>
                     <div className="lg:w-1/4 md:w-1/2 w-full px-4">
@@ -111,13 +114,15 @@ function Footer() {
                             <li>
                                 <a href="/photos" className="text-gray-600 hover:text-gray-800">Photos</a>
                             </li>
-                            <li>
-                                <a href="/polices" className="text-gray-600 hover:text-gray-800">Polices</a>
-                            </li>
-                            <li>
-                                <a href="/privacy-polices" className="text-gray-600 hover:text-gray-800">Privacy
-                                    Polices</a>
-                            </li>
+                            {loggedin && (<>
+                                <li>
+                                    <a href="/polices" className="text-gray-600 hover:text-gray-800">Polices</a>
+                                </li>
+                                <li>
+                                    <a href="/privacy-polices" className="text-gray-600 hover:text-gray-800">Privacy
+                                        Polices</a>
+                                </li>
+                            </>)}
                             <li>
                                 <a href="/terms-condition" className="text-gray-600 hover:text-gray-800">Terms &
                                     Condition</a>

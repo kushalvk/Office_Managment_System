@@ -1,12 +1,25 @@
 import React, {useEffect, useState} from "react";
 import {useNavigate} from "react-router-dom";
 import {fetchFaq} from "../../Services/FaqService.js";
+import {loggedUser} from "../../Services/AuthService.js";
 
 function FAQ() {
 
     const navigate = useNavigate();
-
     const [faqs, setFaqs] = useState([]);
+    const [loggedin, setLoggedin] = useState(null);
+
+    useEffect(() => {
+        const logged = async () => {
+            try {
+                setLoggedin(await loggedUser());
+            } catch (e) {
+                console.log(e.message);
+                setLoggedin(null);
+            }
+        }
+        logged();
+    }, [])
 
     useEffect(() => {
         const faq = async () => {
@@ -38,14 +51,16 @@ function FAQ() {
                 ))}
             </div>
 
-            <div className="flex justify-center mt-10">
-                <button
-                    onClick={() => navigate("/add-faq")}
-                    className="py-2 px-6 rounded-lg shadow-md hover:shadow-lg transition-transform duration-300 hover:scale-105 bg-green-600 text-white font-semibold hover:bg-green-500 focus:outline-none focus:ring-2 focus:ring-green-700"
-                >
-                    Add New FAQ
-                </button>
-            </div>
+            {loggedin?.role && (
+                <div className="flex justify-center mt-10">
+                    <button
+                        onClick={() => navigate("/add-faq")}
+                        className="py-2 px-6 rounded-lg shadow-md hover:shadow-lg transition-transform duration-300 hover:scale-105 bg-green-600 text-white font-semibold hover:bg-green-500 focus:outline-none focus:ring-2 focus:ring-green-700"
+                    >
+                        Add New FAQ
+                    </button>
+                </div>
+            )}
         </div>
     );
 }

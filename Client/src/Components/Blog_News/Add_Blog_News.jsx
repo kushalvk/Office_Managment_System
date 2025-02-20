@@ -1,5 +1,6 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import {useState} from "react";
+import {useNavigate} from "react-router-dom";
+import {addBlogNews} from "../../Services/BlogNewsService.js";
 
 function AddBlogNews() {
     const navigate = useNavigate();
@@ -7,34 +8,36 @@ function AddBlogNews() {
         title: "",
         description: "",
         image: null,
-        date: "",
     });
 
     const handleChange = (e) => {
-        const { name, value, files } = e.target;
+        const {name, value, files} = e.target;
         if (name === "image") {
-            setFormData({ ...formData, image: files[0] });
+            setFormData({...formData, image: files[0]});
         } else {
-            setFormData({ ...formData, [name]: value });
+            setFormData({...formData, [name]: value});
         }
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log("Form Data Submitted:", formData);
-
-        // Validate image upload
-        if (!formData.image) {
-            alert("Please upload an image!");
-            return;
+        try {
+            const form = new FormData();
+            form.append("title", formData.title);
+            form.append("description", formData.description);
+            form.append("image", formData.image);
+            alert("Blog/News successfully added!");
+            await addBlogNews(form);
+            navigate("/blognews");
+        } catch (e) {
+            console.log(e);
+            alert('fail to add blog & news');
         }
-
-        alert("Blog/News successfully added!");
-        navigate("/blog-news"); // Redirect to Blog & News page
     };
 
     return (
-        <div className="relative isolate h-full pt-12 p-6 lg:px-8 bg-gradient-to-r from-blue-800 to-blue-400 min-h-screen">
+        <div
+            className="relative isolate h-full pt-12 p-6 lg:px-8 bg-gradient-to-r from-blue-800 to-blue-400 min-h-screen">
             {/* Decorative Background */}
             <div
                 className="absolute inset-x-0 -top-40 -z-10 transform-gpu overflow-hidden blur-3xl sm:-top-80"
@@ -98,21 +101,6 @@ function AddBlogNews() {
                         accept="image/*"
                         onChange={handleChange}
                         className="w-full border rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                        required
-                    />
-                </div>
-                <div className="mb-4">
-                    <label htmlFor="date" className="block text-gray-700 font-semibold mb-2">
-                        Date
-                    </label>
-                    <input
-                        type="date"
-                        id="date"
-                        name="date"
-                        value={formData.date}
-                        onChange={handleChange}
-                        className="w-full border rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                        required
                     />
                 </div>
                 <div className="flex justify-center mt-6">

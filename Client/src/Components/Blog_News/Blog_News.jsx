@@ -1,34 +1,42 @@
-import { useNavigate } from "react-router-dom";
+import {useNavigate} from "react-router-dom";
+import {useEffect, useState} from "react";
+import {allBlogNews} from "../../Services/BlogNewsService.js";
+import {loggedUser} from "../../Services/AuthService.js";
 
 function BlogNews() {
     const navigate = useNavigate();
+    const [posts, setPost] = useState([]);
+    const [loggedin, setLoggedin] = useState(null);
 
-    const posts = [
-        {
-            id: 1,
-            title: "Tips for Effective Office Management",
-            description: "Learn how to streamline office processes for maximum productivity.",
-            image: "https://via.placeholder.com/300x200",
-            date: "2024-12-01",
-        },
-        {
-            id: 2,
-            title: "The Future of Remote Work",
-            description: "Explore trends and challenges of remote work in modern offices.",
-            image: "https://via.placeholder.com/300x200",
-            date: "2024-11-25",
-        },
-        {
-            id: 3,
-            title: "Office Technology Innovations",
-            description: "Discover the latest technological advancements in office environments.",
-            image: "https://via.placeholder.com/300x200",
-            date: "2024-11-15",
-        },
-    ];
+    useEffect(() => {
+        const logged = async () => {
+            try {
+                setLoggedin(await loggedUser());
+            } catch (e) {
+                console.log(e.message);
+                setLoggedin(null);
+            }
+        }
+        logged();
+    }, [])
+
+    useEffect(() => {
+        const blogNews = async () => {
+            try {
+                const response = await allBlogNews();
+                // console.log(response);
+                setPost(response);
+            } catch (e) {
+                console.log(e);
+                alert("Failed to fetch blog news");
+            }
+        }
+        blogNews();
+    }, []);
 
     return (
-        <div className="relative isolate h-full pt-12 p-6 lg:px-8 bg-gradient-to-r from-blue-800 to-blue-400 min-h-screen">
+        <div
+            className="relative isolate h-full pt-12 p-6 lg:px-8 bg-gradient-to-r from-blue-800 to-blue-400 min-h-screen">
             {/* Decorative Background */}
             <div
                 className="absolute inset-x-0 -top-40 -z-10 transform-gpu overflow-hidden blur-3xl sm:-top-80"
@@ -48,34 +56,37 @@ function BlogNews() {
 
             {/* Posts Grid */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-8">
-                {posts.map((post) => (
+                {posts.map((post, idx) => (
                     <div
-                        key={post.id}
+                        key={idx}
                         className="bg-white rounded-lg shadow-md transform transition-transform duration-300 hover:-translate-y-1 hover:scale-105 hover:shadow-2xl"
                     >
                         <img
-                            src={post.image || "https://via.placeholder.com/300x200"}
+                            src={post.image
+                                ? `${import.meta.env.VITE_REACT_APP_BACKEND_BASEURL}/${post.image}`
+                                : "https://dummyimage.com/150x150/cccccc/ffffff&text=No+Image"}
                             alt={post.title}
                             className="rounded-t-lg object-cover w-full h-48"
                         />
                         <div className="p-4">
                             <h2 className="text-xl font-bold text-gray-800">{post.title}</h2>
                             <p className="text-sm text-gray-600 mt-2">{post.description}</p>
-                            <p className="text-xs text-gray-500 mt-1">Published: {post.date}</p>
+                            <p className="text-xs text-gray-500 mt-1">Published: {new Date(post.createdAt).toLocaleDateString()}</p>
                         </div>
                     </div>
                 ))}
             </div>
 
-            {/* Add Blog Button */}
-            <div className="flex justify-center mt-10">
-                <button
-                    onClick={() => navigate("/addblognews")}
-                    className="py-2 px-6 rounded-lg shadow-md hover:shadow-lg transition-transform duration-300 hover:scale-105 bg-green-600 text-white font-semibold hover:bg-green-500 focus:outline-none focus:ring-2 focus:ring-green-700"
-                >
-                    Add New Blog
-                </button>
-            </div>
+            {loggedin?.role === "Manager" && (
+                <div className="flex justify-center mt-10">
+                    <button
+                        onClick={() => navigate("/addblognews")}
+                        className="py-2 px-6 rounded-lg shadow-md hover:shadow-lg transition-transform duration-300 hover:scale-105 bg-green-600 text-white font-semibold hover:bg-green-500 focus:outline-none focus:ring-2 focus:ring-green-700"
+                    >
+                        Add New Blog
+                    </button>
+                </div>
+            )}
         </div>
     );
 }

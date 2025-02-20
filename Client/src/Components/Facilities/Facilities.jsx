@@ -1,36 +1,24 @@
-import { useNavigate } from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 import {useEffect, useState} from "react";
 import {fetchFacilities} from "../../Services/FacilitiesService.js";
+import {loggedUser} from "../../Services/AuthService.js";
 
 function Facilities() {
     const navigate = useNavigate();
+    const [facilities, setFacilities] = useState([]);
+    const [loggedin, setLoggedin] = useState(null);
 
-    const [facilities, setFacilities] = useState([
-        // {
-        //     id: 1,
-        //     name: "Conference Room",
-        //     description: "A fully equipped conference room with a seating capacity of 20 people.",
-        //     image: "https://via.placeholder.com/150",
-        // },
-        // {
-        //     id: 2,
-        //     name: "Cafeteria",
-        //     description: "A spacious cafeteria with healthy and delicious food options.",
-        //     image: "https://via.placeholder.com/150",
-        // },
-        // {
-        //     id: 3,
-        //     name: "Parking Lot",
-        //     description: "Dedicated parking space for employees and visitors.",
-        //     image: "https://via.placeholder.com/150",
-        // },
-        // {
-        //     id: 4,
-        //     name: "IT Support Room",
-        //     description: "On-site IT support services for technical issues.",
-        //     image: "https://via.placeholder.com/150",
-        // },
-    ]);
+    useEffect(() => {
+        const logged = async () => {
+            try {
+                setLoggedin(await loggedUser());
+            } catch (e) {
+                console.log(e.message);
+                setLoggedin(null);
+            }
+        }
+        logged();
+    }, [])
 
     useEffect(() => {
 
@@ -48,7 +36,8 @@ function Facilities() {
     }, [])
 
     return (
-        <div className="relative isolate h-full pt-12 p-6 lg:px-8 bg-gradient-to-r from-blue-800 to-blue-400 min-h-screen">
+        <div
+            className="relative isolate h-full pt-12 p-6 lg:px-8 bg-gradient-to-r from-blue-800 to-blue-400 min-h-screen">
             {/* Decorative background */}
             <div
                 className="absolute inset-x-0 -top-40 -z-10 transform-gpu overflow-hidden blur-3xl sm:-top-80"
@@ -88,14 +77,16 @@ function Facilities() {
                 ))}
             </div>
 
-            <div className="flex justify-center mt-10">
-                <button
-                    onClick={() => navigate("/add-facility")}
-                    className="py-2 px-6 rounded-lg shadow-md hover:shadow-lg transition-transform duration-300 hover:scale-105 bg-green-600 text-white font-semibold hover:bg-green-500 focus:outline-none focus:ring-2 focus:ring-green-700"
-                >
-                    Add New Facility
-                </button>
-            </div>
+            {loggedin?.role === "Manager" && (
+                <div className="flex justify-center mt-10">
+                    <button
+                        onClick={() => navigate("/add-facility")}
+                        className="py-2 px-6 rounded-lg shadow-md hover:shadow-lg transition-transform duration-300 hover:scale-105 bg-green-600 text-white font-semibold hover:bg-green-500 focus:outline-none focus:ring-2 focus:ring-green-700"
+                    >
+                        Add New Facility
+                    </button>
+                </div>
+            )}
         </div>
     );
 }

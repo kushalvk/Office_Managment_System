@@ -16,7 +16,6 @@ function AddFacility() {
             form.append("title", title);
             form.append("description", description);
             form.append("image", image);
-            console.log(form.image);
 
             await addFacilities(form);
             alert("Facility Added Successfully!");

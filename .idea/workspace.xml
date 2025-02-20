@@ -4,12 +4,21 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="404eb4d8-f181-44b4-a139-a07b064bd629" name="Changes" comment="ADD: Apply Validation to Manager or Employee">
+    <list default="true" id="404eb4d8-f181-44b4-a139-a07b064bd629" name="Changes" comment="UPDATE: Validation to Manager and Employee.">
+      <change afterPath="$PROJECT_DIR$/Client/src/Services/BlogNewsService.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Server/controllers/BlogNews_Controller.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Server/models/BlogNewsSchema.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Server/routers/BlogNews_Route.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/src/Components/All_Staff/All_Staff.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/Components/All_Staff/All_Staff.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/Components/Blog_News/Add_Blog_News.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/Components/Blog_News/Add_Blog_News.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/Components/Blog_News/Blog_News.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/Components/Blog_News/Blog_News.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/Components/FAQ/FAQ.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/Components/FAQ/FAQ.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/Components/Facilities/Add_Facilities.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/Components/Facilities/Add_Facilities.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/Components/Facilities/Facilities.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/Components/Facilities/Facilities.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Client/src/Components/Footer/Footer.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/Components/Footer/Footer.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/src/Components/Login/Login.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/Components/Login/Login.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/src/main.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/main.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/Components/Header/Header.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/Components/Header/Header.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/controllers/Facilities_Controller.js" beforeDir="false" afterPath="$PROJECT_DIR$/Server/controllers/Facilities_Controller.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/Server/index.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -139,7 +148,8 @@
       <workItem from="1739894676058" duration="2093000" />
       <workItem from="1739937203865" duration="2183000" />
       <workItem from="1739977930539" duration="1244000" />
-      <workItem from="1740023140078" duration="1142000" />
+      <workItem from="1740023140078" duration="2002000" />
+      <workItem from="1740059982980" duration="11524000" />
     </task>
     <task id="LOCAL-00001" summary="Merge pull request #2 from Kumhar-Harshad/main&#10;&#10;ADD: Profile.jsx">
       <option name="closed" value="true" />
@@ -309,7 +319,15 @@
       <option name="project" value="LOCAL" />
       <updated>1739939933406</updated>
     </task>
-    <option name="localTasksCounter" value="22" />
+    <task id="LOCAL-00022" summary="UPDATE: Validation to Manager and Employee.">
+      <option name="closed" value="true" />
+      <created>1740024722755</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1740024722755</updated>
+    </task>
+    <option name="localTasksCounter" value="23" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -338,6 +356,7 @@
     <MESSAGE value="ADD: FAQ Page Front-end &amp; Back-end also add MAP." />
     <MESSAGE value="UPDATE: FAQ Front-end." />
     <MESSAGE value="ADD: Apply Validation to Manager or Employee" />
-    <option name="LAST_COMMIT_MESSAGE" value="ADD: Apply Validation to Manager or Employee" />
+    <MESSAGE value="UPDATE: Validation to Manager and Employee." />
+    <option name="LAST_COMMIT_MESSAGE" value="UPDATE: Validation to Manager and Employee." />
   </component>
 </project>

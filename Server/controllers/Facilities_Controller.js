@@ -1,6 +1,5 @@
 const FacilitiesModel = require("../models/FacilitiesSchema");
 
-
 const addFacilitiesController = async (req, res) => {
     try {
         const {title, description} = req.body;
