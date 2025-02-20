@@ -70,7 +70,7 @@ const router = createBrowserRouter(
             <Route path='/view-details/:id' element={<View_Task/>}/>
             <Route path="/group-details/:id" element={<GroupDetails />} />
             <Route path="/forgot-password" element={<ForgotPassword />} />
-            <Route path="/dashbored" element={<AdminDashboard />} />
+            <Route path="/dashboard" element={<AdminDashboard />} />
             <Route path="/add-salary" element={<Add_Salary />} />
             <Route path="/add-facility" element={<AddFacility />} />
             <Route path="/faq" element={<FAQ />} />

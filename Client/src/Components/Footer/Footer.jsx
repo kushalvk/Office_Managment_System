@@ -37,9 +37,14 @@ function Footer() {
                     <div className="lg:w-1/4 md:w-1/2 w-full px-4">
                         <h2 className="title-font font-medium text-gray-900 tracking-widest text-sm mb-3">AUTHENTICATION</h2>
                         <nav className="list-none mb-10  ">
-                            <li>
-                                <a href="/" className="text-gray-600 hover:text-gray-800">Home</a>
-                            </li>
+                            {loggedin?.role === "Manager" ?
+                                <li>
+                                    <a href="/dashboard" className="text-gray-600 hover:text-gray-800">Dashboard</a>
+                                </li> :
+                                <li>
+                                    <a href="/" className="text-gray-600 hover:text-gray-800">Home</a>
+                                </li>
+                            }
                             {!loggedin ?
                                 <li>
                                     <a href="/login" className="text-gray-600 hover:text-gray-800">Login</a>

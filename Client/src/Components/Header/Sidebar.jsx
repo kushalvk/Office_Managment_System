@@ -59,7 +59,7 @@ function Sidebar() {
                 </div>
                 <ul className="space-y-6">
                     <li>
-                        <Link to="/dashbored" className="hover:bg-blue-700 p-2 rounded-md block">Dashboard</Link>
+                        <Link to="/dashboard" className="hover:bg-blue-700 p-2 rounded-md block">Dashboard</Link>
                     </li>
                     <li>
                         <Link to="/all-staff" className="hover:bg-blue-700 p-2 rounded-md block">My Staff</Link>

@@ -28,7 +28,7 @@ function Login() {
             localStorage.setItem("token", token);
             localStorage.setItem("username", user.username);
             if (user.role === "Manager") {
-                navigate("/dashbored");
+                navigate("/dashboard");
             } else {
                 navigate("/");
             }

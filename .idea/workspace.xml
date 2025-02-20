@@ -4,14 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="404eb4d8-f181-44b4-a139-a07b064bd629" name="Changes" comment="UPDATE: FAQ Front-end.">
+    <list default="true" id="404eb4d8-f181-44b4-a139-a07b064bd629" name="Changes" comment="ADD: Apply Validation to Manager or Employee">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/src/Components/Group/Group_Details.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/Components/Group/Group_Details.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/src/Components/Notification/Notification.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/Components/Notification/Notification.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/src/Components/Project/Show_All_Projects.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/Components/Project/Show_All_Projects.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/src/Components/Report/Show_all_report.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/Components/Report/Show_all_report.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/src/Components/Requrment/All_Requirment.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/Components/Requrment/All_Requirment.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/src/Components/Task/View_Task.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/Components/Task/View_Task.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/Components/All_Staff/All_Staff.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/Components/All_Staff/All_Staff.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/Components/Footer/Footer.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/Components/Footer/Footer.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/Components/Login/Login.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/Components/Login/Login.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/main.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/main.jsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -139,7 +137,9 @@
       <workItem from="1739764634958" duration="1351000" />
       <workItem from="1739815020608" duration="1985000" />
       <workItem from="1739894676058" duration="2093000" />
-      <workItem from="1739937203865" duration="1682000" />
+      <workItem from="1739937203865" duration="2183000" />
+      <workItem from="1739977930539" duration="1244000" />
+      <workItem from="1740023140078" duration="1142000" />
     </task>
     <task id="LOCAL-00001" summary="Merge pull request #2 from Kumhar-Harshad/main&#10;&#10;ADD: Profile.jsx">
       <option name="closed" value="true" />
@@ -301,7 +301,15 @@
       <option name="project" value="LOCAL" />
       <updated>1739816909790</updated>
     </task>
-    <option name="localTasksCounter" value="21" />
+    <task id="LOCAL-00021" summary="ADD: Apply Validation to Manager or Employee">
+      <option name="closed" value="true" />
+      <created>1739939933406</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1739939933406</updated>
+    </task>
+    <option name="localTasksCounter" value="22" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -329,6 +337,7 @@
     <MESSAGE value="ADD: Facility Back-end." />
     <MESSAGE value="ADD: FAQ Page Front-end &amp; Back-end also add MAP." />
     <MESSAGE value="UPDATE: FAQ Front-end." />
-    <option name="LAST_COMMIT_MESSAGE" value="UPDATE: FAQ Front-end." />
+    <MESSAGE value="ADD: Apply Validation to Manager or Employee" />
+    <option name="LAST_COMMIT_MESSAGE" value="ADD: Apply Validation to Manager or Employee" />
   </component>
 </project>

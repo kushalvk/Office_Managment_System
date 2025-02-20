@@ -42,7 +42,7 @@ function All_Staff() {
             </button>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-6">
                 {staff.map((employee, idx) => (
-                    <div key={idx} className="bg-white p-4 rounded-lg shadow-md hover:-translate-y-1 hover:scale-105">
+                    <div key={idx} className="bg-white p-4 rounded-lg shadow-md transition-transform duration-300 hover:-translate-y-1 hover:scale-105">
                         <img
                             src={employee.profilePhoto
                                 ? `${import.meta.env.VITE_REACT_APP_BACKEND_BASEURL}/${employee.profilePhoto}`
