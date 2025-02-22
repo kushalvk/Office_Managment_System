@@ -27,3 +27,12 @@ export const updteRequrments = async (id, status) => {
         error(err)
     }
 }
+
+export const updteRequrmentsEmp = async (id, form) => {
+    try {
+        const response = await axios.post(`${import.meta.env.VITE_REACT_APP_BACKEND_BASEURL}/update-requrment-employee/${id}`, form);
+        return response.data;
+    } catch (err) {
+        error(err)
+    }
+}

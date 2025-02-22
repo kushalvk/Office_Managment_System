@@ -4,14 +4,18 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="404eb4d8-f181-44b4-a139-a07b064bd629" name="Changes" comment="UPDATE: Dynamic Manager Dashboard &amp; Add One page with Dynamic Employee(Particular) Details.">
+    <list default="true" id="404eb4d8-f181-44b4-a139-a07b064bd629" name="Changes" comment="UPDATE: Salary page to custom Amount.">
+      <change afterPath="$PROJECT_DIR$/Client/src/Components/Discription/HowIsWorks.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/Client/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/Client/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/Components/Footer/Footer.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/Components/Footer/Footer.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Client/src/Components/Header/Sidebar.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/Components/Header/Sidebar.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/src/Components/Sallary/Sallary.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/Components/Sallary/Sallary.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/Components/Home/Home.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/Components/Home/Home.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/Components/Photos/Photos.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/Components/Photos/Photos.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/Components/Requrment/All_Requirment.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/Components/Requrment/All_Requirment.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/Services/RequrmentService.js" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/Services/RequrmentService.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Client/src/main.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/main.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/controllers/Salary_Controller.js" beforeDir="false" afterPath="$PROJECT_DIR$/Server/controllers/Salary_Controller.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/controllers/Requrment_Controller.js" beforeDir="false" afterPath="$PROJECT_DIR$/Server/controllers/Requrment_Controller.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/routers/Requrment_Route.js" beforeDir="false" afterPath="$PROJECT_DIR$/Server/routers/Requrment_Route.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -144,7 +148,7 @@
       <workItem from="1740023140078" duration="2002000" />
       <workItem from="1740059982980" duration="13533000" />
       <workItem from="1740146255872" duration="3245000" />
-      <workItem from="1740225019194" duration="15370000" />
+      <workItem from="1740225019194" duration="18274000" />
     </task>
     <task id="LOCAL-00001" summary="Merge pull request #2 from Kumhar-Harshad/main&#10;&#10;ADD: Profile.jsx">
       <option name="closed" value="true" />
@@ -338,14 +342,21 @@
       <option name="project" value="LOCAL" />
       <updated>1740234936804</updated>
     </task>
-    <option name="localTasksCounter" value="25" />
+    <task id="LOCAL-00025" summary="UPDATE: Salary page to custom Amount.">
+      <option name="closed" value="true" />
+      <created>1740246278969</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1740246278969</updated>
+    </task>
+    <option name="localTasksCounter" value="26" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Merge pull request #2 from Kumhar-Harshad/main&#10;&#10;ADD: Add_User Page" />
     <MESSAGE value="Merge pull request #2 from Kumhar-Harshad/main&#10;&#10;ADD: Profile.jsx" />
     <MESSAGE value="ADD: Photos,Policies,Privacy Policies,Terms &amp; Condition Pages&#10;Update: Requirment Page" />
     <MESSAGE value="ADD: Group details, View Task pages UPDATE: Add user,Add group,Notification, Profile, Project,Task Pages." />
@@ -370,6 +381,7 @@
     <MESSAGE value="UPDATE: Validation to Manager and Employee." />
     <MESSAGE value="ADD: Back-end of blog &amp; news page." />
     <MESSAGE value="UPDATE: Dynamic Manager Dashboard &amp; Add One page with Dynamic Employee(Particular) Details." />
-    <option name="LAST_COMMIT_MESSAGE" value="UPDATE: Dynamic Manager Dashboard &amp; Add One page with Dynamic Employee(Particular) Details." />
+    <MESSAGE value="UPDATE: Salary page to custom Amount." />
+    <option name="LAST_COMMIT_MESSAGE" value="UPDATE: Salary page to custom Amount." />
   </component>
 </project>

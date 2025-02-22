@@ -35,4 +35,17 @@ const updateRequrmentsController = async (req, res) => {
     }
 }
 
-module.exports = {addRequrmentController, allRequrmentsController, updateRequrmentsController}
+const updateRequrmentsEmpController = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const { name, reason } = req.body;
+
+        RequrmentsModel.findByIdAndUpdate( id , { name, reason })
+            .then(() => res.status(200).send({message: "Requrment Update successfully"}))
+            .catch((err) => res.status(500).send({message: "Fail to updtae Requrments : Controller ", err}));
+    } catch (error) {
+        res.status(500).send({message: "Error to updtae Requrments : Controller ", error});
+    }
+}
+
+module.exports = {addRequrmentController, allRequrmentsController, updateRequrmentsController, updateRequrmentsEmpController}

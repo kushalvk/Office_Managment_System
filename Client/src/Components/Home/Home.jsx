@@ -3,8 +3,12 @@ import Digree from '../../../../Storage/Digree.jpg';
 import Internet from '../../../../Storage/Internet.jpg';
 import HomeIcon from '../../../../Storage/Home.jpg';
 import Code from '../../../../Storage/Code.jpg';
+import {useNavigate} from "react-router-dom";
 
 function Home() {
+
+    const navigate = useNavigate();
+
     return (
         <>
             <div className="relative isolate px-6 pt-14 lg:px-8">
@@ -22,6 +26,7 @@ function Home() {
                 <div className="mx-auto max-w-2xl py-32 sm:py-48 lg:py-56">
                     <div className="hidden sm:mb-8 sm:flex sm:justify-center">
                         <div
+                            onClick={() => navigate('/how-it-works')}
                             className="relative rounded-full px-3 py-1 text-sm/6 text-gray-600 ring-1 ring-gray-900/10 hover:ring-gray-900/20"
                         >
                             Explore Office Tools.{' '}
@@ -43,13 +48,13 @@ function Home() {
                         </p>
                         <div className="mt-10 flex items-center justify-center gap-x-6">
                             <a
-                                href="#"
+                                href="/photos"
                                 className="rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                             >
                                 Get started
                             </a>
                             <a
-                                href="#"
+                                href="/aboutus"
                                 className="text-sm/6 font-semibold text-gray-900"
                             >
                                 Learn more <span aria-hidden="true">→</span>
@@ -88,6 +93,7 @@ function Home() {
                             tools to automate processes, ensuring efficiency and accuracy.</p>
                         <div className="flex justify-center">
                             <button
+                                onClick={() => navigate('/how-it-works')}
                                 className="overflow-hidden w-32 p-2 h-12 bg-white text-[#113823] border-none rounded-md text-xl font-bold cursor-pointer relative z-10 group"
                             >
                                 Prime Hub!
