@@ -50,7 +50,7 @@ const salaryPaymentController = async (req, res) => {
             payment_capture: 1,
         });
 
-        await SalaryModel.findByIdAndUpdate(id, {updatedAt: Date.now()})
+        await SalaryModel.findByIdAndUpdate(id, {updatedAt: Date.now(), amount: amount})
 
         res.json(order);
     } catch (error) {

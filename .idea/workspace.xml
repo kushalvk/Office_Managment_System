@@ -4,27 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="404eb4d8-f181-44b4-a139-a07b064bd629" name="Changes" comment="ADD: Back-end of blog &amp; news page.">
-      <change afterPath="$PROJECT_DIR$/Client/src/Components/All_Staff/UserDetails.jsx" afterDir="false" />
+    <list default="true" id="404eb4d8-f181-44b4-a139-a07b064bd629" name="Changes" comment="UPDATE: Dynamic Manager Dashboard &amp; Add One page with Dynamic Employee(Particular) Details.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Client/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/Client/package-lock.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Client/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/Client/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/src/Components/All_Staff/All_Staff.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/Components/All_Staff/All_Staff.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/src/Components/Dashbored/Dashbored.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/Components/Dashbored/Dashbored.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/src/Components/FAQ/FAQ.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/Components/FAQ/FAQ.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/src/Components/Report/Show_all_report.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/Components/Report/Show_all_report.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/src/Components/Report/Submit_report.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/Components/Report/Submit_report.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/src/Services/AuthService.js" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/Services/AuthService.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/src/Services/ReportService.js" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/Services/ReportService.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/src/Services/WorkService.js" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/Services/WorkService.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/Components/Header/Sidebar.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/Components/Header/Sidebar.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/Components/Sallary/Sallary.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/Components/Sallary/Sallary.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Client/src/main.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/main.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/controllers/Auth_Controller.js" beforeDir="false" afterPath="$PROJECT_DIR$/Server/controllers/Auth_Controller.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/controllers/Report_Controller.js" beforeDir="false" afterPath="$PROJECT_DIR$/Server/controllers/Report_Controller.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/controllers/Work_Controller.js" beforeDir="false" afterPath="$PROJECT_DIR$/Server/controllers/Work_Controller.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/models/ReportSchema.js" beforeDir="false" afterPath="$PROJECT_DIR$/Server/models/ReportSchema.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/routers/Auth_Route.js" beforeDir="false" afterPath="$PROJECT_DIR$/Server/routers/Auth_Route.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/routers/Report_Route.js" beforeDir="false" afterPath="$PROJECT_DIR$/Server/routers/Report_Route.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/routers/Work_Route.js" beforeDir="false" afterPath="$PROJECT_DIR$/Server/routers/Work_Route.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/controllers/Salary_Controller.js" beforeDir="false" afterPath="$PROJECT_DIR$/Server/controllers/Salary_Controller.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -157,7 +144,7 @@
       <workItem from="1740023140078" duration="2002000" />
       <workItem from="1740059982980" duration="13533000" />
       <workItem from="1740146255872" duration="3245000" />
-      <workItem from="1740225019194" duration="9449000" />
+      <workItem from="1740225019194" duration="15370000" />
     </task>
     <task id="LOCAL-00001" summary="Merge pull request #2 from Kumhar-Harshad/main&#10;&#10;ADD: Profile.jsx">
       <option name="closed" value="true" />
@@ -343,7 +330,15 @@
       <option name="project" value="LOCAL" />
       <updated>1740076948356</updated>
     </task>
-    <option name="localTasksCounter" value="24" />
+    <task id="LOCAL-00024" summary="UPDATE: Dynamic Manager Dashboard &amp; Add One page with Dynamic Employee(Particular) Details.">
+      <option name="closed" value="true" />
+      <created>1740234936804</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1740234936804</updated>
+    </task>
+    <option name="localTasksCounter" value="25" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -374,6 +369,7 @@
     <MESSAGE value="ADD: Apply Validation to Manager or Employee" />
     <MESSAGE value="UPDATE: Validation to Manager and Employee." />
     <MESSAGE value="ADD: Back-end of blog &amp; news page." />
-    <option name="LAST_COMMIT_MESSAGE" value="ADD: Back-end of blog &amp; news page." />
+    <MESSAGE value="UPDATE: Dynamic Manager Dashboard &amp; Add One page with Dynamic Employee(Particular) Details." />
+    <option name="LAST_COMMIT_MESSAGE" value="UPDATE: Dynamic Manager Dashboard &amp; Add One page with Dynamic Employee(Particular) Details." />
   </component>
 </project>

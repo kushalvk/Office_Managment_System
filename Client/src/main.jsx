@@ -55,9 +55,9 @@ const router = createBrowserRouter(
             <Route path='/all-reports' element={<ShowAllReports/>}/>
             <Route path='/submit-report' element={<SubmitReport/>}/>
             <Route path='/Show-all-project' element={<AllProjects/>}/>
-            <Route path='/Show-requirment' element={<AllRequirements/>}/>
+            <Route path='/show-requirement' element={<AllRequirements/>}/>
             <Route path='/submit-requrment' element={<AddRequirement/>}/>
-            <Route path='/sallary' element={<SalaryPage/>}/>
+            <Route path='/salary' element={<SalaryPage/>}/>
             <Route path='/profile' element={<UserProfile/>}/>
             <Route path='/facilities' element={<Facilities/>}/>
             <Route path='/blognews' element={<BlogNews/>}/>
