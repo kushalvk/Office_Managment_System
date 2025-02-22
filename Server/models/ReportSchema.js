@@ -28,6 +28,11 @@ const ReportSchema = new mongoose.Schema({
     approve: {
         type: Boolean,
         default: false,
+    },
+
+    submitedBy: {
+        type: String,
+        required: true,
     }
 },{timestamps:true});
 

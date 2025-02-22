@@ -8,6 +8,7 @@ function SubmitReport() {
     const [startDate, setStartDate] = useState("");
     const [endDate, setEndDate] = useState("");
     const [reportdocument, setReportDocument] = useState(null);
+    const username = localStorage.getItem("username");
     const navigate = useNavigate();
 
     const handleSubmit = async (e) => {
@@ -19,6 +20,7 @@ function SubmitReport() {
             report.append("description", description)
             report.append("startDate", startDate)
             report.append("endDate", endDate)
+            report.append("submitedBy", username)
 
             await addReport(report)
             alert("New report submitted!");
@@ -71,7 +73,6 @@ function SubmitReport() {
                         name="reportdocument"
                         onChange={(e) => setReportDocument(e.target.files[0])}
                         className="p-3 rounded-lg bg-white text-gray-800"
-                        required
                     />
                 </div>
 

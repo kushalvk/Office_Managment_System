@@ -73,6 +73,15 @@ export const fetchemployeeProjects = async (username) => {
     }
 }
 
+export const fetchComplatedProject = async () => {
+    try {
+        const response = await axios.get(`${import.meta.env.VITE_REACT_APP_BACKEND_BASEURL}/complate-projects`);
+        return response.data;
+    } catch (err) {
+        error(err)
+    }
+}
+
 export const generateWorkDescription = async (title) => {
     try {
         const response = await axios.post(

@@ -67,3 +67,21 @@ export const deleteStaff = async (id) => {
         error(err)
     }
 }
+
+export const UserById = async (id) => {
+    try {
+        const response = await axios.get(`${import.meta.env.VITE_REACT_APP_BACKEND_BASEURL}/get-user-by-id/${id}`)
+        return response.data;
+    } catch (err) {
+        error(err)
+    }
+}
+
+export const newAddedUsers = async () => {
+    try {
+        const response = await axios.get(`${import.meta.env.VITE_REACT_APP_BACKEND_BASEURL}/newly-added-users`)
+        return response.data;
+    } catch (err) {
+        error(err)
+    }
+}

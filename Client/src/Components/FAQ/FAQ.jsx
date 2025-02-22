@@ -51,7 +51,7 @@ function FAQ() {
                 ))}
             </div>
 
-            {loggedin?.role && (
+            {loggedin?.role === "Manager" && (
                 <div className="flex justify-center mt-10">
                     <button
                         onClick={() => navigate("/add-faq")}

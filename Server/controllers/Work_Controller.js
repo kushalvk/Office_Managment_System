@@ -80,7 +80,7 @@ const employeeProjectsController = async (req, res) => {
             worktype: "project",
             $or: [
                 {groupName: {$in: groupNames}},
-                {employeeName: {$in: [username]}}
+                {empoyeeName: {$in: [username]}}
             ]
         });
 
@@ -103,6 +103,21 @@ const employeeTasksController = async (req, res) => {
     } catch (error) {
         console.error("Error fetching tasks:", error);
         res.status(500).send({message: "Error fetching tasks", error});
+    }
+};
+
+const complatedProjectController = async (req, res) => {
+    try {
+
+        const projects = await WorkModel.find({
+            worktype: "project",
+            workStatus: "complete"
+        });
+
+        res.status(200).send({projects});
+    } catch (error) {
+        console.error("Error fetching project:", error);
+        res.status(500).send({message: "Error fetching project", error});
     }
 };
 
@@ -136,5 +151,6 @@ module.exports = {
     allProjectsController,
     employeeTasksController,
     employeeProjectsController,
+    complatedProjectController,
     generateDescriptionController
 }

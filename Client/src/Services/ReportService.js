@@ -36,3 +36,21 @@ export const deleteReports = async (id) => {
         error(err)
     }
 }
+
+export const newlyReports = async () => {
+    try {
+        const response = await axios.get(`${import.meta.env.VITE_REACT_APP_BACKEND_BASEURL}/newly-reports`);
+        return response.data;
+    } catch (err) {
+        error(err)
+    }
+}
+
+export const pendingApprovalReports = async () => {
+    try {
+        const response = await axios.get(`${import.meta.env.VITE_REACT_APP_BACKEND_BASEURL}/pending-approval-reports`);
+        return response.data;
+    } catch (err) {
+        error(err)
+    }
+}

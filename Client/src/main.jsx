@@ -37,6 +37,7 @@ import Add_Salary from "./Components/Sallary/Add_Salary.jsx";
 import AddFacility from "./Components/Facilities/Add_Facilities.jsx";
 import FAQ from "./Components/FAQ/FAQ.jsx";
 import Add_FAQ from "./Components/FAQ/Add_FAQ.jsx";
+import UserDetails from "./Components/All_Staff/UserDetails.jsx";
 
 const router = createBrowserRouter(
     createRoutesFromElements(
@@ -75,6 +76,7 @@ const router = createBrowserRouter(
             <Route path="/add-facility" element={<AddFacility />} />
             <Route path="/faq" element={<FAQ />} />
             <Route path="/add-faq" element={<Add_FAQ />} />
+            <Route path="/user-details/:id" element={<UserDetails />} />
         </Route>
     )
 )

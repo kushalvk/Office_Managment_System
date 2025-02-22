@@ -1,6 +1,6 @@
-import { useNavigate } from "react-router-dom";
-import { useEffect, useState } from "react";
-import { allStaff, deleteStaff } from "../../Services/AuthService.js";
+import {useNavigate} from "react-router-dom";
+import {useEffect, useState} from "react";
+import {allStaff, deleteStaff} from "../../Services/AuthService.js";
 
 function All_Staff() {
     const [staff, setStaff] = useState([]);
@@ -42,7 +42,8 @@ function All_Staff() {
             </button>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-6">
                 {staff.map((employee, idx) => (
-                    <div key={idx} className="bg-white p-4 rounded-lg shadow-md transition-transform duration-300 hover:-translate-y-1 hover:scale-105">
+                    <div key={idx}
+                         className="bg-white p-4 rounded-lg shadow-md transition-transform duration-300 hover:-translate-y-1 hover:scale-105">
                         <img
                             src={employee.profilePhoto
                                 ? `${import.meta.env.VITE_REACT_APP_BACKEND_BASEURL}/${employee.profilePhoto}`
@@ -56,12 +57,20 @@ function All_Staff() {
                         <p className="text-sm text-gray-700 mt-2"><strong>Department:</strong> {employee.department}</p>
                         <p className="text-sm text-gray-700 mt-2"><strong>Email:</strong> {employee.email}</p>
                         <p className="text-sm text-gray-700 mt-2"><strong>Phone:</strong> {employee.mobNo}</p>
-                        <button
-                            onClick={() => handleDelete(employee._id)}
-                            className="mt-4 bg-red-600 text-white py-2 px-4 rounded-lg hover:bg-red-500 w-full"
-                        >
-                            Delete
-                        </button>
+                        <div className={"flex gap-4"}>
+                            <button
+                                onClick={() => navigate(`/user-details/${employee._id}`)}
+                                className="mt-4 bg-green-600 text-white py-2 px-4 rounded-lg hover:bg-green-500 w-full"
+                            >
+                                View
+                            </button>
+                            <button
+                                onClick={() => handleDelete(employee._id)}
+                                className="mt-4 bg-red-600 text-white py-2 px-4 rounded-lg hover:bg-red-500 w-full"
+                            >
+                                Delete
+                            </button>
+                        </div>
                     </div>
                 ))}
             </div>

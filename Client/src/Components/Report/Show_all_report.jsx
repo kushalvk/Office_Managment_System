@@ -74,12 +74,14 @@ function ShowAllReports() {
 
             <h1 className="text-white text-4xl font-bold mt-7 mt-20 mb-4">All Reports</h1>
 
-            <button
-                onClick={() => navigate("/submit-report")}
-                className="py-2 px-4 rounded-lg shadow-md hover:shadow-lg transition-transform duration-300 hover:scale-105 bg-green-600 text-white font-semibold hover:bg-green-500 focus:outline-none focus:ring-2 focus:ring-green-700"
-            >
-                Add Report
-            </button>
+            {loggedin?.role === "Employee" && (
+                <button
+                    onClick={() => navigate("/submit-report")}
+                    className="py-2 px-4 rounded-lg shadow-md hover:shadow-lg transition-transform duration-300 hover:scale-105 bg-green-600 text-white font-semibold hover:bg-green-500 focus:outline-none focus:ring-2 focus:ring-green-700"
+                >
+                    Add Report
+                </button>
+            )}
 
             <div className="space-y-4 mt-6">
                 {reports.map((report, idx) => (

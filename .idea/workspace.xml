@@ -4,21 +4,27 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="404eb4d8-f181-44b4-a139-a07b064bd629" name="Changes" comment="UPDATE: Validation to Manager and Employee.">
-      <change afterPath="$PROJECT_DIR$/Client/src/Services/BlogNewsService.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Server/controllers/BlogNews_Controller.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Server/models/BlogNewsSchema.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Server/routers/BlogNews_Route.js" afterDir="false" />
+    <list default="true" id="404eb4d8-f181-44b4-a139-a07b064bd629" name="Changes" comment="ADD: Back-end of blog &amp; news page.">
+      <change afterPath="$PROJECT_DIR$/Client/src/Components/All_Staff/UserDetails.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/src/Components/Blog_News/Add_Blog_News.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/Components/Blog_News/Add_Blog_News.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/src/Components/Blog_News/Blog_News.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/Components/Blog_News/Blog_News.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/Client/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/Client/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/Components/All_Staff/All_Staff.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/Components/All_Staff/All_Staff.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/Components/Dashbored/Dashbored.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/Components/Dashbored/Dashbored.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Client/src/Components/FAQ/FAQ.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/Components/FAQ/FAQ.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/src/Components/Facilities/Add_Facilities.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/Components/Facilities/Add_Facilities.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/src/Components/Facilities/Facilities.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/Components/Facilities/Facilities.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/src/Components/Footer/Footer.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/Components/Footer/Footer.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/src/Components/Header/Header.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/Components/Header/Header.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/controllers/Facilities_Controller.js" beforeDir="false" afterPath="$PROJECT_DIR$/Server/controllers/Facilities_Controller.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/Server/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/Components/Report/Show_all_report.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/Components/Report/Show_all_report.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/Components/Report/Submit_report.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/Components/Report/Submit_report.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/Services/AuthService.js" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/Services/AuthService.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/Services/ReportService.js" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/Services/ReportService.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/Services/WorkService.js" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/Services/WorkService.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/main.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/main.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/controllers/Auth_Controller.js" beforeDir="false" afterPath="$PROJECT_DIR$/Server/controllers/Auth_Controller.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/controllers/Report_Controller.js" beforeDir="false" afterPath="$PROJECT_DIR$/Server/controllers/Report_Controller.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/controllers/Work_Controller.js" beforeDir="false" afterPath="$PROJECT_DIR$/Server/controllers/Work_Controller.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/models/ReportSchema.js" beforeDir="false" afterPath="$PROJECT_DIR$/Server/models/ReportSchema.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/routers/Auth_Route.js" beforeDir="false" afterPath="$PROJECT_DIR$/Server/routers/Auth_Route.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/routers/Report_Route.js" beforeDir="false" afterPath="$PROJECT_DIR$/Server/routers/Report_Route.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/routers/Work_Route.js" beforeDir="false" afterPath="$PROJECT_DIR$/Server/routers/Work_Route.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -28,8 +34,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="JSX File" />
         <option value="JavaScript File" />
+        <option value="JSX File" />
       </list>
     </option>
   </component>
@@ -149,7 +155,9 @@
       <workItem from="1739937203865" duration="2183000" />
       <workItem from="1739977930539" duration="1244000" />
       <workItem from="1740023140078" duration="2002000" />
-      <workItem from="1740059982980" duration="11524000" />
+      <workItem from="1740059982980" duration="13533000" />
+      <workItem from="1740146255872" duration="3245000" />
+      <workItem from="1740225019194" duration="9449000" />
     </task>
     <task id="LOCAL-00001" summary="Merge pull request #2 from Kumhar-Harshad/main&#10;&#10;ADD: Profile.jsx">
       <option name="closed" value="true" />
@@ -327,7 +335,15 @@
       <option name="project" value="LOCAL" />
       <updated>1740024722755</updated>
     </task>
-    <option name="localTasksCounter" value="23" />
+    <task id="LOCAL-00023" summary="ADD: Back-end of blog &amp; news page.">
+      <option name="closed" value="true" />
+      <created>1740076948356</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1740076948356</updated>
+    </task>
+    <option name="localTasksCounter" value="24" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -357,6 +373,7 @@
     <MESSAGE value="UPDATE: FAQ Front-end." />
     <MESSAGE value="ADD: Apply Validation to Manager or Employee" />
     <MESSAGE value="UPDATE: Validation to Manager and Employee." />
-    <option name="LAST_COMMIT_MESSAGE" value="UPDATE: Validation to Manager and Employee." />
+    <MESSAGE value="ADD: Back-end of blog &amp; news page." />
+    <option name="LAST_COMMIT_MESSAGE" value="ADD: Back-end of blog &amp; news page." />
   </component>
 </project>

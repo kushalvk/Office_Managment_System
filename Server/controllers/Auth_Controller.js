@@ -160,9 +160,34 @@ const deleteStaffByIdController = async (req, res) => {
             .then(() => res.status(200).send({ message: "Worker deleted successfully"}))
             .catch((err) => res.json(err))
     } catch (e) {
-        res.status(500).send({message: "Error to delete worker"});
+        res.status(500).send({message: "Error to delete Employee"});
     }
 }
+
+const getUserByIdController = async (req, res) => {
+    try {
+        const id = req.params.id;
+
+        await UserModel.findById(id)
+            .then((user) => res.status(200).send(user))
+            .catch((err) => res.json(err))
+    } catch (e) {
+        res.status(500).send({message: "Error to View Employee"});
+    }
+}
+
+const newlyAddedUserController = async (req, res) => {
+    try {
+        const twentyFourHoursAgo = new Date();
+        twentyFourHoursAgo.setHours(twentyFourHoursAgo.getHours() - 24);
+
+        const users = await UserModel.find({ createdAt: { $gte: twentyFourHoursAgo } });
+
+        res.status(200).json({ users });
+    } catch (e) {
+        res.status(500).json({ message: "Error fetching users", error: e.message });
+    }
+};
 
 module.exports = {
     addUserController,
@@ -171,5 +196,7 @@ module.exports = {
     loggedUser,
     updateProfile,
     allStaff,
-    deleteStaffByIdController
+    deleteStaffByIdController,
+    getUserByIdController,
+    newlyAddedUserController
 };
