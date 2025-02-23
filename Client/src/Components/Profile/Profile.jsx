@@ -228,7 +228,7 @@ function UserProfile() {
                             <img
                                 src={
                                     loggedin.profilePhoto
-                                        ? `${import.meta.env.VITE_REACT_APP_BACKEND_BASEURL}/${loggedin.profilePhoto}`
+                                        ? `${import.meta.env.VITE_REACT_APP_BACKEND_BASEURL}/uplodes/${loggedin.profilePhoto}`
                                         : "https://www.pngmart.com/files/23/Profile-PNG-Photo.png"
                                 }
                                 alt="Profile Photo"

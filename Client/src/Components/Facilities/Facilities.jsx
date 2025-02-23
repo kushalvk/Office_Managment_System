@@ -26,8 +26,6 @@ function Facilities() {
         const faciilities = async () => {
             try {
                 setFacilities(await fetchFacilities());
-                // const response = await fetchFacilities();
-                // console.log(response);
             } catch (e) {
                 console.log(e);
                 alert("Fail to load Facilities");
@@ -70,7 +68,7 @@ function Facilities() {
                     >
                         <img
                             src={facility.image
-                                ? `${import.meta.env.VITE_REACT_APP_BACKEND_BASEURL}/${facility.image}`
+                                ? `${import.meta.env.VITE_REACT_APP_BACKEND_BASEURL}/uplodes/${facility.image}`
                                 : "https://dummyimage.com/150x150/cccccc/ffffff&text=No+Image"}
                             alt={facility.title || "Facility Image"}
                             className="w-24 h-24 rounded-lg object-cover"
