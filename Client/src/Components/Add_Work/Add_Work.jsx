@@ -226,7 +226,7 @@ function AddTask() {
                             onClick={() => setIsOpen(!isOpen)}
                         >
                             <span className="flex items-center">
-                                <img src={selectedOption.profilePhoto} alt={selectedOption.username}
+                                <img src={`${import.meta.env.VITE_REACT_APP_BACKEND_BASEURL}/uplodes/${selectedOption.profilePhoto}`} alt={selectedOption.username}
                                     className="w-5 h-5 rounded-full mr-2" />
                                 <span>{selectedOption.username}</span>
                             </span>
@@ -268,7 +268,7 @@ function AddTask() {
                     {members.map((employee, index) => (
                         <div key={index} className="flex justify-between p-2 bg-gray-200 rounded-md mt-1">
                             <span className="flex items-center">
-                                <img src={employee.profilePhoto} alt={employee.username}
+                                <img src={`${import.meta.env.VITE_REACT_APP_BACKEND_BASEURL}/uplodes/${employee.profilePhoto}`} alt={employee.username}
                                     className="w-5 h-5 rounded-full mr-2" />
                                 {employee.username}
                             </span>
