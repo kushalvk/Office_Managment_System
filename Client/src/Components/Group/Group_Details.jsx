@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react';
 import {useParams, useNavigate} from 'react-router-dom';
 import {fetchGroupById, deleteGroup, updateGroup} from "../../Services/GroupService.js";
 import {loggedUser} from "../../Services/AuthService.js";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 
 function GroupDetails() {
     const {id} = useParams();
@@ -92,13 +93,18 @@ function GroupDetails() {
 
     return (
         <div className="relative isolate h-full p-6 lg:px-8 bg-gradient-to-r from-blue-800 to-blue-400 min-h-screen">
+            <button
+                className="absolute gap-2 top-[7.5vw] right-[2.5vw] flex items-center text-white bg-green-600 p-2 px-4 rounded-lg shadow-md hover:bg-green-700 transition-transform transform hover:scale-105"
+                onClick={() => navigate(-1)}
+            >
+                <ArrowBackIcon/> <p> Back </p>
+            </button>
             <div className="mx-auto max-w-2xl pt-[14vw] sm:pt-[6vw] text-center">
                 <h1 className="text-white text-3xl sm:text-5xl font-bold mb-4">Group Details</h1>
             </div>
 
             <div className="bg-white rounded-lg shadow-lg p-6 max-w-4xl mx-auto">
-                {isEditing ? (
-                    <>
+                {isEditing ? (<>
                         <input
                             type="text"
                             value={updatedGroup.groupName}
@@ -126,9 +132,7 @@ function GroupDetails() {
                             <option value="active">Active</option>
                             <option value="inactive">Inactive</option>
                         </select>
-                    </>
-                ) : (
-                    <>
+                    </>) : (<>
                         <h2 className="text-2xl text-gray-800"><b>Group Name: </b>{group.groupName}</h2>
                         <p className="text-gray-600 mt-2"><b>Description: </b>{group.description}</p>
                         <p className="text-gray-600 mt-2">
@@ -145,62 +149,47 @@ function GroupDetails() {
                                 {group.groupStatus}
                             </span>
                         </p>
-                    </>
-                )}
+                    </>)}
                 <p className="text-gray-600 mt-2"><b>Created By: </b>{group.createdBy}</p>
                 <p className="text-gray-600 mt-2"><b>Created At: </b>{new Date(group.createdAt).toLocaleString()}</p>
                 {group.createdAt !== group.updatedAt && (
                     <p className="text-gray-600 mt-2"><b>Updated At: </b>{new Date(group.updatedAt).toLocaleString()}
-                    </p>
-                )}
+                    </p>)}
                 <div className="mt-4">
                     <h3 className="text-xl font-bold text-gray-800">Members:</h3>
                     <ul className="list-disc list-inside text-gray-600">
-                        {group.members.map((member, index) => (
-                            <li key={index}>{member}</li>
-                        ))}
+                        {group.members.map((member, index) => (<li key={index}>{member}</li>))}
                     </ul>
                 </div>
             </div>
 
-            <div className="flex justify-center mt-8 space-x-4">
-                {!isEditing && (
-                    <button onClick={() => navigate('/show-group')}
-                            className="px-6 py-2 text-white bg-green-600 hover:bg-green-700 rounded-md text-lg">
+            <div className="flex flex-wrap justify-center mt-8 gap-4">
+                {!isEditing && (<button onClick={() => navigate('/show-group')}
+                                        className="px-6 py-2 text-white bg-green-600 hover:bg-green-700 rounded-md text-lg w-full sm:w-auto">
                         Back to Groups
-                    </button>
-                )}
-                {loggedin?.role === "Manager" && (
-                    <>
-                        {!isEditing && (
-                            <button onClick={handleDelete}
-                                    className="px-6 py-2 text-white bg-red-600 hover:bg-red-700 rounded-md text-lg"
-                                    disabled={loading}>
+                    </button>)}
+                {loggedin?.role === "Manager" && (<>
+                        {!isEditing && (<button onClick={handleDelete}
+                                                className="px-6 py-2 text-white bg-red-600 hover:bg-red-700 rounded-md text-lg w-full sm:w-auto"
+                                                disabled={loading}>
                                 {loading ? "Deleting..." : "Delete Group"}
-                            </button>
-                        )}
-                        {isEditing ? (
-                            <>
+                            </button>)}
+                        {isEditing ? (<>
                                 <button onClick={handleSave}
-                                        className="px-6 py-2 text-white bg-green-600 hover:bg-green-700 rounded-md text-lg">
+                                        className="px-6 py-2 text-white bg-green-600 hover:bg-green-700 rounded-md text-lg w-full sm:w-auto">
                                     Save
                                 </button>
                                 <button onClick={handleCancel}
-                                        className="px-6 py-2 text-white bg-gray-600 hover:bg-gray-700 rounded-md text-lg">
+                                        className="px-6 py-2 text-white bg-gray-600 hover:bg-gray-700 rounded-md text-lg w-full sm:w-auto">
                                     Cancel
                                 </button>
-                            </>
-                        ) : (
-                            <button onClick={handleEdit}
-                                    className="px-6 py-2 text-white bg-green-600 hover:bg-green-700 rounded-md text-lg">
+                            </>) : (<button onClick={handleEdit}
+                                            className="px-6 py-2 text-white bg-green-600 hover:bg-green-700 rounded-md text-lg w-full sm:w-auto">
                                 Update
-                            </button>
-                        )}
-                    </>
-                )}
+                            </button>)}
+                    </>)}
             </div>
-        </div>
-    );
+        </div>);
 }
 
 export default GroupDetails;

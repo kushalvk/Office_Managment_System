@@ -3,6 +3,7 @@ import GroupIcon from '../../../../Storage/Group_Icon.jpg';
 import {allStaff} from "../../Services/AuthService.js";
 import {addGroup} from "../../Services/GroupService.js";
 import {useNavigate} from "react-router-dom";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 
 function Add_Group() {
 
@@ -113,6 +114,12 @@ function Add_Group() {
 
     return (
         <div className="relative isolate h-full p-6 lg:px-8 bg-gradient-to-r from-blue-800 to-blue-400">
+            <button
+                className="absolute gap-2 top-[3vw] right-[2.5vw] flex items-center text-white bg-green-600 p-2 px-4 rounded-lg shadow-md hover:bg-green-700 transition-transform transform hover:scale-105"
+                onClick={() => navigate(-1)}
+            >
+                <ArrowBackIcon/> <p> Back </p>
+            </button>
             <div className="absolute inset-x-0 -top-40 -z-10 transform-gpu overflow-hidden blur-3xl sm:-top-80"
                  aria-hidden="true">
                 <div

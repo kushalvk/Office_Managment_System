@@ -4,18 +4,35 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="404eb4d8-f181-44b4-a139-a07b064bd629" name="Changes" comment="ADD: Add page of description and Update Requrment.">
+    <list default="true" id="404eb4d8-f181-44b4-a139-a07b064bd629" name="Changes" comment="ADD: Add Upadte Facility to work and group section">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/Components/About_Us/About_Us.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/Components/About_Us/About_Us.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/Components/Add User/Add_User.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/Components/Add User/Add_User.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/Components/Add_Work/Add_Work.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/Components/Add_Work/Add_Work.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/Components/All_Staff/All_Staff.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/Components/All_Staff/All_Staff.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/Components/Blog_News/Blog_News.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/Components/Blog_News/Blog_News.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/Components/Contact_Us/Contact_Us.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/Components/Contact_Us/Contact_Us.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/Components/FAQ/FAQ.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/Components/FAQ/FAQ.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/Components/Facilities/Facilities.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/Components/Facilities/Facilities.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/Components/Group/AddGroup.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/Components/Group/AddGroup.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Client/src/Components/Group/Group_Details.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/Components/Group/Group_Details.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Client/src/Components/Group/Show_Groups.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/Components/Group/Show_Groups.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Client/src/Components/Header/Sidebar.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/Components/Header/Sidebar.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/Components/Notification/Notification.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/Components/Notification/Notification.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/Components/Photos/Photos.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/Components/Photos/Photos.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/Components/Polices/Policies.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/Components/Polices/Policies.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/Components/Privacy_Policies/Privacy_Policies.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/Components/Privacy_Policies/Privacy_Policies.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/Components/Profile/Profile.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/Components/Profile/Profile.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/Components/Project/Show_All_Projects.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/Components/Project/Show_All_Projects.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/Components/Report/Show_all_report.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/Components/Report/Show_all_report.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/Components/Report/Submit_report.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/Components/Report/Submit_report.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/Components/Requrment/All_Requirment.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/Components/Requrment/All_Requirment.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/Components/Requrment/Submit_Requrment.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/Components/Requrment/Submit_Requrment.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/Components/Sallary/Add_Salary.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/Components/Sallary/Add_Salary.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/Components/Sallary/Sallary.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/Components/Sallary/Sallary.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/Components/Task/Show_All_Task.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/Components/Task/Show_All_Task.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Client/src/Components/Task/View_Task.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/Components/Task/View_Task.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/src/Services/GroupService.js" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/Services/GroupService.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/src/Services/WorkService.js" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/Services/WorkService.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/controllers/Group_Controller.js" beforeDir="false" afterPath="$PROJECT_DIR$/Server/controllers/Group_Controller.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/controllers/Work_Controller.js" beforeDir="false" afterPath="$PROJECT_DIR$/Server/controllers/Work_Controller.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/routers/Group_Route.js" beforeDir="false" afterPath="$PROJECT_DIR$/Server/routers/Group_Route.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/routers/Work_Route.js" beforeDir="false" afterPath="$PROJECT_DIR$/Server/routers/Work_Route.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/Components/Terms_Condition/Terms_Condition.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/Components/Terms_Condition/Terms_Condition.jsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -149,7 +166,7 @@
       <workItem from="1740059982980" duration="13533000" />
       <workItem from="1740146255872" duration="3245000" />
       <workItem from="1740225019194" duration="18452000" />
-      <workItem from="1740286553455" duration="6452000" />
+      <workItem from="1740286553455" duration="9306000" />
     </task>
     <task id="LOCAL-00001" summary="Merge pull request #2 from Kumhar-Harshad/main&#10;&#10;ADD: Profile.jsx">
       <option name="closed" value="true" />
@@ -359,14 +376,21 @@
       <option name="project" value="LOCAL" />
       <updated>1740249165600</updated>
     </task>
-    <option name="localTasksCounter" value="27" />
+    <task id="LOCAL-00027" summary="ADD: Add Upadte Facility to work and group section">
+      <option name="closed" value="true" />
+      <created>1740293556635</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1740293556635</updated>
+    </task>
+    <option name="localTasksCounter" value="28" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="ADD: Photos,Policies,Privacy Policies,Terms &amp; Condition Pages&#10;Update: Requirment Page" />
     <MESSAGE value="ADD: Group details, View Task pages UPDATE: Add user,Add group,Notification, Profile, Project,Task Pages." />
     <MESSAGE value="ADD: Complate Auth with backend and also a sidebar diffrentiat for Manager." />
     <MESSAGE value="ADD: Uplodes Folder" />
@@ -391,6 +415,7 @@
     <MESSAGE value="UPDATE: Dynamic Manager Dashboard &amp; Add One page with Dynamic Employee(Particular) Details." />
     <MESSAGE value="UPDATE: Salary page to custom Amount." />
     <MESSAGE value="ADD: Add page of description and Update Requrment." />
-    <option name="LAST_COMMIT_MESSAGE" value="ADD: Add page of description and Update Requrment." />
+    <MESSAGE value="ADD: Add Upadte Facility to work and group section" />
+    <option name="LAST_COMMIT_MESSAGE" value="ADD: Add Upadte Facility to work and group section" />
   </component>
 </project>

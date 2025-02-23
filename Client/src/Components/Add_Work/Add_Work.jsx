@@ -1,6 +1,8 @@
 import React, {useEffect, useState} from "react";
 import {allStaff} from "../../Services/AuthService.js";
 import {addWork, generateWorkDescription} from "../../Services/WorkService.js";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import {useNavigate} from "react-router-dom";
 
 function AddTask() {
 
@@ -15,6 +17,7 @@ function AddTask() {
     const [selectedOption, setSelectedOption] = useState({
         username: 'Select an employee', profilePhoto: 'https://www.pngmart.com/files/23/Profile-PNG-Photo.png'
     });
+    const navigate = useNavigate();
 
     const [task, setTask] = useState({
         title: "", description: "", completionDate: "", worktype: "task", groupName: [], empoyeeName: [],
@@ -127,7 +130,7 @@ function AddTask() {
         setLoading(true);
         try {
             const response = await generateWorkDescription(task.title);
-            setTask(prevTask => ({ ...prevTask, description: response.trim() }));
+            setTask(prevTask => ({...prevTask, description: response.trim()}));
         } catch (error) {
             console.error("Error fetching AI description:", error);
             alert("Error generating description. Please try again.");
@@ -138,6 +141,12 @@ function AddTask() {
 
     return (<div
         className="min-h-screen h-full p-6 bg-gradient-to-r from-blue-800 to-blue-400 flex justify-center items-center">
+        <button
+            className="absolute gap-2 top-[2vw] right-[2.5vw] flex items-center text-white bg-green-600 p-2 px-4 rounded-lg shadow-md hover:bg-green-700 transition-transform transform hover:scale-105"
+            onClick={() => navigate(-1)}
+        >
+            <ArrowBackIcon/> <p> Back </p>
+        </button>
         <div className="w-full max-w-3xl bg-white p-6 rounded-lg shadow-lg">
             <h1 className="text-3xl font-bold text-gray-700 mb-6">Add Work</h1>
             <form className="space-y-4" onSubmit={handleSubmit}>

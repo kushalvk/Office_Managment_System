@@ -1,14 +1,15 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { addSalary } from "../../Services/SalaryService.js";
+import React, {useState} from "react";
+import {useNavigate} from "react-router-dom";
+import {addSalary} from "../../Services/SalaryService.js";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 
 function AddSalary() {
     const occupationOptions = [
-        { value: "", label: "Select Occupation" },
-        { value: "Manager", label: "Manager" },
-        { value: "Software Engineer", label: "Software Engineer" },
-        { value: "Accountant", label: "Accountant" },
-        { value: "Sales Executive", label: "Sales Executive" },
+        {value: "", label: "Select Occupation"},
+        {value: "Manager", label: "Manager"},
+        {value: "Software Engineer", label: "Software Engineer"},
+        {value: "Accountant", label: "Accountant"},
+        {value: "Sales Executive", label: "Sales Executive"},
     ];
 
     const [name, setName] = useState("");
@@ -21,7 +22,7 @@ function AddSalary() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            await addSalary({ name, email, contact, occupation, amount });
+            await addSalary({name, email, contact, occupation, amount});
             alert("Employee Added successfully!");
             navigate("/sallary");
         } catch (e) {
@@ -31,7 +32,14 @@ function AddSalary() {
     };
 
     return (
-        <div className="h-full p-6 lg:px-8 bg-gradient-to-r from-green-800 to-green-400 min-h-screen flex items-center justify-center">
+        <div
+            className="h-full p-6 lg:px-8 bg-gradient-to-r from-green-800 to-green-400 min-h-screen flex items-center justify-center">
+            <button
+                className="absolute top-[7.5vw] right-[2.5vw] flex items-center text-white bg-blue-600 p-2 px-4 rounded-lg shadow-md hover:bg-blue-700 transition-transform hover:scale-105"
+                onClick={() => navigate(-1)}
+            >
+                <ArrowBackIcon/> <p> Back </p>
+            </button>
             <div className="bg-white p-6 rounded-lg shadow-md w-full max-w-lg">
                 <h2 className="text-2xl font-bold text-gray-800 mb-4">Add Salary</h2>
                 <form onSubmit={handleSubmit} className="space-y-4">

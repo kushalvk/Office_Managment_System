@@ -1,7 +1,20 @@
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import React from "react";
+import {useNavigate} from "react-router-dom";
+
 function AboutUs() {
+
+    const navigate = useNavigate();
+
     return (
-        <div className="relative isolate h-full pt-12 p-6 lg:px-8 bg-gradient-to-r from-blue-800 to-blue-400 min-h-screen">
-            {/* Decorative Background */}
+        <div
+            className="relative isolate h-full pt-12 p-6 lg:px-8 bg-gradient-to-r from-blue-800 to-blue-400 min-h-screen">
+            <button
+                className="absolute gap-2 top-[7.5vw] right-[2.5vw] flex items-center text-white bg-green-600 p-2 px-4 rounded-lg shadow-md hover:bg-green-700 transition-transform transform hover:scale-105"
+                onClick={() => navigate(-1)}
+            >
+                <ArrowBackIcon/> <p> Back </p>
+            </button>
             <div
                 className="absolute inset-x-0 -top-40 -z-10 transform-gpu overflow-hidden blur-3xl sm:-top-80"
                 aria-hidden="true"
@@ -19,7 +32,8 @@ function AboutUs() {
             <h1 className="text-white text-4xl font-bold text-center mb-6 mt-10">About Us</h1>
 
             {/* Content */}
-            <div className="bg-white p-8 rounded-lg shadow-lg max-w-4xl mx-auto transform transition-transform duration-300 hover:shadow-2xl">
+            <div
+                className="bg-white p-8 rounded-lg shadow-lg max-w-4xl mx-auto transform transition-transform duration-300 hover:shadow-2xl">
                 <p className="text-gray-700 text-lg mb-4">
                     Welcome to our Office Management System, where we aim to revolutionize how organizations manage
                     their day-to-day operations efficiently and effectively.

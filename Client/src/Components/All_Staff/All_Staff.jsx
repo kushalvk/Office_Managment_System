@@ -1,6 +1,7 @@
 import {useNavigate} from "react-router-dom";
-import {useEffect, useState} from "react";
+import React, {useEffect, useState} from "react";
 import {allStaff, deleteStaff} from "../../Services/AuthService.js";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 
 function All_Staff() {
     const [staff, setStaff] = useState([]);
@@ -33,7 +34,13 @@ function All_Staff() {
 
     return (
         <div className="relative isolate h-full p-6 lg:px-8 bg-gradient-to-r from-blue-800 to-blue-400 min-h-screen">
-            <h1 className="text-white text-4xl font-bold mb-4 mt-20">All Staff</h1>
+            <button
+                className="absolute gap-2 top-[7.5vw] right-[2.5vw] flex items-center text-white bg-green-600 p-2 px-4 rounded-lg shadow-md hover:bg-green-700 transition-transform transform hover:scale-105"
+                onClick={() => navigate(-1)}
+            >
+                <ArrowBackIcon/> <p> Back </p>
+            </button>
+            <h1 className="text-white text-4xl font-bold mb-4 mt-10">All Staff</h1>
             <button
                 onClick={() => navigate("/adduser")}
                 className="py-2 px-4 rounded-lg shadow-md hover:shadow-lg transition-transform duration-300 hover:scale-105 bg-green-600 text-white font-semibold hover:bg-green-500"

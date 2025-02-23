@@ -1,41 +1,42 @@
-import React, { useState } from 'react';
+import React, {useState} from 'react';
 import UserIcon from '../../../../Storage/Add_User.jpg';
-import { addUser } from '../../Services/AuthService';
-import { useNavigate } from 'react-router-dom';
+import {addUser} from '../../Services/AuthService';
+import {useNavigate} from 'react-router-dom';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 
 function Add_User() {
 
     const qualificationOptions = [
-        { value: "", label: "Select Qualification" },
-        { value: "High School", label: "High School" },
-        { value: "Diploma", label: "Diploma" },
-        { value: "Bachelor's Degree", label: "Bachelor's Degree" },
-        { value: "Master's Degree", label: "Master's Degree" },
-        { value: "PhD", label: "PhD" },
-        { value: "Other", label: "Other" },
+        {value: "", label: "Select Qualification"},
+        {value: "High School", label: "High School"},
+        {value: "Diploma", label: "Diploma"},
+        {value: "Bachelor's Degree", label: "Bachelor's Degree"},
+        {value: "Master's Degree", label: "Master's Degree"},
+        {value: "PhD", label: "PhD"},
+        {value: "Other", label: "Other"},
     ];
 
     const departmentOptions = [
-        { value: "", label: "Select Department" },
-        { value: "Human Resources", label: "Human Resources" },
-        { value: "Finance", label: "Finance" },
-        { value: "Information Technology", label: "Information Technology" },
-        { value: "Marketing", label: "Marketing" },
-        { value: "Sales", label: "Sales" },
-        { value: "Operations", label: "Operations" },
-        { value: "Customer Support", label: "Customer Support" },
-        { value: "Research and Development", label: "Research and Development" },
-        { value: "Legal", label: "Legal" },
-        { value: "Administration", label: "Administration" },
+        {value: "", label: "Select Department"},
+        {value: "Human Resources", label: "Human Resources"},
+        {value: "Finance", label: "Finance"},
+        {value: "Information Technology", label: "Information Technology"},
+        {value: "Marketing", label: "Marketing"},
+        {value: "Sales", label: "Sales"},
+        {value: "Operations", label: "Operations"},
+        {value: "Customer Support", label: "Customer Support"},
+        {value: "Research and Development", label: "Research and Development"},
+        {value: "Legal", label: "Legal"},
+        {value: "Administration", label: "Administration"},
     ];
 
     const workLocationOptions = [
-        { value: "", label: "Select Work Location" },
-        { value: "Office", label: "Office" },
-        { value: "Remote", label: "Remote" },
-        { value: "Hybrid", label: "Hybrid" },
-        { value: "On-Site", label: "On-Site" },
-        { value: "Client Location", label: "Client Location" },
+        {value: "", label: "Select Work Location"},
+        {value: "Office", label: "Office"},
+        {value: "Remote", label: "Remote"},
+        {value: "Hybrid", label: "Hybrid"},
+        {value: "On-Site", label: "On-Site"},
+        {value: "Client Location", label: "Client Location"},
     ];
 
     const [formData, setFormData] = useState({
@@ -59,7 +60,7 @@ function Add_User() {
     const navigate = useNavigate();
 
     const handleChange = (e) => {
-        const { name, value, files } = e.target;
+        const {name, value, files} = e.target;
         setFormData((prevData) => ({
             ...prevData,
             [name]: files ? files[0] : value,
@@ -100,8 +101,14 @@ function Add_User() {
 
     return (
         <div className="relative isolate h-full p-6 lg:px-8 bg-gradient-to-r from-blue-800 to-blue-400">
+            <button
+                className="absolute gap-2 top-[3vw] right-[2.5vw] flex items-center text-white bg-green-600 p-2 px-4 rounded-lg shadow-md hover:bg-green-700 transition-transform transform hover:scale-105"
+                onClick={() => navigate(-1)}
+            >
+                <ArrowBackIcon/> <p> Back </p>
+            </button>
             <div className="absolute inset-x-0 -top-40 -z-10 transform-gpu overflow-hidden blur-3xl sm:-top-80"
-                aria-hidden="true">
+                 aria-hidden="true">
                 <div
                     className="relative left-[calc(50%-11rem)] aspect-[1155/678] w-[36.125rem] -translate-x-1/2 rotate-[30deg] bg-gradient-to-tr from-[#ff80b5] to-[#9089fc] opacity-30 sm:left-[calc(50%-30rem)] sm:w-[72.1875rem]"
                     style={{
@@ -110,13 +117,11 @@ function Add_User() {
                 ></div>
             </div>
 
-            {/* Header Section */}
             <div className="mx-auto max-w-2xl p-5 text-center">
                 <h1 className="text-white text-3xl sm:text-5xl font-bold mb-4">Add New User</h1>
                 <p className="text-gray-300 text-lg">Please fill out the form below to add a new user.</p>
             </div>
 
-            {/* Centered Image Section */}
             <div className="flex justify-center mb-6">
                 <img
                     className="object-cover object-center rounded-full h-32 w-32 md:h-48 md:w-48 border-4 border-white shadow-lg"
@@ -125,7 +130,6 @@ function Add_User() {
                 />
             </div>
 
-            {/* Form Section */}
             <section className="bg-gray-100 shadow-lg rounded-lg p-8 mx-4 md:mx-8 mb-8">
                 {Error ? <p className='text-red-600 font-bold flex justify-center'>{Error}</p> : null}
                 <form className="grid grid-cols-1 gap-6 md:grid-cols-2 md:gap-8" onSubmit={handleSubmit} method="POST">
@@ -323,7 +327,7 @@ function Add_User() {
                             required
                         />
                     </div>
-                    {/* Add Resume */}
+
                     <div className="flex flex-col mb-4">
                         <label className="text-gray-800 font-semibold mb-2" htmlFor="resume">Resume</label>
                         <input

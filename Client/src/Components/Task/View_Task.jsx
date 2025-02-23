@@ -2,6 +2,7 @@ import {useParams, useNavigate} from "react-router-dom";
 import React, {useState, useEffect} from "react";
 import {fetchTaskById, updateWorkById} from "../../Services/WorkService.js";
 import {loggedUser} from "../../Services/AuthService.js";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 
 function ViewTask() {
     const {id} = useParams();
@@ -66,7 +67,13 @@ function ViewTask() {
 
     return (
         <div className="relative isolate h-full p-6 lg:px-8 bg-gradient-to-r from-blue-800 to-blue-400 min-h-screen">
-            <h1 className="text-white text-4xl font-bold mb-4 mt-20">Task Details</h1>
+            <button
+                className="absolute gap-2 top-[7.5vw] right-[2.5vw] flex items-center text-white bg-green-600 p-2 px-4 rounded-lg shadow-md hover:bg-green-700 transition-transform transform hover:scale-105"
+                onClick={() => navigate(-1)}
+            >
+                <ArrowBackIcon/> <p> Back </p>
+            </button>
+            <h1 className="flex justify-center text-white text-4xl font-bold mb-4 mt-20">Work Details</h1>
 
             <div className="bg-white p-6 rounded-lg shadow-md max-w-4xl mx-auto space-y-4">
                 <div>

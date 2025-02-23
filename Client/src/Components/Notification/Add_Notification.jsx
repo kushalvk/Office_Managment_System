@@ -1,6 +1,7 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import React, {useState} from "react";
+import {useNavigate} from "react-router-dom";
 import {addNotification} from "../../Services/NotificationService.js";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 
 function AddNotification() {
     const [title, setTitle] = useState("");
@@ -10,7 +11,7 @@ function AddNotification() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            await addNotification({ title, message });
+            await addNotification({title, message});
             alert("Notification added successfully!");
             navigate("/notification");
         } catch (e) {
@@ -20,8 +21,16 @@ function AddNotification() {
     };
 
     return (
-        <div className="relative isolate h-full p-6 lg:px-8 bg-gradient-to-r from-blue-800 to-blue-400 min-h-screen flex items-center justify-center">
-            <div className="absolute inset-x-0 -top-40 -z-10 transform-gpu overflow-hidden blur-3xl sm:-top-80" aria-hidden="true">
+        <div
+            className="relative isolate h-full p-6 lg:px-8 bg-gradient-to-r from-blue-800 to-blue-400 min-h-screen flex items-center justify-center">
+            <button
+                className="absolute top-4 right-4 flex items-center text-white bg-green-600 p-2 px-4 rounded-lg shadow-md hover:bg-green-700 transition-transform hover:scale-105"
+                onClick={() => navigate(-1)}
+            >
+                <ArrowBackIcon/> Back
+            </button>
+            <div className="absolute inset-x-0 -top-40 -z-10 transform-gpu overflow-hidden blur-3xl sm:-top-80"
+                 aria-hidden="true">
                 <div
                     className="relative left-[calc(50%-11rem)] aspect-[1155/678] w-[36.125rem] -translate-x-1/2 rotate-[30deg] bg-gradient-to-tr from-[#ff80b5] to-[#9089fc] opacity-30 sm:left-[calc(50%-30rem)] sm:w-[72.1875rem]"
                     style={{

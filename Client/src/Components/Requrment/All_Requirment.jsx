@@ -1,16 +1,17 @@
-import {useEffect, useState} from "react";
-import {useNavigate} from "react-router-dom";
-import {allRequrments, updteRequrments, updteRequrmentsEmp} from "../../Services/RequrmentService.js";
-import {loggedUser} from "../../Services/AuthService.js";
+import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { allRequrments, updteRequrments, updteRequrmentsEmp } from "../../Services/RequrmentService.js";
+import { loggedUser } from "../../Services/AuthService.js";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 
 function AllRequirements() {
     const [requirements, setRequirements] = useState([]);
     const [loggedin, setLoggedin] = useState(null);
     const [editRequirement, setEditRequirement] = useState(null);
-    const [editedData, setEditedData] = useState({name: "", reason: ""});
+    const [editedData, setEditedData] = useState({ name: "", reason: "" });
 
     useEffect(() => {
-        const logged = async () => {
+        const fetchLoggedUser = async () => {
             try {
                 setLoggedin(await loggedUser());
             } catch (e) {
@@ -18,11 +19,11 @@ function AllRequirements() {
                 setLoggedin(null);
             }
         };
-        logged();
+        fetchLoggedUser();
     }, []);
 
     useEffect(() => {
-        const requrments = async () => {
+        const fetchRequirements = async () => {
             try {
                 setRequirements(await allRequrments());
             } catch (e) {
@@ -30,7 +31,7 @@ function AllRequirements() {
                 alert("Failed to fetch requirements");
             }
         };
-        requrments();
+        fetchRequirements();
     }, []);
 
     const navigate = useNavigate();
@@ -38,7 +39,7 @@ function AllRequirements() {
     const updateStatus = async (id, newStatus) => {
         try {
             await updteRequrments(id, newStatus);
-            setRequirements(requirements.map(req => req._id === id ? {...req, requrmentStatus: newStatus} : req));
+            setRequirements(requirements.map(req => req._id === id ? { ...req, requrmentStatus: newStatus } : req));
             alert(`Requirement ${newStatus} successfully.`);
         } catch (e) {
             console.log(e);
@@ -48,18 +49,18 @@ function AllRequirements() {
 
     const handleEdit = (requirement) => {
         setEditRequirement(requirement._id);
-        setEditedData({name: requirement.name, reason: requirement.reason});
+        setEditedData({ name: requirement.name, reason: requirement.reason });
     };
 
     const handleChange = (e) => {
-        const {name, value} = e.target;
-        setEditedData(prev => ({...prev, [name]: value}));
+        const { name, value } = e.target;
+        setEditedData(prev => ({ ...prev, [name]: value }));
     };
 
     const handleSave = async (id) => {
         try {
             await updteRequrmentsEmp(id, editedData);
-            setRequirements(requirements.map(req => req._id === id ? {...req, ...editedData} : req));
+            setRequirements(requirements.map(req => req._id === id ? { ...req, ...editedData } : req));
             setEditRequirement(null);
             alert("Requirement updated successfully.");
         } catch (e) {
@@ -69,21 +70,31 @@ function AllRequirements() {
     };
 
     return (
-        <div className="relative isolate h-full p-6 lg:px-8 bg-gradient-to-r from-blue-800 to-blue-400 min-h-screen">
-            <h1 className="text-white text-4xl font-bold mb-4 mt-20">All Requirements</h1>
+        <div className="relative h-full p-6 lg:px-8 bg-gradient-to-r from-blue-800 to-blue-400 min-h-screen">
             <button
-                onClick={() => navigate("/submit-requrment")}
-                className="py-2 px-4 rounded-lg shadow-md hover:shadow-lg transition-transform duration-300 hover:scale-105 bg-green-600 text-white font-semibold hover:bg-green-500 focus:outline-none focus:ring-2 focus:ring-green-700"
+                className="absolute top-[7.5vw] right-[2.5vw] flex items-center text-white bg-green-600 p-2 px-4 rounded-lg shadow-md hover:bg-green-700 transition-transform hover:scale-105"
+                onClick={() => navigate(-1)}
             >
-                Add Requirement
+                <ArrowBackIcon /> <p> Back </p>
             </button>
+            <h1 className="text-white text-4xl font-bold mb-4 mt-20 text-center">All Requirements</h1>
+
+            <div className="flex justify-center">
+                <button
+                    onClick={() => navigate("/submit-requrment")}
+                    className="py-2 px-4 rounded-lg shadow-md hover:shadow-lg transition-transform duration-300 hover:scale-105 bg-green-600 text-white font-semibold hover:bg-green-500 focus:outline-none focus:ring-2 focus:ring-green-700"
+                >
+                    Add Requirement
+                </button>
+            </div>
+
             <div className="space-y-4 mt-6">
                 {requirements.map((requirement, idx) => (
                     <div
                         key={idx}
-                        className="flex items-center justify-between bg-white p-4 rounded-lg shadow-md transform transition-transform duration-300 hover:-translate-y-1 hover:scale-105 hover:shadow-2xl"
+                        className="flex flex-col sm:flex-row sm:items-center justify-between bg-white p-4 rounded-lg shadow-md transform transition-transform duration-300 hover:-translate-y-1 hover:scale-105 hover:shadow-2xl"
                     >
-                        <div className="flex flex-col">
+                        <div className="flex flex-col text-center sm:text-left">
                             {editRequirement === requirement._id ? (
                                 <>
                                     <input
@@ -112,25 +123,26 @@ function AllRequirements() {
                             <p
                                 className={`text-sm font-medium mt-1 ${
                                     requirement.requrmentStatus === "Approved" ? "text-green-600" :
-                                        requirement.requrmentStatus === "Cancelled" ? "text-red-600" : "text-gray-600"}`}
+                                        requirement.requrmentStatus === "Cancelled" ? "text-red-600" : "text-gray-600"
+                                }`}
                             >
                                 Status: {requirement.requrmentStatus}
                             </p>
                         </div>
-                        <div className="flex gap-2">
+                        <div className="flex flex-wrap justify-center sm:justify-start gap-2 mt-2 sm:mt-0">
                             {loggedin?.role === "Manager" ? (
                                 <>
                                     {requirement.requrmentStatus === "Pending" && (
                                         <>
                                             <button
                                                 onClick={() => updateStatus(requirement._id, "Approved")}
-                                                className="py-2 px-4 rounded-lg bg-green-600 text-white font-semibold hover:bg-green-500 focus:outline-none focus:ring-2 focus:ring-green-700"
+                                                className="py-2 px-4 w-full sm:w-auto rounded-lg bg-green-600 text-white font-semibold hover:bg-green-500 focus:outline-none focus:ring-2 focus:ring-green-700"
                                             >
                                                 Approve
                                             </button>
                                             <button
                                                 onClick={() => updateStatus(requirement._id, "Cancelled")}
-                                                className="py-2 px-4 rounded-lg bg-red-600 text-white font-semibold hover:bg-red-500 focus:outline-none focus:ring-2 focus:ring-red-700"
+                                                className="py-2 px-4 w-full sm:w-auto rounded-lg bg-red-600 text-white font-semibold hover:bg-red-500 focus:outline-none focus:ring-2 focus:ring-red-700"
                                             >
                                                 Cancel
                                             </button>
@@ -142,14 +154,14 @@ function AllRequirements() {
                                     {editRequirement === requirement._id ? (
                                         <button
                                             onClick={() => handleSave(requirement._id)}
-                                            className="py-2 px-4 rounded-lg bg-blue-600 text-white font-semibold hover:bg-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-700"
+                                            className="py-2 px-4 w-full sm:w-auto rounded-lg bg-blue-600 text-white font-semibold hover:bg-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-700"
                                         >
                                             Save
                                         </button>
                                     ) : (
                                         <button
                                             onClick={() => handleEdit(requirement)}
-                                            className="py-2 px-4 rounded-lg bg-green-500 text-white font-semibold hover:bg-green-400 focus:outline-none focus:ring-2 focus:ring-yellow-600"
+                                            className="py-2 px-4 w-full sm:w-auto rounded-lg bg-green-500 text-white font-semibold hover:bg-green-400 focus:outline-none focus:ring-2 focus:ring-yellow-600"
                                         >
                                             Update
                                         </button>

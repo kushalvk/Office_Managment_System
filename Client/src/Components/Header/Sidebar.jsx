@@ -48,7 +48,6 @@ function Sidebar() {
 
     return (
         <>
-            {/* Sidebar Toggle Button */}
             <button
                 onClick={toggleSidebar}
                 className={`fixed top-3 z-50 p-3 rounded-r-lg shadow-xl transition-all duration-300 ease-in-out transform hover:scale-110 ${
@@ -58,8 +57,6 @@ function Sidebar() {
                 {isSidebarOpen ? <ArrowBackIcon className="w-6 h-6"/> : <ArrowForwardIcon className="w-6 h-6"/>}
             </button>
 
-
-            {/* Sidebar */}
             <div
                 className={`absolute md:fixed top-0 left-0 h-screen bg-blue-800 text-white p-6 shadow-lg z-40 transform transition-transform duration-300 ease-in-out overflow-y-auto ${
                     isSidebarOpen ? "translate-x-0 md:w-64 w-56" : "-translate-x-full"

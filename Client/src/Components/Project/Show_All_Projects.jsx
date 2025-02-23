@@ -1,4 +1,4 @@
-import {useEffect, useState} from "react";
+import React, {useEffect, useState} from "react";
 import {useNavigate} from "react-router-dom";
 import {
     completeById,
@@ -7,6 +7,7 @@ import {
     fetchemployeeProjects
 } from "../../Services/WorkService.js";
 import {loggedUser} from "../../Services/AuthService.js";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 
 function AllProjects() {
     const [projects, setProjects] = useState([]);
@@ -86,6 +87,12 @@ function AllProjects() {
 
     return (
         <div className="relative isolate h-full p-6 lg:px-8 bg-gradient-to-r from-blue-800 to-blue-400 min-h-screen">
+            <button
+                className="absolute gap-2 top-[7.5vw] right-[2.5vw] flex items-center text-white bg-green-600 p-2 px-4 rounded-lg shadow-md hover:bg-green-700 transition-transform transform hover:scale-105"
+                onClick={() => navigate(-1)}
+            >
+                <ArrowBackIcon/> <p> Back </p>
+            </button>
             <div className="absolute inset-x-0 -top-40 -z-10 transform-gpu overflow-hidden blur-3xl sm:-top-80"
                  aria-hidden="true">
                 <div

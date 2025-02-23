@@ -1,5 +1,7 @@
-import {useEffect, useState} from "react";
+import React, {useEffect, useState} from "react";
 import {loggedUser, updateUserProfile} from "../../Services/AuthService.js";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import {useNavigate} from "react-router-dom";
 
 function UserProfile() {
 
@@ -38,6 +40,7 @@ function UserProfile() {
 
     const [loggedin, setLoggedin] = useState({});
     const [isEditing, setIsEditing] = useState(false);
+    const navigate = useNavigate();
 
     const handleInputChange = (e) => {
         const {name, value, files} = e.target;
@@ -93,6 +96,12 @@ function UserProfile() {
     return (
         <div
             className="relative isolate h-full p-6 lg:px-8 bg-gradient-to-r from-blue-800 to-blue-400 min-h-screen flex flex-col items-center justify-center">
+            <button
+                className="absolute gap-2 top-[7.5vw] right-[2.5vw] flex items-center text-white bg-green-600 p-2 px-4 rounded-lg shadow-md hover:bg-green-700 transition-transform transform hover:scale-105"
+                onClick={() => navigate(-1)}
+            >
+                <ArrowBackIcon/> <p> Back </p>
+            </button>
             <h1 className="text-2xl font-bold text-center md:mt-14 text-white">{isEditing ? "Edit Profile" : "User Profile"}</h1>
             <div className="bg-white p-6 rounded-lg shadow-lg max-w-4xl w-full space-y-6 mt-5">
                 {isEditing ? (

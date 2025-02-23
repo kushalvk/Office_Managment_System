@@ -1,6 +1,9 @@
 import React from "react";
+import {useNavigate} from "react-router-dom";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 
 function Policies() {
+    const navigate = useNavigate();
     const policies = [
         {
             id: 1,
@@ -25,8 +28,14 @@ function Policies() {
     ];
 
     return (
-        <div className="relative isolate h-full pt-12 p-6 lg:px-8 bg-gradient-to-r from-blue-800 to-blue-400 min-h-screen">
-            {/* Header */}
+        <div
+            className="relative isolate h-full pt-12 p-6 lg:px-8 bg-gradient-to-r from-blue-800 to-blue-400 min-h-screen">
+            <button
+                className="absolute gap-2 top-[7.5vw] right-[2.5vw] flex items-center text-white bg-green-600 p-2 px-4 rounded-lg shadow-md hover:bg-green-700 transition-transform transform hover:scale-105"
+                onClick={() => navigate(-1)}
+            >
+                <ArrowBackIcon/> <p> Back </p>
+            </button>
             <h1 className="text-white text-4xl font-bold text-center mb-6 mt-10">Company Policies</h1>
 
             {/* Policies List */}

@@ -1,6 +1,11 @@
 import React from "react";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import {useNavigate} from "react-router-dom";
 
 function OfficeGallery() {
+
+    const navigate = useNavigate();
+
     const images = [
         "https://images.pexels.com/photos/3184360/pexels-photo-3184360.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=300&w=400", // Open workspace with laptops
         "https://images.pexels.com/photos/3747132/pexels-photo-3747132.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=300&w=400", // Modern corporate office setup
@@ -11,8 +16,14 @@ function OfficeGallery() {
     ];
 
     return (
-        <div className="relative isolate h-full pt-12 p-6 lg:px-8 bg-gradient-to-r from-blue-800 to-blue-400 min-h-screen">
-            {/* Decorative Background */}
+        <div
+            className="relative isolate h-full pt-12 p-6 lg:px-8 bg-gradient-to-r from-blue-800 to-blue-400 min-h-screen">
+            <button
+                className="absolute gap-2 top-[7.5vw] right-[2.5vw] flex items-center text-white bg-green-600 p-2 px-4 rounded-lg shadow-md hover:bg-green-700 transition-transform transform hover:scale-105"
+                onClick={() => navigate(-1)}
+            >
+                <ArrowBackIcon/> <p> Back </p>
+            </button>
             <div
                 className="absolute inset-x-0 -top-40 -z-10 transform-gpu overflow-hidden blur-3xl sm:-top-80"
                 aria-hidden="true"
