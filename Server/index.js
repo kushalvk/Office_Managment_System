@@ -15,7 +15,7 @@ require("dotenv").config();
 
 const app = express();
 const corsOptions = {
-    origin: ["https://office-ms-two.vercel.app"],
+    origin: [process.env.FRONT_URL],
     methods: ['GET','HEAD','PUT','PATCH','POST','DELETE'],
     credentials: true,
     allowedHeaders: ['Content-Type', 'Authorization', 'X-Auth-Token', 'Origin'],
