@@ -1,8 +1,8 @@
-import React, {useEffect, useState} from "react";
-import {allStaff} from "../../Services/AuthService.js";
-import {addWork, generateWorkDescription} from "../../Services/WorkService.js";
+import React, { useEffect, useState } from "react";
+import { allStaff } from "../../Services/AuthService.js";
+import { addWork, generateWorkDescription } from "../../Services/WorkService.js";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
-import {useNavigate} from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 function AddTask() {
 
@@ -35,8 +35,8 @@ function AddTask() {
         fetchStaff();
     }, []);
 
-    const handleInputChange = ({target: {name, value}}) => {
-        setTask(prevTask => ({...prevTask, [name]: value}));
+    const handleInputChange = ({ target: { name, value } }) => {
+        setTask(prevTask => ({ ...prevTask, [name]: value }));
     };
 
     const addGroup = () => {
@@ -45,7 +45,7 @@ function AddTask() {
         } else if (selectedGroup === "") {
             setError("Please select an group to add.")
         } else if (selectedGroup && !task.groupName.includes(selectedGroup)) {
-            setTask(prevTask => ({...prevTask, groupName: [...prevTask.groupName, selectedGroup]}));
+            setTask(prevTask => ({ ...prevTask, groupName: [...prevTask.groupName, selectedGroup] }));
             setSelectedGroup("");
             setError("")
         }
@@ -130,7 +130,7 @@ function AddTask() {
         setLoading(true);
         try {
             const response = await generateWorkDescription(task.title);
-            setTask(prevTask => ({...prevTask, description: response.trim()}));
+            setTask(prevTask => ({ ...prevTask, description: response.trim() }));
         } catch (error) {
             console.error("Error fetching AI description:", error);
             alert("Error generating description. Please try again.");
@@ -142,10 +142,10 @@ function AddTask() {
     return (<div
         className="min-h-screen h-full p-6 bg-gradient-to-r from-blue-800 to-blue-400 flex justify-center items-center">
         <button
-            className="absolute gap-2 top-[2vw] right-[2.5vw] flex items-center text-white bg-green-600 p-2 px-4 rounded-lg shadow-md hover:bg-green-700 transition-transform transform hover:scale-105"
+            className="absolute gap-2 sm:top-[7.5vw] top-[32vw] right-[2.5vw] flex items-center text-white bg-green-600 p-2 px-4 rounded-lg shadow-md hover:bg-green-700 transition-transform transform hover:scale-105"
             onClick={() => navigate(-1)}
         >
-            <ArrowBackIcon/> <p> Back </p>
+            <ArrowBackIcon /> <p> Back </p>
         </button>
         <div className="w-full max-w-3xl bg-white p-6 rounded-lg shadow-lg">
             <h1 className="text-3xl font-bold text-gray-700 mb-6">Add Work</h1>
@@ -164,19 +164,18 @@ function AddTask() {
 
                 <label className="block text-sm font-medium text-gray-700">Work Description</label>
                 <div className="flex items-center space-x-2">
-                        <textarea
-                            name="description"
-                            placeholder="Work Description"
-                            value={task.description}
-                            onChange={handleInputChange}
-                            className="w-full p-2 border rounded-md"
-                        />
+                    <textarea
+                        name="description"
+                        placeholder="Work Description"
+                        value={task.description}
+                        onChange={handleInputChange}
+                        className="w-full p-2 border rounded-md"
+                    />
                     <button
                         type="button"
                         onClick={generateDescription}
-                        className={`p-2 rounded-md text-white ${
-                            !task.title ? "bg-gray-400 cursor-not-allowed" : loading ? "bg-gray-400" : "bg-blue-500 hover:bg-blue-600"
-                        }`}
+                        className={`p-2 rounded-md text-white ${!task.title ? "bg-gray-400 cursor-not-allowed" : loading ? "bg-gray-400" : "bg-blue-500 hover:bg-blue-600"
+                            }`}
                         disabled={!task.title || loading}
                     >
                         {loading ? "Generating..." : "Ai Generate"}
@@ -197,7 +196,7 @@ function AddTask() {
 
                 <label className="block text-sm font-medium text-gray-700">Work Type</label>
                 <select name="worktype" value={task.worktype} onChange={handleInputChange}
-                        className="w-full p-2 border rounded-md">
+                    className="w-full p-2 border rounded-md">
                     <option value="task">Task</option>
                     <option value="project">Project</option>
                 </select>
@@ -206,13 +205,13 @@ function AddTask() {
                     <label className="block text-sm font-medium text-gray-700">Group Names</label>
                     <div className="flex space-x-2">
                         <select className="p-2 border rounded-md flex-grow" value={selectedGroup}
-                                onChange={(e) => setSelectedGroup(e.target.value)}>
+                            onChange={(e) => setSelectedGroup(e.target.value)}>
                             <option value="">Select Group</option>
                             {groupOptions.map((group, index) => (
                                 <option key={index} value={group}>{group}</option>))}
                         </select>
                         <button type="button" onClick={addGroup}
-                                className="p-2 bg-green-500 text-white rounded-md w-[10vw]">+
+                            className="p-2 bg-green-500 text-white rounded-md w-[10vw]">+
                         </button>
                     </div>
                 </>)}
@@ -226,11 +225,11 @@ function AddTask() {
                             className="w-full bg-white border rounded-md py-2 pl-3 pr-2 text-left text-gray-900 flex items-center justify-between"
                             onClick={() => setIsOpen(!isOpen)}
                         >
-                                <span className="flex items-center">
-                                    <img src={selectedOption.profilePhoto} alt={selectedOption.username}
-                                         className="w-5 h-5 rounded-full mr-2"/>
-                                    <span>{selectedOption.username}</span>
-                                </span>
+                            <span className="flex items-center">
+                                <img src={selectedOption.profilePhoto} alt={selectedOption.username}
+                                    className="w-5 h-5 rounded-full mr-2" />
+                                <span>{selectedOption.username}</span>
+                            </span>
                         </button>
                         {isOpen && (
                             <ul className="absolute z-10 mt-1 w-full bg-white border rounded-md shadow-lg max-h-56 overflow-auto">
@@ -241,12 +240,12 @@ function AddTask() {
                                 >
                                     <img
                                         src={option.profilePhoto ? `${import.meta.env.VITE_REACT_APP_BACKEND_BASEURL}/${option.profilePhoto}` : "https://www.pngmart.com/files/23/Profile-PNG-Photo.png"}
-                                        alt={option.username} className="w-5 h-5 rounded-full mr-2"/>
+                                        alt={option.username} className="w-5 h-5 rounded-full mr-2" />
                                     <span>{option.username}</span>
                                 </li>))}
                             </ul>)}
                         <button type="button" onClick={addEmployee}
-                                className="p-2 bg-green-500 text-white rounded-md w-[12vw]">+
+                            className="p-2 bg-green-500 text-white rounded-md w-[12vw]">+
                         </button>
                     </div>
                 </div>
@@ -268,19 +267,19 @@ function AddTask() {
                         <h3 className="text-gray-700 font-semibold mt-3">Assigned Employees:</h3>}
                     {members.map((employee, index) => (
                         <div key={index} className="flex justify-between p-2 bg-gray-200 rounded-md mt-1">
-                                <span className="flex items-center">
-                                    <img src={employee.profilePhoto} alt={employee.username}
-                                         className="w-5 h-5 rounded-full mr-2"/>
-                                    {employee.username}
-                                </span>
+                            <span className="flex items-center">
+                                <img src={employee.profilePhoto} alt={employee.username}
+                                    className="w-5 h-5 rounded-full mr-2" />
+                                {employee.username}
+                            </span>
                             <button onClick={() => handleDeleteMember(employee.username)}
-                                    className="text-red-500">Remove
+                                className="text-red-500">Remove
                             </button>
                         </div>))}
                 </div>
 
                 <button type="submit"
-                        className="w-full py-2 bg-blue-600 text-white font-bold rounded-lg hover:bg-blue-500">Add
+                    className="w-full py-2 bg-blue-600 text-white font-bold rounded-lg hover:bg-blue-500">Add
                     Task
                 </button>
             </form>
