@@ -64,7 +64,7 @@ function ShowAllReports() {
     return (
         <div className="relative isolate h-full p-6 lg:px-8 bg-gradient-to-r from-blue-800 to-blue-400 min-h-screen">
             <button
-                className="absolute gap-2 sm:top-[7.5vw] top-[32vw] right-[2.5vw] flex items-center text-white bg-green-600 p-2 px-4 rounded-lg shadow-md hover:bg-green-700 transition-transform transform hover:scale-105"
+                className="absolute sm:top-[7.5vw] top-[30vw] right-[2.5vw] flex items-center text-white bg-green-600 p-2 px-4 rounded-lg shadow-md hover:bg-green-700 transition-transform hover:scale-105"
                 onClick={() => navigate(-1)}
             >
                 <ArrowBackIcon/> <p> Back </p>
@@ -79,7 +79,7 @@ function ShowAllReports() {
                 ></div>
             </div>
 
-            <h1 className="text-white text-4xl font-bold mt-7 mt-20 mb-4">All Reports</h1>
+            <h1 className="text-white text-4xl font-bold mt-20 mb-4">All Reports</h1>
 
             {loggedin?.role === "Employee" && (
                 <button
