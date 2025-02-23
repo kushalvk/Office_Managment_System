@@ -239,7 +239,7 @@ function AddTask() {
                                     onClick={() => handleSelect(option)}
                                 >
                                     <img
-                                        src={option.profilePhoto ? `${import.meta.env.VITE_REACT_APP_BACKEND_BASEURL}/${option.profilePhoto}` : "https://www.pngmart.com/files/23/Profile-PNG-Photo.png"}
+                                        src={option.profilePhoto ? `${import.meta.env.VITE_REACT_APP_BACKEND_BASEURL}/uplodes/${option.profilePhoto}` : "https://www.pngmart.com/files/23/Profile-PNG-Photo.png"}
                                         alt={option.username} className="w-5 h-5 rounded-full mr-2" />
                                     <span>{option.username}</span>
                                 </li>))}
