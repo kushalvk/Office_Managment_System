@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="404eb4d8-f181-44b4-a139-a07b064bd629" name="Changes" comment="UPDATE: Back button every pages.">
+    <list default="true" id="404eb4d8-f181-44b4-a139-a07b064bd629" name="Changes" comment="ADD: vercel.json file">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -17,6 +17,7 @@
       <list>
         <option value="JavaScript File" />
         <option value="JSX File" />
+        <option value="tsconfig.json" />
       </list>
     </option>
   </component>
@@ -140,7 +141,7 @@
       <workItem from="1740146255872" duration="3245000" />
       <workItem from="1740225019194" duration="18452000" />
       <workItem from="1740286553455" duration="9542000" />
-      <workItem from="1740316398278" duration="1205000" />
+      <workItem from="1740316398278" duration="3186000" />
     </task>
     <task id="LOCAL-00001" summary="Merge pull request #2 from Kumhar-Harshad/main&#10;&#10;ADD: Profile.jsx">
       <option name="closed" value="true" />
@@ -366,14 +367,21 @@
       <option name="project" value="LOCAL" />
       <updated>1740296465419</updated>
     </task>
-    <option name="localTasksCounter" value="29" />
+    <task id="LOCAL-00029" summary="ADD: vercel.json file">
+      <option name="closed" value="true" />
+      <created>1740319131372</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1740319131372</updated>
+    </task>
+    <option name="localTasksCounter" value="30" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="ADD: Complate Auth with backend and also a sidebar diffrentiat for Manager." />
     <MESSAGE value="ADD: Uplodes Folder" />
     <MESSAGE value="ADD: Update in Group file" />
     <MESSAGE value="ADD: Backend of Group all section and update frontend of add work" />
@@ -398,6 +406,7 @@
     <MESSAGE value="ADD: Add page of description and Update Requrment." />
     <MESSAGE value="ADD: Add Upadte Facility to work and group section" />
     <MESSAGE value="UPDATE: Back button every pages." />
-    <option name="LAST_COMMIT_MESSAGE" value="UPDATE: Back button every pages." />
+    <MESSAGE value="ADD: vercel.json file" />
+    <option name="LAST_COMMIT_MESSAGE" value="ADD: vercel.json file" />
   </component>
 </project>
