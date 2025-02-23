@@ -24,7 +24,7 @@ const corsOptions = {
 };
 app.use(cors(corsOptions));
 app.use(express.json());
-app.use('/uploads', express.static(path.join(__dirname, "uploads")));
+app.use('/uplodes', express.static(path.join(__dirname, "uplodes")));
 
 if (mongoose.connect(process.env.MONGODB_URL)) {
     console.log("Prime_Hub Database connected");
