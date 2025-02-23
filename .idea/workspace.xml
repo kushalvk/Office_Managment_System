@@ -4,9 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="404eb4d8-f181-44b4-a139-a07b064bd629" name="Changes" comment="UPDATE: Website Icon.">
+    <list default="true" id="404eb4d8-f181-44b4-a139-a07b064bd629" name="Changes" comment="UPDATE: Limit File size.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/Server/index.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -142,7 +141,7 @@
       <workItem from="1740146255872" duration="3245000" />
       <workItem from="1740225019194" duration="18452000" />
       <workItem from="1740286553455" duration="9542000" />
-      <workItem from="1740316398278" duration="9764000" />
+      <workItem from="1740316398278" duration="10997000" />
     </task>
     <task id="LOCAL-00001" summary="Merge pull request #2 from Kumhar-Harshad/main&#10;&#10;ADD: Profile.jsx">
       <option name="closed" value="true" />
@@ -472,14 +471,21 @@
       <option name="project" value="LOCAL" />
       <updated>1740329723571</updated>
     </task>
-    <option name="localTasksCounter" value="42" />
+    <task id="LOCAL-00042" summary="UPDATE: Limit File size.">
+      <option name="closed" value="true" />
+      <created>1740331233928</created>
+      <option name="number" value="00042" />
+      <option name="presentableId" value="LOCAL-00042" />
+      <option name="project" value="LOCAL" />
+      <updated>1740331233928</updated>
+    </task>
+    <option name="localTasksCounter" value="43" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="ADD: Backend of Reports." />
     <MESSAGE value="ADD: Uplodes." />
     <MESSAGE value="ADD: Backed of requrments." />
     <MESSAGE value="ADD: Backed of for logged User Task and Project." />
@@ -504,6 +510,7 @@
     <MESSAGE value="UPDATE: file Access Permition." />
     <MESSAGE value="UPDATE: file Load Permition." />
     <MESSAGE value="UPDATE: Website Icon." />
-    <option name="LAST_COMMIT_MESSAGE" value="UPDATE: Website Icon." />
+    <MESSAGE value="UPDATE: Limit File size." />
+    <option name="LAST_COMMIT_MESSAGE" value="UPDATE: Limit File size." />
   </component>
 </project>

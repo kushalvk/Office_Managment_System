@@ -4,7 +4,7 @@ const addReportController = async (req, res) => {
     try {
         const {title, description, startDate, endDate, submitedBy} = req.body;
 
-        const reportDocument = req.file ? req.file.filename : null;
+        const reportDocument = req.file ? `uplodes/${req.file.filename}` : null;
 
         ReportsModel.create({title, description, reportDocument, startDate, endDate, submitedBy})
             .then(() => res.status(200).send({message: "Report Added successfully"}))
