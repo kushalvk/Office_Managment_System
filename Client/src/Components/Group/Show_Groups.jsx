@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { allGroups } from "../../Services/GroupService.js";
-import { loggedUser } from "../../Services/AuthService.js";
+import React, {useEffect, useState} from "react";
+import {useNavigate} from "react-router-dom";
+import {allGroups} from "../../Services/GroupService.js";
+import {loggedUser} from "../../Services/AuthService.js";
 
 function ShowAllGroups() {
     const navigate = useNavigate();
@@ -27,7 +27,9 @@ function ShowAllGroups() {
                 const response = await allGroups();
                 let filteredGroups = response.groups;
 
-                if (!loggedin) {
+                if (loggedin?.role === "Manager") {
+                    setGroups(response.groups);
+                } else if (!loggedin) {
                     filteredGroups = filteredGroups.filter(group => group.groupType === "public");
                 } else {
                     filteredGroups = filteredGroups.filter(
@@ -60,7 +62,7 @@ function ShowAllGroups() {
             </div>
 
             {/* Header */}
-            <div className="mx-auto max-w-2xl pt-48 pb-2 text-center">
+            <div className="mx-auto max-w-2xl pt-[14vw] sm:pt-[6vw] pb-2 text-center">
                 <h1 className="text-white text-3xl sm:text-5xl font-bold mb-4">Show All Groups</h1>
                 <p className="text-gray-300 text-lg">Here is the list of all groups.</p>
             </div>

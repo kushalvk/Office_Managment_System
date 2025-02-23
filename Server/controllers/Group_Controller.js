@@ -46,4 +46,17 @@ const deleteGroupById = async (req, res) => {
     }
 }
 
-module.exports = { addGroupController, allGroupController, fetchGroupByIdController, deleteGroupById };
+const updateGroupById = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const { groupName, description, groupType, groupStatus } = req.body;
+
+        await GroupModel.findByIdAndUpdate( id , { groupName, description, groupType, groupStatus })
+            .then(() => res.status(200).send({ message: "Group updated successfully " }))
+            .catch(err => res.status(500).send({ message: "Fail to update Group : Controller ", err}));
+    } catch (err) {
+        res.status(500).send({message: "Error to update Group : Controller ", err});
+    }
+}
+
+module.exports = { addGroupController, allGroupController, fetchGroupByIdController, deleteGroupById, updateGroupById };

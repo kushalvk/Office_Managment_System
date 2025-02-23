@@ -1,23 +1,64 @@
 import {useParams, useNavigate} from "react-router-dom";
 import React, {useState, useEffect} from "react";
-import {fetchTaskById} from "../../Services/WorkService.js";
+import {fetchTaskById, updateWorkById} from "../../Services/WorkService.js";
+import {loggedUser} from "../../Services/AuthService.js";
 
 function ViewTask() {
     const {id} = useParams();
     const navigate = useNavigate();
     const [task, setTask] = useState(null);
+    const [editMode, setEditMode] = useState(false);
+    const [updatedTask, setUpdatedTask] = useState({
+        title: "",
+        description: "",
+        completionDate: "",
+    });
+    const [loggedin, setLoggedin] = useState(null);
 
     useEffect(() => {
-        const task = async () => {
+        const logged = async () => {
+            try {
+                setLoggedin(await loggedUser());
+            } catch (e) {
+                console.log(e.message);
+                setLoggedin(null);
+            }
+        }
+        logged();
+    }, [])
+
+    useEffect(() => {
+        const getTask = async () => {
             try {
                 const response = await fetchTaskById(id);
                 setTask(response.tasks);
+                setUpdatedTask({
+                    title: response.tasks.title,
+                    description: response.tasks.description,
+                    completionDate: new Date(response.tasks.completionDate).toISOString().split("T")[0],
+                });
             } catch (e) {
-                console.log(e)
+                console.log(e);
             }
-        }
-        task();
+        };
+        getTask();
     }, [id]);
+
+    const handleChange = (e) => {
+        const {name, value} = e.target;
+        setUpdatedTask({...updatedTask, [name]: value});
+    };
+
+    const handleSave = async () => {
+        try {
+            await updateWorkById(id, updatedTask);
+            setTask({...task, ...updatedTask});
+            setEditMode(false);
+            alert("Work updated successfully!");
+        } catch (e) {
+            console.log("Update failed:", e);
+        }
+    };
 
     if (!task) {
         return <div>Loading...</div>;
@@ -25,24 +66,55 @@ function ViewTask() {
 
     return (
         <div className="relative isolate h-full p-6 lg:px-8 bg-gradient-to-r from-blue-800 to-blue-400 min-h-screen">
-            <div
-                className="absolute inset-x-0 -top-40 -z-10 transform-gpu overflow-hidden blur-3xl sm:-top-80"
-                aria-hidden="true"
-            >
-                <div
-                    className="relative left-[calc(50%-11rem)] aspect-[1155/678] w-[36.125rem] -translate-x-1/2 rotate-[30deg] bg-gradient-to-tr from-[#ff80b5] to-[#9089fc] opacity-30 sm:left-[calc(50%-30rem)] sm:w-[72.1875rem]"
-                    style={{
-                        clipPath:
-                            "polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)",
-                    }}
-                ></div>
-            </div>
-
-            <h1 className="text-white text-4xl font-bold mb-4 mt-20">Details</h1>
+            <h1 className="text-white text-4xl font-bold mb-4 mt-20">Task Details</h1>
 
             <div className="bg-white p-6 rounded-lg shadow-md max-w-4xl mx-auto space-y-4">
-                <h2 className="text-2xl text-gray-800"><b>Title:</b> {task.title}</h2>
-                <p className="text-sm text-gray-800"><b>Description:</b> {task.description}</p>
+                <div>
+                    <label className="text-gray-700 font-bold">Title:</label>
+                    {editMode ? (
+                        <input
+                            type="text"
+                            name="title"
+                            value={updatedTask.title}
+                            onChange={handleChange}
+                            className="w-full border rounded px-2 py-1 mt-1"
+                        />
+                    ) : (
+                        <h2 className="text-2xl text-gray-800">{task.title}</h2>
+                    )}
+                </div>
+
+                <div>
+                    <label className="text-gray-700 font-bold">Description:</label>
+                    {editMode ? (
+                        <textarea
+                            name="description"
+                            value={updatedTask.description}
+                            onChange={handleChange}
+                            className="w-full border rounded px-2 py-1 mt-1"
+                        />
+                    ) : (
+                        <p className="text-sm text-gray-800">{task.description}</p>
+                    )}
+                </div>
+
+                <div>
+                    <label className="text-gray-700 font-bold">Completion Date:</label>
+                    {editMode ? (
+                        <input
+                            type="date"
+                            name="completionDate"
+                            value={updatedTask.completionDate}
+                            onChange={handleChange}
+                            className="w-full border rounded px-2 py-1 mt-1"
+                        />
+                    ) : (
+                        <p className="text-sm text-gray-700">
+                            {new Date(task.completionDate).toLocaleDateString()}
+                        </p>
+                    )}
+                </div>
+
                 <p className="text-sm text-gray-700">
                     <b>Assigned to:</b>
                     <div className={"flex gap-4 mt-3"}>
@@ -64,12 +136,17 @@ function ViewTask() {
                         )}
                     </div>
                 </p>
-                <p className="text-sm text-gray-700"><b>Completion
-                    Date:</b> {new Date(task.completionDate).toLocaleDateString()}</p>
-                <p className="text-sm text-gray-700"><b>Creation
-                    Date:</b> {new Date(task.createdAt).toLocaleDateString()}</p>
-                {task.createdAt !== task.updatedAt && <p className="text-sm text-gray-700"><b>Updation
-                    Date:</b> {new Date(task.updatedAt).toLocaleDateString()}</p>}
+
+                <p className="text-sm text-gray-700">
+                    <b>Creation Date:</b> {new Date(task.createdAt).toLocaleDateString()}
+                </p>
+
+                {task.createdAt !== task.updatedAt && (
+                    <p className="text-sm text-gray-700">
+                        <b>Updation Date:</b> {new Date(task.updatedAt).toLocaleDateString()}
+                    </p>
+                )}
+
                 <p
                     className={`text-sm font-medium ${
                         task.workStatus === "complete" ? "text-green-600" : "text-red-600"
@@ -80,9 +157,35 @@ function ViewTask() {
             </div>
 
             <div className="flex justify-center mt-8 gap-2">
+                {loggedin?.role === "Manager" && (<>
+                    {editMode ? (
+                        <>
+                            <button
+                                onClick={handleSave}
+                                className="py-2 px-6 rounded-lg bg-green-600 text-white font-semibold hover:bg-green-500 transition-transform duration-300 hover:scale-105"
+                            >
+                                Save
+                            </button>
+                            <button
+                                onClick={() => setEditMode(false)}
+                                className="py-2 px-6 rounded-lg bg-gray-600 text-white font-semibold hover:bg-gray-500 transition-transform duration-300 hover:scale-105"
+                            >
+                                Cancel
+                            </button>
+                        </>
+                    ) : (
+                        <button
+                            onClick={() => setEditMode(true)}
+                            className="py-2 px-6 rounded-lg bg-green-600 text-white font-semibold hover:bg-green-500 transition-transform duration-300 hover:scale-105"
+                        >
+                            Edit
+                        </button>
+                    )}
+                </>)}
+
                 <button
                     onClick={() => navigate(-1)}
-                    className="py-2 px-6 rounded-lg shadow-md hover:shadow-lg transition-transform duration-300 hover:scale-105 bg-green-600 text-white font-semibold hover:bg-green-500 focus:outline-none focus:ring-2 focus:ring-green-700"
+                    className="py-2 px-6 rounded-lg bg-green-600 text-white font-semibold hover:bg-green-500 transition-transform duration-300 hover:scale-105"
                 >
                     Back
                 </button>

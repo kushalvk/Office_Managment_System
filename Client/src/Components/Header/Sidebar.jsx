@@ -1,6 +1,6 @@
-import { Link, useNavigate } from "react-router-dom";
-import React, { useEffect, useState } from "react";
-import { loggedUser } from "../../Services/AuthService.js";
+import {Link, useNavigate} from "react-router-dom";
+import React, {useEffect, useState} from "react";
+import {loggedUser} from "../../Services/AuthService.js";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 
@@ -51,12 +51,13 @@ function Sidebar() {
             {/* Sidebar Toggle Button */}
             <button
                 onClick={toggleSidebar}
-                className={`fixed top-3 z-50 bg-blue-800 text-white p-2 rounded-r-md shadow-lg hover:bg-blue-700 transition-all duration-300 ${
+                className={`fixed top-3 z-50 p-3 rounded-r-lg shadow-xl transition-all duration-300 ease-in-out transform hover:scale-110 ${
                     isSidebarOpen ? "left-56 md:left-64" : "left-0"
-                }`}
+                } bg-blue-800 text-white hover:from-blue-500 hover:bg-blue-700 hover:shadow-lg`}
             >
-                {isSidebarOpen ? <ArrowBackIcon /> : <ArrowForwardIcon />}
+                {isSidebarOpen ? <ArrowBackIcon className="w-6 h-6"/> : <ArrowForwardIcon className="w-6 h-6"/>}
             </button>
+
 
             {/* Sidebar */}
             <div
@@ -81,16 +82,16 @@ function Sidebar() {
                 </div>
                 <ul className="space-y-4 mt-6 text-sm md:text-base">
                     {[
-                        { path: "/dashboard", label: "Dashboard" },
-                        { path: "/all-staff", label: "My Staff" },
-                        { path: "/add-work", label: "Add Work" },
-                        { path: "/all-reports", label: "Reports" },
-                        { path: "/show-all-tasks", label: "Task" },
-                        { path: "/show-all-project", label: "Project" },
-                        { path: "/show-group", label: "Group" },
-                        { path: "/show-requirement", label: "Requirement" },
-                        { path: "/salary", label: "Salary" }
-                    ].map(({ path, label }) => (
+                        {path: "/dashboard", label: "Dashboard"},
+                        {path: "/all-staff", label: "My Staff"},
+                        {path: "/add-work", label: "Add Work"},
+                        {path: "/all-reports", label: "Reports"},
+                        {path: "/show-all-tasks", label: "Task"},
+                        {path: "/show-all-project", label: "Project"},
+                        {path: "/show-group", label: "Group"},
+                        {path: "/show-requirement", label: "Requirement"},
+                        {path: "/salary", label: "Salary"}
+                    ].map(({path, label}) => (
                         <li key={path}>
                             <Link
                                 to={path}

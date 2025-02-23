@@ -36,3 +36,12 @@ export const deleteGroup = async (id) => {
         error(err)
     }
 };
+
+export const updateGroup = async (id, form) => {
+    try {
+        const response = await axios.post(`${import.meta.env.VITE_REACT_APP_BACKEND_BASEURL}/update-groups-by-id/${id}`, form);
+        return response.data;
+    } catch (err) {
+        error(err)
+    }
+};

@@ -82,6 +82,15 @@ export const fetchComplatedProject = async () => {
     }
 }
 
+export const updateWorkById = async (id, form) => {
+    try {
+        const response = await axios.post(`${import.meta.env.VITE_REACT_APP_BACKEND_BASEURL}/update-work/${id}`, form);
+        return response.data;
+    } catch (err) {
+        error(err)
+    }
+}
+
 export const generateWorkDescription = async (title) => {
     try {
         const response = await axios.post(

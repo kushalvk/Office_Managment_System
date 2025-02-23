@@ -1,6 +1,6 @@
 const WorkModel = require('../models/WorkSchema');
 const GroupModel = require('../models/GroupSchema');
-const { GoogleGenerativeAI } = require("@google/generative-ai");
+const {GoogleGenerativeAI} = require("@google/generative-ai");
 
 const addWorkController = async (req, res) => {
     try {
@@ -121,24 +121,37 @@ const complatedProjectController = async (req, res) => {
     }
 };
 
+const updateWorkController = async (req, res) => {
+    try {
+        const {id} = req.params;
+        const {title, description, completionDate} = req.body;
+
+        await WorkModel.findByIdAndUpdate(id, {title, description, completionDate});
+        res.status(200).send({ message: "Work updated successfully" });
+    } catch (error) {
+        console.error("Error fetching project:", error);
+        res.status(500).send({message: "Error fetching project", error});
+    }
+};
+
 const generateDescriptionController = async (req, res) => {
-    const { title } = req.body;
+    const {title} = req.body;
     const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
-    const model = genAI.getGenerativeModel({ model: "gemini-2.0-flash" });
+    const model = genAI.getGenerativeModel({model: "gemini-2.0-flash"});
     const prompt = `Generate a short and clear task description for: "${title}"`;
 
     if (!title) {
-        return res.status(400).json({ error: "Title is required!" });
+        return res.status(400).json({error: "Title is required!"});
     }
 
     try {
         const result = await model.generateContent(prompt);
         const generatedText = result.response.text() || "No description generated.";
 
-        res.json({ description: generatedText });
+        res.json({description: generatedText});
     } catch (error) {
         console.error("Error generating description:", error?.response?.data || error.message);
-        res.status(500).json({ error: "Failed to generate description. Try again later." });
+        res.status(500).json({error: "Failed to generate description. Try again later."});
     }
 };
 
@@ -152,5 +165,6 @@ module.exports = {
     employeeTasksController,
     employeeProjectsController,
     complatedProjectController,
+    updateWorkController,
     generateDescriptionController
 }
