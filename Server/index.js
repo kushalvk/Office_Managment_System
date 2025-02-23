@@ -12,19 +12,18 @@ const FacilitiesRouters = require('./routers/Facilities_Router');
 const FAQRouters = require('./routers/FAQ_Route');
 const BlogNewsRouters = require('./routers/BlogNews_Route');
 require("dotenv").config();
-const path = require("path");
 
 const app = express();
 const corsOptions = {
     origin: [process.env.FRONT_URL],
-    methods: ['GET', 'HEAD', 'PUT', 'PATCH', 'POST', 'DELETE'],
+    methods: ['GET','HEAD','PUT','PATCH','POST','DELETE'],
     credentials: true,
     allowedHeaders: ['Content-Type', 'Authorization', 'X-Auth-Token', 'Origin'],
     optionsSuccessStatus: 200
-};
+  };
 app.use(cors(corsOptions));
 app.use(express.json());
-app.use('/uplodes', express.static(path.join(__dirname, "uplodes")));
+app.use(express.static("uplodes"))
 
 if (mongoose.connect(process.env.MONGODB_URL)) {
     console.log("Prime_Hub Database connected");
@@ -52,7 +51,7 @@ app.use(FAQRouters);
 
 app.use(BlogNewsRouters);
 
-app.get("/", (red, res) => {
+app.get("/", (red,res) => {
     res.json(" Hello from Prime Hub Server ! ")
 })
 
