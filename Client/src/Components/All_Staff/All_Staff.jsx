@@ -53,7 +53,7 @@ function All_Staff() {
                          className="bg-white p-4 rounded-lg shadow-md transition-transform duration-300 hover:-translate-y-1 hover:scale-105">
                         <img
                             src={employee.profilePhoto
-                                ? `${import.meta.env.VITE_REACT_APP_BACKEND_BASEURL}/${employee.profilePhoto}`
+                                ? `${import.meta.env.VITE_REACT_APP_BACKEND_BASEURL}/uplodes/${employee.profilePhoto}`
                                 : "https://www.pngmart.com/files/23/Profile-PNG-Photo.png"
                             }
                             alt={employee.fullName}
