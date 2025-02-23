@@ -4,9 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="404eb4d8-f181-44b4-a139-a07b064bd629" name="Changes" comment="UPDATE: vercel.json file">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-    </list>
+    <list default="true" id="404eb4d8-f181-44b4-a139-a07b064bd629" name="Changes" comment="UPDATE: file Access Permition." />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -141,7 +139,7 @@
       <workItem from="1740146255872" duration="3245000" />
       <workItem from="1740225019194" duration="18452000" />
       <workItem from="1740286553455" duration="9542000" />
-      <workItem from="1740316398278" duration="4119000" />
+      <workItem from="1740316398278" duration="4591000" />
     </task>
     <task id="LOCAL-00001" summary="Merge pull request #2 from Kumhar-Harshad/main&#10;&#10;ADD: Profile.jsx">
       <option name="closed" value="true" />
@@ -391,14 +389,21 @@
       <option name="project" value="LOCAL" />
       <updated>1740324372485</updated>
     </task>
-    <option name="localTasksCounter" value="32" />
+    <task id="LOCAL-00032" summary="UPDATE: file Access Permition.">
+      <option name="closed" value="true" />
+      <created>1740325266114</created>
+      <option name="number" value="00032" />
+      <option name="presentableId" value="LOCAL-00032" />
+      <option name="project" value="LOCAL" />
+      <updated>1740325266114</updated>
+    </task>
+    <option name="localTasksCounter" value="33" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="ADD: Update in Group file" />
     <MESSAGE value="ADD: Backend of Group all section and update frontend of add work" />
     <MESSAGE value="ADD: Backend of Task, Projects &amp; Works." />
     <MESSAGE value="ADD: Backend of Reports." />
@@ -423,6 +428,7 @@
     <MESSAGE value="UPDATE: Back button every pages." />
     <MESSAGE value="ADD: vercel.json file" />
     <MESSAGE value="UPDATE: vercel.json file" />
-    <option name="LAST_COMMIT_MESSAGE" value="UPDATE: vercel.json file" />
+    <MESSAGE value="UPDATE: file Access Permition." />
+    <option name="LAST_COMMIT_MESSAGE" value="UPDATE: file Access Permition." />
   </component>
 </project>
