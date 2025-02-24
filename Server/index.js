@@ -25,8 +25,8 @@ const corsOptions = {
 app.use(cors(corsOptions));
 app.use(express.json());
 app.use('/uplodes', express.static(path.join(__dirname, "uplodes")));
-app.use(express.json({ limit: "10mb" }));
-app.use(express.urlencoded({ limit: "10mb", extended: true }));
+app.use(express.json({ limit: "20mb" }));
+app.use(express.urlencoded({ limit: "20mb", extended: false }));
 
 if (mongoose.connect(process.env.MONGODB_URL)) {
     console.log("Prime_Hub Database connected");
