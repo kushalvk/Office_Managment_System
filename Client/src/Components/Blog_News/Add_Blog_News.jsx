@@ -22,6 +22,11 @@ function AddBlogNews() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
+            if (formData.image.size > 10 * 1024 * 1024) {
+                alert("File size si Too Lage! Maximum 10MB limit of file size.");
+                return;
+            }
+
             const form = new FormData();
             form.append("title", formData.title);
             form.append("description", formData.description);

@@ -71,6 +71,12 @@ function Add_User() {
         e.preventDefault();
 
         if (formData.password === formData.confirmPassword) {
+
+            if (formData?.profilePhoto?.size > 10 * 1024 * 1024 || formData.resume.size > 10 * 1024 * 1024) {
+                alert("File size si Too Lage! Maximum 10MB limit of each file size.");
+                return;
+            }
+
             const form = new FormData();
             form.append("fullName", formData.fullName)
             form.append("email", formData.email)

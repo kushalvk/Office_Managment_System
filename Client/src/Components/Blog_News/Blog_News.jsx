@@ -69,7 +69,7 @@ function BlogNews() {
                     >
                         <img
                             src={post.image
-                                ? `${import.meta.env.VITE_REACT_APP_BACKEND_BASEURL}/uplodes/${post.image}`
+                                ? `${post.image}`
                                 : "https://dummyimage.com/150x150/cccccc/ffffff&text=No+Image"}
                             alt={post.title}
                             className="rounded-t-lg object-cover w-full h-48"

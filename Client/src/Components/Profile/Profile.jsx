@@ -228,7 +228,7 @@ function UserProfile() {
                             <img
                                 src={
                                     loggedin.profilePhoto
-                                        ? `${import.meta.env.VITE_REACT_APP_BACKEND_BASEURL}/uplodes/${loggedin.profilePhoto}`
+                                        ? `${loggedin.profilePhoto}`
                                         : "https://www.pngmart.com/files/23/Profile-PNG-Photo.png"
                                 }
                                 alt="Profile Photo"
@@ -244,7 +244,7 @@ function UserProfile() {
                         {key.replace(/([A-Z])/g, ' $1').trim()}:
                     </span>
                                     {key === "resume" ? (
-                                        <a href={`${import.meta.env.VITE_REACT_APP_BACKEND_BASEURL}/uplodes/${loggedin[key]}`}
+                                        <a href={`${loggedin[key]}`}
                                            className="text-blue-600" target="_blank">
                                             Click to show resume
                                         </a>

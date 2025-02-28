@@ -6,7 +6,46 @@
   <component name="ChangeListManager">
     <list default="true" id="404eb4d8-f181-44b4-a139-a07b064bd629" name="Changes" comment="ADD: handle error to large file size at report.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/routers/Report_Route.js" beforeDir="false" afterPath="$PROJECT_DIR$/Server/routers/Report_Route.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/Components/Add User/Add_User.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/Components/Add User/Add_User.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/Components/All_Staff/All_Staff.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/Components/All_Staff/All_Staff.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/Components/All_Staff/UserDetails.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/Components/All_Staff/UserDetails.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/Components/Blog_News/Add_Blog_News.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/Components/Blog_News/Add_Blog_News.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/Components/Blog_News/Blog_News.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/Components/Blog_News/Blog_News.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/Components/Facilities/Facilities.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/Components/Facilities/Facilities.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/Components/Header/Sidebar.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/Components/Header/Sidebar.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/Components/Profile/Profile.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/Components/Profile/Profile.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/Components/Report/Submit_report.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/Components/Report/Submit_report.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/controllers/Auth_Controller.js" beforeDir="false" afterPath="$PROJECT_DIR$/Server/controllers/Auth_Controller.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/controllers/BlogNews_Controller.js" beforeDir="false" afterPath="$PROJECT_DIR$/Server/controllers/BlogNews_Controller.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/controllers/Facilities_Controller.js" beforeDir="false" afterPath="$PROJECT_DIR$/Server/controllers/Facilities_Controller.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/uplodes/1738496714381_Ram.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/uplodes/1738496817566_github profile pic.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/uplodes/1738496874963_VK.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/uplodes/1738496874964_Kushal Resume.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/uplodes/1738497146506_City allocation.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/uplodes/1738497182156_2.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/uplodes/1738497286835_TK.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/uplodes/1738497588349_2.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/uplodes/1738666687685_City allocation.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/uplodes/1738930082951_invoice.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/uplodes/1738930159216_Kushal Resume.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/uplodes/1738932308837_invoice.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/uplodes/1739689992008_1.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/uplodes/1739689992051_TK.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/uplodes/1739690080506_1.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/uplodes/1739690080533_TK.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/uplodes/1739732742022_Conference-room.jpeg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/uplodes/1739732849060_Cafeteria.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/uplodes/1739732942661_parking.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/uplodes/1739733063568_IT Support Room.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/uplodes/1739733742515_Ram.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/uplodes/1740074809077_Ram.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/uplodes/1740074949204_Office-inventory-management-tips.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/uplodes/1740075048409_Feture of remote work.webp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/uplodes/1740075197719_Optimizing-Businesses.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/uplodes/1740228198723_1.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/uplodes/1740228198764_TK.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/uplodes/1740229027438_Kushal Resume.pdf" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -146,7 +185,8 @@
       <workItem from="1740402010624" duration="5062000" />
       <workItem from="1740542759613" duration="983000" />
       <workItem from="1740665664022" duration="8918000" />
-      <workItem from="1740717015386" duration="4399000" />
+      <workItem from="1740717015386" duration="4961000" />
+      <workItem from="1740747883481" duration="4997000" />
     </task>
     <task id="LOCAL-00001" summary="Merge pull request #2 from Kumhar-Harshad/main&#10;&#10;ADD: Profile.jsx">
       <option name="closed" value="true" />
@@ -524,7 +564,23 @@
       <option name="project" value="LOCAL" />
       <updated>1740720929434</updated>
     </task>
-    <option name="localTasksCounter" value="48" />
+    <task id="LOCAL-00048" summary="ADD: handle error to large file size at report.">
+      <option name="closed" value="true" />
+      <created>1740721513112</created>
+      <option name="number" value="00048" />
+      <option name="presentableId" value="LOCAL-00048" />
+      <option name="project" value="LOCAL" />
+      <updated>1740721513112</updated>
+    </task>
+    <task id="LOCAL-00049" summary="ADD: handle error to large file size at report.">
+      <option name="closed" value="true" />
+      <created>1740721825144</created>
+      <option name="number" value="00049" />
+      <option name="presentableId" value="LOCAL-00049" />
+      <option name="project" value="LOCAL" />
+      <updated>1740721825144</updated>
+    </task>
+    <option name="localTasksCounter" value="50" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

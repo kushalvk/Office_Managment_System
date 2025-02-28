@@ -15,6 +15,11 @@ function SubmitReport() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
+            if (reportdocument.size > 10 * 1024 * 1024) {
+                alert("File size si Too Lage! Maximum 10MB limit of file size.");
+                return;
+            }
+
             const report = new FormData();
             report.append("reportdocument", reportdocument)
             report.append("title", title)
@@ -23,11 +28,8 @@ function SubmitReport() {
             report.append("endDate", endDate)
             report.append("submitedBy", username)
 
-            const response = await addReport(report)
-            if (response.status === 413) {
-                alert("File is too large! Please upload a file smaller than 10MB.");
-                return;
-            }
+            await addReport(report);
+
             alert("New report submitted!");
             navigate("/all-reports");
         } catch (e) {

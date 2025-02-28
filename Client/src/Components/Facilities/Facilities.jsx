@@ -68,7 +68,7 @@ function Facilities() {
                     >
                         <img
                             src={facility.image
-                                ? `${import.meta.env.VITE_REACT_APP_BACKEND_BASEURL}/uplodes/${facility.image}`
+                                ? `${facility.image}`
                                 : "https://dummyimage.com/150x150/cccccc/ffffff&text=No+Image"}
                             alt={facility.title || "Facility Image"}
                             className="w-24 h-24 rounded-lg object-cover"

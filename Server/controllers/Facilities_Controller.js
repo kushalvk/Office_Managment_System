@@ -1,12 +1,14 @@
 const FacilitiesModel = require("../models/FacilitiesSchema");
+const {uploadOnCloudinary} = require("../cloudinary/Cloudinary");
 
 const addFacilitiesController = async (req, res) => {
     try {
         const {title, description} = req.body;
 
-        const image = req.file ? req.file.filename : null;
+        const imageLocalPath = req?.file?.buffer;
+        const image = await uploadOnCloudinary(imageLocalPath);
 
-        await FacilitiesModel.create({ title, description, image })
+        await FacilitiesModel.create({ title, description, image: image.url })
             .then(() => res.status(200).send({ message: "Facilities Added successfully" }))
             .catch(err => res.status(500).send({ message: "Fail to Add Facilities : Controller ", err}));
     } catch (error) {

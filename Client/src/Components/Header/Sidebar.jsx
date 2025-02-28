@@ -68,7 +68,7 @@ function Sidebar() {
                             className="h-full w-full rounded-full object-cover border-2 border-gray-200"
                             src={
                                 loggedin.profilePhoto
-                                    ? `${import.meta.env.VITE_REACT_APP_BACKEND_BASEURL}/uplodes/${loggedin.profilePhoto}`
+                                    ? `${loggedin.profilePhoto}`
                                     : "https://www.pngmart.com/files/23/Profile-PNG-Photo.png"
                             }
                             alt="Profile"

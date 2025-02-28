@@ -1,5 +1,6 @@
 const bcrypt = require('bcrypt');
 const UserModel = require('../models/UserSchema');
+const {uploadOnCloudinary} = require("../cloudinary/Cloudinary");
 
 const addUserController = async (req, res) => {
     try {
@@ -19,20 +20,32 @@ const addUserController = async (req, res) => {
         } = req.body;
 
         if (!username || !email || !password) {
-            return res.status(400).json({message: "Please provide all Fields"})
+            return res.status(400).json({message: "Please provide all required fields"});
         }
 
-        const existingUser = await UserModel.findOne({email})
+        const existingUser = await UserModel.findOne({email});
         if (existingUser) {
-            return res.status(400).json({messgae: "This email allready ragistared"})
+            return res.status(400).json({message: "This email is already registered"});
         }
 
         const hashpass = await bcrypt.hash(password, 12);
 
-        const profilePhoto = req.files["profilePhoto"] ? req.files["profilePhoto"][0].filename : null;
-        const resume = req.files["resume"] ? req.files["resume"][0].filename : null;
+        let profilePhoto = null;
+        let resume = null;
 
-        UserModel.create({
+        if (req?.files?.profilePhoto) {
+            const profilePhotoLocalPath = req.files.profilePhoto[0].buffer;
+            profilePhoto = await uploadOnCloudinary(profilePhotoLocalPath);
+        }
+
+        if (req?.files?.resume) {
+            const resumeLocalPath = req.files.resume[0].buffer;
+            resume = await uploadOnCloudinary(resumeLocalPath);
+        } else {
+            return res.status(400).json({message: "Resume file is required"});
+        }
+
+        const newUser = await UserModel.create({
             fullName,
             email,
             address,
@@ -45,16 +58,17 @@ const addUserController = async (req, res) => {
             workLocation,
             department,
             role,
-            profilePhoto,
-            resume
-        })
-            .then((user) => res.json({message: "User Added Sucessfully", user}))
-            .catch((err) => res.json(err))
+            profilePhoto: profilePhoto ? profilePhoto.url : null,
+            resume: resume.url,
+        });
+
+        res.status(201).json({message: "User added successfully", user: newUser});
 
     } catch (error) {
-        res.status(500).send({message: "Error to ragistered User : Controller", error})
+        console.error("Error in user registration:", error);
+        res.status(500).json({message: "Error registering user", error});
     }
-}
+};
 
 const loginController = async (req, res) => {
     try {
@@ -125,13 +139,23 @@ const updateProfile = async (req, res) => {
     const {id} = req.params;
     const form = req.body;
 
-    const profilePhoto = req.files?.profilePhoto?.[0]?.filename || null;
-    const resume = req.files?.resume?.[0]?.filename || null;
+    let profilePhoto = null;
+    let resume = null;
+
+    if (req?.files?.profilePhoto) {
+        const profilePhotoLocalPath = req.files.profilePhoto[0].buffer;
+        profilePhoto = await uploadOnCloudinary(profilePhotoLocalPath);
+    }
+
+    if (req?.files?.resume) {
+        const resumeLocalPath = req.files.resume[0].buffer;
+        resume = await uploadOnCloudinary(resumeLocalPath);
+    }
 
     let updateData = {...form};
 
-    if (profilePhoto) updateData.profilePhoto = profilePhoto;
-    if (resume) updateData.resume = resume;
+    if (profilePhoto) updateData.profilePhoto = profilePhoto.url;
+    if (resume) updateData.resume = resume.url;
 
     try {
         await UserModel.findByIdAndUpdate(id, updateData);
@@ -157,7 +181,7 @@ const deleteStaffByIdController = async (req, res) => {
         const id = req.params.id;
 
         await UserModel.findByIdAndDelete(id)
-            .then(() => res.status(200).send({ message: "Worker deleted successfully"}))
+            .then(() => res.status(200).send({message: "Worker deleted successfully"}))
             .catch((err) => res.json(err))
     } catch (e) {
         res.status(500).send({message: "Error to delete Employee"});
@@ -181,11 +205,11 @@ const newlyAddedUserController = async (req, res) => {
         const twentyFourHoursAgo = new Date();
         twentyFourHoursAgo.setHours(twentyFourHoursAgo.getHours() - 24);
 
-        const users = await UserModel.find({ createdAt: { $gte: twentyFourHoursAgo } });
+        const users = await UserModel.find({createdAt: {$gte: twentyFourHoursAgo}});
 
-        res.status(200).json({ users });
+        res.status(200).json({users});
     } catch (e) {
-        res.status(500).json({ message: "Error fetching users", error: e.message });
+        res.status(500).json({message: "Error fetching users", error: e.message});
     }
 };
 

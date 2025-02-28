@@ -1,12 +1,14 @@
 const BlogNewsModel = require("../models/BlogNewsSchema");
+const {uploadOnCloudinary} = require("../cloudinary/Cloudinary");
 
 const addBlogNewsController = async (req, res) => {
     try {
         const { title, description } = req.body;
 
-        const image = req.file ? req.file.filename : null;
+        const imageLocalPath = req?.file?.buffer;
+        const image = await uploadOnCloudinary(imageLocalPath);
 
-        await BlogNewsModel.create({ title, description, image})
+        await BlogNewsModel.create({ title, description, image: image.url})
             .then(() => res.status(200).json({ message: 'Blog News Successfully created!' }))
             .catch(err => res.status(500).json({ message: err.message }));
     } catch (e) {

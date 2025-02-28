@@ -25,7 +25,7 @@ const UserDetails = () => {
                 <img
                     src={
                         user.profilePhoto
-                            ? `${import.meta.env.VITE_REACT_APP_BACKEND_BASEURL}/uplodes/${user.profilePhoto}`
+                            ? `${user.profilePhoto}`
                             : "https://www.pngmart.com/files/23/Profile-PNG-Photo.png"
                     }
                     alt="Profile Photo"
@@ -46,7 +46,7 @@ const UserDetails = () => {
                         </span>
                             {key === "resume" && user[key] ? (
                                 <a
-                                    href={`${import.meta.env.VITE_REACT_APP_BACKEND_BASEURL}/uplodes/${user[key]}`}
+                                    href={`${user[key]}`}
                                     className="text-blue-600"
                                     target="_blank"
                                     rel="noopener noreferrer"
