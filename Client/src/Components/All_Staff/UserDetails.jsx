@@ -1,91 +1,111 @@
-import React, {useEffect, useState} from "react";
-import {useNavigate, useParams} from "react-router-dom";
-import {UserById} from "../../Services/AuthService.js";
+import React, { useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+import { UserById } from "../../Services/AuthService.js";
 import toast from "react-hot-toast";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 
 const UserDetails = () => {
-
     const { id } = useParams();
     const [user, setUser] = useState({});
-    const  navigate = useNavigate();
+    const navigate = useNavigate();
 
     useEffect(() => {
         const userDetails = async () => {
             try {
                 const response = await UserById(id);
-                setUser(response)
+                setUser(response);
             } catch (e) {
                 console.log(e.message);
                 toast.error(e.message);
             }
-        }
+        };
         userDetails();
-    }, [id, user]);
+    }, [id]);
 
     return (
-        <div className="bg-white p-6 rounded-xl shadow-md max-w-lg mx-auto space-y-4 mt-10">
+        <div className="min-h-screen bg-gradient-to-r from-blue-600 to-indigo-500 p-5 pt-15">
+            {/* Back Button */}
             <button
-                className="absolute sm:top-[7.5vw] top-[80px] right-[2.5vw] flex items-center text-white bg-green-600 p-2 px-4 rounded-lg shadow-md hover:bg-green-700 transition-transform hover:scale-105"
+                className="fixed top-27 right-4 flex items-center gap-2 bg-white text-blue-600 px-4 py-2 rounded-full shadow-lg hover:bg-blue-50 transition-all duration-300 z-10"
                 onClick={() => navigate(-1)}
             >
-                <ArrowBackIcon/> <p> Back </p>
+                <ArrowBackIcon sx={{ fontSize: 20 }} />
+                <span className="text-sm font-medium">Back</span>
             </button>
-            <div className="flex flex-col items-center">
-                <img
-                    src={
-                        user.profilePhoto
-                            ? `${user.profilePhoto}`
-                            : "https://www.pngmart.com/files/23/Profile-PNG-Photo.png"
-                    }
-                    alt="Profile Photo"
-                    className="w-24 h-24 rounded-full"
-                />
+
+            {/* Header */}
+            <div className="max-w-3xl mx-auto text-center pt-16 pb-8">
+                <h1 className="text-4xl md:text-5xl font-bold text-white drop-shadow-lg animate-fade-in">
+                    User Details
+                </h1>
             </div>
 
-            {Object.keys(user).map((key) =>
-                    key !== "_id" &&
-                    key !== "password" &&
-                    key !== "profilePhoto" &&
-                    key !== "__v" &&
-                    key !== "updatedAt" &&
-                    key !== "createdAt" && (
-                        <div key={key} className="flex justify-between">
-                        <span className="font-semibold text-gray-700 capitalize">
-                            {key.replace(/([A-Z])/g, " $1").trim()}:
-                        </span>
-                            {key === "resume" && user[key] ? (
-                                <a
-                                    href={`${user[key]}`}
-                                    className="text-blue-600"
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                >
-                                    Click to show resume
-                                </a>
-                            ) : (
-                                <span className="text-gray-600">{user[key]}</span>
-                            )}
-                        </div>
-                    )
-            )}
+            {/* User Details Card */}
+            <div className="max-w-4xl mx-auto bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-all duration-300">
+                {/* Profile Photo */}
+                <div className="flex flex-col items-center mb-6">
+                    <img
+                        src={
+                            user.profilePhoto
+                                ? `${user.profilePhoto}`
+                                : "https://www.pngmart.com/files/23/Profile-PNG-Photo.png"
+                        }
+                        alt="Profile Photo"
+                        className="w-24 h-24 rounded-full"
+                    />
+                </div>
 
-            {user.createdAt && (
-                <div className="flex justify-between">
-                    <span className="font-semibold text-gray-700">Account Created:</span>
-                    <span className="text-gray-600">
-                        {new Date(user.createdAt).toLocaleDateString()}
-                    </span>
+                {/* User Details */}
+                <div className="space-y-4">
+                    {Object.keys(user).map(
+                        (key) =>
+                            key !== "_id" &&
+                            key !== "password" &&
+                            key !== "profilePhoto" &&
+                            key !== "__v" &&
+                            key !== "updatedAt" &&
+                            key !== "createdAt" && (
+                                <div key={key} className="flex justify-between">
+                                    <span className="font-semibold text-gray-700 capitalize">
+                                        {key.replace(/([A-Z])/g, " $1").trim()}:
+                                    </span>
+                                    {key === "resume" && user[key] ? (
+                                        <a
+                                            href={`${user[key]}`}
+                                            className="text-blue-600 hover:underline"
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                        >
+                                            Click to show resume
+                                        </a>
+                                    ) : (
+                                        <span className="text-gray-600">{user[key]}</span>
+                                    )}
+                                </div>
+                            )
+                    )}
+
+                    {/* Account Created Date */}
+                    {user.createdAt && (
+                        <div className="flex justify-between">
+                            <span className="font-semibold text-gray-700">Account Created:</span>
+                            <span className="text-gray-600">
+                                {new Date(user.createdAt).toLocaleDateString()}
+                            </span>
+                        </div>
+                    )}
+
+                    {/* Last Updated Date */}
+                    {user.updatedAt !== user.createdAt && (
+                        <div className="flex justify-between">
+                            <span className="font-semibold text-gray-700">Last Updated:</span>
+                            <span className="text-gray-600">
+                                {new Date(user.updatedAt).toLocaleDateString()}
+                            </span>
+                        </div>
+                    )}
                 </div>
-            )}
-            {user.updatedAt !== user.createdAt && (
-                <div className="flex justify-between">
-                    <span className="font-semibold text-gray-700">Last Updated:</span>
-                    <span className="text-gray-600">
-                        {new Date(user.updatedAt).toLocaleDateString()}
-                    </span>
-                </div>
-            )}
+            </div>
         </div>
     );
 };

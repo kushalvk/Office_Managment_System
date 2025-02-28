@@ -1,52 +1,49 @@
-import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import React from "react";
-import {useNavigate} from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 
 function AboutUs() {
-
     const navigate = useNavigate();
 
     return (
-        <div
-            className="relative isolate h-full pt-12 p-6 lg:px-8 bg-gradient-to-r from-blue-800 to-blue-400 min-h-screen">
+        <div className="min-h-screen bg-gradient-to-r from-blue-600 to-indigo-500 p-6 pt-15">
+            {/* Back Button */}
             <button
-                className="absolute sm:top-[7.5vw] top-[80px] right-[2.5vw] flex items-center text-white bg-green-600 p-2 px-4 rounded-lg shadow-md hover:bg-green-700 transition-transform hover:scale-105"
+                className="fixed top-27 right-4 flex items-center gap-2 bg-white text-blue-600 px-4 py-2 rounded-full shadow-lg hover:bg-blue-50 transition-all duration-300 z-10"
                 onClick={() => navigate(-1)}
             >
-                <ArrowBackIcon/> <p> Back </p>
+                <ArrowBackIcon sx={{ fontSize: 20 }} />
+                <span className="text-sm font-medium">Back</span>
             </button>
-            <div
-                className="absolute inset-x-0 -top-40 -z-10 transform-gpu overflow-hidden blur-3xl sm:-top-80"
-                aria-hidden="true"
-            >
-                <div
-                    className="relative left-[calc(50%-11rem)] aspect-[1155/678] w-[36.125rem] -translate-x-1/2 rotate-[30deg] bg-gradient-to-tr from-[#ff80b5] to-[#9089fc] opacity-30 sm:left-[calc(50%-30rem)] sm:w-[72.1875rem]"
-                    style={{
-                        clipPath:
-                            "polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)",
-                    }}
-                ></div>
-            </div>
 
             {/* Header */}
-            <h1 className="text-white text-4xl font-bold text-center mb-6 mt-10">About Us</h1>
-
-            {/* Content */}
-            <div
-                className="bg-white p-8 rounded-lg shadow-lg max-w-4xl mx-auto transform transition-transform duration-300 hover:shadow-2xl">
-                <p className="text-gray-700 text-lg mb-4">
-                    Welcome to our Office Management System, where we aim to revolutionize how organizations manage
-                    their day-to-day operations efficiently and effectively.
-                </p>
-                <p className="text-gray-700 text-lg mb-4">
-                    Our system provides advanced tools for managing employees, tracking tasks, monitoring progress,
-                    and streamlining workflows to ensure productivity and success.
-                </p>
-                <p className="text-gray-700 text-lg">
-                    With a focus on innovation, our team is dedicated to creating a seamless user experience, bringing
-                    the latest technology to simplify office management for everyone.
+            <div className="max-w-3xl mx-auto text-center mb-12">
+                <h1 className="text-4xl md:text-5xl font-bold text-white drop-shadow-lg animate-fade-in">
+                    About Us
+                </h1>
+                <p className="text-lg text-gray-200 mt-3">
+                    Discover who we are and what drives us to empower your organization.
                 </p>
             </div>
+
+            {/* Content */}
+            <section className="max-w-4xl mx-auto bg-white rounded-xl shadow-2xl p-8 transform transition-all duration-300 hover:shadow-xl">
+                <div className="space-y-6 text-gray-700">
+                    <p className="text-lg leading-relaxed">
+                        Welcome to our <span className="font-semibold text-blue-600">Office Management System</span>,
+                        where we aim to revolutionize how organizations manage their day-to-day operations with
+                        efficiency and precision.
+                    </p>
+                    <p className="text-lg leading-relaxed">
+                        Our system offers advanced tools for managing employees, tracking tasks, monitoring progress,
+                        and streamlining workflows—designed to boost productivity and ensure your team’s success.
+                    </p>
+                    <p className="text-lg leading-relaxed">
+                        With a passion for innovation, our dedicated team strives to deliver a seamless user experience,
+                        leveraging the latest technology to simplify office management for businesses of all sizes.
+                    </p>
+                </div>
+            </section>
         </div>
     );
 }

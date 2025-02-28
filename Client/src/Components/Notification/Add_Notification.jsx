@@ -1,6 +1,6 @@
-import React, {useState} from "react";
-import {useNavigate} from "react-router-dom";
-import {addNotification} from "../../Services/NotificationService.js";
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { addNotification } from "../../Services/NotificationService.js";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import toast from "react-hot-toast";
 
@@ -12,63 +12,74 @@ function AddNotification() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            await addNotification({title, message});
+            await addNotification({ title, message });
             toast.success("Notification added successfully!");
             navigate("/notification");
         } catch (e) {
             console.log(e);
-            toast.error("Fail to add Notification");
+            toast.error("Failed to add Notification");
         }
     };
 
     return (
-        <div
-            className="relative isolate h-full p-6 lg:px-8 bg-gradient-to-r from-blue-800 to-blue-400 min-h-screen flex items-center justify-center">
+        <div className="min-h-screen bg-gradient-to-r from-blue-600 to-indigo-500 p-5 pt-15">
+            {/* Back Button */}
             <button
-                className="absolute sm:top-[7.5vw] top-[80px] right-[2.5vw] flex items-center text-white bg-green-600 p-2 px-4 rounded-lg shadow-md hover:bg-green-700 transition-transform hover:scale-105"
+                className="fixed top-27 right-4 flex items-center gap-2 bg-white text-blue-600 px-4 py-2 rounded-full shadow-lg hover:bg-blue-50 transition-all duration-300 z-10"
                 onClick={() => navigate(-1)}
             >
-                <ArrowBackIcon/> <p> Back </p>
+                <ArrowBackIcon sx={{ fontSize: 20 }} />
+                <span className="text-sm font-medium">Back</span>
             </button>
-            <div className="absolute inset-x-0 -top-40 -z-10 transform-gpu overflow-hidden blur-3xl sm:-top-80"
-                 aria-hidden="true">
-                <div
-                    className="relative left-[calc(50%-11rem)] aspect-[1155/678] w-[36.125rem] -translate-x-1/2 rotate-[30deg] bg-gradient-to-tr from-[#ff80b5] to-[#9089fc] opacity-30 sm:left-[calc(50%-30rem)] sm:w-[72.1875rem]"
-                    style={{
-                        clipPath: 'polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)',
-                    }}
-                ></div>
+
+            {/* Header */}
+            <div className="max-w-3xl mx-auto text-center pt-16 pb-8">
+                <h1 className="text-4xl md:text-5xl font-bold text-white drop-shadow-lg animate-fade-in">
+                    Add Notification
+                </h1>
             </div>
-            <div className="bg-white p-8 rounded-lg shadow-md w-full max-w-lg">
-                <h2 className="text-3xl font-bold text-gray-800 mb-6">Add Notification</h2>
-                <form onSubmit={handleSubmit} className="space-y-4">
-                    <div>
-                        <label className="block text-gray-700 font-medium mb-2">Title</label>
-                        <input
-                            type="text"
-                            value={title}
-                            onChange={(e) => setTitle(e.target.value)}
-                            className="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                            placeholder="Enter title"
-                            required
-                        />
+
+            {/* Form */}
+            <div className="max-w-4xl mx-auto">
+                <form
+                    onSubmit={handleSubmit}
+                    className="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-all duration-300"
+                >
+                    <div className="space-y-6">
+                        {/* Title Field */}
+                        <div>
+                            <label className="block text-sm font-medium text-gray-700">Title</label>
+                            <input
+                                type="text"
+                                value={title}
+                                onChange={(e) => setTitle(e.target.value)}
+                                className="w-full mt-1 p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                placeholder="Enter title"
+                                required
+                            />
+                        </div>
+
+                        {/* Message Field */}
+                        <div>
+                            <label className="block text-sm font-medium text-gray-700">Message</label>
+                            <textarea
+                                value={message}
+                                onChange={(e) => setMessage(e.target.value)}
+                                className="w-full mt-1 p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                placeholder="Enter message"
+                                rows="4"
+                                required
+                            />
+                        </div>
+
+                        {/* Submit Button */}
+                        <button
+                            type="submit"
+                            className="w-full py-2 bg-green-600 text-white font-bold rounded-lg hover:bg-green-700 transition-all duration-300"
+                        >
+                            Add Notification
+                        </button>
                     </div>
-                    <div>
-                        <label className="block text-gray-700 font-medium mb-2">Message</label>
-                        <textarea
-                            value={message}
-                            onChange={(e) => setMessage(e.target.value)}
-                            className="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                            placeholder="Enter message"
-                            required
-                        />
-                    </div>
-                    <button
-                        type="submit"
-                        className="bg-green-600 text-white font-bold py-3 px-6 rounded-lg shadow-md hover:bg-green-700 transition-colors w-full"
-                    >
-                        Add Notification
-                    </button>
                 </form>
             </div>
         </div>

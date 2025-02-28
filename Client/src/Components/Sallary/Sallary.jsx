@@ -1,6 +1,6 @@
-import React, {useEffect, useState} from "react";
-import {useNavigate} from "react-router-dom";
-import {fetchSalary, deleteSalary, paysalary} from "../../Services/SalaryService.js";
+import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { fetchSalary, deleteSalary, paysalary } from "../../Services/SalaryService.js";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import toast from "react-hot-toast";
 
@@ -30,11 +30,11 @@ function SalaryPage() {
 
     const handleEditAmount = (id, amount) => {
         setEditingSalaryId(id);
-        setAmountInputs(prev => ({...prev, [id]: amount}));
+        setAmountInputs(prev => ({ ...prev, [id]: amount }));
     };
 
     const handleAmountChange = (id, value) => {
-        setAmountInputs(prev => ({...prev, [id]: value}));
+        setAmountInputs(prev => ({ ...prev, [id]: value }));
     };
 
     const handleConfirmPayment = async (salary) => {
@@ -45,8 +45,9 @@ function SalaryPage() {
         }
 
         try {
-            await paysalary({...salary, amount});
+            await paysalary({ ...salary, amount });
             setEditingSalaryId(null);
+            toast.success("Payment processed successfully.");
         } catch (error) {
             console.error("Error processing payment:", error);
             toast.error("Failed to process payment.");
@@ -67,77 +68,104 @@ function SalaryPage() {
     };
 
     return (
-        <div className="relative isolate h-full p-6 lg:px-8 bg-gradient-to-r from-blue-800 to-blue-400 min-h-screen">
+        <div className="min-h-screen bg-gradient-to-r from-blue-600 to-indigo-500 p-5 pt-15">
+            {/* Back Button */}
             <button
-                className="absolute sm:top-[7.5vw] top-[80px] right-[2.5vw] flex items-center text-white bg-green-600 p-2 px-4 rounded-lg shadow-md hover:bg-green-700 transition-transform hover:scale-105"
+                className="fixed top-27 right-4 flex items-center gap-2 bg-white text-blue-600 px-4 py-2 rounded-full shadow-lg hover:bg-blue-50 transition-all duration-300 z-10"
                 onClick={() => navigate(-1)}
             >
-                <ArrowBackIcon/> <p> Back </p>
+                <ArrowBackIcon sx={{ fontSize: 20 }} />
+                <span className="text-sm font-medium">Back</span>
             </button>
-            <h1 className="text-white text-3xl sm:text-4xl font-bold mb-6 mt-16 text-center sm:text-left">Salary
-                Payments</h1>
-            <div className="flex justify-center sm:justify-start">
+
+            {/* Header */}
+            <div className="max-w-3xl mx-auto text-center pt-16 pb-8">
+                <h1 className="text-4xl md:text-5xl font-bold text-white drop-shadow-lg animate-fade-in">
+                    Salary Payments
+                </h1>
+            </div>
+
+            {/* Add Salary Button */}
+            <div className="flex justify-center mb-8">
                 <button
                     onClick={() => navigate("/add-salary")}
-                    className="py-2 px-4 rounded-lg shadow-md hover:shadow-lg transition-transform duration-300 hover:scale-105 bg-green-600 text-white font-semibold hover:bg-green-500 mb-6"
+                    className="px-6 py-2 bg-green-600 text-white rounded-lg shadow-md hover:bg-green-700 transition-all duration-300"
                 >
                     Add Salary
                 </button>
             </div>
-            <div className="space-y-4 mt-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {salaries.map((salary) => (
-                    <div
-                        key={salary._id}
-                        className="flex flex-col bg-white p-4 rounded-lg shadow-md transition-transform duration-300 hover:-translate-y-1 hover:scale-105 hover:shadow-2xl"
-                    >
-                        <div className="mb-3">
-                            <h4 className="text-xl font-bold text-gray-800">{salary.name}</h4>
-                            <p className="text-sm font-medium text-gray-800">Occupation: {salary.occupation}</p>
-                            <p className="text-xs text-gray-500 mt-1">Last Payment
-                                Date: {new Date(salary.updatedAt).toLocaleString()}</p>
-                            <p className="text-xs text-gray-500 mt-1">Email: {salary.email}</p>
-                            <p className="text-xs text-gray-500 mt-1">Mobile No: {salary.contact}</p>
-                            <p className="text-xs text-gray-500 mt-1">Last Payment Amount: {salary.amount}</p>
-                        </div>
-                        {editingSalaryId === salary._id && (
-                            <div className="flex flex-col sm:flex-row gap-3 items-center mt-2">
-                                <input
-                                    type="number"
-                                    value={amountInputs[salary._id]}
-                                    onChange={(e) => handleAmountChange(salary._id, e.target.value)}
-                                    className="p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-black w-full sm:w-auto"
-                                    placeholder="Enter Amount"
-                                />
-                                <button
-                                    onClick={() => handleConfirmPayment(salary)}
-                                    className="text-white bg-green-600 hover:bg-green-500 font-semibold py-2 px-4 rounded-lg w-full sm:w-auto"
-                                >
-                                    ✅ Confirm
-                                </button>
-                                <button
-                                    onClick={() => setEditingSalaryId(null)}
-                                    className="text-gray-700 border border-gray-400 rounded-lg py-2 px-4 hover:bg-gray-100 w-full sm:w-auto"
-                                >
-                                    ❌ Cancel
-                                </button>
+
+            {/* Salary Cards */}
+            <div className="max-w-6xl mx-auto">
+                {salaries.length === 0 ? (
+                    <p className="text-center text-lg text-gray-200 font-semibold py-4 bg-white rounded-lg shadow-md">
+                        No salary records found.
+                    </p>
+                ) : (
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                        {salaries.map((salary) => (
+                            <div
+                                key={salary._id}
+                                className="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-all duration-300"
+                            >
+                                {/* Employee Details */}
+                                <h4 className="text-xl font-bold text-gray-800">{salary.name}</h4>
+                                <p className="text-sm text-gray-600">Occupation: {salary.occupation}</p>
+                                <p className="text-sm text-gray-500 mt-2">
+                                    Last Payment Date: {new Date(salary.updatedAt).toLocaleString()}
+                                </p>
+                                <p className="text-sm text-gray-500 mt-2">Email: {salary.email}</p>
+                                <p className="text-sm text-gray-500 mt-2">Mobile No: {salary.contact}</p>
+                                <p className="text-sm text-gray-500 mt-2">
+                                    Last Payment Amount: {salary.amount}
+                                </p>
+
+                                {/* Edit Amount Input */}
+                                {editingSalaryId === salary._id && (
+                                    <div className="mt-4 space-y-3">
+                                        <input
+                                            type="number"
+                                            value={amountInputs[salary._id]}
+                                            onChange={(e) => handleAmountChange(salary._id, e.target.value)}
+                                            className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                            placeholder="Enter Amount"
+                                        />
+                                        <div className="flex gap-3">
+                                            <button
+                                                onClick={() => handleConfirmPayment(salary)}
+                                                className="flex-1 py-2 bg-green-600 text-white rounded-md hover:bg-green-700 transition-all duration-300"
+                                            >
+                                                ✅ Confirm
+                                            </button>
+                                            <button
+                                                onClick={() => setEditingSalaryId(null)}
+                                                className="flex-1 py-2 bg-gray-200 text-gray-700 rounded-md hover:bg-gray-300 transition-all duration-300"
+                                            >
+                                                ❌ Cancel
+                                            </button>
+                                        </div>
+                                    </div>
+                                )}
+
+                                {/* Buttons */}
+                                <div className="flex gap-3 mt-6">
+                                    <button
+                                        onClick={() => handleEditAmount(salary._id, salary.amount)}
+                                        className="flex-1 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-all duration-300"
+                                    >
+                                        Pay Now
+                                    </button>
+                                    <button
+                                        onClick={() => handleDelete(salary._id)}
+                                        className="flex-1 py-2 bg-red-600 text-white rounded-md hover:bg-red-700 transition-all duration-300"
+                                    >
+                                        Delete
+                                    </button>
+                                </div>
                             </div>
-                        )}
-                        <div className="flex flex-col sm:flex-row gap-3 mt-4">
-                            <button
-                                onClick={() => handleEditAmount(salary._id, salary.amount)}
-                                className="text-white bg-green-600 hover:bg-green-500 font-semibold py-2 px-4 rounded-lg w-full sm:w-auto"
-                            >
-                                Pay Now
-                            </button>
-                            <button
-                                onClick={() => handleDelete(salary._id)}
-                                className="text-white bg-red-600 hover:bg-red-500 font-semibold py-2 px-4 rounded-lg w-full sm:w-auto"
-                            >
-                                Delete
-                            </button>
-                        </div>
+                        ))}
                     </div>
-                ))}
+                )}
             </div>
         </div>
     );

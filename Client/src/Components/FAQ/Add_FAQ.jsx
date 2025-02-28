@@ -1,54 +1,90 @@
 import React, { useState } from "react";
-import {addFaq} from "../../Services/FaqService.js";
-import {useNavigate} from "react-router-dom";
+import { addFaq } from "../../Services/FaqService.js";
+import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 
 function Add_FAQ() {
-
     const [newFaq, setNewFaq] = useState({ question: "", answer: "" });
     const navigate = useNavigate();
 
     const handleAddFaq = async () => {
         try {
             await addFaq(newFaq);
-            toast.success("Faq added successfully!");
+            toast.success("FAQ added successfully!");
             navigate("/faq");
         } catch (e) {
             console.log(e);
-            toast.error("Error adding a faq");
+            toast.error("Error adding FAQ");
         }
     };
 
     return (
-        <div
-            className="relative isolate h-full pt-12 p-6 lg:px-8 bg-gradient-to-r from-blue-800 to-blue-400 min-h-screen">
+        <div className="min-h-screen bg-gradient-to-r from-blue-600 to-indigo-500 p-5 pt-15">
+            {/* Back Button */}
             <button
-                className="absolute sm:top-[7.5vw] top-[80px] right-[2.5vw] flex items-center text-white bg-green-600 p-2 px-4 rounded-lg shadow-md hover:bg-green-700 transition-transform hover:scale-105"
+                className="fixed top-27 right-4 flex items-center gap-2 bg-white text-blue-600 px-4 py-2 rounded-full shadow-lg hover:bg-blue-50 transition-all duration-300 z-10"
                 onClick={() => navigate(-1)}
             >
-                <ArrowBackIcon/> <p> Back </p>
+                <ArrowBackIcon sx={{ fontSize: 20 }} />
+                <span className="text-sm font-medium">Back</span>
             </button>
-            <h1 className="text-white text-4xl font-bold text-center mb-6 mt-10">Frequently Asked Questions</h1>
 
-            <div className="bg-white p-6 rounded-lg shadow-md max-w-lg mx-auto mb-6">
-                <h2 className="text-lg font-bold text-gray-800 mb-4">Add a New FAQ</h2>
-                <input
-                    type="text"
-                    placeholder="Enter question"
-                    value={newFaq.question}
-                    onChange={(e) => setNewFaq({...newFaq, question: e.target.value})}
-                    className="w-full p-2 border rounded mb-2"
-                />
-                <textarea
-                    placeholder="Enter answer"
-                    value={newFaq.answer}
-                    onChange={(e) => setNewFaq({...newFaq, answer: e.target.value})}
-                    className="w-full p-2 border rounded mb-2"
-                ></textarea>
-                <button onClick={handleAddFaq}
-                        className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">Add FAQ
-                </button>
+            {/* Header */}
+            <div className="max-w-3xl mx-auto text-center pt-16 pb-8">
+                <h1 className="text-4xl md:text-5xl font-bold text-white drop-shadow-lg animate-fade-in">
+                    Add FAQ
+                </h1>
+            </div>
+
+            {/* Form */}
+            <div className="max-w-4xl mx-auto">
+                <div className="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-all duration-300">
+                    <h2 className="text-xl font-bold text-gray-800 mb-6">Add a New FAQ</h2>
+                    <div className="space-y-6">
+                        {/* Question Field */}
+                        <div>
+                            <label htmlFor="question" className="block text-sm font-medium text-gray-700">
+                                Question
+                            </label>
+                            <input
+                                type="text"
+                                id="question"
+                                placeholder="Enter question"
+                                value={newFaq.question}
+                                onChange={(e) => setNewFaq({ ...newFaq, question: e.target.value })}
+                                className="w-full mt-1 p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                required
+                            />
+                        </div>
+
+                        {/* Answer Field */}
+                        <div>
+                            <label htmlFor="answer" className="block text-sm font-medium text-gray-700">
+                                Answer
+                            </label>
+                            <textarea
+                                id="answer"
+                                placeholder="Enter answer"
+                                value={newFaq.answer}
+                                onChange={(e) => setNewFaq({ ...newFaq, answer: e.target.value })}
+                                className="w-full mt-1 p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                rows="4"
+                                required
+                            ></textarea>
+                        </div>
+
+                        {/* Submit Button */}
+                        <div className="flex justify-center">
+                            <button
+                                onClick={handleAddFaq}
+                                className="w-full py-2 bg-green-600 text-white font-bold rounded-lg hover:bg-green-700 transition-all duration-300"
+                            >
+                                Add FAQ
+                            </button>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     );

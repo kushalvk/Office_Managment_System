@@ -2,9 +2,9 @@ const RequrmentsModel = require("../models/RequirmentSchema");
 
 const addRequrmentController = async (req, res) => {
     try {
-        const { name, reason, username, date } = req.body;
+        const {name, reason, username, date} = req.body;
 
-        RequrmentsModel.create({ name, reason, username, date })
+        RequrmentsModel.create({name, reason, username, date})
             .then(() => res.status(200).send({message: "Requrment Added successfully"}))
             .catch((err) => res.status(500).send({message: "Fail to Add Requrment : Controller ", err}));
     } catch (error) {
@@ -22,12 +22,24 @@ const allRequrmentsController = async (req, res) => {
     }
 }
 
+const allRequrmentsByUsernameController = async (req, res) => {
+    try {
+        const {username} = req.params;
+
+        RequrmentsModel.find({username})
+            .then((requrments) => res.status(200).send(requrments))
+            .catch((err) => res.status(500).send({message: "Fail to fetch Requrments : Controller ", err}));
+    } catch (error) {
+        res.status(500).send({message: "Error to fetch Requrments : Controller ", error});
+    }
+}
+
 const updateRequrmentsController = async (req, res) => {
     try {
-        const { id } = req.params;
-        const { requrmentstatus } = req.body;
+        const {id} = req.params;
+        const {requrmentstatus} = req.body;
 
-        RequrmentsModel.findByIdAndUpdate( id , {requrmentStatus: requrmentstatus})
+        RequrmentsModel.findByIdAndUpdate(id, {requrmentStatus: requrmentstatus})
             .then(() => res.status(200).send({message: "Requrment Update successfully"}))
             .catch((err) => res.status(500).send({message: "Fail to updtae Requrments : Controller ", err}));
     } catch (error) {
@@ -37,10 +49,10 @@ const updateRequrmentsController = async (req, res) => {
 
 const updateRequrmentsEmpController = async (req, res) => {
     try {
-        const { id } = req.params;
-        const { name, reason } = req.body;
+        const {id} = req.params;
+        const {name, reason} = req.body;
 
-        RequrmentsModel.findByIdAndUpdate( id , { name, reason })
+        RequrmentsModel.findByIdAndUpdate(id, {name, reason})
             .then(() => res.status(200).send({message: "Requrment Update successfully"}))
             .catch((err) => res.status(500).send({message: "Fail to updtae Requrments : Controller ", err}));
     } catch (error) {
@@ -48,4 +60,10 @@ const updateRequrmentsEmpController = async (req, res) => {
     }
 }
 
-module.exports = {addRequrmentController, allRequrmentsController, updateRequrmentsController, updateRequrmentsEmpController}
+module.exports = {
+    addRequrmentController,
+    allRequrmentsController,
+    updateRequrmentsController,
+    updateRequrmentsEmpController,
+    allRequrmentsByUsernameController
+}

@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="404eb4d8-f181-44b4-a139-a07b064bd629" name="Changes" comment="UPDATE: All Notification using library react-hot-toast.">
+    <list default="true" id="404eb4d8-f181-44b4-a139-a07b064bd629" name="Changes" comment="UPDATE: All Page Back Button.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Client/src/Components/About_Us/About_Us.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/Components/About_Us/About_Us.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Client/src/Components/Add User/Add_User.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/Components/Add User/Add_User.jsx" afterDir="false" />
@@ -14,14 +14,18 @@
       <change beforePath="$PROJECT_DIR$/Client/src/Components/Blog_News/Add_Blog_News.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/Components/Blog_News/Add_Blog_News.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Client/src/Components/Blog_News/Blog_News.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/Components/Blog_News/Blog_News.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Client/src/Components/Contact_Us/Contact_Us.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/Components/Contact_Us/Contact_Us.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/Components/Dashbored/Dashbored.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/Components/Dashbored/Dashbored.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Client/src/Components/Discription/HowIsWorks.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/Components/Discription/HowIsWorks.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Client/src/Components/FAQ/Add_FAQ.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/Components/FAQ/Add_FAQ.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Client/src/Components/FAQ/FAQ.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/Components/FAQ/FAQ.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Client/src/Components/Facilities/Add_Facilities.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/Components/Facilities/Add_Facilities.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Client/src/Components/Facilities/Facilities.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/Components/Facilities/Facilities.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/Components/Footer/Footer.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/Components/Footer/Footer.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Client/src/Components/Group/AddGroup.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/Components/Group/AddGroup.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Client/src/Components/Group/Group_Details.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/Components/Group/Group_Details.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Client/src/Components/Group/Show_Groups.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/Components/Group/Show_Groups.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/Components/Header/Header.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/Components/Header/Header.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/Components/Header/Sidebar.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/Components/Header/Sidebar.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Client/src/Components/Notification/Add_Notification.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/Components/Notification/Add_Notification.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Client/src/Components/Notification/Notification.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/Components/Notification/Notification.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Client/src/Components/Photos/Photos.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/Components/Photos/Photos.jsx" afterDir="false" />
@@ -38,6 +42,12 @@
       <change beforePath="$PROJECT_DIR$/Client/src/Components/Task/Show_All_Task.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/Components/Task/Show_All_Task.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Client/src/Components/Task/View_Task.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/Components/Task/View_Task.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Client/src/Components/Terms_Condition/Terms_Condition.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/Components/Terms_Condition/Terms_Condition.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/Services/ReportService.js" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/Services/ReportService.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/Services/RequrmentService.js" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/Services/RequrmentService.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/controllers/Report_Controller.js" beforeDir="false" afterPath="$PROJECT_DIR$/Server/controllers/Report_Controller.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/controllers/Requrment_Controller.js" beforeDir="false" afterPath="$PROJECT_DIR$/Server/controllers/Requrment_Controller.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/routers/Report_Route.js" beforeDir="false" afterPath="$PROJECT_DIR$/Server/routers/Report_Route.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/routers/Requrment_Route.js" beforeDir="false" afterPath="$PROJECT_DIR$/Server/routers/Requrment_Route.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -178,15 +188,7 @@
       <workItem from="1740542759613" duration="983000" />
       <workItem from="1740665664022" duration="8918000" />
       <workItem from="1740717015386" duration="4961000" />
-      <workItem from="1740747883481" duration="11949000" />
-    </task>
-    <task id="LOCAL-00006" summary="ADD: Update in Group file">
-      <option name="closed" value="true" />
-      <created>1738521617124</created>
-      <option name="number" value="00006" />
-      <option name="presentableId" value="LOCAL-00006" />
-      <option name="project" value="LOCAL" />
-      <updated>1738521617124</updated>
+      <workItem from="1740747883481" duration="22342000" />
     </task>
     <task id="LOCAL-00007" summary="ADD: Backend of Group all section and update frontend of add work">
       <option name="closed" value="true" />
@@ -572,14 +574,21 @@
       <option name="project" value="LOCAL" />
       <updated>1740760304505</updated>
     </task>
-    <option name="localTasksCounter" value="55" />
+    <task id="LOCAL-00055" summary="UPDATE: All Page Back Button.">
+      <option name="closed" value="true" />
+      <created>1740762515696</created>
+      <option name="number" value="00055" />
+      <option name="presentableId" value="LOCAL-00055" />
+      <option name="project" value="LOCAL" />
+      <updated>1740762515696</updated>
+    </task>
+    <option name="localTasksCounter" value="56" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="ADD: Salary Page and Payment Gateway." />
     <MESSAGE value="ADD: Facility Back-end." />
     <MESSAGE value="ADD: FAQ Page Front-end &amp; Back-end also add MAP." />
     <MESSAGE value="UPDATE: FAQ Front-end." />
@@ -604,6 +613,7 @@
     <MESSAGE value="ADD: Files Upload on cloudinary completed for all page." />
     <MESSAGE value="UPDATE: on document click Redirection." />
     <MESSAGE value="UPDATE: All Notification using library react-hot-toast." />
-    <option name="LAST_COMMIT_MESSAGE" value="UPDATE: All Notification using library react-hot-toast." />
+    <MESSAGE value="UPDATE: All Page Back Button." />
+    <option name="LAST_COMMIT_MESSAGE" value="UPDATE: All Page Back Button." />
   </component>
 </project>

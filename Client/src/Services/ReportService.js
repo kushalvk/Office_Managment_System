@@ -10,6 +10,15 @@ export const addReport = async (form) => {
     }
 }
 
+export const allReportsByUsername = async (username) => {
+    try {
+        const response = await axios.get(`${import.meta.env.VITE_REACT_APP_BACKEND_BASEURL}/all-reports/${username}`);
+        return response.data;
+    } catch (err) {
+        error(err)
+    }
+}
+
 export const allReports = async () => {
     try {
         const response = await axios.get(`${import.meta.env.VITE_REACT_APP_BACKEND_BASEURL}/all-reports`);

@@ -1,132 +1,206 @@
-import React, {useEffect, useState} from "react";
-import {loggedUser, updateUserProfile} from "../../Services/AuthService.js";
+import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { loggedUser, updateUserProfile } from "../../Services/AuthService.js";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
-import {useNavigate} from "react-router-dom";
 import toast from "react-hot-toast";
 
 function UserProfile() {
-
     const qualificationOptions = [
-        {value: "", label: "Select Qualification"},
-        {value: "High School", label: "High School"},
-        {value: "Diploma", label: "Diploma"},
-        {value: "Bachelor's Degree", label: "Bachelor's Degree"},
-        {value: "Master's Degree", label: "Master's Degree"},
-        {value: "PhD", label: "PhD"},
-        {value: "Other", label: "Other"},
+        { value: "", label: "Select Qualification" },
+        { value: "High School", label: "High School" },
+        { value: "Diploma", label: "Diploma" },
+        { value: "Bachelor's Degree", label: "Bachelor's Degree" },
+        { value: "Master's Degree", label: "Master's Degree" },
+        { value: "PhD", label: "PhD" },
+        { value: "Other", label: "Other" },
     ];
 
     const departmentOptions = [
-        {value: "", label: "Select Department"},
-        {value: "Human Resources", label: "Human Resources"},
-        {value: "Finance", label: "Finance"},
-        {value: "Information Technology", label: "Information Technology"},
-        {value: "Marketing", label: "Marketing"},
-        {value: "Sales", label: "Sales"},
-        {value: "Operations", label: "Operations"},
-        {value: "Customer Support", label: "Customer Support"},
-        {value: "Research and Development", label: "Research and Development"},
-        {value: "Legal", label: "Legal"},
-        {value: "Administration", label: "Administration"},
+        { value: "", label: "Select Department" },
+        { value: "Human Resources", label: "Human Resources" },
+        { value: "Finance", label: "Finance" },
+        { value: "Information Technology", label: "Information Technology" },
+        { value: "Marketing", label: "Marketing" },
+        { value: "Sales", label: "Sales" },
+        { value: "Operations", label: "Operations" },
+        { value: "Customer Support", label: "Customer Support" },
+        { value: "Research and Development", label: "Research and Development" },
+        { value: "Legal", label: "Legal" },
+        { value: "Administration", label: "Administration" },
     ];
 
     const workLocationOptions = [
-        {value: "", label: "Select Work Location"},
-        {value: "Office", label: "Office"},
-        {value: "Remote", label: "Remote"},
-        {value: "Hybrid", label: "Hybrid"},
-        {value: "On-Site", label: "On-Site"},
-        {value: "Client Location", label: "Client Location"},
+        { value: "", label: "Select Work Location" },
+        { value: "Office", label: "Office" },
+        { value: "Remote", label: "Remote" },
+        { value: "Hybrid", label: "Hybrid" },
+        { value: "On-Site", label: "On-Site" },
+        { value: "Client Location", label: "Client Location" },
     ];
 
-    const [loggedin, setLoggedin] = useState({});
+    const [loggedIn, setLoggedIn] = useState({});
     const [isEditing, setIsEditing] = useState(false);
     const navigate = useNavigate();
 
-    const handleInputChange = (e) => {
-        const {name, value, files} = e.target;
+    useEffect(() => {
+        const fetchLoggedInUser = async () => {
+            try {
+                const user = await loggedUser();
+                setLoggedIn(user);
+            } catch (e) {
+                console.log(e.message);
+                toast.error("Failed to load user profile.");
+            }
+        };
+        fetchLoggedInUser();
+    }, []);
 
-        if (files) {
-            setLoggedin((prevUser) => ({
-                ...prevUser,
-                [name]: files[0],
-            }));
-        } else {
-            setLoggedin((prevUser) => ({
-                ...prevUser,
-                [name]: value,
-            }));
-        }
+    const handleInputChange = (e) => {
+        const { name, value, files } = e.target;
+        setLoggedIn(prevUser => ({
+            ...prevUser,
+            [name]: files ? files[0] : value,
+        }));
     };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-
         try {
             const formData = new FormData();
-
-            for (const key in loggedin) {
-                if (loggedin[key] !== null && loggedin[key] !== undefined) {
-                    formData.append(key, loggedin[key]);
+            for (const key in loggedIn) {
+                if (loggedIn[key] !== null && loggedIn[key] !== undefined) {
+                    formData.append(key, loggedIn[key]);
                 }
             }
-
-            const response = await updateUserProfile(loggedin._id, formData);
-
-            setLoggedin(response);
+            const response = await updateUserProfile(loggedIn._id, formData);
+            setLoggedIn(response);
             setIsEditing(false);
             toast.success("Profile updated successfully!");
-            location.reload();
+            navigate(0); // Refresh the page instead of `location.reload()` for React Router compatibility
         } catch (error) {
             console.error("Error updating profile:", error.message);
             toast.error("Failed to update profile. Please try again.");
         }
     };
 
-    useEffect(() => {
-        const logged = async () => {
-            try {
-                setLoggedin(await loggedUser());
-            } catch (e) {
-                console.log(e.message);
-            }
-        }
-        logged();
-    }, [])
-
     return (
-        <div
-            className="relative isolate h-full p-6 lg:px-8 bg-gradient-to-r from-blue-800 to-blue-400 min-h-screen flex flex-col items-center justify-center">
+        <div className="min-h-screen bg-gradient-to-r from-blue-600 to-indigo-500 p-6 pt-15">
+            {/* Back Button */}
             <button
-                className="absolute sm:top-[7.5vw] top-[80px] right-[2.5vw] flex items-center text-white bg-green-600 p-2 px-4 rounded-lg shadow-md hover:bg-green-700 transition-transform hover:scale-105"
+                className="fixed top-27 right-4 flex items-center gap-2 bg-white text-blue-600 px-4 py-2 rounded-full shadow-lg hover:bg-blue-50 transition-all duration-300 z-10"
                 onClick={() => navigate(-1)}
             >
-                <ArrowBackIcon/> <p> Back </p>
+                <ArrowBackIcon sx={{ fontSize: 20 }} />
+                <span className="text-sm font-medium">Back</span>
             </button>
-            <h1 className="text-2xl font-bold text-center md:mt-14 text-white">{isEditing ? "Edit Profile" : "User Profile"}</h1>
-            <div className="bg-white p-6 rounded-lg shadow-lg max-w-4xl w-full space-y-6 mt-5">
+
+            {/* Header */}
+            <div className="max-w-3xl mx-auto text-center pt-16 pb-8">
+                <h1 className="text-4xl md:text-5xl font-bold text-white drop-shadow-lg animate-fade-in">
+                    {isEditing ? "Edit Profile" : "User Profile"}
+                </h1>
+            </div>
+
+            {/* Profile Card */}
+            <div className="max-w-4xl mx-auto bg-white rounded-xl shadow-2xl p-8">
                 {isEditing ? (
-                    <form onSubmit={handleSubmit} className="space-y-4">
-                        {/* Profile Photo Upload */}
-                        <div className="flex flex-col">
-                            <label className="font-semibold text-gray-700 capitalize">Profile Photo:</label>
+                    <form onSubmit={handleSubmit} className="space-y-6">
+                        {/* Profile Photo */}
+                        <div>
+                            <label className="block text-sm font-medium text-gray-700">Profile Photo</label>
                             <input
                                 type="file"
                                 name="profilePhoto"
                                 onChange={handleInputChange}
-                                className="border rounded px-3 py-2 w-full"
+                                className="w-full p-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none border-gray-300 mt-1 text-gray-700"
                                 accept="image/*"
                             />
                         </div>
 
-                        {/* Qualification Dropdown */}
-                        <div className="flex flex-col">
-                            <label className="font-semibold text-gray-700 capitalize">Qualification:</label>
+                        {/* Full Name */}
+                        <div>
+                            <label className="block text-sm font-medium text-gray-700">Full Name</label>
+                            <input
+                                type="text"
+                                name="fullName"
+                                value={loggedIn.fullName || ""}
+                                onChange={handleInputChange}
+                                className="w-full p-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none border-gray-300 mt-1"
+                            />
+                        </div>
+
+                        {/* Email */}
+                        <div>
+                            <label className="block text-sm font-medium text-gray-700">Email</label>
+                            <input
+                                type="email"
+                                name="email"
+                                value={loggedIn.email || ""}
+                                onChange={handleInputChange}
+                                className="w-full p-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none border-gray-300 mt-1"
+                            />
+                        </div>
+
+                        {/* Address */}
+                        <div>
+                            <label className="block text-sm font-medium text-gray-700">Address</label>
+                            <input
+                                type="text"
+                                name="address"
+                                value={loggedIn.address || ""}
+                                onChange={handleInputChange}
+                                className="w-full p-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none border-gray-300 mt-1"
+                            />
+                        </div>
+
+                        {/* Date of Birth */}
+                        <div>
+                            <label className="block text-sm font-medium text-gray-700">Date of Birth</label>
+                            <input
+                                type="date"
+                                name="dob"
+                                value={loggedIn.dob ? new Date(loggedIn.dob).toISOString().split("T")[0] : ""}
+                                onChange={handleInputChange}
+                                className="w-full p-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none border-gray-300 mt-1"
+                            />
+                        </div>
+
+                        {/* Gender */}
+                        <div>
+                            <label className="block text-sm font-medium text-gray-700">Gender</label>
+                            <select
+                                name="gender"
+                                value={loggedIn.gender || ""}
+                                onChange={handleInputChange}
+                                className="w-full p-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none border-gray-300 mt-1"
+                            >
+                                <option value="">Select Gender</option>
+                                <option value="male">Male</option>
+                                <option value="female">Female</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+
+                        {/* Mobile Number */}
+                        <div>
+                            <label className="block text-sm font-medium text-gray-700">Mobile Number</label>
+                            <input
+                                type="text"
+                                name="mobNo"
+                                value={loggedIn.mobNo || ""}
+                                onChange={handleInputChange}
+                                className="w-full p-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none border-gray-300 mt-1"
+                            />
+                        </div>
+
+                        {/* Qualification */}
+                        <div>
+                            <label className="block text-sm font-medium text-gray-700">Qualification</label>
                             <select
                                 name="qualification"
-                                value={loggedin.qualification || ""}
+                                value={loggedIn.qualification || ""}
                                 onChange={handleInputChange}
-                                className="border rounded px-3 py-2 w-full"
+                                className="w-full p-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none border-gray-300 mt-1"
                             >
                                 {qualificationOptions.map((option) => (
                                     <option key={option.value} value={option.value}>
@@ -136,14 +210,26 @@ function UserProfile() {
                             </select>
                         </div>
 
-                        {/* Department Dropdown */}
-                        <div className="flex flex-col">
-                            <label className="font-semibold text-gray-700 capitalize">Department:</label>
+                        {/* Username */}
+                        <div>
+                            <label className="block text-sm font-medium text-gray-700">Username</label>
+                            <input
+                                type="text"
+                                name="username"
+                                value={loggedIn.username || ""}
+                                onChange={handleInputChange}
+                                className="w-full p-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none border-gray-300 mt-1"
+                            />
+                        </div>
+
+                        {/* Department */}
+                        <div>
+                            <label className="block text-sm font-medium text-gray-700">Department</label>
                             <select
                                 name="department"
-                                value={loggedin.department || ""}
+                                value={loggedIn.department || ""}
                                 onChange={handleInputChange}
-                                className="border rounded px-3 py-2 w-full"
+                                className="w-full p-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none border-gray-300 mt-1"
                             >
                                 {departmentOptions.map((option) => (
                                     <option key={option.value} value={option.value}>
@@ -153,14 +239,14 @@ function UserProfile() {
                             </select>
                         </div>
 
-                        {/* Work Location Dropdown */}
-                        <div className="flex flex-col">
-                            <label className="font-semibold text-gray-700 capitalize">Work Location:</label>
+                        {/* Work Location */}
+                        <div>
+                            <label className="block text-sm font-medium text-gray-700">Work Location</label>
                             <select
                                 name="workLocation"
-                                value={loggedin.workLocation || ""}
+                                value={loggedIn.workLocation || ""}
                                 onChange={handleInputChange}
-                                className="border rounded px-3 py-2 w-full"
+                                className="w-full p-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none border-gray-300 mt-1"
                             >
                                 {workLocationOptions.map((option) => (
                                     <option key={option.value} value={option.value}>
@@ -170,110 +256,85 @@ function UserProfile() {
                             </select>
                         </div>
 
-                        {/* Other Fields */}
-                        {Object.keys(loggedin).map((key) => (
-                            key !== "_id" && key !== "password" && key !== "profilePhoto" && key !== "__v" &&
-                            key !== "qualification" && key !== "department" && key !== "workLocation" && key !== "updatedAt" && key !== "createdAt" && (
-                                <div key={key} className="flex flex-col">
-                                    <label className="font-semibold text-gray-700 capitalize">
-                                        {key.replace(/([A-Z])/g, ' $1').trim()}:
-                                    </label>
-                                    {key === "role" ? (
-                                        <select
-                                            name={key}
-                                            value={loggedin[key]}
-                                            onChange={handleInputChange}
-                                            className="border rounded px-3 py-2 w-full"
-                                        >
-                                            <option value="Admin">Admin</option>
-                                            <option value="Employee">Employee</option>
-                                            <option value="Manager">Manager</option>
-                                        </select>
-                                    ) : key === "resume" ? (
-                                        <input
-                                            type="file"
-                                            name={key}
-                                            onChange={handleInputChange}
-                                            className="border rounded px-3 py-2 w-full"
-                                            accept=".pdf,.doc,.docx"
-                                        />
-                                    ) : (
-                                        <input
-                                            type={key === "dob" ? "date" : "text"}
-                                            name={key}
-                                            value={loggedin[key]}
-                                            onChange={handleInputChange}
-                                            className="border rounded px-3 py-2 w-full"
-                                        />
-                                    )}
-                                </div>
-                            )
-                        ))}
+                        {/* Resume */}
+                        <div>
+                            <label className="block text-sm font-medium text-gray-700">Resume</label>
+                            <input
+                                type="file"
+                                name="resume"
+                                onChange={handleInputChange}
+                                className="w-full p-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none border-gray-300 mt-1 text-gray-700"
+                                accept=".pdf,.doc,.docx"
+                            />
+                        </div>
 
                         {/* Save and Cancel Buttons */}
                         <div className="flex justify-center gap-4">
-                            <button type="submit"
-                                    className="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-500">
+                            <button
+                                type="submit"
+                                className="px-6 py-2 bg-green-600 text-white rounded-lg shadow-md hover:bg-green-700 transition-all duration-300"
+                            >
                                 Save Changes
                             </button>
-                            <button type="button" onClick={() => setIsEditing(false)}
-                                    className="bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-400">
+                            <button
+                                type="button"
+                                onClick={() => setIsEditing(false)}
+                                className="px-6 py-2 bg-gray-600 text-white rounded-lg shadow-md hover:bg-gray-700 transition-all duration-300"
+                            >
                                 Cancel
                             </button>
                         </div>
                     </form>
                 ) : (
-                    <div className="space-y-4">
-                        {/* Display Profile Photo */}
-                        <div className="flex flex-col items-center">
+                    <div className="space-y-6">
+                        {/* Profile Photo */}
+                        <div className="flex justify-center">
                             <img
                                 src={
-                                    loggedin.profilePhoto
-                                        ? `${loggedin.profilePhoto}`
+                                    loggedIn.profilePhoto
+                                        ? `${loggedIn.profilePhoto}`
                                         : "https://www.pngmart.com/files/23/Profile-PNG-Photo.png"
                                 }
                                 alt="Profile Photo"
-                                className="w-24 h-24 rounded-full"
+                                className="w-32 h-32 rounded-full border-4 border-gray-200 shadow-md transition-transform hover:scale-105 duration-300"
                             />
                         </div>
 
-                        {/* Display Other Fields */}
-                        {Object.keys(loggedin).map((key) => (
-                            key !== "_id" && key !== "password" && key !== "profilePhoto" && key !== "updatedAt" && key !== "createdAt" && key !== "__v" && (
-                                <div key={key} className="flex justify-between">
-                    <span className="font-semibold text-gray-700 capitalize">
-                        {key.replace(/([A-Z])/g, ' $1').trim()}:
-                    </span>
-                                    {key === "resume" ? (
-                                        <a href={`${loggedin[key]}`}
-                                           className="text-blue-600" target="_blank">
-                                            Click to show resume
-                                        </a>
-                                    ) : (
-                                        <span className="text-gray-600">{loggedin[key]}</span>
-                                    )}
-                                </div>
-                            )
-                        ))}
-                        {loggedin.createdAt && (
-                            <div className="flex justify-between">
-                                <span className="font-semibold text-gray-700">Account Created:</span>
-                                <span
-                                    className="text-gray-600">{new Date(loggedin.createdAt).toLocaleDateString()}</span>
-                            </div>
-                        )}
-                        {loggedin.updatedAt && (
-                            <div className="flex justify-between">
-                                <span className="font-semibold text-gray-700">Last Updated:</span>
-                                <span
-                                    className="text-gray-600">{new Date(loggedin.updatedAt).toLocaleDateString()}</span>
-                            </div>
-                        )}
+                        {/* Profile Details */}
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            {Object.keys(loggedIn).map((key) => (
+                                key !== "_id" && key !== "password" && key !== "profilePhoto" && key !== "__v" && (
+                                    <div key={key} className="flex justify-between">
+                                        <span className="font-semibold text-gray-700 capitalize">
+                                            {key.replace(/([A-Z])/g, ' $1').trim()}:
+                                        </span>
+                                        {key === "resume" ? (
+                                            <a
+                                                href={`${loggedIn[key]}`}
+                                                className="text-blue-600 hover:text-blue-800"
+                                                target="_blank"
+                                                rel="noopener noreferrer"
+                                            >
+                                                View Resume
+                                            </a>
+                                        ) : (
+                                            <span className="text-gray-600">
+                                                {key === "createdAt" || key === "updatedAt"
+                                                    ? new Date(loggedIn[key]).toLocaleDateString()
+                                                    : loggedIn[key]}
+                                            </span>
+                                        )}
+                                    </div>
+                                )
+                            ))}
+                        </div>
 
                         {/* Edit Profile Button */}
                         <div className="flex justify-center">
-                            <button onClick={() => setIsEditing(true)}
-                                    className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-500">
+                            <button
+                                onClick={() => setIsEditing(true)}
+                                className="px-6 py-2 bg-blue-600 text-white rounded-lg shadow-md hover:bg-blue-700 transition-all duration-300"
+                            >
                                 Edit Profile
                             </button>
                         </div>

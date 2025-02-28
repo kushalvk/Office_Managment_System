@@ -1,13 +1,15 @@
 const express = require('express')
 const {
     addReportController, allReportController, approveReportController, deleteReportController,
-    newlyAddedReportsController, pendingApprovalController
+    newlyAddedReportsController, pendingApprovalController, allReportControllerByUsername
 } = require("../controllers/Report_Controller");
 const {default: upload} = require("../middlewares/uploadMiddleware");
 
 const router = express.Router()
 
 router.post('/add-report', upload.single("reportdocument"), addReportController)
+
+router.get('/all-reports/:username', allReportControllerByUsername)
 
 router.get('/all-reports', allReportController)
 

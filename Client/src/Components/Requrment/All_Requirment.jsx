@@ -1,6 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { allRequrments, updteRequrments, updteRequrmentsEmp } from "../../Services/RequrmentService.js";
+import {
+    allRequrments,
+    allRequrmentsByUsername,
+    updteRequrments,
+    updteRequrmentsEmp
+} from "../../Services/RequrmentService.js";
 import { loggedUser } from "../../Services/AuthService.js";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import toast from "react-hot-toast";
@@ -24,16 +29,28 @@ function AllRequirements() {
     }, []);
 
     useEffect(() => {
-        const fetchRequirements = async () => {
-            try {
-                setRequirements(await allRequrments());
-            } catch (e) {
-                console.log(e);
-                toast.error("Failed to fetch requirements");
-            }
-        };
-        fetchRequirements();
-    }, []);
+        if (loggedin?.role === "Manager") {
+            const fetchRequirements = async () => {
+                try {
+                    setRequirements(await allRequrments());
+                } catch (e) {
+                    console.log(e);
+                    toast.error("Failed to fetch requirements");
+                }
+            };
+            fetchRequirements();
+        } else {
+            const fetchRequirements = async () => {
+                try {
+                    setRequirements(await allRequrmentsByUsername(loggedin?.username));
+                } catch (e) {
+                    console.log(e);
+                    toast.error("Failed to fetch requirements");
+                }
+            };
+            fetchRequirements();
+        }
+    }, [loggedin?.role, loggedin?.username]);
 
     const navigate = useNavigate();
 
@@ -71,107 +88,128 @@ function AllRequirements() {
     };
 
     return (
-        <div className="relative h-full p-6 lg:px-8 bg-gradient-to-r from-blue-800 to-blue-400 min-h-screen">
+        <div className="min-h-screen bg-gradient-to-r from-blue-600 to-indigo-500 p-5 pt-15">
+            {/* Back Button */}
             <button
-                className="absolute sm:top-[7.5vw] top-[80px] right-[2.5vw] flex items-center text-white bg-green-600 p-2 px-4 rounded-lg shadow-md hover:bg-green-700 transition-transform hover:scale-105"
+                className="fixed top-27 right-4 flex items-center gap-2 bg-white text-blue-600 px-4 py-2 rounded-full shadow-lg hover:bg-blue-50 transition-all duration-300 z-10"
                 onClick={() => navigate(-1)}
             >
-                <ArrowBackIcon/> <p> Back </p>
+                <ArrowBackIcon sx={{ fontSize: 20 }} />
+                <span className="text-sm font-medium">Back</span>
             </button>
-            <h1 className="text-white text-4xl font-bold mb-4 mt-20 text-center">All Requirements</h1>
 
-            <div className="flex justify-center">
+            {/* Header */}
+            <div className="max-w-3xl mx-auto text-center pt-16 pb-8">
+                <h1 className="text-4xl md:text-5xl font-bold text-white drop-shadow-lg animate-fade-in">
+                    All Requirements
+                </h1>
+            </div>
+
+            {/* Add Requirement Button */}
+            <div className="flex justify-center mb-8">
                 <button
                     onClick={() => navigate("/submit-requrment")}
-                    className="py-2 px-4 rounded-lg shadow-md hover:shadow-lg transition-transform duration-300 hover:scale-105 bg-green-600 text-white font-semibold hover:bg-green-500 focus:outline-none focus:ring-2 focus:ring-green-700"
+                    className="px-6 py-2 bg-green-600 text-white rounded-lg shadow-md hover:bg-green-700 transition-all duration-300"
                 >
                     Add Requirement
                 </button>
             </div>
 
-            <div className="space-y-4 mt-6">
-                {requirements.map((requirement, idx) => (
-                    <div
-                        key={idx}
-                        className="flex flex-col sm:flex-row sm:items-center justify-between bg-white p-4 rounded-lg shadow-md transform transition-transform duration-300 hover:-translate-y-1 hover:scale-105 hover:shadow-2xl"
-                    >
-                        <div className="flex flex-col text-center sm:text-left">
-                            {editRequirement === requirement._id ? (
-                                <>
-                                    <input
-                                        type="text"
-                                        name="name"
-                                        value={editedData.name}
-                                        onChange={handleChange}
-                                        className="border border-gray-300 p-2 rounded-md w-full"
-                                    />
-                                    <input
-                                        type="text"
-                                        name="reason"
-                                        value={editedData.reason}
-                                        onChange={handleChange}
-                                        className="border border-gray-300 p-2 rounded-md w-full mt-2"
-                                    />
-                                </>
-                            ) : (
-                                <>
-                                    <h4 className="text-2xl font-bold text-gray-800">{requirement.name}</h4>
-                                    <p className="text-sm font-medium text-gray-800">{requirement.reason}</p>
-                                </>
-                            )}
-                            <p className="text-xs text-gray-500 mt-1">Username: {requirement.username}</p>
-                            <p className="text-xs text-gray-500 mt-1">Date: {new Date(requirement.date).toLocaleDateString()}</p>
-                            <p
-                                className={`text-sm font-medium mt-1 ${
-                                    requirement.requrmentStatus === "Approved" ? "text-green-600" :
-                                        requirement.requrmentStatus === "Cancelled" ? "text-red-600" : "text-gray-600"
-                                }`}
+            {/* Requirement List */}
+            <div className="max-w-4xl mx-auto">
+                {requirements.length === 0 ? (
+                    <p className="text-center text-lg text-gray-200 font-semibold py-4 bg-white rounded-lg shadow-md">
+                        No requirements submitted yet.
+                    </p>
+                ) : (
+                    <div className="space-y-6">
+                        {requirements.map((requirement, idx) => (
+                            <div
+                                key={idx}
+                                className="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-all duration-300 flex flex-col sm:flex-row justify-between items-start sm:items-center"
                             >
-                                Status: {requirement.requrmentStatus}
-                            </p>
-                        </div>
-                        <div className="flex flex-wrap justify-center sm:justify-start gap-2 mt-2 sm:mt-0">
-                            {loggedin?.role === "Manager" ? (
-                                <>
-                                    {requirement.requrmentStatus === "Pending" && (
+                                {/* Requirement Details */}
+                                <div className="flex-grow">
+                                    {editRequirement === requirement._id ? (
                                         <>
-                                            <button
-                                                onClick={() => updateStatus(requirement._id, "Approved")}
-                                                className="py-2 px-4 w-full sm:w-auto rounded-lg bg-green-600 text-white font-semibold hover:bg-green-500 focus:outline-none focus:ring-2 focus:ring-green-700"
-                                            >
-                                                Approve
-                                            </button>
-                                            <button
-                                                onClick={() => updateStatus(requirement._id, "Cancelled")}
-                                                className="py-2 px-4 w-full sm:w-auto rounded-lg bg-red-600 text-white font-semibold hover:bg-red-500 focus:outline-none focus:ring-2 focus:ring-red-700"
-                                            >
-                                                Cancel
-                                            </button>
+                                            <input
+                                                type="text"
+                                                name="name"
+                                                value={editedData.name}
+                                                onChange={handleChange}
+                                                className="border border-gray-300 p-2 rounded-md w-full"
+                                            />
+                                            <input
+                                                type="text"
+                                                name="reason"
+                                                value={editedData.reason}
+                                                onChange={handleChange}
+                                                className="border border-gray-300 p-2 rounded-md w-full mt-2"
+                                            />
+                                        </>
+                                    ) : (
+                                        <>
+                                            <h4 className="text-xl font-semibold text-gray-800">{requirement.name}</h4>
+                                            <p className="text-gray-600 mt-1">{requirement.reason}</p>
                                         </>
                                     )}
-                                </>
-                            ) : (
-                                <>
-                                    {editRequirement === requirement._id ? (
-                                        <button
-                                            onClick={() => handleSave(requirement._id)}
-                                            className="py-2 px-4 w-full sm:w-auto rounded-lg bg-blue-600 text-white font-semibold hover:bg-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-700"
-                                        >
-                                            Save
-                                        </button>
+                                    <p className="text-sm text-gray-500 mt-1">Username: {requirement.username}</p>
+                                    <p className="text-sm text-gray-500 mt-1">Date: {new Date(requirement.date).toLocaleDateString()}</p>
+                                    <p
+                                        className={`text-sm font-medium mt-1 ${
+                                            requirement.requrmentStatus === "Approved" ? "text-green-600" :
+                                                requirement.requrmentStatus === "Cancelled" ? "text-red-600" : "text-gray-600"
+                                        }`}
+                                    >
+                                        Status: {requirement.requrmentStatus}
+                                    </p>
+                                </div>
+
+                                {/* Buttons */}
+                                <div className="flex gap-4 mt-4 sm:mt-0">
+                                    {loggedin?.role === "Manager" ? (
+                                        <>
+                                            {requirement.requrmentStatus === "Pending" && (
+                                                <>
+                                                    <button
+                                                        onClick={() => updateStatus(requirement._id, "Approved")}
+                                                        className="px-4 py-2 bg-green-600 text-white rounded-lg shadow-md hover:bg-green-700 transition-all duration-300"
+                                                    >
+                                                        Approve
+                                                    </button>
+                                                    <button
+                                                        onClick={() => updateStatus(requirement._id, "Cancelled")}
+                                                        className="px-4 py-2 bg-red-600 text-white rounded-lg shadow-md hover:bg-red-700 transition-all duration-300"
+                                                    >
+                                                        Cancel
+                                                    </button>
+                                                </>
+                                            )}
+                                        </>
                                     ) : (
-                                        <button
-                                            onClick={() => handleEdit(requirement)}
-                                            className="py-2 px-4 w-full sm:w-auto rounded-lg bg-green-500 text-white font-semibold hover:bg-green-400 focus:outline-none focus:ring-2 focus:ring-yellow-600"
-                                        >
-                                            Update
-                                        </button>
+                                        <>
+                                            {editRequirement === requirement._id ? (
+                                                <button
+                                                    onClick={() => handleSave(requirement._id)}
+                                                    className="px-4 py-2 bg-blue-600 text-white rounded-lg shadow-md hover:bg-blue-700 transition-all duration-300"
+                                                >
+                                                    Save
+                                                </button>
+                                            ) : (
+                                                <button
+                                                    onClick={() => handleEdit(requirement)}
+                                                    className="px-4 py-2 bg-green-500 text-white rounded-lg shadow-md hover:bg-green-400 transition-all duration-300"
+                                                >
+                                                    Update
+                                                </button>
+                                            )}
+                                        </>
                                     )}
-                                </>
-                            )}
-                        </div>
+                                </div>
+                            </div>
+                        ))}
                     </div>
-                ))}
+                )}
             </div>
         </div>
     );

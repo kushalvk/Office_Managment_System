@@ -1,288 +1,262 @@
-import {useEffect, useState} from "react";
-import {useNavigate} from "react-router-dom";
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import LOGO from "../../../../Storage/LOGO1.svg";
-import {loggedUser} from "../../Services/AuthService.js";
+import { loggedUser } from "../../Services/AuthService.js";
 
 function Header() {
     const navigate = useNavigate();
     const [menuOpen, setMenuOpen] = useState(false);
-    const [loggedin, setLoggedin] = useState({});
+    const [loggedIn, setLoggedIn] = useState(null); // Changed to null for clearer state
 
-    const toggleMenu = () => {
-        setMenuOpen(!menuOpen);
+    const toggleMenu = () => setMenuOpen(!menuOpen);
+
+    const handleLogin = () => {
+        navigate('/login');
+        setMenuOpen(false);
     };
 
-    const HandleLogin = () => {
-        navigate('/login');
-        setMenuOpen(false)
-    }
-
     const handleProfile = () => {
-        if (loggedin) {
-            navigate('/profile')
-            setMenuOpen(false)
+        if (loggedIn) {
+            navigate('/profile');
+            setMenuOpen(false);
         } else {
-            alert("Your session is Expired Logged in First");
-            navigate('/login')
+            alert("Your session has expired. Please log in first.");
+            navigate('/login');
         }
-    }
+    };
 
-    const HandleLogout = () => {
+    const handleLogout = () => {
         localStorage.clear();
         navigate('/login');
-        location.reload();
-    }
+        window.location.reload(); // Use window.location.reload for clarity
+    };
 
     useEffect(() => {
-        const logged = async () => {
+        const fetchLoggedUser = async () => {
             try {
-                setLoggedin(await loggedUser());
+                const user = await loggedUser();
+                setLoggedIn(user);
             } catch (e) {
                 console.log(e.message);
+                setLoggedIn(null);
             }
-        }
-        logged();
-    }, [])
+        };
+        fetchLoggedUser();
+    }, []);
 
     return (
-        <>
-            <header className="absolute inset-x-0 top-0 z-50">
-                <nav className="flex items-center justify-between p-6 lg:px-8" aria-label="Global">
-                    <div className="flex lg:flex-1">
-                        <a href="#" className="-m-1.5 p-1.5">
-                            <span className="sr-only">Your Company</span>
-                            <img
-                                className="h-12 w-auto rounded-full"
-                                src={LOGO}
-                                alt="logo"
-                            />
-                        </a>
-                    </div>
+        <header className="fixed inset-x-0 top-0 z-50 bg-white shadow-md">
+            <nav className="flex items-center justify-between p-4 lg:px-8" aria-label="Global">
+                {/* Logo */}
+                <div className="flex lg:flex-1">
+                    <a href="/" className="-m-1.5 p-1.5">
+                        <span className="sr-only">Your Company</span>
+                        <img
+                            className="h-15 w-auto rounded-full transition-transform hover:scale-105"
+                            src={LOGO}
+                            alt="Logo"
+                        />
+                    </a>
+                </div>
 
-                    <div className="flex lg:hidden">
-                        <button
-                            type="button"
-                            onClick={toggleMenu}
-                            className="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-gray-700"
+                {/* Hamburger Menu (Mobile) */}
+                <div className="flex lg:hidden">
+                    <button
+                        type="button"
+                        onClick={toggleMenu}
+                        className="p-2 text-gray-700 hover:text-blue-600 focus:outline-none"
+                    >
+                        <span className="sr-only">Open main menu</span>
+                        <svg
+                            className="h-6 w-6"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            strokeWidth="1.5"
+                            stroke="currentColor"
+                            aria-hidden="true"
                         >
-                            <span className="sr-only">Open main menu</span>
-                            <svg
-                                className="h-6 w-6"
-                                fill="none"
-                                viewBox="0 0 24 24"
-                                strokeWidth="1.5"
-                                stroke="currentColor"
-                                aria-hidden="true"
-                            >
-                                <path
-                                    strokeLinecap="round"
-                                    strokeLinejoin="round"
-                                    d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
-                                />
-                            </svg>
-                        </button>
-                    </div>
-
-                    <div className="hidden lg:flex lg:gap-x-12">
-                        <a href="/" className="text-sm font-semibold text-gray-900">Home</a>
-                        <a href="/show-group" className="text-sm font-semibold text-gray-900">Group</a>
-                        {loggedin && (<><a href="/show-all-tasks"
-                                           className="text-sm font-semibold text-gray-900">Tasks</a>
-                            <a href="/all-reports" className="text-sm font-semibold text-gray-900">Reports</a>
-                            <a href="/Show-all-project"
-                               className="text-sm font-semibold text-gray-900">Projects</a></>)}
-                    </div>
-
-                    <div className="hidden lg:flex lg:flex-1 lg:justify-end items-center gap-4">
-
-                        {!loggedin ?
-                            <button
-                                className="group group-hover:before:duration-500 group-hover:after:duration-500 after:duration-500 hover:border-rose-300 hover:before:[box-shadow:_20px_20px_20px_30px_#a21caf] duration-500 before:duration-500 hover:duration-500 underline underline-offset-2 hover:after:-right-8 hover:before:right-12 hover:before:-bottom-8 hover:before:blur hover:underline hover:underline-offset-4 origin-left hover:decoration-2 hover:text-rose-300 relative bg-neutral-800 h-16 w-60 border text-left p-3 text-gray-50 text-base font-bold rounded-lg overflow-hidden before:absolute before:w-12 before:h-12 before:content[''] before:right-1 before:top-1 before:z-10 before:bg-violet-500 before:rounded-full before:blur-lg after:absolute after:z-10 after:w-20 after:h-20 after:content[''] after:bg-rose-300 after:right-8 after:top-3 after:rounded-full after:blur-lg"
-                                onClick={HandleLogin}
-                            >
-                                Login
-                            </button>
-                            :
-                            <>
-                                {/* Bell Button */}
-                                <button
-                                    type="button"
-                                    className="relative text-gray-400 hover:text-gray-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                                >
-                                    <a href="/notification">
-                                        <span className="sr-only">View notifications</span>
-                                        <span className="relative flex h-3 w-3 ml-3 pt-2">
-                                    <span
-                                        className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
-                                    <span className="relative inline-flex rounded-full h-3 w-3 bg-red-500  "></span>
-                                </span>
-
-                                        <svg
-                                            className="h-6 w-6"
-                                            fill="none"
-                                            viewBox="0 0 24 24"
-                                            strokeWidth="1.5"
-                                            stroke="currentColor"
-                                            aria-hidden="true"
-                                        >
-                                            <path
-                                                strokeLinecap="round"
-                                                strokeLinejoin="round"
-                                                d="M14.857 17.082a23.848 23.848 0 0 0 5.454-1.31A8.967 8.967 0 0 1 18 9.75V9A6 6 0 0 0 6 9v.75a8.967 8.967 0 0 1-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 0 1-5.714 0m5.714 0a3 3 0 1 1-5.714 0"
-                                            />
-                                        </svg>
-                                    </a>
-                                </button>
-                                <button className="relative h-16 w-16">
-                                    <img
-                                        className="h-full w-full rounded-full object-cover border-2 border-gray-200"
-                                        src={
-                                            loggedin?.profilePhoto
-                                                ? `${import.meta.env.VITE_REACT_APP_BACKEND_BASEURL}/uplodes/${loggedin.profilePhoto}`
-                                                : "https://www.pngmart.com/files/23/Profile-PNG-Photo.png"
-                                        }
-                                        alt="Profile"
-                                        onClick={handleProfile}
-                                    />
-                                </button>
-                                <button
-                                    className="group group-hover:before:duration-500 group-hover:after:duration-500 after:duration-500 hover:border-rose-300 hover:before:[box-shadow:_20px_20px_20px_30px_#a21caf] duration-500 before:duration-500 hover:duration-500 underline underline-offset-2 hover:after:-right-8 hover:before:right-12 hover:before:-bottom-8 hover:before:blur hover:underline hover:underline-offset-4 origin-left hover:decoration-2 hover:text-rose-300 relative bg-neutral-800 h-16 w-60 border text-left p-3 text-gray-50 text-base font-bold rounded-lg overflow-hidden before:absolute before:w-12 before:h-12 before:content[''] before:right-1 before:top-1 before:z-10 before:bg-violet-500 before:rounded-full before:blur-lg after:absolute after:z-10 after:w-20 after:h-20 after:content[''] after:bg-rose-300 after:right-8 after:top-3 after:rounded-full after:blur-lg"
-                                    onClick={HandleLogout}
-                                >
-                                    Logout
-                                </button>
-                            </>
-                        }
-                    </div>
-                </nav>
-
-                <div
-                    className={`fixed inset-y-0 right-0 z-50 w-full max-w-sm bg-white px-6 py-6 sm:ring-1 sm:ring-gray-900/10 transform ${menuOpen ? "translate-x-0 opacity-100" : "translate-x-full opacity-0"
-                    } transition-all duration-500 ease-in-out`}
-                >
-                    <div className="flex items-center justify-between">
-                        <a href="#" className="-m-1.5 p-1.5">
-                            <span className="sr-only">Your Company</span>
-                            <img
-                                className="h-8 w-auto"
-                                src={LOGO}
-                                alt=""
+                            <path
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
                             />
-                        </a>
-                        <button
-                            type="button"
-                            onClick={toggleMenu}
-                            className="-m-2.5 rounded-md p-2.5 text-gray-700"
-                        >
-                            <span className="sr-only">Close menu</span>
-                            <svg
-                                className="h-6 w-6"
-                                fill="none"
-                                viewBox="0 0 24 24"
-                                strokeWidth="1.5"
-                                stroke="currentColor"
-                                aria-hidden="true"
-                            >
-                                <path
-                                    strokeLinecap="round"
-                                    strokeLinejoin="round"
-                                    d="M6 18L18 6M6 6l12 12"
-                                />
-                            </svg>
-                        </button>
-                    </div>
-                    <div className="mt-6">
-                        <a href="/" className="block px-3 py-2 text-base font-semibold text-gray-900 hover:bg-gray-100">
-                            Home
-                        </a>
-                        <a href="/show-group" className="block px-3 py-2 text-base font-semibold text-gray-900 hover:bg-gray-100">
-                            Group
-                        </a>
-                        {loggedin && (<>
-                            <a href="/show-all-tasks"
-                               className="block px-3 py-2 text-base font-semibold text-gray-900 hover:bg-gray-100">
+                        </svg>
+                    </button>
+                </div>
+
+                {/* Desktop Navigation */}
+                <div className="hidden lg:flex lg:gap-x-8">
+                    <a href="/" className="text-md font-semibold text-gray-900 hover:text-blue-600 transition-colors">
+                        Home
+                    </a>
+                    <a href="/show-group" className="text-md font-semibold text-gray-900 hover:text-blue-600 transition-colors">
+                        Group
+                    </a>
+                    {loggedIn && (
+                        <>
+                            <a href="/show-all-tasks" className="text-md font-semibold text-gray-900 hover:text-blue-600 transition-colors">
                                 Tasks
                             </a>
-                            <a href="/all-reports"
-                               className="block px-3 py-2 text-base font-semibold text-gray-900 hover:bg-gray-100">
+                            <a href="/all-reports" className="text-md font-semibold text-gray-900 hover:text-blue-600 transition-colors">
                                 Reports
                             </a>
-                            <a href="/Show-all-project"
-                               className="block px-3 py-2 text-base font-semibold text-gray-900 hover:bg-gray-100">
+                            <a href="/Show-all-project" className="text-md font-semibold text-gray-900 hover:text-blue-600 transition-colors">
                                 Projects
                             </a>
-                        </>)}
-                        <div className="flex flex-col gap-7">
-                            {loggedin && <div className="flex items-center justify-between w-full">
-                                <div className="flex items-center">
-                                    <button className="mt-5 ml-3 relative h-16 w-16">
-                                        <img
-                                            className="h-full w-full rounded-full object-cover border-2 border-gray-200"
-                                            src={
-                                                loggedin?.profilePhoto
-                                                    ? `${loggedin.profilePhoto}`
-                                                    : "https://www.pngmart.com/files/23/Profile-PNG-Photo.png"
-                                            }
-                                            alt="Profile"
-                                            onClick={handleProfile}
-                                        />
-                                    </button>
-                                    <div className="flex flex-col ml-3">
-                                        <h4>{loggedin.fullName}</h4>
-                                        <p>{loggedin.email}</p>
-                                    </div>
-                                </div>
-
-                                <button
-                                    type="button"
-                                    className="relative text-gray-400 hover:text-gray-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                                >
-                                    <a href="/notification">
-                                        <span className="sr-only">View notifications</span>
-                                        <span className="relative flex h-3 w-3 ml-3 pt-2">
-                                            <span
-                                                className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
-                                            <span
-                                                className="relative inline-flex rounded-full h-3 w-3 bg-red-500  "></span>
-                                        </span>
-                                        <svg
-                                            className="h-6 w-6"
-                                            fill="none"
-                                            viewBox="0 0 24 24"
-                                            strokeWidth="1.5"
-                                            stroke="currentColor"
-                                            aria-hidden="true"
-                                        >
-                                            <path
-                                                strokeLinecap="round"
-                                                strokeLinejoin="round"
-                                                d="M14.857 17.082a23.848 23.848 0 0 0 5.454-1.31A8.967 8.967 0 0 1 18 9.75V9A6 6 0 0 0 6 9v.75a8.967 8.967 0 0 1-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 0 1-5.714 0m5.714 0a3 3 0 1 1-5.714 0"
-                                            />
-                                        </svg>
-                                    </a>
-                                </button>
-                            </div>}
-
-                            {!loggedin ?
-                                <button
-                                    className="group group-hover:before:duration-500 group-hover:after:duration-500 after:duration-500 hover:border-rose-300 hover:before:[box-shadow:_20px_20px_20px_30px_#a21caf] duration-500 before:duration-500 hover:duration-500 underline underline-offset-2 hover:after:-right-8 hover:before:right-12 hover:before:-bottom-8 hover:before:blur hover:underline hover:underline-offset-4 origin-left hover:decoration-2 hover:text-rose-300 relative bg-neutral-800 h-16 w-60 border text-left p-3 text-gray-50 text-base font-bold rounded-lg overflow-hidden before:absolute before:w-12 before:h-12 before:content[''] before:right-1 before:top-1 before:z-10 before:bg-violet-500 before:rounded-full before:blur-lg after:absolute after:z-10 after:w-20 after:h-20 after:content[''] after:bg-rose-300 after:right-8 after:top-3 after:rounded-full after:blur-lg"
-                                    onClick={HandleLogin}
-                                >
-                                    Login
-                                </button>
-                                :
-                                <button
-                                    className="group group-hover:before:duration-500 group-hover:after:duration-500 after:duration-500 hover:border-rose-300 hover:before:[box-shadow:_20px_20px_20px_30px_#a21caf] duration-500 before:duration-500 hover:duration-500 underline underline-offset-2 hover:after:-right-8 hover:before:right-12 hover:before:-bottom-8 hover:before:blur hover:underline hover:underline-offset-4 origin-left hover:decoration-2 hover:text-rose-300 relative bg-neutral-800 h-16 w-60 border text-left p-3 text-gray-50 text-base font-bold rounded-lg overflow-hidden before:absolute before:w-12 before:h-12 before:content[''] before:right-1 before:top-1 before:z-10 before:bg-violet-500 before:rounded-full before:blur-lg after:absolute after:z-10 after:w-20 after:h-20 after:content[''] after:bg-rose-300 after:right-8 after:top-3 after:rounded-full after:blur-lg"
-                                    onClick={HandleLogout}
-                                >
-                                    Logout
-                                </button>
-                            }
-                        </div>
-                    </div>
+                        </>
+                    )}
                 </div>
-            </header>
-        </>
+
+                {/* Desktop User Actions */}
+                <div className="hidden lg:flex lg:flex-1 lg:justify-end items-center gap-4">
+                    {!loggedIn ? (
+                        <button
+                            onClick={handleLogin}
+                            className="group group-hover:before:duration-500 group-hover:after:duration-500 after:duration-500 hover:border-rose-300 hover:before:[box-shadow:_20px_20px_20px_30px_#a21caf] duration-500 before:duration-500 hover:duration-500 underline underline-offset-2 hover:after:-right-8 hover:before:right-12 hover:before:-bottom-8 hover:before:blur hover:underline hover:underline-offset-4 origin-left hover:decoration-2 hover:text-rose-300 relative bg-neutral-800 h-16 w-60 border text-left p-3 text-gray-50 text-base font-bold rounded-lg overflow-hidden before:absolute before:w-12 before:h-12 before:content[''] before:right-1 before:top-1 before:z-10 before:bg-violet-500 before:rounded-full before:blur-lg after:absolute after:z-10 after:w-20 after:h-20 after:content[''] after:bg-rose-300 after:right-8 after:top-3 after:rounded-full after:blur-lg"
+                        >
+                            Login
+                        </button>
+                    ) : (
+                        <>
+                            {/* Notification Bell */}
+                            <a href="/notification" className="relative text-gray-600 hover:text-blue-600">
+                                <svg
+                                    className="h-6 w-6"
+                                    fill="none"
+                                    viewBox="0 0 24 24"
+                                    strokeWidth="1.5"
+                                    stroke="currentColor"
+                                    aria-hidden="true"
+                                >
+                                    <path
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
+                                        d="M14.857 17.082a23.848 23.848 0 0 0 5.454-1.31A8.967 8.967 0 0 1 18 9.75V9A6 6 0 0 0 6 9v.75a8.967 8.967 0 0 1-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 0 1-5.714 0m5.714 0a3 3 0 1 1-5.714 0"
+                                    />
+                                </svg>
+                                <span className="absolute top-0 right-0 flex h-2 w-2">
+                                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
+                                    <span className="relative inline-flex rounded-full h-2 w-2 bg-red-500"></span>
+                                </span>
+                            </a>
+
+                            {/* Profile Picture */}
+                            <button onClick={handleProfile} className="relative h-15 w-15">
+                                <img
+                                    className="h-full w-full rounded-full object-cover border-2 border-blue-200 hover:border-blue-400 transition-all"
+                                    src={
+                                        loggedIn?.profilePhoto
+                                            ? `${loggedIn.profilePhoto}`
+                                            : "https://www.pngmart.com/files/23/Profile-PNG-Photo.png"
+                                    }
+                                    alt="Profile"
+                                />
+                            </button>
+
+                            {/* Logout Button */}
+                            <button
+                                onClick={handleLogout}
+                                className="group group-hover:before:duration-500 group-hover:after:duration-500 after:duration-500 hover:border-rose-300 hover:before:[box-shadow:_20px_20px_20px_30px_#a21caf] duration-500 before:duration-500 hover:duration-500 underline underline-offset-2 hover:after:-right-8 hover:before:right-12 hover:before:-bottom-8 hover:before:blur hover:underline hover:underline-offset-4 origin-left hover:decoration-2 hover:text-rose-300 relative bg-neutral-800 h-16 w-60 border text-left p-3 text-gray-50 text-base font-bold rounded-lg overflow-hidden before:absolute before:w-12 before:h-12 before:content[''] before:right-1 before:top-1 before:z-10 before:bg-violet-500 before:rounded-full before:blur-lg after:absolute after:z-10 after:w-20 after:h-20 after:content[''] after:bg-rose-300 after:right-8 after:top-3 after:rounded-full after:blur-lg"
+                            >
+                                Logout
+                            </button>
+                        </>
+                    )}
+                </div>
+            </nav>
+
+            {/* Mobile Menu */}
+            <div
+                className={`fixed inset-y-0 right-0 z-50 w-64 bg-white shadow-lg transform transition-transform duration-300 ease-in-out ${menuOpen ? "translate-x-0" : "translate-x-full"
+                }`}
+            >
+                <div className="flex items-center justify-between p-4 border-b">
+                    <a href="/" className="-m-1.5 p-1.5">
+                        <img className="h-8 w-auto" src={LOGO} alt="Logo" />
+                    </a>
+                    <button onClick={toggleMenu} className="p-2 text-gray-700 hover:text-blue-600">
+                        <svg
+                            className="h-6 w-6"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            strokeWidth="1.5"
+                            stroke="currentColor"
+                            aria-hidden="true"
+                        >
+                            <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                    </button>
+                </div>
+
+                <div className="p-4 space-y-4">
+                    <a href="/" className="block text-base font-semibold text-gray-900 hover:text-blue-600">
+                        Home
+                    </a>
+                    <a href="/show-group" className="block text-base font-semibold text-gray-900 hover:text-blue-600">
+                        Group
+                    </a>
+                    {loggedIn && (
+                        <>
+                            <a href="/show-all-tasks" className="block text-base font-semibold text-gray-900 hover:text-blue-600">
+                                Tasks
+                            </a>
+                            <a href="/all-reports" className="block text-base font-semibold text-gray-900 hover:text-blue-600">
+                                Reports
+                            </a>
+                            <a href="/Show-all-project" className="block text-base font-semibold text-gray-900 hover:text-blue-600">
+                                Projects
+                            </a>
+                        </>
+                    )}
+                    {loggedIn && (
+                        <div className="flex items-center gap-3 border-t pt-4">
+                            <img
+                                className="h-10 w-10 rounded-full object-cover border-2 border-blue-200"
+                                src={
+                                    loggedIn?.profilePhoto
+                                        ? `${loggedIn.profilePhoto}`
+                                        : "https://www.pngmart.com/files/23/Profile-PNG-Photo.png"
+                                }
+                                alt="Profile"
+                                onClick={handleProfile}
+                            />
+                            <div>
+                                <p className="text-sm font-semibold text-gray-900">{loggedIn.fullName}</p>
+                                <p className="text-xs text-gray-600">{loggedIn.email}</p>
+                            </div>
+                        </div>
+                    )}
+                    <button
+                        onClick={loggedIn ? handleLogout : handleLogin}
+                        className="group group-hover:before:duration-500 group-hover:after:duration-500 after:duration-500 hover:border-rose-300 hover:before:[box-shadow:_20px_20px_20px_30px_#a21caf] duration-500 before:duration-500 hover:duration-500 underline underline-offset-2 hover:after:-right-8 hover:before:right-12 hover:before:-bottom-8 hover:before:blur hover:underline hover:underline-offset-4 origin-left hover:decoration-2 hover:text-rose-300 relative bg-neutral-800 h-16 w-60 border text-left p-3 text-gray-50 text-base font-bold rounded-lg overflow-hidden before:absolute before:w-12 before:h-12 before:content[''] before:right-1 before:top-1 before:z-10 before:bg-violet-500 before:rounded-full before:blur-lg after:absolute after:z-10 after:w-20 after:h-20 after:content[''] after:bg-rose-300 after:right-8 after:top-3 after:rounded-full after:blur-lg"
+                    >
+                        {loggedIn ? "Logout" : "Login"}
+                    </button>
+                    {loggedIn && (
+                        <a href="/notification" className="flex items-center gap-2 text-gray-600 hover:text-blue-600">
+                            <svg
+                                className="h-6 w-6"
+                                fill="none"
+                                viewBox="0 0 24 24"
+                                strokeWidth="1.5"
+                                stroke="currentColor"
+                            >
+                                <path
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
+                                    d="M14.857 17.082a23.848 23.848 0 0 0 5.454-1.31A8.967 8.967 0 0 1 18 9.75V9A6 6 0 0 0 6 9v.75a8.967 8.967 0 0 1-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 0 1-5.714 0m5.714 0a3 3 0 1 1-5.714 0"
+                                />
+                            </svg>
+                            Notifications
+                            <span className="relative flex h-2 w-2">
+                                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
+                                <span className="relative inline-flex rounded-full h-2 w-2 bg-red-500"></span>
+                            </span>
+                        </a>
+                    )}
+                </div>
+            </div>
+        </header>
     );
 }
 

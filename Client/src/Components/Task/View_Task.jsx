@@ -1,12 +1,12 @@
-import {useParams, useNavigate} from "react-router-dom";
-import React, {useState, useEffect} from "react";
-import {fetchTaskById, updateWorkById} from "../../Services/WorkService.js";
-import {loggedUser} from "../../Services/AuthService.js";
+import { useParams, useNavigate } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { fetchTaskById, updateWorkById } from "../../Services/WorkService.js";
+import { loggedUser } from "../../Services/AuthService.js";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import toast from "react-hot-toast";
 
 function ViewTask() {
-    const {id} = useParams();
+    const { id } = useParams();
     const navigate = useNavigate();
     const [task, setTask] = useState(null);
     const [editMode, setEditMode] = useState(false);
@@ -15,19 +15,20 @@ function ViewTask() {
         description: "",
         completionDate: "",
     });
-    const [loggedin, setLoggedin] = useState(null);
+    const [loggedIn, setLoggedIn] = useState(null);
 
     useEffect(() => {
-        const logged = async () => {
+        const fetchLoggedInUser = async () => {
             try {
-                setLoggedin(await loggedUser());
+                const user = await loggedUser();
+                setLoggedIn(user);
             } catch (e) {
                 console.log(e.message);
-                setLoggedin(null);
+                setLoggedIn(null);
             }
-        }
-        logged();
-    }, [])
+        };
+        fetchLoggedInUser();
+    }, []);
 
     useEffect(() => {
         const getTask = async () => {
@@ -41,160 +42,189 @@ function ViewTask() {
                 });
             } catch (e) {
                 console.log(e);
+                toast.error("Failed to fetch task details.");
             }
         };
         getTask();
     }, [id]);
 
     const handleChange = (e) => {
-        const {name, value} = e.target;
-        setUpdatedTask({...updatedTask, [name]: value});
+        const { name, value } = e.target;
+        setUpdatedTask(prev => ({ ...prev, [name]: value }));
     };
 
     const handleSave = async () => {
         try {
             await updateWorkById(id, updatedTask);
-            setTask({...task, ...updatedTask});
+            setTask(prev => ({ ...prev, ...updatedTask }));
             setEditMode(false);
             toast.success("Work updated successfully!");
         } catch (e) {
             console.log("Update failed:", e);
-            toast.error("Failed to update work");
+            toast.error("Failed to update work.");
         }
     };
 
     if (!task) {
-        return <div>Loading...</div>;
+        return (
+            <div className="min-h-screen bg-gradient-to-r from-blue-600 to-indigo-500 p-6 flex justify-center items-center">
+                <p className="text-white text-lg font-semibold">Loading...</p>
+            </div>
+        );
     }
 
     return (
-        <div className="relative isolate h-full p-6 lg:px-8 bg-gradient-to-r from-blue-800 to-blue-400 min-h-screen">
+        <div className="min-h-screen bg-gradient-to-r from-blue-600 to-indigo-500 p-5 pt-15">
+            {/* Back Button */}
             <button
-                className="absolute sm:top-[7.5vw] top-[80px] right-[2.5vw] flex items-center text-white bg-green-600 p-2 px-4 rounded-lg shadow-md hover:bg-green-700 transition-transform hover:scale-105"
+                className="fixed top-27 right-4 flex items-center gap-2 bg-white text-blue-600 px-4 py-2 rounded-full shadow-lg hover:bg-blue-50 transition-all duration-300 z-10"
                 onClick={() => navigate(-1)}
             >
-                <ArrowBackIcon/> <p> Back </p>
+                <ArrowBackIcon sx={{ fontSize: 20 }} />
+                <span className="text-sm font-medium">Back</span>
             </button>
-            <h1 className="flex justify-center text-white text-4xl font-bold mb-4 mt-20">Work Details</h1>
 
-            <div className="bg-white p-6 rounded-lg shadow-md max-w-4xl mx-auto space-y-4">
+            {/* Header */}
+            <div className="max-w-3xl mx-auto text-center pt-16 pb-8">
+                <h1 className="text-4xl md:text-5xl font-bold text-white drop-shadow-lg animate-fade-in">
+                    Work Details
+                </h1>
+            </div>
+
+            {/* Task Details Card */}
+            <div className="max-w-4xl mx-auto bg-white rounded-xl shadow-2xl p-8 space-y-6">
                 <div>
-                    <label className="text-gray-700 font-bold">Title:</label>
+                    <label className="block text-sm font-medium text-gray-700">Title</label>
                     {editMode ? (
                         <input
                             type="text"
                             name="title"
                             value={updatedTask.title}
                             onChange={handleChange}
-                            className="w-full border rounded px-2 py-1 mt-1"
+                            className="w-full p-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none border-gray-300 mt-1"
                         />
                     ) : (
-                        <h2 className="text-2xl text-gray-800">{task.title}</h2>
+                        <h2 className="text-2xl font-semibold text-gray-800 mt-1">{task.title}</h2>
                     )}
                 </div>
 
                 <div>
-                    <label className="text-gray-700 font-bold">Description:</label>
+                    <label className="block text-sm font-medium text-gray-700">Description</label>
                     {editMode ? (
                         <textarea
                             name="description"
                             value={updatedTask.description}
                             onChange={handleChange}
-                            className="w-full border rounded px-2 py-1 mt-1"
+                            className="w-full p-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none border-gray-300 mt-1 h-24 resize-y"
                         />
                     ) : (
-                        <p className="text-sm text-gray-800">{task.description}</p>
+                        <p className="text-gray-600 mt-1">{task.description}</p>
                     )}
                 </div>
 
                 <div>
-                    <label className="text-gray-700 font-bold">Completion Date:</label>
+                    <label className="block text-sm font-medium text-gray-700">Completion Date</label>
                     {editMode ? (
                         <input
                             type="date"
                             name="completionDate"
                             value={updatedTask.completionDate}
                             onChange={handleChange}
-                            className="w-full border rounded px-2 py-1 mt-1"
+                            className="w-full p-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none border-gray-300 mt-1"
                         />
                     ) : (
-                        <p className="text-sm text-gray-700">
-                            {new Date(task.completionDate).toLocaleDateString()}
-                        </p>
+                        <p className="text-gray-600 mt-1">{new Date(task.completionDate).toLocaleDateString()}</p>
                     )}
                 </div>
 
-                <p className="text-sm text-gray-700">
-                    <b>Assigned to:</b>
-                    <div className={"flex gap-4 mt-3"}>
+                <div>
+                    <label className="block text-sm font-medium text-gray-700">Assigned To</label>
+                    <div className="flex flex-col sm:flex-row gap-6 mt-2">
                         {task.groupName.length > 0 && (
                             <div>
-                                <p className={"text-blue-700 font-bold"}>Group Name:</p>
-                                <ul className="list-disc list-inside text-gray-600 mt-3">
-                                    {task.groupName.map((group, index) => (<li key={index}>{group}</li>))}
+                                <p className="text-blue-700 font-semibold">Group Name:</p>
+                                <ul className="mt-2 space-y-1 text-gray-600">
+                                    {task.groupName.map((group, index) => (
+                                        <li key={index} className="flex items-center gap-2">
+                                            <span className="w-2 h-2 bg-blue-500 rounded-full"></span>
+                                            {group}
+                                        </li>
+                                    ))}
                                 </ul>
                             </div>
                         )}
                         {task.empoyeeName.length > 0 && (
                             <div>
-                                <p className={"text-blue-700 font-bold"}>Employee:</p>
-                                <ul className="list-disc list-inside text-gray-600 mt-3">
-                                    {task.empoyeeName.map((employee, index) => (<li key={index}>{employee}</li>))}
+                                <p className="text-blue-700 font-semibold">Employee:</p>
+                                <ul className="mt-2 space-y-1 text-gray-600">
+                                    {task.empoyeeName.map((employee, index) => (
+                                        <li key={index} className="flex items-center gap-2">
+                                            <span className="w-2 h-2 bg-blue-500 rounded-full"></span>
+                                            {employee}
+                                        </li>
+                                    ))}
                                 </ul>
                             </div>
                         )}
                     </div>
-                </p>
+                </div>
 
-                <p className="text-sm text-gray-700">
-                    <b>Creation Date:</b> {new Date(task.createdAt).toLocaleDateString()}
-                </p>
+                <div>
+                    <label className="block text-sm font-medium text-gray-700">Creation Date</label>
+                    <p className="text-gray-600 mt-1">{new Date(task.createdAt).toLocaleDateString()}</p>
+                </div>
 
                 {task.createdAt !== task.updatedAt && (
-                    <p className="text-sm text-gray-700">
-                        <b>Updation Date:</b> {new Date(task.updatedAt).toLocaleDateString()}
-                    </p>
+                    <div>
+                        <label className="block text-sm font-medium text-gray-700">Updated Date</label>
+                        <p className="text-gray-600 mt-1">{new Date(task.updatedAt).toLocaleDateString()}</p>
+                    </div>
                 )}
 
-                <p
-                    className={`text-sm font-medium ${
-                        task.workStatus === "complete" ? "text-green-600" : "text-red-600"
-                    }`}
-                >
-                    <b>Status:</b> {task.workStatus}
-                </p>
+                <div>
+                    <label className="block text-sm font-medium text-gray-700">Status</label>
+                    <p
+                        className={`mt-1 text-sm font-medium ${
+                            task.workStatus === "complete" ? "text-green-600" : "text-red-600"
+                        }`}
+                    >
+                        {task.workStatus}
+                    </p>
+                </div>
             </div>
 
-            <div className="flex justify-center mt-8 gap-2">
-                {loggedin?.role === "Manager" && (<>
-                    {editMode ? (
-                        <>
+            {/* Action Buttons */}
+            <div className="max-w-4xl mx-auto flex flex-wrap justify-center gap-4 mt-8">
+                {loggedIn?.role === "Manager" && (
+                    <>
+                        {editMode ? (
+                            <>
+                                <button
+                                    onClick={handleSave}
+                                    className="px-6 py-2 bg-green-600 text-white rounded-lg shadow-md hover:bg-green-700 transition-all duration-300 w-full sm:w-auto"
+                                >
+                                    Save
+                                </button>
+                                <button
+                                    onClick={() => setEditMode(false)}
+                                    className="px-6 py-2 bg-gray-600 text-white rounded-lg shadow-md hover:bg-gray-700 transition-all duration-300 w-full sm:w-auto"
+                                >
+                                    Cancel
+                                </button>
+                            </>
+                        ) : (
                             <button
-                                onClick={handleSave}
-                                className="py-2 px-6 rounded-lg bg-green-600 text-white font-semibold hover:bg-green-500 transition-transform duration-300 hover:scale-105"
+                                onClick={() => setEditMode(true)}
+                                className="px-6 py-2 bg-blue-600 text-white rounded-lg shadow-md hover:bg-blue-700 transition-all duration-300 w-full sm:w-auto"
                             >
-                                Save
+                                Edit
                             </button>
-                            <button
-                                onClick={() => setEditMode(false)}
-                                className="py-2 px-6 rounded-lg bg-gray-600 text-white font-semibold hover:bg-gray-500 transition-transform duration-300 hover:scale-105"
-                            >
-                                Cancel
-                            </button>
-                        </>
-                    ) : (
-                        <button
-                            onClick={() => setEditMode(true)}
-                            className="py-2 px-6 rounded-lg bg-green-600 text-white font-semibold hover:bg-green-500 transition-transform duration-300 hover:scale-105"
-                        >
-                            Edit
-                        </button>
-                    )}
-                </>)}
-
+                        )}
+                    </>
+                )}
                 <button
                     onClick={() => navigate(-1)}
-                    className="py-2 px-6 rounded-lg bg-green-600 text-white font-semibold hover:bg-green-500 transition-transform duration-300 hover:scale-105"
+                    className="px-6 py-2 mb-4 bg-green-600 text-white rounded-lg shadow-md hover:bg-green-700 transition-all duration-300 max-w-2xl"
                 >
                     Back
                 </button>

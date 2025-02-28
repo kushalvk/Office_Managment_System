@@ -19,6 +19,15 @@ export const allRequrments = async () => {
     }
 }
 
+export const allRequrmentsByUsername = async (username) => {
+    try {
+        const response = await axios.get(`${import.meta.env.VITE_REACT_APP_BACKEND_BASEURL}/all-requrments-by-username/${username}`);
+        return response.data;
+    } catch (err) {
+        error(err)
+    }
+}
+
 export const updteRequrments = async (id, status) => {
     try {
         const response = await axios.post(`${import.meta.env.VITE_REACT_APP_BACKEND_BASEURL}/update-requrment/${id}`, {requrmentstatus: status});

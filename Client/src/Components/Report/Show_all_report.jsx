@@ -1,138 +1,173 @@
 import React, {useEffect, useState} from "react";
 import {useNavigate} from "react-router-dom";
-import {allReports, approveReports, deleteReports} from "../../Services/ReportService.js";
+import {allReports, allReportsByUsername, approveReports, deleteReports} from "../../Services/ReportService.js";
 import {loggedUser} from "../../Services/AuthService.js";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import toast from "react-hot-toast";
 
 function ShowAllReports() {
     const [reports, setReports] = useState([]);
-    const [loggedin, setLoggedin] = useState(null);
+    const [loggedIn, setLoggedIn] = useState(null);
+    const navigate = useNavigate();
 
     useEffect(() => {
-        const logged = async () => {
+        const fetchLoggedInUser = async () => {
             try {
-                setLoggedin(await loggedUser());
+                const user = await loggedUser();
+                setLoggedIn(user);
             } catch (e) {
                 console.log(e.message);
-                setLoggedin(null);
+                setLoggedIn(null);
             }
-        }
-        logged();
-    }, [])
-
-    useEffect(() => {
-        const reports = async () => {
-            try {
-                const reports = await allReports();
-                setReports(reports.reports);
-            } catch (e) {
-                console.log(e);
-                toast.error("Fail to load Reports");
-            }
-        }
-        reports();
+        };
+        fetchLoggedInUser();
     }, []);
 
-    const navigate = useNavigate();
+    useEffect(() => {
+        if (loggedIn?.role === "Manager") {
+            const fetchReports = async () => {
+                try {
+                    if (loggedIn) {
+                        const response = await allReports();
+                        setReports(response.reports || []);
+                    }
+                } catch (e) {
+                    console.log(e);
+                    toast.error("Failed to load reports.");
+                }
+            };
+            fetchReports();
+        } else {
+            const fetchReports = async () => {
+                try {
+                    if (loggedIn) {
+                        const response = await allReportsByUsername(loggedIn.username);
+                        setReports(response.reports || []);
+                    }
+                } catch (e) {
+                    console.log(e);
+                    toast.error("Failed to load reports.");
+                }
+            };
+            fetchReports();
+        }
+    }, [loggedIn]);
 
     const handleDelete = async (reportId) => {
         try {
             await deleteReports(reportId);
-            setReports(reports.filter((report) => report._id !== reportId));
-            toast.success(`Report Deleted successfully.`);
+            setReports(prev => prev.filter(report => report._id !== reportId));
+            toast.success("Report deleted successfully!");
         } catch (e) {
             console.log(e);
-            toast.error(`Fail to delete Report.`);
+            toast.error("Failed to delete report.");
         }
     };
 
     const handleApprove = async (reportId) => {
         try {
             await approveReports(reportId);
-
-            setReports(reports.map((report) =>
-                report._id === reportId ? {...report, approve: true} : report
-            ));
-
-            toast.success("Report Approve successfully.");
+            setReports(prev =>
+                prev.map(report =>
+                    report._id === reportId ? {...report, approve: true} : report
+                )
+            );
+            toast.success("Report approved successfully!");
         } catch (e) {
             console.log(e);
-            toast.error("Fail to approve report");
+            toast.error("Failed to approve report.");
         }
     };
 
     return (
-        <div className="relative isolate h-full p-6 lg:px-8 bg-gradient-to-r from-blue-800 to-blue-400 min-h-screen">
+        <div className="min-h-screen bg-gradient-to-r from-blue-600 to-indigo-500 p-5 pt-15">
+            {/* Back Button */}
             <button
-                className="absolute sm:top-[7.5vw] top-[80px] right-[2.5vw] flex items-center text-white bg-green-600 p-2 px-4 rounded-lg shadow-md hover:bg-green-700 transition-transform hover:scale-105"
+                className="fixed top-27 right-4 flex items-center gap-2 bg-white text-blue-600 px-4 py-2 rounded-full shadow-lg hover:bg-blue-50 transition-all duration-300 z-10"
                 onClick={() => navigate(-1)}
             >
-                <ArrowBackIcon/> <p> Back </p>
+                <ArrowBackIcon sx={{fontSize: 20}}/>
+                <span className="text-sm font-medium">Back</span>
             </button>
-            <div className="absolute inset-x-0 -top-40 -z-10 transform-gpu overflow-hidden blur-3xl sm:-top-80"
-                 aria-hidden="true">
-                <div
-                    className="relative left-[calc(50%-11rem)] aspect-[1155/678] w-[36.125rem] -translate-x-1/2 rotate-[30deg] bg-gradient-to-tr from-[#ff80b5] to-[#9089fc] opacity-30 sm:left-[calc(50%-30rem)] sm:w-[72.1875rem]"
-                    style={{
-                        clipPath: 'polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)',
-                    }}
-                ></div>
+
+            {/* Header */}
+            <div className="max-w-3xl mx-auto text-center pt-16 pb-8">
+                <h1 className="text-4xl md:text-5xl font-bold text-white drop-shadow-lg animate-fade-in">
+                    All Reports
+                </h1>
             </div>
 
-            <h1 className="text-white text-4xl font-bold mt-20 mb-4">All Reports</h1>
-
-            {loggedin?.role === "Employee" && (
-                <button
-                    onClick={() => navigate("/submit-report")}
-                    className="py-2 px-4 rounded-lg shadow-md hover:shadow-lg transition-transform duration-300 hover:scale-105 bg-green-600 text-white font-semibold hover:bg-green-500 focus:outline-none focus:ring-2 focus:ring-green-700"
-                >
-                    Add Report
-                </button>
+            {/* Add Report Button (Employee Only) */}
+            {loggedIn?.role === "Employee" && (
+                <div className="flex justify-center mb-8">
+                    <button
+                        onClick={() => navigate("/submit-report")}
+                        className="px-6 py-2 bg-green-600 text-white rounded-lg shadow-md hover:bg-green-700 transition-all duration-300"
+                    >
+                        Add Report
+                    </button>
+                </div>
             )}
 
-            <div className="space-y-4 mt-6">
-                {reports.map((report, idx) => (
-                    <div
-                        key={idx}
-                        className="flex items-center justify-between bg-white p-4 rounded-lg shadow-md transform transition-transform duration-300 hover:-translate-y-1 hover:scale-105 hover:shadow-2xl"
-                    >
-                        <div className="flex flex-col">
-                            <h4 className="text-2xl font-bold text-gray-800">{report.title}</h4>
-                            <p className="text-sm font-medium text-gray-800">{report.description}</p>
-                            <p className="text-xs text-gray-500 mt-1">Start
-                                Date: {new Date(report.startDate).toLocaleDateString()} | End
-                                Date: {new Date(report.endDate).toLocaleDateString()}</p>
-                        </div>
-                        <div className="flex items-center">
-                            <a
-                                href={report.reportDocument}
-                                target={"_blank"}
-                                className="text-indigo-600 hover:text-indigo-800 focus:outline-none"
+            {/* Report List */}
+            <div className="max-w-4xl mx-auto">
+                {reports.length === 0 ? (
+                    <p className="text-center text-lg text-gray-200 font-semibold py-4 bg-white rounded-lg shadow-md">
+                        No reports submitted yet.
+                    </p>
+                ) : (
+                    <div className="space-y-6">
+                        {reports.map((report, idx) => (
+                            <div
+                                key={idx}
+                                className="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-all duration-300 flex flex-col sm:flex-row justify-between items-start sm:items-center"
                             >
-                                View
-                            </a>
+                                {/* Report Details */}
+                                <div className="flex-grow">
+                                    <h4 className="text-xl font-semibold text-gray-800">{report.title}</h4>
+                                    <p className="text-gray-600 mt-1">{report.description}</p>
+                                    <p className="text-sm text-gray-500 mt-1">
+                                        <span
+                                            className="font-medium">Start Date:</span> {new Date(report.startDate).toLocaleDateString()} |{' '}
+                                        <span
+                                            className="font-medium">End Date:</span> {new Date(report.endDate).toLocaleDateString()}
+                                    </p>
+                                </div>
 
-                            {loggedin?.role === "Manager" && (<>
-                                {!report.approve ? (
-                                    <button
-                                        onClick={() => handleApprove(report._id)}
-                                        className="ml-4 text-yellow-600 hover:text-yellow-800 focus:outline-none"
+                                {/* Buttons */}
+                                <div className="flex gap-4 mt-4 sm:mt-0">
+                                    <a
+                                        href={report.reportDocument}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="px-4 py-2 bg-blue-600 text-white rounded-lg shadow-md hover:bg-blue-700 transition-all duration-300"
                                     >
-                                        Approve
-                                    </button>
-                                ) : (
-                                    <button
-                                        onClick={() => handleDelete(report._id)}
-                                        className="ml-4 text-red-600 hover:text-red-800 focus:outline-none"
-                                    >
-                                        Delete
-                                    </button>
-                                )}
-                            </>)}
-                        </div>
+                                        View
+                                    </a>
+                                    {loggedIn?.role === "Manager" && (
+                                        <>
+                                            {!report.approve ? (
+                                                <button
+                                                    onClick={() => handleApprove(report._id)}
+                                                    className="px-4 py-2 bg-yellow-600 text-white rounded-lg shadow-md hover:bg-yellow-700 transition-all duration-300"
+                                                >
+                                                    Approve
+                                                </button>
+                                            ) : (
+                                                <button
+                                                    onClick={() => handleDelete(report._id)}
+                                                    className="px-4 py-2 bg-red-600 text-white rounded-lg shadow-md hover:bg-red-700 transition-all duration-300"
+                                                >
+                                                    Delete
+                                                </button>
+                                            )}
+                                        </>
+                                    )}
+                                </div>
+                            </div>
+                        ))}
                     </div>
-                ))}
+                )}
             </div>
         </div>
     );

@@ -6,7 +6,6 @@ import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import toast from "react-hot-toast";
 
 function Add_User() {
-
     const qualificationOptions = [
         { value: "", label: "Select Qualification" },
         { value: "High School", label: "High School" },
@@ -57,7 +56,7 @@ function Add_User() {
         profilePhoto: null,
         resume: null,
     });
-    const [Error, setError] = useState('');
+    const [error, setError] = useState('');
     const navigate = useNavigate();
 
     const handleChange = (e) => {
@@ -70,293 +69,135 @@ function Add_User() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        if (formData.password !== formData.confirmPassword) {
+            setError("Passwords don't match");
+            toast.error("Passwords don't match");
+            return;
+        }
 
-        if (formData.password === formData.confirmPassword) {
+        if (formData?.profilePhoto?.size > 10 * 1024 * 1024 || formData?.resume?.size > 10 * 1024 * 1024) {
+            setError("File size too large! Maximum 10MB limit per file.");
+            toast.error("File size too large! Maximum 10MB limit per file.");
+            return;
+        }
 
-            if (formData?.profilePhoto?.size > 10 * 1024 * 1024 || formData.resume.size > 10 * 1024 * 1024) {
-                toast.error("File size si Too Lage! Maximum 10MB limit of each file size.");
-                return;
-            }
+        const form = new FormData();
+        Object.entries(formData).forEach(([key, value]) => form.append(key, value));
 
-            const form = new FormData();
-            form.append("fullName", formData.fullName)
-            form.append("email", formData.email)
-            form.append("address", formData.address)
-            form.append("dob", formData.dob)
-            form.append("gender", formData.gender)
-            form.append("mobNo", formData.mobNo)
-            form.append("qualification", formData.qualification)
-            form.append("username", formData.username)
-            form.append("password", formData.password)
-            form.append("workLocation", formData.workLocation)
-            form.append("department", formData.department)
-            form.append("role", formData.role)
-            form.append("profilePhoto", formData.profilePhoto)
-            form.append("resume", formData.resume)
-
-            try {
-                await addUser(form);
-                toast.success("User Added Successfully")
-                navigate("/all-staff");
-            } catch (e) {
-                setError(e.message);
-            }
-        } else {
-            setError("Password doesn't match")
-            toast.error("Password doesn't match")
+        try {
+            await addUser(form);
+            toast.success("User Added Successfully");
+            navigate("/all-staff");
+        } catch (e) {
+            setError(e.message);
+            toast.error(e.message);
         }
     };
 
     return (
-        <div className="relative isolate h-full p-6 lg:px-8 bg-gradient-to-r from-blue-800 to-blue-400">
+        <div className="min-h-screen bg-gradient-to-r from-blue-600 to-indigo-500 p-6">
+            {/* Back Button */}
             <button
-                className="absolute sm:top-[7.5vw] top-[80px] right-[2.5vw] flex items-center text-white bg-green-600 p-2 px-4 rounded-lg shadow-md hover:bg-green-700 transition-transform hover:scale-105"
+                className="fixed top-4 right-4 flex items-center gap-2 bg-white text-blue-600 px-4 py-2 rounded-full shadow-lg hover:bg-blue-50 transition-all duration-300 z-10"
                 onClick={() => navigate(-1)}
             >
-                <ArrowBackIcon /> <p> Back </p>
+                <ArrowBackIcon sx={{ fontSize: 20 }} />
+                <span className="text-sm font-medium">Back</span>
             </button>
-            <div className="absolute inset-x-0 -top-40 -z-10 transform-gpu overflow-hidden blur-3xl sm:-top-80"
-                aria-hidden="true">
-                <div
-                    className="relative left-[calc(50%-11rem)] aspect-[1155/678] w-[36.125rem] -translate-x-1/2 rotate-[30deg] bg-gradient-to-tr from-[#ff80b5] to-[#9089fc] opacity-30 sm:left-[calc(50%-30rem)] sm:w-[72.1875rem]"
-                    style={{
-                        clipPath: 'polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)',
-                    }}
-                ></div>
+
+            {/* Header */}
+            <div className="max-w-3xl mx-auto text-center mb-10">
+                <h1 className="text-4xl md:text-5xl font-bold text-white drop-shadow-lg animate-fade-in">
+                    Add New User
+                </h1>
+                <p className="text-lg text-gray-200 mt-2">Fill out the details below to register a new user.</p>
             </div>
 
-            <div className="mx-auto max-w-2xl p-5 text-center">
-                <h1 className="text-white text-3xl sm:text-5xl font-bold mb-4">Add New User</h1>
-                <p className="text-gray-300 text-lg">Please fill out the form below to add a new user.</p>
-            </div>
-
-            <div className="flex justify-center mb-6">
+            {/* User Icon */}
+            <div className="flex justify-center mb-8">
                 <img
-                    className="object-cover object-center rounded-full h-32 w-32 md:h-48 md:w-48 border-4 border-white shadow-lg"
-                    alt="User Icon"
+                    className="w-32 h-32 md:w-40 md:h-40 rounded-full border-4 border-white shadow-xl object-cover transition-transform hover:scale-105"
                     src={UserIcon}
+                    alt="User Icon"
                 />
             </div>
 
-            <section className="bg-gray-100 shadow-lg rounded-lg p-8 mx-4 md:mx-8 mb-8">
-                {Error ? <p className='text-red-600 font-bold flex justify-center'>{Error}</p> : null}
-                <form className="grid grid-cols-1 gap-6 md:grid-cols-2 md:gap-8" onSubmit={handleSubmit} method="POST">
-                    {/* Form Fields */}
-                    <div className="flex flex-col mb-4">
-                        <label className="text-gray-800 font-semibold mb-2" htmlFor="fullName">Full Name</label>
-                        <input
-                            type="text"
-                            id="fullName"
-                            name="fullName"
-                            value={formData.fullName}
-                            onChange={handleChange}
-                            className="p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
-                            required
-                        />
-                    </div>
-                    <div className="flex flex-col mb-4">
-                        <label className="text-gray-800 font-semibold mb-2" htmlFor="email">Email</label>
-                        <input
-                            type="email"
-                            id="email"
-                            name="email"
-                            value={formData.email}
-                            onChange={handleChange}
-                            className="p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
-                            required
-                        />
-                    </div>
-                    <div className="flex flex-col mb-4">
-                        <label className="text-gray-800 font-semibold mb-2" htmlFor="address">Address</label>
-                        <input
-                            type="text"
-                            id="address"
-                            name="address"
-                            value={formData.address}
-                            onChange={handleChange}
-                            className="p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
-                            required
-                        />
-                    </div>
-                    <div className="flex flex-col mb-4">
-                        <label className="text-gray-800 font-semibold mb-2" htmlFor="dob">Date of Birth</label>
-                        <input
-                            type="date"
-                            id="dob"
-                            name="dob"
-                            value={formData.dob}
-                            onChange={handleChange}
-                            className="p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
-                            required
-                        />
-                    </div>
-                    <div className="flex flex-col mb-4">
-                        <label className="text-gray-800 font-semibold mb-2" htmlFor="gender">Gender</label>
-                        <select
-                            id="gender"
-                            name="gender"
-                            value={formData.gender}
-                            onChange={handleChange}
-                            className="p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
-                            required
-                        >
-                            <option value="">Select Gender</option>
-                            <option value="male">Male</option>
-                            <option value="female">Female</option>
-                            <option value="other">Other</option>
-                        </select>
-                    </div>
-                    <div className="flex flex-col mb-4">
-                        <label className="text-gray-800 font-semibold mb-2" htmlFor="mobNo">Mobile Number</label>
-                        <input
-                            type="text"
-                            id="mobNo"
-                            name="mobNo"
-                            value={formData.mobNo}
-                            onChange={handleChange}
-                            className="p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
-                            required
-                        />
-                    </div>
-                    <div className="flex flex-col mb-4">
-                        <label className="text-gray-800 font-semibold mb-2"
-                            htmlFor="qualification">Qualification</label>
-                        <select
-                            id="qualification"
-                            name="qualification"
-                            value={formData.qualification}
-                            onChange={handleChange}
-                            className="p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
-                            required
-                        >
-                            {qualificationOptions.map((option) => (
-                                <option key={option.value} value={option.value}>
-                                    {option.label}
-                                </option>
-                            ))}
-                        </select>
-                    </div>
-                    <div className="flex flex-col mb-4">
-                        <label className="text-gray-800 font-semibold mb-2" htmlFor="username">Username</label>
-                        <input
-                            type="text"
-                            id="username"
-                            name="username"
-                            value={formData.username}
-                            onChange={handleChange}
-                            className="p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
-                            required
-                        />
-                    </div>
-                    <div className="flex flex-col mb-4">
-                        <label className="text-gray-800 font-semibold mb-2" htmlFor="password">Password</label>
-                        <input
-                            type="password"
-                            id="password"
-                            name="password"
-                            value={formData.password}
-                            onChange={handleChange}
-                            className="p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
-                            required
-                        />
-                    </div>
-                    <div className="flex flex-col mb-4">
-                        <label className="text-gray-800 font-semibold mb-2" htmlFor="confirmPassword">Confirm
-                            Password</label>
-                        <input
-                            type="password"
-                            id="confirmPassword"
-                            name="confirmPassword"
-                            value={formData.confirmPassword}
-                            onChange={handleChange}
-                            className="p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
-                            required
-                        />
-                    </div>
-                    <div className="flex flex-col mb-4">
-                        <label className="text-gray-800 font-semibold mb-2" htmlFor="workLocation">Work Location</label>
-                        <select
-                            id="workLocation"
-                            name="workLocation"
-                            value={formData.workLocation}
-                            onChange={handleChange}
-                            className="p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
-                            required
-                        >
-                            {workLocationOptions.map((option) => (
-                                <option key={option.value} value={option.value}>
-                                    {option.label}
-                                </option>
-                            ))}
-                        </select>
-                    </div>
-                    <div className="flex flex-col mb-4">
-                        <label className="text-gray-800 font-semibold mb-2" htmlFor="department">Department</label>
-                        <select
-                            id="department"
-                            name="department"
-                            value={formData.department}
-                            onChange={handleChange}
-                            className="p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
-                            required
-                        >
-                            {departmentOptions.map((option) => (
-                                <option key={option.value} value={option.value}>
-                                    {option.label}
-                                </option>
-                            ))}
-                        </select>
-                    </div>
-                    <div className="flex flex-col mb-4">
-                        <label className="text-gray-800 font-semibold mb-2" htmlFor="role">Role</label>
-                        <select
-                            id="role"
-                            name="role"
-                            value={formData.role}
-                            onChange={handleChange}
-                            className="p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
-                            required
-                        >
-                            <option value="" disabled>Select Role</option>
-                            {/* Placeholder option */}
-                            <option value="Employee">Employee</option>
-                            <option value="Manager">Manager</option>
-                        </select>
-                    </div>
-                    <div className="flex flex-col mb-4">
-                        <label className="text-gray-800 font-semibold mb-2" htmlFor="profilePhoto">Profile Photo</label>
-                        <input
-                            type="file"
-                            id="profilePhoto"
-                            name="profilePhoto"
-                            onChange={handleChange}
-                            className="p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
-                            accept="image/*"
-                            required
-                        />
-                    </div>
+            {/* Form Section */}
+            <section className="max-w-4xl mx-auto bg-white rounded-xl shadow-2xl p-8">
+                {error && (
+                    <p className="text-red-600 font-semibold text-center mb-4">{error}</p>
+                )}
+                <form onSubmit={handleSubmit} className="grid md:grid-cols-2 gap-6">
+                    <FormField label="Full Name" name="fullName" type="text" value={formData.fullName} onChange={handleChange} required />
+                    <FormField label="Email" name="email" type="email" value={formData.email} onChange={handleChange} required />
+                    <FormField label="Address" name="address" type="text" value={formData.address} onChange={handleChange} required />
+                    <FormField label="Date of Birth" name="dob" type="date" value={formData.dob} onChange={handleChange} required />
+                    <FormField label="Gender" name="gender" type="select" value={formData.gender} onChange={handleChange} required options={[
+                        { value: "", label: "Select Gender" },
+                        { value: "male", label: "Male" },
+                        { value: "female", label: "Female" },
+                        { value: "other", label: "Other" },
+                    ]} />
+                    <FormField label="Mobile Number" name="mobNo" type="text" value={formData.mobNo} onChange={handleChange} required />
+                    <FormField label="Qualification" name="qualification" type="select" value={formData.qualification} onChange={handleChange} required options={qualificationOptions} />
+                    <FormField label="Username" name="username" type="text" value={formData.username} onChange={handleChange} required />
+                    <FormField label="Password" name="password" type="password" value={formData.password} onChange={handleChange} required />
+                    <FormField label="Confirm Password" name="confirmPassword" type="password" value={formData.confirmPassword} onChange={handleChange} required />
+                    <FormField label="Work Location" name="workLocation" type="select" value={formData.workLocation} onChange={handleChange} required options={workLocationOptions} />
+                    <FormField label="Department" name="department" type="select" value={formData.department} onChange={handleChange} required options={departmentOptions} />
+                    <FormField label="Role" name="role" type="select" value={formData.role} onChange={handleChange} required options={[
+                        { value: "", label: "Select Role" },
+                        { value: "Employee", label: "Employee" },
+                        { value: "Manager", label: "Manager" },
+                    ]} />
+                    <FormField label="Profile Photo" name="profilePhoto" type="file" onChange={handleChange} accept="image/*" required />
+                    <FormField label="Resume" name="resume" type="file" onChange={handleChange} accept=".pdf,.doc,.docx" required />
 
-                    <div className="flex flex-col mb-4">
-                        <label className="text-gray-800 font-semibold mb-2" htmlFor="resume">Resume</label>
-                        <input
-                            type="file"
-                            id="resume"
-                            name="resume"
-                            onChange={handleChange}
-                            className="p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
-                            accept=".pdf,.doc,.docx"
-                            required
-                        />
-                    </div>
-                    {Error ? <p className='text-red-600 font-bold flex justify-center'>{Error}</p> : null}
-                    <div className="flex justify-center mb-4 md:col-span-2">
-                        <button type="submit"
-                            className="bg-blue-600 text-white p-3 rounded-lg shadow-md hover:bg-blue-700 transition duration-300">
-                            Submit
+                    <div className="md:col-span-2 flex justify-center">
+                        <button
+                            type="submit"
+                            className="w-full max-w-xs py-3 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition-all duration-300 focus:ring-2 focus:ring-blue-500 focus:outline-none"
+                        >
+                            Add User
                         </button>
                     </div>
                 </form>
             </section>
+        </div>
+    );
+}
+
+// Reusable Form Field Component
+// eslint-disable-next-line react/prop-types
+function FormField({ label, name, type, value, onChange, required, options, accept }) {
+    return (
+        <div className="flex flex-col">
+            <label className="text-sm font-medium text-gray-700 mb-1">{label}</label>
+            {type === "select" ? (
+                <select
+                    name={name}
+                    value={value}
+                    onChange={onChange}
+                    className="p-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none text-gray-700"
+                    required={required}
+                >
+                    {options.map((option) => (
+                        <option key={option.value} value={option.value}>
+                            {option.label}
+                        </option>
+                    ))}
+                </select>
+            ) : (
+                <input
+                    type={type}
+                    name={name}
+                    value={type !== "file" ? value : undefined}
+                    onChange={onChange}
+                    className="p-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none text-gray-700"
+                    required={required}
+                    accept={accept}
+                />
+            )}
         </div>
     );
 }

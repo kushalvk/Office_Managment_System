@@ -20,6 +20,18 @@ const addReportController = async (req, res) => {
     }
 }
 
+const allReportControllerByUsername = async (req, res) => {
+    try {
+        const {username} = req.params;
+
+        ReportsModel.find({submitedBy: username})
+            .then((reports) => res.status(200).send({reports}))
+            .catch((err) => res.status(500).send({message: "Fail to fetch Reports : Controller ", err}));
+    } catch (error) {
+        res.status(500).send({message: "Error to fetch Report : Controller ", error});
+    }
+}
+
 const allReportController = async (req, res) => {
     try {
         ReportsModel.find()
@@ -86,5 +98,6 @@ module.exports = {
     approveReportController,
     deleteReportController,
     newlyAddedReportsController,
-    pendingApprovalController
+    pendingApprovalController,
+    allReportControllerByUsername
 }
