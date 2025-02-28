@@ -5,7 +5,8 @@ const addReportController = async (req, res) => {
     try {
         const {title, description, startDate, endDate, submitedBy} = req.body;
 
-        const reportDocumentLocalPath = req.file.path;
+        const reportDocumentLocalPath = req?.file?.buffer;
+        // console.log(reportDocumentLocalPath);
         const reportDocument = await uploadOnCloudinary(reportDocumentLocalPath);
 
         ReportsModel.create({title, description, reportDocument: reportDocument.url, startDate, endDate, submitedBy})
