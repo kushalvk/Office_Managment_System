@@ -16,32 +16,23 @@ function SubmitReport() {
         e.preventDefault();
         try {
             const report = new FormData();
-            report.append("reportdocument", reportdocument);
-            report.append("title", title);
-            report.append("description", description);
-            report.append("startDate", startDate);
-            report.append("endDate", endDate);
-            report.append("submitedBy", username);
+            report.append("reportdocument", reportdocument)
+            report.append("title", title)
+            report.append("description", description)
+            report.append("startDate", startDate)
+            report.append("endDate", endDate)
+            report.append("submitedBy", username)
 
-            const response = await addReport(report);
-
-            if (!response.ok) {
-                const errorData = await response.json();
-
-                if (response.status === 400 && errorData.message === "File too large. Maximum allowed size is 10MB.") {
-                    alert("File is too large! Please upload a file smaller than 10MB.");
-                    return;
-                }
-
-                throw new Error(errorData.message || "Fail to add report");
+            const response = await addReport(report)
+            if (response.status === 413) {
+                alert("File is too large! Please upload a file smaller than 10MB.");
+                return;
             }
-
             alert("New report submitted!");
             navigate("/all-reports");
-
         } catch (e) {
             console.log(e);
-            alert(e.message || "Fail to add report");
+            alert("Fail to add report")
         }
     };
 

@@ -12,7 +12,11 @@ const addReportController = async (req, res) => {
             .then(() => res.status(200).send({message: "Report Added successfully"}))
             .catch((err) => res.status(500).send({message: "Fail to Add Report : Controller ", err}));
     } catch (error) {
-        res.status(500).send({message: "Error to add Report : Controller ", error});
+        if (error.code === "LIMIT_FILE_SIZE") {
+            return res.status(413).send({message: "File size exceeds 10MB limit"});
+        } else {
+            res.status(500).send({message: "Error to add Report : Controller ", error});
+        }
     }
 }
 
@@ -22,11 +26,7 @@ const allReportController = async (req, res) => {
             .then((reports) => res.status(200).send({reports}))
             .catch((err) => res.status(500).send({message: "Fail to fetch Reports : Controller ", err}));
     } catch (error) {
-        if (error.code === "LIMIT_FILE_SIZE") {
-            return res.status(413).send({message: "File size exceeds 10MB limit"});
-        } else {
-            res.status(500).send({message: "Error to fetch Report : Controller ", error});
-        }
+        res.status(500).send({message: "Error to fetch Report : Controller ", error});
     }
 }
 
