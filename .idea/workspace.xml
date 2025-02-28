@@ -4,10 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="404eb4d8-f181-44b4-a139-a07b064bd629" name="Changes" comment="ADD: Apply a Cloudinary.">
+    <list default="true" id="404eb4d8-f181-44b4-a139-a07b064bd629" name="Changes" comment="ADD: handle error to large file size at report.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/src/Components/Report/Submit_report.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/Components/Report/Submit_report.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/controllers/Report_Controller.js" beforeDir="false" afterPath="$PROJECT_DIR$/Server/controllers/Report_Controller.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Server/routers/Report_Route.js" beforeDir="false" afterPath="$PROJECT_DIR$/Server/routers/Report_Route.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -148,7 +146,7 @@
       <workItem from="1740402010624" duration="5062000" />
       <workItem from="1740542759613" duration="983000" />
       <workItem from="1740665664022" duration="8918000" />
-      <workItem from="1740717015386" duration="3784000" />
+      <workItem from="1740717015386" duration="4399000" />
     </task>
     <task id="LOCAL-00001" summary="Merge pull request #2 from Kumhar-Harshad/main&#10;&#10;ADD: Profile.jsx">
       <option name="closed" value="true" />
@@ -518,14 +516,21 @@
       <option name="project" value="LOCAL" />
       <updated>1740719429958</updated>
     </task>
-    <option name="localTasksCounter" value="47" />
+    <task id="LOCAL-00047" summary="ADD: handle error to large file size at report.">
+      <option name="closed" value="true" />
+      <created>1740720929434</created>
+      <option name="number" value="00047" />
+      <option name="presentableId" value="LOCAL-00047" />
+      <option name="project" value="LOCAL" />
+      <updated>1740720929434</updated>
+    </task>
+    <option name="localTasksCounter" value="48" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="ADD: Intigrate Ai In add work description." />
     <MESSAGE value="UPDATE: Ai generated responce." />
     <MESSAGE value="ADD: Notifiaction Page with font-end and back-end and change other pages.." />
     <MESSAGE value="ADD: Uplodes" />
@@ -550,6 +555,7 @@
     <MESSAGE value="UPDATE: file upload setup." />
     <MESSAGE value="UPDATE: file upload error." />
     <MESSAGE value="ADD: Apply a Cloudinary." />
-    <option name="LAST_COMMIT_MESSAGE" value="ADD: Apply a Cloudinary." />
+    <MESSAGE value="ADD: handle error to large file size at report." />
+    <option name="LAST_COMMIT_MESSAGE" value="ADD: handle error to large file size at report." />
   </component>
 </project>
