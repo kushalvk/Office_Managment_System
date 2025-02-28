@@ -245,7 +245,7 @@ function UserProfile() {
                     </span>
                                     {key === "resume" ? (
                                         <a href={`${loggedin[key]}`}
-                                           className="text-blue-600" target="_blank">
+                                           className="text-blue-600" target="_self">
                                             Click to show resume
                                         </a>
                                     ) : (
