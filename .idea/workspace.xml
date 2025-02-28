@@ -6,9 +6,9 @@
   <component name="ChangeListManager">
     <list default="true" id="404eb4d8-f181-44b4-a139-a07b064bd629" name="Changes" comment="ADD: Apply a Cloudinary.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/cloudinary/Cloudinary.js" beforeDir="false" afterPath="$PROJECT_DIR$/Server/cloudinary/Cloudinary.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/Components/Report/Submit_report.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/Components/Report/Submit_report.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Server/controllers/Report_Controller.js" beforeDir="false" afterPath="$PROJECT_DIR$/Server/controllers/Report_Controller.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/middlewares/uploadMiddleware.js" beforeDir="false" afterPath="$PROJECT_DIR$/Server/middlewares/uploadMiddleware.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/routers/Report_Route.js" beforeDir="false" afterPath="$PROJECT_DIR$/Server/routers/Report_Route.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -148,7 +148,7 @@
       <workItem from="1740402010624" duration="5062000" />
       <workItem from="1740542759613" duration="983000" />
       <workItem from="1740665664022" duration="8918000" />
-      <workItem from="1740717015386" duration="2334000" />
+      <workItem from="1740717015386" duration="3784000" />
     </task>
     <task id="LOCAL-00001" summary="Merge pull request #2 from Kumhar-Harshad/main&#10;&#10;ADD: Profile.jsx">
       <option name="closed" value="true" />
@@ -510,7 +510,15 @@
       <option name="project" value="LOCAL" />
       <updated>1740717428351</updated>
     </task>
-    <option name="localTasksCounter" value="46" />
+    <task id="LOCAL-00046" summary="ADD: Apply a Cloudinary.">
+      <option name="closed" value="true" />
+      <created>1740719429957</created>
+      <option name="number" value="00046" />
+      <option name="presentableId" value="LOCAL-00046" />
+      <option name="project" value="LOCAL" />
+      <updated>1740719429958</updated>
+    </task>
+    <option name="localTasksCounter" value="47" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
