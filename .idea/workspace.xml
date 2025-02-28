@@ -4,8 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="404eb4d8-f181-44b4-a139-a07b064bd629" name="Changes" comment="UPDATE: file upload setup.">
+    <list default="true" id="404eb4d8-f181-44b4-a139-a07b064bd629" name="Changes" comment="UPDATE: file upload error.">
+      <change afterPath="$PROJECT_DIR$/Server/cloudinary/Cloudinary.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/Components/Report/Show_all_report.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/Components/Report/Show_all_report.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/controllers/Report_Controller.js" beforeDir="false" afterPath="$PROJECT_DIR$/Server/controllers/Report_Controller.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/Server/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/Server/package.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -15,9 +20,9 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="JavaScript File" />
         <option value="JSX File" />
         <option value="tsconfig.json" />
+        <option value="JavaScript File" />
       </list>
     </option>
   </component>
@@ -142,6 +147,10 @@
       <workItem from="1740225019194" duration="18452000" />
       <workItem from="1740286553455" duration="9542000" />
       <workItem from="1740316398278" duration="12029000" />
+      <workItem from="1740402010624" duration="5062000" />
+      <workItem from="1740542759613" duration="983000" />
+      <workItem from="1740665664022" duration="8918000" />
+      <workItem from="1740717015386" duration="307000" />
     </task>
     <task id="LOCAL-00001" summary="Merge pull request #2 from Kumhar-Harshad/main&#10;&#10;ADD: Profile.jsx">
       <option name="closed" value="true" />
@@ -487,14 +496,21 @@
       <option name="project" value="LOCAL" />
       <updated>1740332679522</updated>
     </task>
-    <option name="localTasksCounter" value="44" />
+    <task id="LOCAL-00044" summary="UPDATE: file upload error.">
+      <option name="closed" value="true" />
+      <created>1740402732563</created>
+      <option name="number" value="00044" />
+      <option name="presentableId" value="LOCAL-00044" />
+      <option name="project" value="LOCAL" />
+      <updated>1740402732563</updated>
+    </task>
+    <option name="localTasksCounter" value="45" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="ADD: Backed of requrments." />
     <MESSAGE value="ADD: Backed of for logged User Task and Project." />
     <MESSAGE value="ADD: Intigrate Ai In add work description." />
     <MESSAGE value="UPDATE: Ai generated responce." />
@@ -519,6 +535,7 @@
     <MESSAGE value="UPDATE: Website Icon." />
     <MESSAGE value="UPDATE: Limit File size." />
     <MESSAGE value="UPDATE: file upload setup." />
-    <option name="LAST_COMMIT_MESSAGE" value="UPDATE: file upload setup." />
+    <MESSAGE value="UPDATE: file upload error." />
+    <option name="LAST_COMMIT_MESSAGE" value="UPDATE: file upload error." />
   </component>
 </project>

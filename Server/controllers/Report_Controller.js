@@ -1,12 +1,14 @@
 const ReportsModel = require("../models/ReportSchema");
+const {uploadOnCloudinary} = require("../cloudinary/Cloudinary");
 
 const addReportController = async (req, res) => {
     try {
         const {title, description, startDate, endDate, submitedBy} = req.body;
 
-        const reportDocument = req.file ? `uplodes/${req.file.filename}` : null;
+        const reportDocumentLocalPath = req.file.path;
+        const reportDocument = await uploadOnCloudinary(reportDocumentLocalPath);
 
-        ReportsModel.create({title, description, reportDocument, startDate, endDate, submitedBy})
+        ReportsModel.create({title, description, reportDocument: reportDocument.url, startDate, endDate, submitedBy})
             .then(() => res.status(200).send({message: "Report Added successfully"}))
             .catch((err) => res.status(500).send({message: "Fail to Add Report : Controller ", err}));
     } catch (error) {

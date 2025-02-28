@@ -105,7 +105,7 @@ function ShowAllReports() {
                         </div>
                         <div className="flex items-center">
                             <a
-                                href={`${import.meta.env.VITE_REACT_APP_BACKEND_BASEURL}/uplodes/${report.reportDocument}`}
+                                href={report.reportDocument}
                                 target={"_blank"}
                                 className="text-indigo-600 hover:text-indigo-800 focus:outline-none"
                             >
