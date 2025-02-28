@@ -144,15 +144,7 @@
       <workItem from="1740542759613" duration="983000" />
       <workItem from="1740665664022" duration="8918000" />
       <workItem from="1740717015386" duration="4961000" />
-      <workItem from="1740747883481" duration="5459000" />
-    </task>
-    <task id="LOCAL-00003" summary="ADD: Group details, View Task pages UPDATE: Add user,Add group,Notification, Profile, Project,Task Pages.">
-      <option name="closed" value="true" />
-      <created>1738250007838</created>
-      <option name="number" value="00003" />
-      <option name="presentableId" value="LOCAL-00003" />
-      <option name="project" value="LOCAL" />
-      <updated>1738250007838</updated>
+      <workItem from="1740747883481" duration="5776000" />
     </task>
     <task id="LOCAL-00004" summary="ADD: Complate Auth with backend and also a sidebar diffrentiat for Manager.">
       <option name="closed" value="true" />
@@ -538,7 +530,15 @@
       <option name="project" value="LOCAL" />
       <updated>1740753856692</updated>
     </task>
-    <option name="localTasksCounter" value="52" />
+    <task id="LOCAL-00052" summary="UPDATE: on document click Redirection.">
+      <option name="closed" value="true" />
+      <created>1740754178056</created>
+      <option name="number" value="00052" />
+      <option name="presentableId" value="LOCAL-00052" />
+      <option name="project" value="LOCAL" />
+      <updated>1740754178056</updated>
+    </task>
+    <option name="localTasksCounter" value="53" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

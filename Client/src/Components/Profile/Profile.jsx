@@ -244,12 +244,12 @@ function UserProfile() {
                         {key.replace(/([A-Z])/g, ' $1').trim()}:
                     </span>
                                     {key === "resume" ? (
-                                        <a href={`${loggedin[key]}`}
-                                           className="text-blue-600"
-                                           target="_blank"
-                                           rel="noopener noreferrer">
+                                        <button
+                                            className="text-blue-600"
+                                            onClick={() => window.open(loggedin[key], "_blank", "noopener,noreferrer")}
+                                        >
                                             Click to show resume
-                                        </a>
+                                        </button>
                                     ) : (
                                         <span className="text-gray-600">{loggedin[key]}</span>
                                     )}
