@@ -8,6 +8,7 @@ import {
 } from "../../Services/WorkService.js";
 import {loggedUser} from "../../Services/AuthService.js";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import toast from "react-hot-toast";
 
 function ShowTask() {
     const [tasks, setTasks] = useState([]);
@@ -61,10 +62,10 @@ function ShowTask() {
                 )
             );
 
-            alert(`Selected Task marked as complete!`);
+            toast.success(`Selected Task marked as complete!`);
         } catch (e) {
             console.log(e);
-            alert(`Fail complete task!`);
+            toast.error(`Fail complete task!`);
         }
     };
 
@@ -77,10 +78,10 @@ function ShowTask() {
             try {
                 await deleteWorkById(id);
                 setTasks((prevTasks) => prevTasks.filter((task) => task._id !== id));
-                alert("Task Deleted successfully");
+                toast.success("Task Deleted successfully");
             } catch (e) {
                 console.log(e);
-                alert("Fail to Delete Task");
+                toast.error("Fail to Delete Task");
             }
         }
     };

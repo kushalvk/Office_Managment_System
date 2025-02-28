@@ -1,6 +1,7 @@
 import React, { useState } from "react"
 import { login } from "../../Services/AuthService";
 import { useNavigate } from 'react-router-dom';
+import toast from "react-hot-toast";
 
 function Login() {
 
@@ -35,6 +36,7 @@ function Login() {
             location.reload();
         } catch (e) {
             setError(e.message);
+            toast.error(e.message);
         }
     };
 

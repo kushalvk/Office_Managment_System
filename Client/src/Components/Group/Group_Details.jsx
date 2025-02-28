@@ -3,6 +3,7 @@ import {useParams, useNavigate} from 'react-router-dom';
 import {fetchGroupById, deleteGroup, updateGroup} from "../../Services/GroupService.js";
 import {loggedUser} from "../../Services/AuthService.js";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import toast from "react-hot-toast";
 
 function GroupDetails() {
     const {id} = useParams();
@@ -39,6 +40,7 @@ function GroupDetails() {
                 });
             } catch (err) {
                 console.log(err);
+                toast.error(err.message);
             }
         };
         fetchGroup();
@@ -51,11 +53,11 @@ function GroupDetails() {
         setLoading(true);
         try {
             await deleteGroup(id);
-            alert("Group deleted successfully!");
+            toast.success("Group deleted successfully!");
             navigate('/show-group'); // Redirect to groups list
         } catch (err) {
             console.error("Error deleting group:", err);
-            alert("Failed to delete group. Please try again.");
+            toast.error("Failed to delete group. Please try again.");
         } finally {
             setLoading(false);
         }
@@ -80,10 +82,10 @@ function GroupDetails() {
             await updateGroup(id, updatedGroup);
             setGroup(prev => ({...prev, ...updatedGroup}));
             setIsEditing(false);
-            alert("Group updated successfully!");
+            toast.success("Group updated successfully!");
         } catch (err) {
             console.error("Error updating group:", err);
-            alert("Failed to update group. Please try again.");
+            toast.error("Failed to update group. Please try again.");
         }
     };
 

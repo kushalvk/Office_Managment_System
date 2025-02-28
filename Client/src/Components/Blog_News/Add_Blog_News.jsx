@@ -1,6 +1,7 @@
 import {useState} from "react";
 import {useNavigate} from "react-router-dom";
 import {addBlogNews} from "../../Services/BlogNewsService.js";
+import toast from "react-hot-toast";
 
 function AddBlogNews() {
     const navigate = useNavigate();
@@ -23,7 +24,7 @@ function AddBlogNews() {
         e.preventDefault();
         try {
             if (formData.image.size > 10 * 1024 * 1024) {
-                alert("File size si Too Lage! Maximum 10MB limit of file size.");
+                toast.error("File size si Too Lage! Maximum 10MB limit of file size.");
                 return;
             }
 
@@ -31,12 +32,12 @@ function AddBlogNews() {
             form.append("title", formData.title);
             form.append("description", formData.description);
             form.append("image", formData.image);
-            alert("Blog/News successfully added!");
+            toast.success("Blog/News successfully added!");
             await addBlogNews(form);
             navigate("/blognews");
         } catch (e) {
             console.log(e);
-            alert('fail to add blog & news');
+            toast.error('fail to add blog & news');
         }
     };
 

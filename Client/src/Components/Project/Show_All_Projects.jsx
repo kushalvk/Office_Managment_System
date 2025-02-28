@@ -8,6 +8,7 @@ import {
 } from "../../Services/WorkService.js";
 import {loggedUser} from "../../Services/AuthService.js";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import toast from "react-hot-toast";
 
 function AllProjects() {
     const [projects, setProjects] = useState([]);
@@ -61,10 +62,10 @@ function AllProjects() {
                 )
             );
 
-            alert(`Selected Project marked as complete!`);
+            toast.success(`Selected Project marked as complete!`);
         } catch (e) {
             console.log(e);
-            alert(`Fail complete Project!`);
+            toast.error(`Fail complete Project!`);
         }
     };
 
@@ -77,10 +78,10 @@ function AllProjects() {
             try {
                 await deleteWorkById(id);
                 setProjects((prevProjects) => prevProjects.filter((project) => project._id !== id));
-                alert("Project Deleted successfully");
+                toast.success("Project Deleted successfully");
             } catch (e) {
                 console.log(e);
-                alert("Fail to Delete Project");
+                toast.error("Fail to Delete Project");
             }
         }
     };

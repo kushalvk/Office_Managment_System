@@ -3,6 +3,7 @@ import React, {useEffect, useState} from "react";
 import {allBlogNews} from "../../Services/BlogNewsService.js";
 import {loggedUser} from "../../Services/AuthService.js";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import toast from "react-hot-toast";
 
 function BlogNews() {
     const navigate = useNavigate();
@@ -25,11 +26,10 @@ function BlogNews() {
         const blogNews = async () => {
             try {
                 const response = await allBlogNews();
-                // console.log(response);
                 setPost(response);
             } catch (e) {
                 console.log(e);
-                alert("Failed to fetch blog news");
+                toast.error("Failed to fetch blog news");
             }
         }
         blogNews();

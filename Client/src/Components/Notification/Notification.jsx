@@ -3,6 +3,7 @@ import {useNavigate} from "react-router-dom";
 import {fetchNotifications, deleteNotification} from "../../Services/NotificationService.js";
 import {loggedUser} from "../../Services/AuthService.js";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import toast from "react-hot-toast";
 
 function Notification() {
     const [notifications, setNotifications] = useState([]);
@@ -28,7 +29,7 @@ function Notification() {
                 setNotifications(response);
             } catch (e) {
                 console.log(e);
-                alert("Failed to fetch notifications");
+                toast.error("Failed to fetch notifications");
             }
         };
         getNotifications();
@@ -39,10 +40,10 @@ function Notification() {
             try {
                 await deleteNotification(id);
                 setNotifications(notifications.filter(notification => notification._id !== id));
-                alert("Notification deleted successfully!");
+                toast.success("Notification deleted successfully!");
             } catch (err) {
                 console.error("Error deleting notification:", err);
-                alert("Failed to delete notification.");
+                toast.error("Failed to delete notification.");
             }
         }
     };

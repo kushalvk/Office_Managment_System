@@ -3,6 +3,7 @@ import React, {useEffect, useState} from "react";
 import {fetchFacilities} from "../../Services/FacilitiesService.js";
 import {loggedUser} from "../../Services/AuthService.js";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import toast from "react-hot-toast";
 
 function Facilities() {
     const navigate = useNavigate();
@@ -15,6 +16,7 @@ function Facilities() {
                 setLoggedin(await loggedUser());
             } catch (e) {
                 console.log(e.message);
+                toast.error(e.message);
                 setLoggedin(null);
             }
         }
@@ -28,7 +30,7 @@ function Facilities() {
                 setFacilities(await fetchFacilities());
             } catch (e) {
                 console.log(e);
-                alert("Fail to load Facilities");
+                toast.error("Fail to load Facilities");
             }
         }
         faciilities();

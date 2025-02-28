@@ -12,6 +12,7 @@ import {allStaff, newAddedUsers} from "../../Services/AuthService.js";
 import {allReports, newlyReports, pendingApprovalReports} from "../../Services/ReportService.js";
 import {fetchallTasks, fetchComplatedProject} from "../../Services/WorkService.js";
 import { formatDistanceToNow } from "date-fns";
+import toast from "react-hot-toast";
 
 function AdminDashboard() {
     const username = localStorage.getItem("username");
@@ -30,6 +31,7 @@ function AdminDashboard() {
                 setUsers(response.employees);
             } catch (e) {
                 console.log(e.message);
+                toast.error(e.message);
             }
         }
         const reports = async () => {
@@ -38,6 +40,7 @@ function AdminDashboard() {
                 setReports(response.reports);
             } catch (e) {
                 console.log(e.message);
+                toast.error(e.message);
             }
         }
         const task = async () => {
@@ -46,6 +49,7 @@ function AdminDashboard() {
                 setTasks(response.tasks);
             } catch (e) {
                 console.log(e.message);
+                toast.error(e.message);
             }
         }
         const project = async () => {
@@ -54,6 +58,7 @@ function AdminDashboard() {
                 setProjects(response.projects);
             } catch (e) {
                 console.log(e.message);
+                toast.error(e.message);
             }
         }
         const newUsers = async () => {
@@ -62,6 +67,7 @@ function AdminDashboard() {
                 setNewUsers(response.users);
             } catch (e) {
                 console.log(e.message);
+                toast.error(e.message);
             }
         }
         const newreports = async () => {
@@ -70,6 +76,7 @@ function AdminDashboard() {
                 setNewReports(response);
             } catch (e) {
                 console.log(e.message);
+                toast.error(e.message);
             }
         }
         const pendingApprovereports = async () => {
@@ -78,6 +85,7 @@ function AdminDashboard() {
                 setPendingApprovReports(response);
             } catch (e) {
                 console.log(e.message);
+                toast.error(e.message);
             }
         }
 

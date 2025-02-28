@@ -3,6 +3,7 @@ import React, {useState, useEffect} from "react";
 import {fetchTaskById, updateWorkById} from "../../Services/WorkService.js";
 import {loggedUser} from "../../Services/AuthService.js";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import toast from "react-hot-toast";
 
 function ViewTask() {
     const {id} = useParams();
@@ -55,9 +56,10 @@ function ViewTask() {
             await updateWorkById(id, updatedTask);
             setTask({...task, ...updatedTask});
             setEditMode(false);
-            alert("Work updated successfully!");
+            toast.success("Work updated successfully!");
         } catch (e) {
             console.log("Update failed:", e);
+            toast.error("Failed to update work");
         }
     };
 

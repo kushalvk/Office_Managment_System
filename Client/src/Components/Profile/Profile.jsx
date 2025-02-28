@@ -2,6 +2,7 @@ import React, {useEffect, useState} from "react";
 import {loggedUser, updateUserProfile} from "../../Services/AuthService.js";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import {useNavigate} from "react-router-dom";
+import toast from "react-hot-toast";
 
 function UserProfile() {
 
@@ -74,11 +75,11 @@ function UserProfile() {
 
             setLoggedin(response);
             setIsEditing(false);
-            alert("Profile updated successfully!");
+            toast.success("Profile updated successfully!");
             location.reload();
         } catch (error) {
             console.error("Error updating profile:", error.message);
-            alert("Failed to update profile. Please try again.");
+            toast.error("Failed to update profile. Please try again.");
         }
     };
 
@@ -244,12 +245,10 @@ function UserProfile() {
                         {key.replace(/([A-Z])/g, ' $1').trim()}:
                     </span>
                                     {key === "resume" ? (
-                                        <button
-                                            className="text-blue-600"
-                                            onClick={() => window.open(loggedin[key], "_blank", "noopener,noreferrer")}
-                                        >
+                                        <a href={`${loggedin[key]}`}
+                                           className="text-blue-600" target="_blank">
                                             Click to show resume
-                                        </button>
+                                        </a>
                                     ) : (
                                         <span className="text-gray-600">{loggedin[key]}</span>
                                     )}

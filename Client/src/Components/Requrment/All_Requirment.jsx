@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { allRequrments, updteRequrments, updteRequrmentsEmp } from "../../Services/RequrmentService.js";
 import { loggedUser } from "../../Services/AuthService.js";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import toast from "react-hot-toast";
 
 function AllRequirements() {
     const [requirements, setRequirements] = useState([]);
@@ -28,7 +29,7 @@ function AllRequirements() {
                 setRequirements(await allRequrments());
             } catch (e) {
                 console.log(e);
-                alert("Failed to fetch requirements");
+                toast.error("Failed to fetch requirements");
             }
         };
         fetchRequirements();
@@ -40,10 +41,10 @@ function AllRequirements() {
         try {
             await updteRequrments(id, newStatus);
             setRequirements(requirements.map(req => req._id === id ? { ...req, requrmentStatus: newStatus } : req));
-            alert(`Requirement ${newStatus} successfully.`);
+            toast.success(`Requirement ${newStatus} successfully.`);
         } catch (e) {
             console.log(e);
-            alert(`Failed to ${newStatus} Requirement. Please try again.`);
+            toast.error(`Failed to ${newStatus} Requirement. Please try again.`);
         }
     };
 
@@ -62,10 +63,10 @@ function AllRequirements() {
             await updteRequrmentsEmp(id, editedData);
             setRequirements(requirements.map(req => req._id === id ? { ...req, ...editedData } : req));
             setEditRequirement(null);
-            alert("Requirement updated successfully.");
+            toast.success("Requirement updated successfully.");
         } catch (e) {
             console.log(e);
-            alert("Failed to update Requirement. Please try again.");
+            toast.error("Failed to update Requirement. Please try again.");
         }
     };
 

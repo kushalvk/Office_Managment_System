@@ -2,6 +2,7 @@ import React, {useState} from "react";
 import {useNavigate} from "react-router-dom";
 import {addNotification} from "../../Services/NotificationService.js";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import toast from "react-hot-toast";
 
 function AddNotification() {
     const [title, setTitle] = useState("");
@@ -12,11 +13,11 @@ function AddNotification() {
         e.preventDefault();
         try {
             await addNotification({title, message});
-            alert("Notification added successfully!");
+            toast.success("Notification added successfully!");
             navigate("/notification");
         } catch (e) {
             console.log(e);
-            alert("Fail to add Notification");
+            toast.error("Fail to add Notification");
         }
     };
 

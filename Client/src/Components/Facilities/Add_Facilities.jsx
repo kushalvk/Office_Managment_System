@@ -1,6 +1,7 @@
 import {useState} from "react";
 import {useNavigate} from "react-router-dom";
 import {addFacilities} from "../../Services/FacilitiesService.js";
+import toast from "react-hot-toast";
 
 function AddFacility() {
     const [title, setTitle] = useState("");
@@ -18,11 +19,11 @@ function AddFacility() {
             form.append("image", image);
 
             await addFacilities(form);
-            alert("Facility Added Successfully!");
+            toast.success("Facility Added Successfully!");
             navigate("/facilities");
         } catch (e) {
             console.log(e);
-            alert("Failed to add facility");
+            toast.error("Failed to add facility");
         }
     };
 

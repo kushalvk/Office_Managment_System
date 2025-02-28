@@ -3,6 +3,7 @@ import {useNavigate} from "react-router-dom";
 import {allReports, approveReports, deleteReports} from "../../Services/ReportService.js";
 import {loggedUser} from "../../Services/AuthService.js";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import toast from "react-hot-toast";
 
 function ShowAllReports() {
     const [reports, setReports] = useState([]);
@@ -27,7 +28,7 @@ function ShowAllReports() {
                 setReports(reports.reports);
             } catch (e) {
                 console.log(e);
-                alert("Fail to load Reports");
+                toast.error("Fail to load Reports");
             }
         }
         reports();
@@ -39,10 +40,10 @@ function ShowAllReports() {
         try {
             await deleteReports(reportId);
             setReports(reports.filter((report) => report._id !== reportId));
-            alert(`Report Deleted successfully.`);
+            toast.success(`Report Deleted successfully.`);
         } catch (e) {
             console.log(e);
-            alert(`Fail to delete Report.`);
+            toast.error(`Fail to delete Report.`);
         }
     };
 
@@ -54,10 +55,10 @@ function ShowAllReports() {
                 report._id === reportId ? {...report, approve: true} : report
             ));
 
-            alert("Report Approve successfully.");
+            toast.success("Report Approve successfully.");
         } catch (e) {
             console.log(e);
-            alert("Fail to approve report");
+            toast.error("Fail to approve report");
         }
     };
 

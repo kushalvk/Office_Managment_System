@@ -1,6 +1,7 @@
 import {useEffect, useState} from "react";
 import {useParams} from "react-router-dom";
 import {UserById} from "../../Services/AuthService.js";
+import toast from "react-hot-toast";
 
 const UserDetails = () => {
 
@@ -14,6 +15,7 @@ const UserDetails = () => {
                 setUser(response)
             } catch (e) {
                 console.log(e.message);
+                toast.error(e.message);
             }
         }
         userDetails();

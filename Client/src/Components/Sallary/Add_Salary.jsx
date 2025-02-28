@@ -2,6 +2,7 @@ import React, {useState} from "react";
 import {useNavigate} from "react-router-dom";
 import {addSalary} from "../../Services/SalaryService.js";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import toast from "react-hot-toast";
 
 function AddSalary() {
     const occupationOptions = [
@@ -23,11 +24,11 @@ function AddSalary() {
         e.preventDefault();
         try {
             await addSalary({name, email, contact, occupation, amount});
-            alert("Employee Added successfully!");
+            toast.success("Employee Added successfully!");
             navigate("/sallary");
         } catch (e) {
             console.log(e);
-            alert("Error adding Employee");
+            toast.error("Error adding Employee");
         }
     };
 

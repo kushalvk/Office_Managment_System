@@ -1,6 +1,7 @@
 import React, {useState} from "react";
 import {forgotPassword} from "../../Services/AuthService.js";
 import {useNavigate} from "react-router-dom";
+import toast from "react-hot-toast";
 
 function ForgotPassword() {
 
@@ -26,10 +27,11 @@ function ForgotPassword() {
         try {
             if (formData.newPassword === formData.confirmPassword) {
                 await forgotPassword(formData);
-                alert("Password reset successful!");
+                toast.success("Password reset successful!");
                 navigate("/login");
             } else {
                 setError("Passwords do not match!");
+                toast.error("Passwords do not match!");
             }
         } catch (e) {
             setError(e.message);

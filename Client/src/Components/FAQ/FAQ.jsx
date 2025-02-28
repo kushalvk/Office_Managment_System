@@ -3,6 +3,7 @@ import {useNavigate} from "react-router-dom";
 import {fetchFaq} from "../../Services/FaqService.js";
 import {loggedUser} from "../../Services/AuthService.js";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import toast from "react-hot-toast";
 
 function FAQ() {
 
@@ -16,6 +17,7 @@ function FAQ() {
                 setLoggedin(await loggedUser());
             } catch (e) {
                 console.log(e.message);
+                toast.error(e.message);
                 setLoggedin(null);
             }
         }
@@ -28,7 +30,7 @@ function FAQ() {
                 setFaqs(await fetchFaq());
             } catch (e) {
                 console.log(e);
-                alert("fail to load FAQ's")
+                toast.error("fail to load FAQ's")
             }
         }
         faq();

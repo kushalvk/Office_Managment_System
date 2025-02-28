@@ -4,6 +4,7 @@ import {allStaff} from "../../Services/AuthService.js";
 import {addGroup} from "../../Services/GroupService.js";
 import {useNavigate} from "react-router-dom";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import toast from "react-hot-toast";
 
 function Add_Group() {
 
@@ -37,6 +38,7 @@ function Add_Group() {
                 setOptions(staff.employees)
             } catch (e) {
                 console.log(e)
+                toast.error(e.message);
             }
         }
         Staff();
@@ -74,11 +76,11 @@ function Add_Group() {
 
         try {
             const responce = await addGroup(updatedFormData);
-            alert(responce.message);
+            toast.success(responce.message);
             navigate("/show-group");
         } catch (error) {
             console.error("Error updating profile:", error.message);
-            alert("Failed to update profile. Please try again.");
+            toast.error("Failed to update profile. Please try again.");
         }
     };
 

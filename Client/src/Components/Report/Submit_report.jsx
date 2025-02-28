@@ -2,6 +2,7 @@ import React, {useState} from "react";
 import {useNavigate} from "react-router-dom";
 import {addReport} from "../../Services/ReportService.js";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import toast from "react-hot-toast";
 
 function SubmitReport() {
     const [title, setTitle] = useState("");
@@ -16,7 +17,7 @@ function SubmitReport() {
         e.preventDefault();
         try {
             if (reportdocument.size > 10 * 1024 * 1024) {
-                alert("File size si Too Lage! Maximum 10MB limit of file size.");
+                toast.error("File size si Too Lage! Maximum 10MB limit of file size.");
                 return;
             }
 
@@ -30,11 +31,11 @@ function SubmitReport() {
 
             await addReport(report);
 
-            alert("New report submitted!");
+            toast.success("New report submitted!");
             navigate("/all-reports");
         } catch (e) {
             console.log(e);
-            alert("Fail to add report")
+            toast.error("Fail to add report")
         }
     };
 

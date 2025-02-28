@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import {addFaq} from "../../Services/FaqService.js";
 import {useNavigate} from "react-router-dom";
+import toast from "react-hot-toast";
 
 function Add_FAQ() {
 
@@ -10,11 +11,11 @@ function Add_FAQ() {
     const handleAddFaq = async () => {
         try {
             await addFaq(newFaq);
-            alert("Faq added successfully!");
+            toast.success("Faq added successfully!");
             navigate("/faq");
         } catch (e) {
             console.log(e);
-            alert("Error adding a faq");
+            toast.error("Error adding a faq");
         }
     };
 

@@ -2,6 +2,7 @@ import React, {useEffect, useState} from "react";
 import {useNavigate} from "react-router-dom";
 import {fetchSalary, deleteSalary, paysalary} from "../../Services/SalaryService.js";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import toast from "react-hot-toast";
 
 function SalaryPage() {
     const [salaries, setSalaries] = useState([]);
@@ -21,7 +22,7 @@ function SalaryPage() {
                 setAmountInputs(amounts);
             } catch (e) {
                 console.error(e);
-                alert("Error fetching salaries.");
+                toast.error("Error fetching salaries.");
             }
         };
         fetchSalaries();
@@ -39,17 +40,16 @@ function SalaryPage() {
     const handleConfirmPayment = async (salary) => {
         const amount = parseFloat(amountInputs[salary._id]);
         if (isNaN(amount) || amount <= 0) {
-            alert("Please enter a valid amount.");
+            toast.error("Please enter a valid amount.");
             return;
         }
 
         try {
             await paysalary({...salary, amount});
             setEditingSalaryId(null);
-            alert("Payment successful!");
         } catch (error) {
             console.error("Error processing payment:", error);
-            alert("Failed to process payment.");
+            toast.error("Failed to process payment.");
         }
     };
 
@@ -58,10 +58,10 @@ function SalaryPage() {
             try {
                 await deleteSalary(id);
                 setSalaries(salaries.filter((salary) => salary._id !== id));
-                alert("Salary record deleted successfully.");
+                toast.success("Salary record deleted successfully.");
             } catch (error) {
                 console.error("Error deleting salary:", error);
-                alert("Failed to delete salary record.");
+                toast.error("Failed to delete salary record.");
             }
         }
     };

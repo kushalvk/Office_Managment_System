@@ -3,6 +3,7 @@ import {useNavigate} from "react-router-dom";
 import {allGroups} from "../../Services/GroupService.js";
 import {loggedUser} from "../../Services/AuthService.js";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import toast from "react-hot-toast";
 
 function ShowAllGroups() {
     const navigate = useNavigate();
@@ -41,6 +42,7 @@ function ShowAllGroups() {
                 setGroups(filteredGroups);
             } catch (e) {
                 console.log(e);
+                toast.error(e.message);
             }
         };
 

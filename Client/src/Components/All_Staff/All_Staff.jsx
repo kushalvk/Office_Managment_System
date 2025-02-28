@@ -2,6 +2,7 @@ import {useNavigate} from "react-router-dom";
 import React, {useEffect, useState} from "react";
 import {allStaff, deleteStaff} from "../../Services/AuthService.js";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import toast from "react-hot-toast";
 
 function All_Staff() {
     const [staff, setStaff] = useState([]);
@@ -24,10 +25,10 @@ function All_Staff() {
             try {
                 await deleteStaff(id);
                 setStaff(staff.filter(employee => employee._id !== id));
-                alert("Staff member Deleted successfully!");
+                toast.success("Staff member Deleted successfully!");
             } catch (e) {
                 console.log(e);
-                alert("Failed to delete staff member");
+                toast.error("Failed to delete staff member");
             }
         }
     };

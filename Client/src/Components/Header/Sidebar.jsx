@@ -44,7 +44,7 @@ function Sidebar() {
         } else if (!localStorage.getItem("token")) {
             navigate("/login");
         }
-    }, []);
+    }, [loggedin.profilePhoto, navigate]);
 
     return (
         <>

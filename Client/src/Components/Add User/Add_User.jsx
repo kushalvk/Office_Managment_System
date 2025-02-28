@@ -3,6 +3,7 @@ import UserIcon from '../../../../Storage/Add_User.jpg';
 import { addUser } from '../../Services/AuthService';
 import { useNavigate } from 'react-router-dom';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import toast from "react-hot-toast";
 
 function Add_User() {
 
@@ -73,7 +74,7 @@ function Add_User() {
         if (formData.password === formData.confirmPassword) {
 
             if (formData?.profilePhoto?.size > 10 * 1024 * 1024 || formData.resume.size > 10 * 1024 * 1024) {
-                alert("File size si Too Lage! Maximum 10MB limit of each file size.");
+                toast.error("File size si Too Lage! Maximum 10MB limit of each file size.");
                 return;
             }
 
@@ -95,13 +96,14 @@ function Add_User() {
 
             try {
                 await addUser(form);
-                alert("User Added Sucessfully")
+                toast.success("User Added Successfully")
                 navigate("/all-staff");
             } catch (e) {
                 setError(e.message);
             }
         } else {
-            setError("Password dose't match")
+            setError("Password doesn't match")
+            toast.error("Password doesn't match")
         }
     };
 

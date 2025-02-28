@@ -3,6 +3,7 @@ import { allStaff } from "../../Services/AuthService.js";
 import { addWork, generateWorkDescription } from "../../Services/WorkService.js";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
 
 function AddTask() {
 
@@ -42,8 +43,10 @@ function AddTask() {
     const addGroup = () => {
         if (task.groupName.includes(selectedGroup)) {
             setError("This group has already been added.")
+            toast.error("This group has already been added.")
         } else if (selectedGroup === "") {
             setError("Please select an group to add.")
+            toast.error("Please select an group to add.")
         } else if (selectedGroup && !task.groupName.includes(selectedGroup)) {
             setTask(prevTask => ({ ...prevTask, groupName: [...prevTask.groupName, selectedGroup] }));
             setSelectedGroup("");
@@ -54,12 +57,14 @@ function AddTask() {
     const addEmployee = () => {
         if (selectedOption.username === 'Select an employee') {
             setError('Please select an employee to add.');
+            toast.error('Please select an employee to add.')
             return;
         }
 
         const memberExists = members.some(member => member.username === selectedOption.username);
         if (memberExists) {
             setError('This member has already been added.');
+            toast.error('This member has already been added.')
             return;
         }
 
@@ -99,11 +104,11 @@ function AddTask() {
         if (validateForm()) {
             try {
                 await addWork(finaltask);
-                alert("Work Add Successfully");
+                toast.success("Work Add Successfully");
                 location.reload();
             } catch (error) {
                 console.log(error);
-                alert("Failed to Add Work. Please try again.");
+                toast.error("Failed to Add Work. Please try again.");
             }
         }
     };
@@ -123,7 +128,7 @@ function AddTask() {
     // Ai
     const generateDescription = async () => {
         if (task.title.length < 3) {
-            alert("Please enter at least 3 characters for the title.");
+            toast.error("Please enter at least 3 characters for the title.");
             return;
         }
 
@@ -133,7 +138,7 @@ function AddTask() {
             setTask(prevTask => ({ ...prevTask, description: response.trim() }));
         } catch (error) {
             console.error("Error fetching AI description:", error);
-            alert("Error generating description. Please try again.");
+            toast.error("Error generating description. Please try again.");
         } finally {
             setLoading(false);
         }
