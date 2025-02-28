@@ -1,12 +1,14 @@
-import {useEffect, useState} from "react";
-import {useParams} from "react-router-dom";
+import React, {useEffect, useState} from "react";
+import {useNavigate, useParams} from "react-router-dom";
 import {UserById} from "../../Services/AuthService.js";
 import toast from "react-hot-toast";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 
 const UserDetails = () => {
 
     const { id } = useParams();
     const [user, setUser] = useState({});
+    const  navigate = useNavigate();
 
     useEffect(() => {
         const userDetails = async () => {
@@ -23,6 +25,12 @@ const UserDetails = () => {
 
     return (
         <div className="bg-white p-6 rounded-xl shadow-md max-w-lg mx-auto space-y-4 mt-10">
+            <button
+                className="absolute sm:top-[7.5vw] top-[80px] right-[2.5vw] flex items-center text-white bg-green-600 p-2 px-4 rounded-lg shadow-md hover:bg-green-700 transition-transform hover:scale-105"
+                onClick={() => navigate(-1)}
+            >
+                <ArrowBackIcon/> <p> Back </p>
+            </button>
             <div className="flex flex-col items-center">
                 <img
                     src={

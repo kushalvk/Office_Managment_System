@@ -96,7 +96,7 @@ function GroupDetails() {
     return (
         <div className="relative isolate h-full p-6 lg:px-8 bg-gradient-to-r from-blue-800 to-blue-400 min-h-screen">
             <button
-                className="absolute sm:top-[7.5vw] top-[30vw] right-[2.5vw] flex items-center text-white bg-green-600 p-2 px-4 rounded-lg shadow-md hover:bg-green-700 transition-transform hover:scale-105"
+                className="absolute sm:top-[7.5vw] top-[80px] right-[2.5vw] flex items-center text-white bg-green-600 p-2 px-4 rounded-lg shadow-md hover:bg-green-700 transition-transform hover:scale-105"
                 onClick={() => navigate(-1)}
             >
                 <ArrowBackIcon/> <p> Back </p>
@@ -107,51 +107,51 @@ function GroupDetails() {
 
             <div className="bg-white rounded-lg shadow-lg p-6 max-w-4xl mx-auto">
                 {isEditing ? (<>
-                        <input
-                            type="text"
-                            value={updatedGroup.groupName}
-                            onChange={(e) => setUpdatedGroup({...updatedGroup, groupName: e.target.value})}
-                            className="w-full p-2 border rounded-md"
-                        />
-                        <textarea
-                            value={updatedGroup.description}
-                            onChange={(e) => setUpdatedGroup({...updatedGroup, description: e.target.value})}
-                            className="w-full p-2 border rounded-md mt-2"
-                        />
-                        <select
-                            value={updatedGroup.groupType}
-                            onChange={(e) => setUpdatedGroup({...updatedGroup, groupType: e.target.value})}
-                            className="w-full p-2 border rounded-md mt-2"
-                        >
-                            <option value="public">Public</option>
-                            <option value="private">Private</option>
-                        </select>
-                        <select
-                            value={updatedGroup.groupStatus}
-                            onChange={(e) => setUpdatedGroup({...updatedGroup, groupStatus: e.target.value})}
-                            className="w-full p-2 border rounded-md mt-2"
-                        >
-                            <option value="active">Active</option>
-                            <option value="inactive">Inactive</option>
-                        </select>
-                    </>) : (<>
-                        <h2 className="text-2xl text-gray-800"><b>Group Name: </b>{group.groupName}</h2>
-                        <p className="text-gray-600 mt-2"><b>Description: </b>{group.description}</p>
-                        <p className="text-gray-600 mt-2">
-                            <b>Group Type: </b>
-                            <span
-                                className={`px-2 py-1 rounded-md text-white ${group.groupType === 'public' ? 'bg-red-500' : 'bg-green-500'}`}>
+                    <input
+                        type="text"
+                        value={updatedGroup.groupName}
+                        onChange={(e) => setUpdatedGroup({...updatedGroup, groupName: e.target.value})}
+                        className="w-full p-2 border rounded-md"
+                    />
+                    <textarea
+                        value={updatedGroup.description}
+                        onChange={(e) => setUpdatedGroup({...updatedGroup, description: e.target.value})}
+                        className="w-full p-2 border rounded-md mt-2"
+                    />
+                    <select
+                        value={updatedGroup.groupType}
+                        onChange={(e) => setUpdatedGroup({...updatedGroup, groupType: e.target.value})}
+                        className="w-full p-2 border rounded-md mt-2"
+                    >
+                        <option value="public">Public</option>
+                        <option value="private">Private</option>
+                    </select>
+                    <select
+                        value={updatedGroup.groupStatus}
+                        onChange={(e) => setUpdatedGroup({...updatedGroup, groupStatus: e.target.value})}
+                        className="w-full p-2 border rounded-md mt-2"
+                    >
+                        <option value="active">Active</option>
+                        <option value="inactive">Inactive</option>
+                    </select>
+                </>) : (<>
+                    <h2 className="text-2xl text-gray-800"><b>Group Name: </b>{group.groupName}</h2>
+                    <p className="text-gray-600 mt-2"><b>Description: </b>{group.description}</p>
+                    <p className="text-gray-600 mt-2">
+                        <b>Group Type: </b>
+                        <span
+                            className={`px-2 py-1 rounded-md text-white ${group.groupType === 'public' ? 'bg-red-500' : 'bg-green-500'}`}>
                                 {group.groupType}
                             </span>
-                        </p>
-                        <p className="text-gray-600 mt-2">
-                            <b>Group Status: </b>
-                            <span
-                                className={`px-2 py-1 rounded-md text-white ${group.groupStatus === 'active' ? 'bg-green-500' : 'bg-red-500'}`}>
+                    </p>
+                    <p className="text-gray-600 mt-2">
+                        <b>Group Status: </b>
+                        <span
+                            className={`px-2 py-1 rounded-md text-white ${group.groupStatus === 'active' ? 'bg-green-500' : 'bg-red-500'}`}>
                                 {group.groupStatus}
                             </span>
-                        </p>
-                    </>)}
+                    </p>
+                </>)}
                 <p className="text-gray-600 mt-2"><b>Created By: </b>{group.createdBy}</p>
                 <p className="text-gray-600 mt-2"><b>Created At: </b>{new Date(group.createdAt).toLocaleString()}</p>
                 {group.createdAt !== group.updatedAt && (
@@ -168,28 +168,28 @@ function GroupDetails() {
             <div className="flex flex-wrap justify-center mt-8 gap-4">
                 {!isEditing && (<button onClick={() => navigate('/show-group')}
                                         className="px-6 py-2 text-white bg-green-600 hover:bg-green-700 rounded-md text-lg w-full sm:w-auto">
-                        Back to Groups
-                    </button>)}
+                    Back to Groups
+                </button>)}
                 {loggedin?.role === "Manager" && (<>
-                        {!isEditing && (<button onClick={handleDelete}
-                                                className="px-6 py-2 text-white bg-red-600 hover:bg-red-700 rounded-md text-lg w-full sm:w-auto"
-                                                disabled={loading}>
-                                {loading ? "Deleting..." : "Delete Group"}
-                            </button>)}
-                        {isEditing ? (<>
-                                <button onClick={handleSave}
-                                        className="px-6 py-2 text-white bg-green-600 hover:bg-green-700 rounded-md text-lg w-full sm:w-auto">
-                                    Save
-                                </button>
-                                <button onClick={handleCancel}
-                                        className="px-6 py-2 text-white bg-gray-600 hover:bg-gray-700 rounded-md text-lg w-full sm:w-auto">
-                                    Cancel
-                                </button>
-                            </>) : (<button onClick={handleEdit}
-                                            className="px-6 py-2 text-white bg-green-600 hover:bg-green-700 rounded-md text-lg w-full sm:w-auto">
-                                Update
-                            </button>)}
-                    </>)}
+                    {!isEditing && (<button onClick={handleDelete}
+                                            className="px-6 py-2 text-white bg-red-600 hover:bg-red-700 rounded-md text-lg w-full sm:w-auto"
+                                            disabled={loading}>
+                        {loading ? "Deleting..." : "Delete Group"}
+                    </button>)}
+                    {isEditing ? (<>
+                        <button onClick={handleSave}
+                                className="px-6 py-2 text-white bg-green-600 hover:bg-green-700 rounded-md text-lg w-full sm:w-auto">
+                            Save
+                        </button>
+                        <button onClick={handleCancel}
+                                className="px-6 py-2 text-white bg-gray-600 hover:bg-gray-700 rounded-md text-lg w-full sm:w-auto">
+                            Cancel
+                        </button>
+                    </>) : (<button onClick={handleEdit}
+                                    className="px-6 py-2 text-white bg-green-600 hover:bg-green-700 rounded-md text-lg w-full sm:w-auto">
+                        Update
+                    </button>)}
+                </>)}
             </div>
         </div>);
 }

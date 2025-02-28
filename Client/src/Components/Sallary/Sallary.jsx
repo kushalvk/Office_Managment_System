@@ -69,12 +69,13 @@ function SalaryPage() {
     return (
         <div className="relative isolate h-full p-6 lg:px-8 bg-gradient-to-r from-blue-800 to-blue-400 min-h-screen">
             <button
-                className="absolute top-4 right-4 flex items-center text-white bg-green-600 p-2 px-4 rounded-lg shadow-md hover:bg-green-700 transition-transform hover:scale-105"
+                className="absolute sm:top-[7.5vw] top-[80px] right-[2.5vw] flex items-center text-white bg-green-600 p-2 px-4 rounded-lg shadow-md hover:bg-green-700 transition-transform hover:scale-105"
                 onClick={() => navigate(-1)}
             >
-                <ArrowBackIcon/> Back
+                <ArrowBackIcon/> <p> Back </p>
             </button>
-            <h1 className="text-white text-3xl sm:text-4xl font-bold mb-6 mt-16 text-center sm:text-left">Salary Payments</h1>
+            <h1 className="text-white text-3xl sm:text-4xl font-bold mb-6 mt-16 text-center sm:text-left">Salary
+                Payments</h1>
             <div className="flex justify-center sm:justify-start">
                 <button
                     onClick={() => navigate("/add-salary")}
@@ -92,7 +93,8 @@ function SalaryPage() {
                         <div className="mb-3">
                             <h4 className="text-xl font-bold text-gray-800">{salary.name}</h4>
                             <p className="text-sm font-medium text-gray-800">Occupation: {salary.occupation}</p>
-                            <p className="text-xs text-gray-500 mt-1">Last Payment Date: {new Date(salary.updatedAt).toLocaleString()}</p>
+                            <p className="text-xs text-gray-500 mt-1">Last Payment
+                                Date: {new Date(salary.updatedAt).toLocaleString()}</p>
                             <p className="text-xs text-gray-500 mt-1">Email: {salary.email}</p>
                             <p className="text-xs text-gray-500 mt-1">Mobile No: {salary.contact}</p>
                             <p className="text-xs text-gray-500 mt-1">Last Payment Amount: {salary.amount}</p>

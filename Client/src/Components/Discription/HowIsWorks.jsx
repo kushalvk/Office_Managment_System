@@ -1,10 +1,15 @@
 import React from "react";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import {useNavigate} from "react-router-dom";
 
 function HowItWorks() {
+
+    const navigate = useNavigate();
+
     return (
         <div className="container mx-auto p-6 pt-[20vw] sm:pt-[10vw]">
             <button
-                className="absolute sm:top-[7.5vw] top-[30vw] right-[2.5vw] flex items-center text-white bg-green-600 p-2 px-4 rounded-lg shadow-md hover:bg-green-700 transition-transform hover:scale-105"
+                className="absolute sm:top-[7.5vw] top-[80px] right-[2.5vw] flex items-center text-white bg-green-600 p-2 px-4 rounded-lg shadow-md hover:bg-green-700 transition-transform hover:scale-105"
                 onClick={() => navigate(-1)}
             >
                 <ArrowBackIcon /> <p> Back </p>

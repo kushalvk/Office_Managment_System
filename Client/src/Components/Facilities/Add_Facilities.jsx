@@ -1,7 +1,8 @@
-import {useState} from "react";
+import React, {useState} from "react";
 import {useNavigate} from "react-router-dom";
 import {addFacilities} from "../../Services/FacilitiesService.js";
 import toast from "react-hot-toast";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 
 function AddFacility() {
     const [title, setTitle] = useState("");
@@ -30,6 +31,12 @@ function AddFacility() {
     return (
         <div
             className="h-full p-6 lg:px-8 bg-gradient-to-r from-blue-800 to-blue-400 min-h-screen flex items-center justify-center">
+            <button
+                className="absolute sm:top-[7.5vw] top-[80px] right-[2.5vw] flex items-center text-white bg-green-600 p-2 px-4 rounded-lg shadow-md hover:bg-green-700 transition-transform hover:scale-105"
+                onClick={() => navigate(-1)}
+            >
+                <ArrowBackIcon/> <p> Back </p>
+            </button>
             <div className="bg-white p-6 rounded-lg shadow-md w-full max-w-lg">
                 <h2 className="text-2xl font-bold text-gray-800 mb-4">Add Facility</h2>
                 <form onSubmit={handleSubmit} className="space-y-4">

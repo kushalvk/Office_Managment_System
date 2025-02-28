@@ -36,7 +36,7 @@ function AddSalary() {
         <div
             className="h-full p-6 lg:px-8 bg-gradient-to-r from-green-800 to-green-400 min-h-screen flex items-center justify-center">
             <button
-                className="absolute top-[7.5vw] right-[2.5vw] flex items-center text-white bg-blue-600 p-2 px-4 rounded-lg shadow-md hover:bg-blue-700 transition-transform hover:scale-105"
+                className="absolute sm:top-[7.5vw] top-[80px] right-[2.5vw] flex items-center text-white bg-green-600 p-2 px-4 rounded-lg shadow-md hover:bg-green-700 transition-transform hover:scale-105"
                 onClick={() => navigate(-1)}
             >
                 <ArrowBackIcon/> <p> Back </p>

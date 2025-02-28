@@ -4,18 +4,17 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="404eb4d8-f181-44b4-a139-a07b064bd629" name="Changes" comment="UPDATE: on document click Redirection.">
+    <list default="true" id="404eb4d8-f181-44b4-a139-a07b064bd629" name="Changes" comment="UPDATE: All Notification using library react-hot-toast.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/Client/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/Client/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/src/App.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/App.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/Components/About_Us/About_Us.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/Components/About_Us/About_Us.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Client/src/Components/Add User/Add_User.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/Components/Add User/Add_User.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Client/src/Components/Add_Work/Add_Work.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/Components/Add_Work/Add_Work.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Client/src/Components/All_Staff/All_Staff.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/Components/All_Staff/All_Staff.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Client/src/Components/All_Staff/UserDetails.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/Components/All_Staff/UserDetails.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Client/src/Components/Blog_News/Add_Blog_News.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/Components/Blog_News/Add_Blog_News.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Client/src/Components/Blog_News/Blog_News.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/Components/Blog_News/Blog_News.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/src/Components/Dashbored/Dashbored.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/Components/Dashbored/Dashbored.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/Components/Contact_Us/Contact_Us.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/Components/Contact_Us/Contact_Us.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/Components/Discription/HowIsWorks.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/Components/Discription/HowIsWorks.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Client/src/Components/FAQ/Add_FAQ.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/Components/FAQ/Add_FAQ.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Client/src/Components/FAQ/FAQ.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/Components/FAQ/FAQ.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Client/src/Components/Facilities/Add_Facilities.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/Components/Facilities/Add_Facilities.jsx" afterDir="false" />
@@ -23,22 +22,22 @@
       <change beforePath="$PROJECT_DIR$/Client/src/Components/Group/AddGroup.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/Components/Group/AddGroup.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Client/src/Components/Group/Group_Details.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/Components/Group/Group_Details.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Client/src/Components/Group/Show_Groups.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/Components/Group/Show_Groups.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/src/Components/Header/Header.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/Components/Header/Header.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/src/Components/Header/Sidebar.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/Components/Header/Sidebar.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/src/Components/Login/Forgate_Password.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/Components/Login/Forgate_Password.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/src/Components/Login/Login.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/Components/Login/Login.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Client/src/Components/Notification/Add_Notification.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/Components/Notification/Add_Notification.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Client/src/Components/Notification/Notification.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/Components/Notification/Notification.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Client/src/Components/Photos/Photos.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/Components/Photos/Photos.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/Components/Polices/Policies.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/Components/Polices/Policies.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/Components/Privacy_Policies/Privacy_Policies.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/Components/Privacy_Policies/Privacy_Policies.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Client/src/Components/Profile/Profile.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/Components/Profile/Profile.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Client/src/Components/Project/Show_All_Projects.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/Components/Project/Show_All_Projects.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Client/src/Components/Report/Show_all_report.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/Components/Report/Show_all_report.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Client/src/Components/Report/Submit_report.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/Components/Report/Submit_report.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Client/src/Components/Requrment/All_Requirment.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/Components/Requrment/All_Requirment.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/Components/Requrment/Submit_Requrment.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/Components/Requrment/Submit_Requrment.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Client/src/Components/Sallary/Add_Salary.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/Components/Sallary/Add_Salary.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Client/src/Components/Sallary/Sallary.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/Components/Sallary/Sallary.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Client/src/Components/Task/Show_All_Task.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/Components/Task/Show_All_Task.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Client/src/Components/Task/View_Task.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/Components/Task/View_Task.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/Components/Terms_Condition/Terms_Condition.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/Components/Terms_Condition/Terms_Condition.jsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -179,15 +178,7 @@
       <workItem from="1740542759613" duration="983000" />
       <workItem from="1740665664022" duration="8918000" />
       <workItem from="1740717015386" duration="4961000" />
-      <workItem from="1740747883481" duration="9900000" />
-    </task>
-    <task id="LOCAL-00005" summary="ADD: Uplodes Folder">
-      <option name="closed" value="true" />
-      <created>1738501826580</created>
-      <option name="number" value="00005" />
-      <option name="presentableId" value="LOCAL-00005" />
-      <option name="project" value="LOCAL" />
-      <updated>1738501826580</updated>
+      <workItem from="1740747883481" duration="11949000" />
     </task>
     <task id="LOCAL-00006" summary="ADD: Update in Group file">
       <option name="closed" value="true" />
@@ -573,14 +564,21 @@
       <option name="project" value="LOCAL" />
       <updated>1740754497872</updated>
     </task>
-    <option name="localTasksCounter" value="54" />
+    <task id="LOCAL-00054" summary="UPDATE: All Notification using library react-hot-toast.">
+      <option name="closed" value="true" />
+      <created>1740760304504</created>
+      <option name="number" value="00054" />
+      <option name="presentableId" value="LOCAL-00054" />
+      <option name="project" value="LOCAL" />
+      <updated>1740760304505</updated>
+    </task>
+    <option name="localTasksCounter" value="55" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="ADD: Uplodes" />
     <MESSAGE value="ADD: Salary Page and Payment Gateway." />
     <MESSAGE value="ADD: Facility Back-end." />
     <MESSAGE value="ADD: FAQ Page Front-end &amp; Back-end also add MAP." />
@@ -605,6 +603,7 @@
     <MESSAGE value="ADD: handle error to large file size at report." />
     <MESSAGE value="ADD: Files Upload on cloudinary completed for all page." />
     <MESSAGE value="UPDATE: on document click Redirection." />
-    <option name="LAST_COMMIT_MESSAGE" value="UPDATE: on document click Redirection." />
+    <MESSAGE value="UPDATE: All Notification using library react-hot-toast." />
+    <option name="LAST_COMMIT_MESSAGE" value="UPDATE: All Notification using library react-hot-toast." />
   </component>
 </project>
