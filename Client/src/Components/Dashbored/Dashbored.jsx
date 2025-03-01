@@ -54,7 +54,7 @@ function AdminDashboard() {
 
     return (
         <div className="min-h-screen bg-gradient-to-br from-gray-50 to-blue-50 p-6">
-            {/* Header */}
+
             <div className="max-w-6xl mx-auto mb-8">
                 <div className="bg-white p-6 rounded-xl shadow-lg flex justify-between items-center">
                     <h1 className="text-3xl font-bold text-gray-800 animate-fade-in">
@@ -63,7 +63,6 @@ function AdminDashboard() {
                 </div>
             </div>
 
-            {/* Dashboard Cards */}
             <div className="max-w-6xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
                 <DashboardCard
                     title="Total Users"
@@ -91,7 +90,6 @@ function AdminDashboard() {
                 />
             </div>
 
-            {/* Recent Activity */}
             <div className="max-w-6xl mx-auto bg-white p-6 rounded-xl shadow-lg mb-8">
                 <h2 className="text-2xl font-bold text-gray-800 mb-4">Recent Activity</h2>
                 {newReports?.length > 0 || newUsers?.length > 0 ? (
@@ -118,7 +116,6 @@ function AdminDashboard() {
                 )}
             </div>
 
-            {/* Quick Stats */}
             <div className="max-w-6xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                 <DashboardCard
                     title="New Users"
@@ -143,7 +140,6 @@ function AdminDashboard() {
     );
 }
 
-// Dashboard Card Component
 // eslint-disable-next-line react/prop-types
 function DashboardCard({ title, value, icon, gradient }) {
     return (
@@ -159,7 +155,6 @@ function DashboardCard({ title, value, icon, gradient }) {
     );
 }
 
-// Activity Item Component
 // eslint-disable-next-line react/prop-types
 function ActivityItem({ text, time }) {
     return (

@@ -7,7 +7,7 @@ function HowItWorks() {
 
     return (
         <div className="min-h-screen bg-gradient-to-r from-blue-600 to-indigo-500 p-5 pt-15">
-            {/* Back Button */}
+
             <button
                 className="fixed top-27 right-4 flex items-center gap-2 bg-white text-blue-600 px-4 py-2 rounded-full shadow-lg hover:bg-blue-50 transition-all duration-300 z-10"
                 onClick={() => navigate(-1)}
@@ -16,16 +16,14 @@ function HowItWorks() {
                 <span className="text-sm font-medium">Back</span>
             </button>
 
-            {/* Header */}
             <div className="max-w-3xl mx-auto text-center pt-16 pb-8">
                 <h1 className="text-4xl md:text-5xl font-bold text-white drop-shadow-lg animate-fade-in">
                     How This Website Works
                 </h1>
             </div>
 
-            {/* Content */}
             <div className="max-w-4xl mx-auto bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-all duration-300">
-                {/* User Registration & Login */}
+
                 <section className="mb-8">
                     <h2 className="text-2xl font-semibold text-gray-800 mb-2">1. User Registration & Login</h2>
                     <p className="text-gray-600">
@@ -33,7 +31,6 @@ function HowItWorks() {
                     </p>
                 </section>
 
-                {/* Dashboard Overview */}
                 <section className="mb-8">
                     <h2 className="text-2xl font-semibold text-gray-800 mb-2">2. Dashboard Overview</h2>
                     <p className="text-gray-600">
@@ -41,7 +38,6 @@ function HowItWorks() {
                     </p>
                 </section>
 
-                {/* Features & Functionalities */}
                 <section className="mb-8">
                     <h2 className="text-2xl font-semibold text-gray-800 mb-2">3. Features & Functionalities</h2>
                     <ul className="list-disc pl-6 text-gray-600">
@@ -51,7 +47,6 @@ function HowItWorks() {
                     </ul>
                 </section>
 
-                {/* Secure Transactions */}
                 <section className="mb-8">
                     <h2 className="text-2xl font-semibold text-gray-800 mb-2">4. Secure Transactions</h2>
                     <p className="text-gray-600">
@@ -59,7 +54,6 @@ function HowItWorks() {
                     </p>
                 </section>
 
-                {/* Logout & Security */}
                 <section className="mb-8">
                     <h2 className="text-2xl font-semibold text-gray-800 mb-2">5. Logout & Security</h2>
                     <p className="text-gray-600">
@@ -67,7 +61,6 @@ function HowItWorks() {
                     </p>
                 </section>
 
-                {/* Call to Action */}
                 <div className="text-center mt-6">
                     <p className="text-lg font-semibold text-gray-800">
                         Start exploring the features and enhance your experience today!

@@ -47,7 +47,7 @@ function Header() {
     return (
         <header className="fixed inset-x-0 top-0 z-50 bg-white shadow-md">
             <nav className="flex items-center justify-between p-4 lg:px-8" aria-label="Global">
-                {/* Logo */}
+
                 <div className="flex lg:flex-1">
                     <a href="/" className="-m-1.5 p-1.5">
                         <span className="sr-only">Your Company</span>
@@ -59,7 +59,6 @@ function Header() {
                     </a>
                 </div>
 
-                {/* Hamburger Menu (Mobile) */}
                 <div className="flex lg:hidden">
                     <button
                         type="button"
@@ -84,7 +83,6 @@ function Header() {
                     </button>
                 </div>
 
-                {/* Desktop Navigation */}
                 <div className="hidden lg:flex lg:gap-x-8">
                     <a href="/" className="text-md font-semibold text-gray-900 hover:text-blue-600 transition-colors">
                         Home
@@ -107,7 +105,6 @@ function Header() {
                     )}
                 </div>
 
-                {/* Desktop User Actions */}
                 <div className="hidden lg:flex lg:flex-1 lg:justify-end items-center gap-4">
                     {!loggedIn ? (
                         <button
@@ -118,7 +115,6 @@ function Header() {
                         </button>
                     ) : (
                         <>
-                            {/* Notification Bell */}
                             <a href="/notification" className="relative text-gray-600 hover:text-blue-600">
                                 <svg
                                     className="h-6 w-6"
@@ -140,7 +136,6 @@ function Header() {
                                 </span>
                             </a>
 
-                            {/* Profile Picture */}
                             <button onClick={handleProfile} className="relative h-15 w-15">
                                 <img
                                     className="h-full w-full rounded-full object-cover border-2 border-blue-200 hover:border-blue-400 transition-all"
@@ -153,7 +148,6 @@ function Header() {
                                 />
                             </button>
 
-                            {/* Logout Button */}
                             <button
                                 onClick={handleLogout}
                                 className="group group-hover:before:duration-500 group-hover:after:duration-500 after:duration-500 hover:border-rose-300 hover:before:[box-shadow:_20px_20px_20px_30px_#a21caf] duration-500 before:duration-500 hover:duration-500 underline underline-offset-2 hover:after:-right-8 hover:before:right-12 hover:before:-bottom-8 hover:before:blur hover:underline hover:underline-offset-4 origin-left hover:decoration-2 hover:text-rose-300 relative bg-neutral-800 h-16 w-60 border text-left p-3 text-gray-50 text-base font-bold rounded-lg overflow-hidden before:absolute before:w-12 before:h-12 before:content[''] before:right-1 before:top-1 before:z-10 before:bg-violet-500 before:rounded-full before:blur-lg after:absolute after:z-10 after:w-20 after:h-20 after:content[''] after:bg-rose-300 after:right-8 after:top-3 after:rounded-full after:blur-lg"
@@ -165,7 +159,6 @@ function Header() {
                 </div>
             </nav>
 
-            {/* Mobile Menu */}
             <div
                 className={`fixed inset-y-0 right-0 z-50 w-64 bg-white shadow-lg transform transition-transform duration-300 ease-in-out ${menuOpen ? "translate-x-0" : "translate-x-full"
                 }`}

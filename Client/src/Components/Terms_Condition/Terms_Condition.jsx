@@ -29,7 +29,7 @@ function TermsConditions() {
 
     return (
         <div className="min-h-screen bg-gradient-to-r from-blue-600 to-indigo-500 p-5 pt-15">
-            {/* Back Button */}
+
             <button
                 className="fixed top-27 right-4 flex items-center gap-2 bg-white text-blue-600 px-4 py-2 rounded-full shadow-lg hover:bg-blue-50 transition-all duration-300 z-10"
                 onClick={() => navigate(-1)}
@@ -38,14 +38,12 @@ function TermsConditions() {
                 <span className="text-sm font-medium">Back</span>
             </button>
 
-            {/* Header */}
             <div className="max-w-3xl mx-auto text-center pt-16 pb-8">
                 <h1 className="text-4xl md:text-5xl font-bold text-white drop-shadow-lg animate-fade-in">
                     Terms & Conditions
                 </h1>
             </div>
 
-            {/* Terms List */}
             <div className="max-w-6xl mx-auto">
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-6">
                     {terms.map((term) => (

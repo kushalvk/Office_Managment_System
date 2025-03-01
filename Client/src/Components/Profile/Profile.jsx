@@ -85,7 +85,7 @@ function UserProfile() {
 
     return (
         <div className="min-h-screen bg-gradient-to-r from-blue-600 to-indigo-500 p-6 pt-15">
-            {/* Back Button */}
+
             <button
                 className="fixed top-27 right-4 flex items-center gap-2 bg-white text-blue-600 px-4 py-2 rounded-full shadow-lg hover:bg-blue-50 transition-all duration-300 z-10"
                 onClick={() => navigate(-1)}
@@ -94,18 +94,16 @@ function UserProfile() {
                 <span className="text-sm font-medium">Back</span>
             </button>
 
-            {/* Header */}
             <div className="max-w-3xl mx-auto text-center pt-16 pb-8">
                 <h1 className="text-4xl md:text-5xl font-bold text-white drop-shadow-lg animate-fade-in">
                     {isEditing ? "Edit Profile" : "User Profile"}
                 </h1>
             </div>
 
-            {/* Profile Card */}
             <div className="max-w-4xl mx-auto bg-white rounded-xl shadow-2xl p-8">
                 {isEditing ? (
                     <form onSubmit={handleSubmit} className="space-y-6">
-                        {/* Profile Photo */}
+
                         <div>
                             <label className="block text-sm font-medium text-gray-700">Profile Photo</label>
                             <input
@@ -117,7 +115,6 @@ function UserProfile() {
                             />
                         </div>
 
-                        {/* Full Name */}
                         <div>
                             <label className="block text-sm font-medium text-gray-700">Full Name</label>
                             <input
@@ -129,7 +126,6 @@ function UserProfile() {
                             />
                         </div>
 
-                        {/* Email */}
                         <div>
                             <label className="block text-sm font-medium text-gray-700">Email</label>
                             <input
@@ -141,7 +137,6 @@ function UserProfile() {
                             />
                         </div>
 
-                        {/* Address */}
                         <div>
                             <label className="block text-sm font-medium text-gray-700">Address</label>
                             <input
@@ -153,7 +148,6 @@ function UserProfile() {
                             />
                         </div>
 
-                        {/* Date of Birth */}
                         <div>
                             <label className="block text-sm font-medium text-gray-700">Date of Birth</label>
                             <input
@@ -165,7 +159,6 @@ function UserProfile() {
                             />
                         </div>
 
-                        {/* Gender */}
                         <div>
                             <label className="block text-sm font-medium text-gray-700">Gender</label>
                             <select
@@ -181,7 +174,6 @@ function UserProfile() {
                             </select>
                         </div>
 
-                        {/* Mobile Number */}
                         <div>
                             <label className="block text-sm font-medium text-gray-700">Mobile Number</label>
                             <input
@@ -193,7 +185,6 @@ function UserProfile() {
                             />
                         </div>
 
-                        {/* Qualification */}
                         <div>
                             <label className="block text-sm font-medium text-gray-700">Qualification</label>
                             <select
@@ -210,7 +201,6 @@ function UserProfile() {
                             </select>
                         </div>
 
-                        {/* Username */}
                         <div>
                             <label className="block text-sm font-medium text-gray-700">Username</label>
                             <input
@@ -222,7 +212,6 @@ function UserProfile() {
                             />
                         </div>
 
-                        {/* Department */}
                         <div>
                             <label className="block text-sm font-medium text-gray-700">Department</label>
                             <select
@@ -239,7 +228,6 @@ function UserProfile() {
                             </select>
                         </div>
 
-                        {/* Work Location */}
                         <div>
                             <label className="block text-sm font-medium text-gray-700">Work Location</label>
                             <select
@@ -256,7 +244,6 @@ function UserProfile() {
                             </select>
                         </div>
 
-                        {/* Resume */}
                         <div>
                             <label className="block text-sm font-medium text-gray-700">Resume</label>
                             <input
@@ -268,7 +255,6 @@ function UserProfile() {
                             />
                         </div>
 
-                        {/* Save and Cancel Buttons */}
                         <div className="flex justify-center gap-4">
                             <button
                                 type="submit"
@@ -287,7 +273,6 @@ function UserProfile() {
                     </form>
                 ) : (
                     <div className="space-y-6">
-                        {/* Profile Photo */}
                         <div className="flex justify-center">
                             <img
                                 src={
@@ -300,7 +285,6 @@ function UserProfile() {
                             />
                         </div>
 
-                        {/* Profile Details */}
                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                             {Object.keys(loggedIn).map((key) => (
                                 key !== "_id" && key !== "password" && key !== "profilePhoto" && key !== "__v" && (
@@ -329,7 +313,6 @@ function UserProfile() {
                             ))}
                         </div>
 
-                        {/* Edit Profile Button */}
                         <div className="flex justify-center">
                             <button
                                 onClick={() => setIsEditing(true)}

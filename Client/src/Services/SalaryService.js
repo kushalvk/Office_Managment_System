@@ -1,5 +1,5 @@
 import axios from "axios";
-import { error } from "./Error";
+import {error} from "./Error";
 
 export const addSalary = async (form) => {
     try {
@@ -49,8 +49,8 @@ export const paysalary = async (salary) => {
 
         const response = await fetch(`${import.meta.env.VITE_REACT_APP_BACKEND_BASEURL}/create-order`, {
             method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ amount: salary.amount, id: salary._id }),
+            headers: {"Content-Type": "application/json"},
+            body: JSON.stringify({amount: salary.amount, id: salary._id}),
         });
         const order = await response.json();
 
@@ -64,8 +64,18 @@ export const paysalary = async (salary) => {
             handler: function (response) {
                 alert(`Payment Successful! Payment ID: ${response.razorpay_payment_id}`);
             },
-            prefill: { name: salary.name, email: salary.email, contact: salary.contact },
-            theme: { color: "green" },
+            prefill: {name: salary.name, email: salary.email, contact: salary.contact},
+            theme: {color: "blue"},
+            // ✅ Enable UPI Payment Directly
+            method: {
+                upi: true,  // Enables UPI Payment
+                card: false, // Disables card payment
+                netbanking: false, // Disables net banking
+            },
+            // ✅ Force Payment via UPI ID (Google Pay, PhonePe, Paytm)
+            upi: {
+                flow: "intent", // Opens UPI apps like Google Pay, Paytm, PhonePe
+            },
         };
 
         const rzp = new window.Razorpay(options);

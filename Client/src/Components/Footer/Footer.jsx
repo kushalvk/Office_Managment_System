@@ -22,7 +22,7 @@ function Footer() {
         <footer className="bg-gray-50 text-gray-600 py-12 shadow-md">
             <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="grid grid-cols-1 md:grid-cols-5 gap-8">
-                    {/* Logo Section */}
+
                     <div className="col-span-1 md:col-span-2">
                         <a href="/" className="flex items-center space-x-3">
                             <img
@@ -37,7 +37,6 @@ function Footer() {
                         </p>
                     </div>
 
-                    {/* Navigation Columns */}
                     <div className="space-y-4">
                         <h2 className="text-sm font-semibold text-gray-900 uppercase tracking-wider">Authentication</h2>
                         <ul className="space-y-2">
@@ -104,7 +103,6 @@ function Footer() {
                     </div>
                 </div>
 
-                {/* Bottom Section */}
                 <div className="mt-12 pt-8 border-t border-gray-200">
                     <div className="flex flex-col sm:flex-row justify-between items-center">
                         <p className="text-sm text-gray-500 text-center sm:text-left">

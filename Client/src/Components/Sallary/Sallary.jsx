@@ -3,12 +3,18 @@ import { useNavigate } from "react-router-dom";
 import { fetchSalary, deleteSalary, paysalary } from "../../Services/SalaryService.js";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import toast from "react-hot-toast";
+import DeleteConfirmationAlert from "../ConfirmetionAlerts/DeleteConfermetionAlert.jsx";
 
 function SalaryPage() {
     const [salaries, setSalaries] = useState([]);
     const [editingSalaryId, setEditingSalaryId] = useState(null);
     const [amountInputs, setAmountInputs] = useState({});
     const navigate = useNavigate();
+
+    // State variables for the delete confirmation alert
+    const [showConfirm, setShowConfirm] = useState(false);
+    const [deleteId, setDeleteId] = useState(null);
+    const [closing, setClosing] = useState(false);
 
     useEffect(() => {
         const fetchSalaries = async () => {
@@ -54,22 +60,31 @@ function SalaryPage() {
         }
     };
 
-    const handleDelete = async (id) => {
-        if (window.confirm("Are you sure you want to delete this salary record?")) {
-            try {
-                await deleteSalary(id);
-                setSalaries(salaries.filter((salary) => salary._id !== id));
-                toast.success("Salary record deleted successfully.");
-            } catch (error) {
-                console.error("Error deleting salary:", error);
-                toast.error("Failed to delete salary record.");
-            }
+    // Updated handleDelete function to open the confirmation alert
+    const handleDelete = (id) => {
+        setDeleteId(id);
+        setShowConfirm(true);
+    };
+
+    // Function to perform the actual deletion after confirmation
+    const onConfirmDelete = async () => {
+        try {
+            await deleteSalary(deleteId);
+            setSalaries(salaries.filter((salary) => salary._id !== deleteId));
+            toast.success("Salary record deleted successfully.");
+        } catch (error) {
+            console.error("Error deleting salary:", error);
+            toast.error("Failed to delete salary record.");
+        } finally {
+            // Reset the state variables
+            setDeleteId(null);
+            setShowConfirm(false); // Close the modal
         }
     };
 
     return (
         <div className="min-h-screen bg-gradient-to-r from-blue-600 to-indigo-500 p-5 pt-15">
-            {/* Back Button */}
+
             <button
                 className="fixed top-27 right-4 flex items-center gap-2 bg-white text-blue-600 px-4 py-2 rounded-full shadow-lg hover:bg-blue-50 transition-all duration-300 z-10"
                 onClick={() => navigate(-1)}
@@ -78,14 +93,12 @@ function SalaryPage() {
                 <span className="text-sm font-medium">Back</span>
             </button>
 
-            {/* Header */}
             <div className="max-w-3xl mx-auto text-center pt-16 pb-8">
                 <h1 className="text-4xl md:text-5xl font-bold text-white drop-shadow-lg animate-fade-in">
                     Salary Payments
                 </h1>
             </div>
 
-            {/* Add Salary Button */}
             <div className="flex justify-center mb-8">
                 <button
                     onClick={() => navigate("/add-salary")}
@@ -95,7 +108,6 @@ function SalaryPage() {
                 </button>
             </div>
 
-            {/* Salary Cards */}
             <div className="max-w-6xl mx-auto">
                 {salaries.length === 0 ? (
                     <p className="text-center text-lg text-gray-200 font-semibold py-4 bg-white rounded-lg shadow-md">
@@ -108,7 +120,6 @@ function SalaryPage() {
                                 key={salary._id}
                                 className="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-all duration-300"
                             >
-                                {/* Employee Details */}
                                 <h4 className="text-xl font-bold text-gray-800">{salary.name}</h4>
                                 <p className="text-sm text-gray-600">Occupation: {salary.occupation}</p>
                                 <p className="text-sm text-gray-500 mt-2">
@@ -119,9 +130,7 @@ function SalaryPage() {
                                 <p className="text-sm text-gray-500 mt-2">
                                     Last Payment Amount: {salary.amount}
                                 </p>
-
-                                {/* Edit Amount Input */}
-                                {editingSalaryId === salary._id && (
+                                {editingSalaryId === salary._id ? (
                                     <div className="mt-4 space-y-3">
                                         <input
                                             type="number"
@@ -145,28 +154,39 @@ function SalaryPage() {
                                             </button>
                                         </div>
                                     </div>
+                                ) : (
+                                    <>
+                                        <div className="flex gap-3 mt-6">
+                                            <button
+                                                onClick={() => handleEditAmount(salary._id, salary.amount)}
+                                                className="flex-1 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-all duration-300"
+                                            >
+                                                Pay Now
+                                            </button>
+                                            <button
+                                                onClick={() => handleDelete(salary._id)}
+                                                className="flex-1 py-2 bg-red-600 text-white rounded-md hover:bg-red-700 transition-all duration-300"
+                                            >
+                                                Delete
+                                            </button>
+                                        </div>
+                                    </>
                                 )}
-
-                                {/* Buttons */}
-                                <div className="flex gap-3 mt-6">
-                                    <button
-                                        onClick={() => handleEditAmount(salary._id, salary.amount)}
-                                        className="flex-1 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-all duration-300"
-                                    >
-                                        Pay Now
-                                    </button>
-                                    <button
-                                        onClick={() => handleDelete(salary._id)}
-                                        className="flex-1 py-2 bg-red-600 text-white rounded-md hover:bg-red-700 transition-all duration-300"
-                                    >
-                                        Delete
-                                    </button>
-                                </div>
                             </div>
                         ))}
                     </div>
                 )}
             </div>
+
+            <DeleteConfirmationAlert
+                showConfirm={showConfirm}
+                setShowConfirm={setShowConfirm}
+                deleteId={deleteId}
+                setDeleteId={setDeleteId}
+                closing={closing}
+                setClosing={setClosing}
+                onConfirm={onConfirmDelete}
+            />
         </div>
     );
 }

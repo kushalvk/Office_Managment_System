@@ -4,6 +4,7 @@ import { fetchGroupById, deleteGroup, updateGroup } from "../../Services/GroupSe
 import { loggedUser } from "../../Services/AuthService.js";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import toast from "react-hot-toast";
+import DeleteConfirmationAlert from "../ConfirmetionAlerts/DeleteConfermetionAlert"; // Import if separate file
 
 function GroupDetails() {
     const { id } = useParams();
@@ -13,6 +14,9 @@ function GroupDetails() {
     const [loggedIn, setLoggedIn] = useState(null);
     const [isEditing, setIsEditing] = useState(false);
     const [updatedGroup, setUpdatedGroup] = useState({ groupName: "", description: "", groupType: "", groupStatus: "" });
+    const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
+    const [deleteId, setDeleteId] = useState(null);
+    const [closingDelete, setClosingDelete] = useState(false);
 
     useEffect(() => {
         const fetchLoggedInUser = async () => {
@@ -46,13 +50,16 @@ function GroupDetails() {
         fetchGroup();
     }, [id]);
 
-    const handleDelete = async () => {
-        const confirmDelete = window.confirm("Are you sure you want to delete this group?");
-        if (!confirmDelete) return;
+    const handleDeleteClick = () => {
+        setDeleteId(id);
+        setShowDeleteConfirm(true);
+        setClosingDelete(false);
+    };
 
+    const handleDeleteConfirm = async () => {
         setLoading(true);
         try {
-            await deleteGroup(id);
+            await deleteGroup(deleteId);
             toast.success("Group deleted successfully!");
             navigate('/show-group');
         } catch (err) {
@@ -60,6 +67,9 @@ function GroupDetails() {
             toast.error("Failed to delete group. Please try again.");
         } finally {
             setLoading(false);
+            setShowDeleteConfirm(false);
+            setClosingDelete(false);
+            setDeleteId(null);
         }
     };
 
@@ -102,7 +112,7 @@ function GroupDetails() {
 
     return (
         <div className="min-h-screen bg-gradient-to-r from-blue-600 to-indigo-500 p-5 pt-15">
-            {/* Back Button */}
+
             <button
                 className="fixed top-27 right-4 flex items-center gap-2 bg-white text-blue-600 px-4 py-2 rounded-full shadow-lg hover:bg-blue-50 transition-all duration-300 z-10"
                 onClick={() => navigate(-1)}
@@ -111,14 +121,12 @@ function GroupDetails() {
                 <span className="text-sm font-medium">Back</span>
             </button>
 
-            {/* Header */}
             <div className="max-w-3xl mx-auto text-center pt-16 pb-8">
                 <h1 className="text-4xl md:text-5xl font-bold text-white drop-shadow-lg animate-fade-in">
                     Group Details
                 </h1>
             </div>
 
-            {/* Group Details Card */}
             <div className="max-w-4xl mx-auto bg-white rounded-xl shadow-2xl p-8">
                 {isEditing ? (
                     <div className="space-y-4">
@@ -218,7 +226,6 @@ function GroupDetails() {
                 )}
             </div>
 
-            {/* Action Buttons */}
             <div className="max-w-4xl mx-auto flex flex-wrap justify-center gap-4 mt-8">
                 {!isEditing && (
                     <button
@@ -233,7 +240,7 @@ function GroupDetails() {
                         {!isEditing ? (
                             <>
                                 <button
-                                    onClick={handleDelete}
+                                    onClick={handleDeleteClick}
                                     className="px-6 py-2 bg-red-600 text-white rounded-lg shadow-md hover:bg-red-700 transition-all duration-300 w-full sm:w-auto"
                                     disabled={loading}
                                 >
@@ -265,6 +272,16 @@ function GroupDetails() {
                     </>
                 )}
             </div>
+
+            <DeleteConfirmationAlert
+                showConfirm={showDeleteConfirm}
+                setShowConfirm={setShowDeleteConfirm}
+                deleteId={deleteId}
+                setDeleteId={setDeleteId}
+                closing={closingDelete}
+                setClosing={setClosingDelete}
+                onConfirm={handleDeleteConfirm}
+            />
         </div>
     );
 }

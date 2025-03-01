@@ -22,7 +22,7 @@ function AddRequirement() {
         try {
             await addRequrment(requirement);
             toast.success("Requirement added successfully");
-            navigate("/Show-requirment");
+            navigate("/show-requirement");
         } catch (e) {
             console.log(e);
             toast.error("Failed to add requirement");

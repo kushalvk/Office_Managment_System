@@ -1,12 +1,12 @@
-import { useParams, useNavigate } from "react-router-dom";
-import React, { useState, useEffect } from "react";
-import { fetchTaskById, updateWorkById } from "../../Services/WorkService.js";
-import { loggedUser } from "../../Services/AuthService.js";
+import {useParams, useNavigate} from "react-router-dom";
+import React, {useState, useEffect} from "react";
+import {fetchTaskById, updateWorkById} from "../../Services/WorkService.js";
+import {loggedUser} from "../../Services/AuthService.js";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import toast from "react-hot-toast";
 
 function ViewTask() {
-    const { id } = useParams();
+    const {id} = useParams();
     const navigate = useNavigate();
     const [task, setTask] = useState(null);
     const [editMode, setEditMode] = useState(false);
@@ -49,14 +49,14 @@ function ViewTask() {
     }, [id]);
 
     const handleChange = (e) => {
-        const { name, value } = e.target;
-        setUpdatedTask(prev => ({ ...prev, [name]: value }));
+        const {name, value} = e.target;
+        setUpdatedTask(prev => ({...prev, [name]: value}));
     };
 
     const handleSave = async () => {
         try {
             await updateWorkById(id, updatedTask);
-            setTask(prev => ({ ...prev, ...updatedTask }));
+            setTask(prev => ({...prev, ...updatedTask}));
             setEditMode(false);
             toast.success("Work updated successfully!");
         } catch (e) {
@@ -67,7 +67,8 @@ function ViewTask() {
 
     if (!task) {
         return (
-            <div className="min-h-screen bg-gradient-to-r from-blue-600 to-indigo-500 p-6 flex justify-center items-center">
+            <div
+                className="min-h-screen bg-gradient-to-r from-blue-600 to-indigo-500 p-6 flex justify-center items-center">
                 <p className="text-white text-lg font-semibold">Loading...</p>
             </div>
         );
@@ -75,23 +76,21 @@ function ViewTask() {
 
     return (
         <div className="min-h-screen bg-gradient-to-r from-blue-600 to-indigo-500 p-5 pt-15">
-            {/* Back Button */}
+
             <button
                 className="fixed top-27 right-4 flex items-center gap-2 bg-white text-blue-600 px-4 py-2 rounded-full shadow-lg hover:bg-blue-50 transition-all duration-300 z-10"
                 onClick={() => navigate(-1)}
             >
-                <ArrowBackIcon sx={{ fontSize: 20 }} />
+                <ArrowBackIcon sx={{fontSize: 20}}/>
                 <span className="text-sm font-medium">Back</span>
             </button>
 
-            {/* Header */}
             <div className="max-w-3xl mx-auto text-center pt-16 pb-8">
                 <h1 className="text-4xl md:text-5xl font-bold text-white drop-shadow-lg animate-fade-in">
                     Work Details
                 </h1>
             </div>
 
-            {/* Task Details Card */}
             <div className="max-w-4xl mx-auto bg-white rounded-xl shadow-2xl p-8 space-y-6">
                 <div>
                     <label className="block text-sm font-medium text-gray-700">Title</label>
@@ -193,7 +192,6 @@ function ViewTask() {
                 </div>
             </div>
 
-            {/* Action Buttons */}
             <div className="max-w-4xl mx-auto flex flex-wrap justify-center gap-4 mt-8">
                 {loggedIn?.role === "Manager" && (
                     <>
@@ -212,25 +210,27 @@ function ViewTask() {
                                     Cancel
                                 </button>
                             </>
-                        ) : (
-                            <button
-                                onClick={() => setEditMode(true)}
-                                className="px-6 py-2 bg-blue-600 text-white rounded-lg shadow-md hover:bg-blue-700 transition-all duration-300 w-full sm:w-auto"
-                            >
-                                Edit
-                            </button>
+                        ) : (<>
+                                <button
+                                    onClick={() => setEditMode(true)}
+                                    className="px-6 py-2 mb-4 bg-green-600 text-white rounded-lg shadow-md hover:bg-green-700 transition-all duration-300 max-w-2xl"
+                                >
+                                    Edit
+                                </button>
+                                <button
+                                    onClick={() => navigate(-1)}
+                                    className="px-6 py-2 mb-4 bg-green-600 text-white rounded-lg shadow-md hover:bg-green-700 transition-all duration-300 max-w-2xl"
+                                >
+                                    Back
+                                </button>
+                            </>
                         )}
                     </>
                 )}
-                <button
-                    onClick={() => navigate(-1)}
-                    className="px-6 py-2 mb-4 bg-green-600 text-white rounded-lg shadow-md hover:bg-green-700 transition-all duration-300 max-w-2xl"
-                >
-                    Back
-                </button>
             </div>
         </div>
-    );
+    )
+        ;
 }
 
 export default ViewTask;

@@ -4,9 +4,10 @@ import { addWork, generateWorkDescription } from "../../Services/WorkService.js"
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
+import {allGroups} from "../../Services/GroupService.js";
 
 function AddTask() {
-    const groupOptions = ["Group A", "Group B", "Group C"];
+    const [groupOptions, setGroup] = useState([]);
     const [employeeOptions, setEmployeeOption] = useState([]);
     const [members, setMembers] = useState([]);
     const [selectedGroup, setSelectedGroup] = useState("");
@@ -39,6 +40,17 @@ function AddTask() {
                 toast.error("Failed to fetch staff.");
             }
         };
+        const fetchGroup = async () => {
+            try {
+                const staff = await allGroups();
+                const groupNames = staff.groups.map(group => group.groupName);
+                setGroup(groupNames);
+            } catch (e) {
+                console.log(e);
+                toast.error("Failed to fetch staff.");
+            }
+        };
+        fetchGroup();
         fetchStaff();
     }, []);
 
@@ -111,7 +123,6 @@ function AddTask() {
         try {
             await addWork(finalTask);
             toast.success("Work Added Successfully");
-            navigate(-1); // Navigate back instead of reloading
         } catch (error) {
             console.log(error);
             toast.error("Failed to add work. Please try again.");
@@ -147,7 +158,7 @@ function AddTask() {
 
     return (
         <div className="min-h-screen bg-gradient-to-r from-blue-600 to-indigo-500 p-6 pt-15">
-            {/* Back Button */}
+
             <button
                 className="fixed top-4 right-4 flex items-center gap-2 bg-white text-blue-600 px-4 py-2 rounded-full shadow-lg hover:bg-blue-50 transition-all duration-300 z-10"
                 onClick={() => navigate(-1)}
@@ -156,12 +167,11 @@ function AddTask() {
                 <span className="text-sm font-medium">Back</span>
             </button>
 
-            {/* Form Container */}
             <div className="max-w-3xl mx-auto bg-white rounded-xl shadow-2xl p-8">
                 <h1 className="text-3xl font-bold text-gray-800 mb-6 animate-fade-in">Add Work</h1>
                 {error && <p className="text-red-600 font-semibold text-center mb-4">{error}</p>}
                 <form onSubmit={handleSubmit} className="space-y-6">
-                    {/* Work Title */}
+
                     <div>
                         <label className="block text-sm font-medium text-gray-700">Work Title</label>
                         <input
@@ -175,7 +185,6 @@ function AddTask() {
                         {formErrors.title && <p className="text-red-500 text-sm mt-1">{formErrors.title}</p>}
                     </div>
 
-                    {/* Work Description */}
                     <div>
                         <label className="block text-sm font-medium text-gray-700">Work Description</label>
                         <div className="flex gap-3">
@@ -197,7 +206,6 @@ function AddTask() {
                         </div>
                     </div>
 
-                    {/* Completion Date */}
                     <div>
                         <label className="block text-sm font-medium text-gray-700">Completion Date</label>
                         <input
@@ -211,7 +219,6 @@ function AddTask() {
                         {formErrors.completionDate && <p className="text-red-500 text-sm mt-1">{formErrors.completionDate}</p>}
                     </div>
 
-                    {/* Work Type */}
                     <div>
                         <label className="block text-sm font-medium text-gray-700">Work Type</label>
                         <select
@@ -225,7 +232,6 @@ function AddTask() {
                         </select>
                     </div>
 
-                    {/* Group Selection (for Projects) */}
                     {task.worktype === "project" && (
                         <div>
                             <label className="block text-sm font-medium text-gray-700">Group Names</label>
@@ -251,7 +257,6 @@ function AddTask() {
                         </div>
                     )}
 
-                    {/* Employee Selection */}
                     <div>
                         <label className="block text-sm font-medium text-gray-700">Assigned to</label>
                         <div className="flex gap-3">
@@ -306,7 +311,6 @@ function AddTask() {
                         </div>
                     </div>
 
-                    {/* Group & Employee List */}
                     {(task.groupName.length > 0 || members.length > 0) && (
                         <div className="space-y-4">
                             {task.groupName.length > 0 && (
@@ -355,7 +359,6 @@ function AddTask() {
                         </div>
                     )}
 
-                    {/* Submit Button */}
                     <button
                         type="submit"
                         className="w-full py-3 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition-all duration-300 focus:ring-2 focus:ring-blue-500 focus:outline-none"

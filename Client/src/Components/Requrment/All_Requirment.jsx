@@ -9,12 +9,22 @@ import {
 import { loggedUser } from "../../Services/AuthService.js";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import toast from "react-hot-toast";
+import DeleteConfirmationAlert from "../ConfirmetionAlerts/DeleteConfermetionAlert";
+import ApproveConfirmationAlert from "../ConfirmetionAlerts/ApproveConfermetionAlert";
 
 function AllRequirements() {
     const [requirements, setRequirements] = useState([]);
     const [loggedin, setLoggedin] = useState(null);
     const [editRequirement, setEditRequirement] = useState(null);
     const [editedData, setEditedData] = useState({ name: "", reason: "" });
+    const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
+    const [showApproveConfirm, setShowApproveConfirm] = useState(false);
+    const [deleteId, setDeleteId] = useState(null);
+    const [approveId, setApproveId] = useState(null);
+    const [searchTerm, setSearchTerm] = useState("");
+    const [filterStatus, setFilterStatus] = useState("all");
+    const [isUpdating, setIsUpdating] = useState(false);  // Track updating state
+
 
     useEffect(() => {
         const fetchLoggedUser = async () => {
@@ -29,45 +39,125 @@ function AllRequirements() {
     }, []);
 
     useEffect(() => {
-        if (loggedin?.role === "Manager") {
-            const fetchRequirements = async () => {
-                try {
-                    setRequirements(await allRequrments());
-                } catch (e) {
-                    console.log(e);
-                    toast.error("Failed to fetch requirements");
+        const fetchRequirements = async () => {
+            try {
+                if (!loggedin) return;
+
+                let response;
+                if (loggedin.role === "Manager") {
+                    response = await allRequrments();
+                } else {
+                    response = await allRequrmentsByUsername(loggedin.username);
                 }
-            };
-            fetchRequirements();
-        } else {
-            const fetchRequirements = async () => {
-                try {
-                    setRequirements(await allRequrmentsByUsername(loggedin?.username));
-                } catch (e) {
-                    console.log(e);
-                    toast.error("Failed to fetch requirements");
+
+                let filteredRequirements = response || [];
+
+                if (searchTerm) {
+                    filteredRequirements = filteredRequirements.filter(req =>
+                        req.name.toLowerCase().includes(searchTerm.toLowerCase())
+                    );
                 }
-            };
-            fetchRequirements();
-        }
-    }, [loggedin?.role, loggedin?.username]);
+
+                if (filterStatus !== "all") {
+                    filteredRequirements = filteredRequirements.filter(req =>
+                        req.requrmentStatus.toLowerCase() === filterStatus.toLowerCase()
+                    );
+                }
+
+                setRequirements(filteredRequirements);
+            } catch (e) {
+                console.log(e);
+                toast.error("Failed to fetch requirements");
+            }
+        };
+
+        fetchRequirements();
+    }, [loggedin?.role, loggedin?.username, searchTerm, filterStatus]);
 
     const navigate = useNavigate();
 
-    const updateStatus = async (id, newStatus) => {
+    const handleDeleteClick = (id) => {
+        setDeleteId(id);
+        setShowDeleteConfirm(true);
+    };
+
+    const handleDeleteConfirm = async () => {
         try {
-            await updteRequrments(id, newStatus);
-            setRequirements(requirements.map(req => req._id === id ? { ...req, requrmentStatus: newStatus } : req));
-            toast.success(`Requirement ${newStatus} successfully.`);
+            await updteRequrments(deleteId, "Cancelled");
+            setRequirements(prevRequirements =>
+                prevRequirements.map(req =>
+                    req._id === deleteId ? { ...req, requrmentStatus: "Cancelled" } : req
+                )
+            );
+            toast.success("Requirement cancelled successfully.");
         } catch (e) {
             console.log(e);
-            toast.error(`Failed to ${newStatus} Requirement. Please try again.`);
+            toast.error("Failed to cancel requirement. Please try again.");
+        } finally {
+            setShowDeleteConfirm(false);
+            setDeleteId(null);
         }
     };
+
+    const handleApproveClick = (id) => {
+        setApproveId(id);
+        setShowApproveConfirm(true);
+    };
+
+    const handleApproveConfirm = async () => {
+        try {
+            await updteRequrments(approveId, "Approved");
+            setRequirements(prevRequirements =>
+                prevRequirements.map(req =>
+                    req._id === approveId ? { ...req, requrmentStatus: "Approved" } : req
+                )
+            );
+            toast.success("Requirement approved successfully.");
+        } catch (e) {
+            console.log(e);
+            toast.error("Failed to approve requirement. Please try again.");
+        } finally {
+            setShowApproveConfirm(false);
+            setApproveId(null);
+        }
+    };
+
+    const handleUpdateConfirm = async (id) => {
+        setIsUpdating(true);  // Start updating
+
+        try {
+            await updteRequrmentsEmp(id, editedData);
+
+            // Optimistic update: Update the UI immediately
+            setRequirements(prevRequirements =>
+                prevRequirements.map(req =>
+                    req._id === id ? { ...req, ...editedData, requrmentStatus: "Pending" } : req  // Set status to "Pending"
+                )
+            );
+            toast.success("Requirement updated successfully.");
+        } catch (e) {
+            console.log(e);
+            toast.error("Failed to update requirement. Please try again.");
+
+            //Revert optimistic update, show old data
+            const oldData = await allRequrments()
+            setRequirements(oldData);
+        } finally {
+            setIsUpdating(false); // Finish updating
+            setEditRequirement(null);
+            setEditedData({ name: "", reason: "" });
+        }
+    };
+
 
     const handleEdit = (requirement) => {
         setEditRequirement(requirement._id);
         setEditedData({ name: requirement.name, reason: requirement.reason });
+    };
+
+    const handleCancelEdit = () => {
+        setEditRequirement(null);
+        setEditedData({ name: "", reason: "" });
     };
 
     const handleChange = (e) => {
@@ -75,21 +165,12 @@ function AllRequirements() {
         setEditedData(prev => ({ ...prev, [name]: value }));
     };
 
-    const handleSave = async (id) => {
-        try {
-            await updteRequrmentsEmp(id, editedData);
-            setRequirements(requirements.map(req => req._id === id ? { ...req, ...editedData } : req));
-            setEditRequirement(null);
-            toast.success("Requirement updated successfully.");
-        } catch (e) {
-            console.log(e);
-            toast.error("Failed to update Requirement. Please try again.");
-        }
+    const handleSave = (id) => {
+        handleUpdateConfirm(id);
     };
 
     return (
         <div className="min-h-screen bg-gradient-to-r from-blue-600 to-indigo-500 p-5 pt-15">
-            {/* Back Button */}
             <button
                 className="fixed top-27 right-4 flex items-center gap-2 bg-white text-blue-600 px-4 py-2 rounded-full shadow-lg hover:bg-blue-50 transition-all duration-300 z-10"
                 onClick={() => navigate(-1)}
@@ -98,24 +179,39 @@ function AllRequirements() {
                 <span className="text-sm font-medium">Back</span>
             </button>
 
-            {/* Header */}
             <div className="max-w-3xl mx-auto text-center pt-16 pb-8">
                 <h1 className="text-4xl md:text-5xl font-bold text-white drop-shadow-lg animate-fade-in">
                     All Requirements
                 </h1>
             </div>
 
-            {/* Add Requirement Button */}
-            <div className="flex justify-center mb-8">
-                <button
-                    onClick={() => navigate("/submit-requrment")}
-                    className="px-6 py-2 bg-green-600 text-white rounded-lg shadow-md hover:bg-green-700 transition-all duration-300"
+            <div className="max-w-4xl mx-auto mb-8 flex flex-col sm:flex-row gap-4 justify-between items-center">
+                <input
+                    type="text"
+                    placeholder="Search by name..."
+                    value={searchTerm}
+                    onChange={(e) => setSearchTerm(e.target.value)}
+                    className="w-full sm:w-1/2 p-3 rounded-lg shadow-md focus:outline-none focus:ring-2 focus:ring-blue-300 text-gray-700 bg-white/90 backdrop-blur-sm"
+                />
+                <select
+                    value={filterStatus}
+                    onChange={(e) => setFilterStatus(e.target.value)}
+                    className="w-full sm:w-1/4 p-3 rounded-lg shadow-md focus:outline-none focus:ring-2 focus:ring-blue-300 text-gray-700 bg-white/90 backdrop-blur-sm"
                 >
-                    Add Requirement
-                </button>
+                    <option value="all">All Status</option>
+                    <option value="pending">Pending</option>
+                    <option value="approved">Approved</option>
+                    <option value="cancelled">Cancelled</option>
+                </select>
+                {loggedin?.role === "Employee" && (
+                    <button
+                        onClick={() => navigate("/submit-requrment")}
+                        className="w-full sm:w-auto px-6 py-3 bg-green-600 text-white rounded-lg shadow-md hover:bg-green-700 transition-all duration-300"
+                    >
+                        Add Requirement
+                    </button>
+                )}
             </div>
-
-            {/* Requirement List */}
             <div className="max-w-4xl mx-auto">
                 {requirements.length === 0 ? (
                     <p className="text-center text-lg text-gray-200 font-semibold py-4 bg-white rounded-lg shadow-md">
@@ -126,9 +222,8 @@ function AllRequirements() {
                         {requirements.map((requirement, idx) => (
                             <div
                                 key={idx}
-                                className="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-all duration-300 flex flex-col sm:flex-row justify-between items-start sm:items-center"
+                                className="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-all duration-300 flex flex-col sm:flex-row justify-between items-start sm:items-center transform hover:scale-105"
                             >
-                                {/* Requirement Details */}
                                 <div className="flex-grow">
                                     {editRequirement === requirement._id ? (
                                         <>
@@ -137,14 +232,14 @@ function AllRequirements() {
                                                 name="name"
                                                 value={editedData.name}
                                                 onChange={handleChange}
-                                                className="border border-gray-300 p-2 rounded-md w-full"
+                                                className="border border-gray-300 p-2 rounded-md w-full mb-2"
                                             />
                                             <input
                                                 type="text"
                                                 name="reason"
                                                 value={editedData.reason}
                                                 onChange={handleChange}
-                                                className="border border-gray-300 p-2 rounded-md w-full mt-2"
+                                                className="border border-gray-300 p-2 rounded-md w-full"
                                             />
                                         </>
                                     ) : (
@@ -156,29 +251,26 @@ function AllRequirements() {
                                     <p className="text-sm text-gray-500 mt-1">Username: {requirement.username}</p>
                                     <p className="text-sm text-gray-500 mt-1">Date: {new Date(requirement.date).toLocaleDateString()}</p>
                                     <p
-                                        className={`text-sm font-medium mt-1 ${
-                                            requirement.requrmentStatus === "Approved" ? "text-green-600" :
-                                                requirement.requrmentStatus === "Cancelled" ? "text-red-600" : "text-gray-600"
+                                        className={`text-sm font-medium mt-1 ${requirement.requrmentStatus === "Approved" ? "text-green-600" : requirement.requrmentStatus === "Cancelled" ? "text-red-600" : "text-gray-600"
                                         }`}
                                     >
                                         Status: {requirement.requrmentStatus}
                                     </p>
                                 </div>
 
-                                {/* Buttons */}
                                 <div className="flex gap-4 mt-4 sm:mt-0">
                                     {loggedin?.role === "Manager" ? (
                                         <>
                                             {requirement.requrmentStatus === "Pending" && (
                                                 <>
                                                     <button
-                                                        onClick={() => updateStatus(requirement._id, "Approved")}
+                                                        onClick={() => handleApproveClick(requirement._id)}
                                                         className="px-4 py-2 bg-green-600 text-white rounded-lg shadow-md hover:bg-green-700 transition-all duration-300"
                                                     >
                                                         Approve
                                                     </button>
                                                     <button
-                                                        onClick={() => updateStatus(requirement._id, "Cancelled")}
+                                                        onClick={() => handleDeleteClick(requirement._id)}
                                                         className="px-4 py-2 bg-red-600 text-white rounded-lg shadow-md hover:bg-red-700 transition-all duration-300"
                                                     >
                                                         Cancel
@@ -189,12 +281,21 @@ function AllRequirements() {
                                     ) : (
                                         <>
                                             {editRequirement === requirement._id ? (
-                                                <button
-                                                    onClick={() => handleSave(requirement._id)}
-                                                    className="px-4 py-2 bg-blue-600 text-white rounded-lg shadow-md hover:bg-blue-700 transition-all duration-300"
-                                                >
-                                                    Save
-                                                </button>
+                                                <>
+                                                    <button
+                                                        onClick={() => handleSave(requirement._id)}
+                                                        className="px-4 py-2 bg-blue-600 text-white rounded-lg shadow-md hover:bg-blue-700 transition-all duration-300"
+                                                        disabled={isUpdating}
+                                                    >
+                                                        {isUpdating ? "Saving..." : "Save"}
+                                                    </button>
+                                                    <button
+                                                        onClick={handleCancelEdit}
+                                                        className="px-4 py-2 bg-gray-400 text-white rounded-lg shadow-md hover:bg-gray-500 transition-all duration-300"
+                                                    >
+                                                        Cancel
+                                                    </button>
+                                                </>
                                             ) : (
                                                 <button
                                                     onClick={() => handleEdit(requirement)}
@@ -211,6 +312,22 @@ function AllRequirements() {
                     </div>
                 )}
             </div>
+
+            <DeleteConfirmationAlert
+                showConfirm={showDeleteConfirm}
+                setShowConfirm={setShowDeleteConfirm}
+                deleteId={deleteId}
+                setDeleteId={setDeleteId}
+                onConfirm={handleDeleteConfirm}
+            />
+
+            <ApproveConfirmationAlert
+                showConfirm={showApproveConfirm}
+                setShowConfirm={setShowApproveConfirm}
+                approveId={approveId}
+                setApproveId={setApproveId}
+                onConfirm={handleApproveConfirm}
+            />
         </div>
     );
 }

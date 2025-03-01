@@ -96,7 +96,7 @@ function Add_User() {
 
     return (
         <div className="min-h-screen bg-gradient-to-r from-blue-600 to-indigo-500 p-6">
-            {/* Back Button */}
+
             <button
                 className="fixed top-4 right-4 flex items-center gap-2 bg-white text-blue-600 px-4 py-2 rounded-full shadow-lg hover:bg-blue-50 transition-all duration-300 z-10"
                 onClick={() => navigate(-1)}
@@ -105,7 +105,6 @@ function Add_User() {
                 <span className="text-sm font-medium">Back</span>
             </button>
 
-            {/* Header */}
             <div className="max-w-3xl mx-auto text-center mb-10">
                 <h1 className="text-4xl md:text-5xl font-bold text-white drop-shadow-lg animate-fade-in">
                     Add New User
@@ -113,7 +112,6 @@ function Add_User() {
                 <p className="text-lg text-gray-200 mt-2">Fill out the details below to register a new user.</p>
             </div>
 
-            {/* User Icon */}
             <div className="flex justify-center mb-8">
                 <img
                     className="w-32 h-32 md:w-40 md:h-40 rounded-full border-4 border-white shadow-xl object-cover transition-transform hover:scale-105"
@@ -122,7 +120,6 @@ function Add_User() {
                 />
             </div>
 
-            {/* Form Section */}
             <section className="max-w-4xl mx-auto bg-white rounded-xl shadow-2xl p-8">
                 {error && (
                     <p className="text-red-600 font-semibold text-center mb-4">{error}</p>
@@ -167,8 +164,7 @@ function Add_User() {
     );
 }
 
-// Reusable Form Field Component
-// eslint-disable-next-line react/prop-types
+// eslint-disable-next-line react/prop-types,react-refresh/only-export-components
 function FormField({ label, name, type, value, onChange, required, options, accept }) {
     return (
         <div className="flex flex-col">

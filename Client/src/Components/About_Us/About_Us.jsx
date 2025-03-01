@@ -7,7 +7,7 @@ function AboutUs() {
 
     return (
         <div className="min-h-screen bg-gradient-to-r from-blue-600 to-indigo-500 p-6 pt-15">
-            {/* Back Button */}
+
             <button
                 className="fixed top-27 right-4 flex items-center gap-2 bg-white text-blue-600 px-4 py-2 rounded-full shadow-lg hover:bg-blue-50 transition-all duration-300 z-10"
                 onClick={() => navigate(-1)}
@@ -16,7 +16,6 @@ function AboutUs() {
                 <span className="text-sm font-medium">Back</span>
             </button>
 
-            {/* Header */}
             <div className="max-w-3xl mx-auto text-center mb-12">
                 <h1 className="text-4xl md:text-5xl font-bold text-white drop-shadow-lg animate-fade-in">
                     About Us
@@ -26,7 +25,6 @@ function AboutUs() {
                 </p>
             </div>
 
-            {/* Content */}
             <section className="max-w-4xl mx-auto bg-white rounded-xl shadow-2xl p-8 transform transition-all duration-300 hover:shadow-xl">
                 <div className="space-y-6 text-gray-700">
                     <p className="text-lg leading-relaxed">

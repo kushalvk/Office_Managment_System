@@ -34,7 +34,7 @@ function AddSalary() {
 
     return (
         <div className="min-h-screen bg-gradient-to-r from-blue-600 to-indigo-500 p-5 pt-15">
-            {/* Back Button */}
+
             <button
                 className="fixed top-27 right-4 flex items-center gap-2 bg-white text-blue-600 px-4 py-2 rounded-full shadow-lg hover:bg-blue-50 transition-all duration-300 z-10"
                 onClick={() => navigate(-1)}
@@ -43,21 +43,19 @@ function AddSalary() {
                 <span className="text-sm font-medium">Back</span>
             </button>
 
-            {/* Header */}
             <div className="max-w-3xl mx-auto text-center pt-16 pb-8">
                 <h1 className="text-4xl md:text-5xl font-bold text-white drop-shadow-lg animate-fade-in">
                     Add Salary
                 </h1>
             </div>
 
-            {/* Form */}
             <div className="max-w-4xl mx-auto">
                 <form
                     onSubmit={handleSubmit}
                     className="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-all duration-300"
                 >
                     <div className="space-y-6">
-                        {/* Name Field */}
+
                         <div>
                             <label className="block text-sm font-medium text-gray-700">Name</label>
                             <input
@@ -70,7 +68,6 @@ function AddSalary() {
                             />
                         </div>
 
-                        {/* Email Field */}
                         <div>
                             <label className="block text-sm font-medium text-gray-700">Email</label>
                             <input
@@ -83,7 +80,6 @@ function AddSalary() {
                             />
                         </div>
 
-                        {/* Contact Field */}
                         <div>
                             <label className="block text-sm font-medium text-gray-700">Contact Number</label>
                             <input
@@ -96,7 +92,6 @@ function AddSalary() {
                             />
                         </div>
 
-                        {/* Occupation Field */}
                         <div>
                             <label className="block text-sm font-medium text-gray-700">Occupation</label>
                             <select
@@ -113,7 +108,6 @@ function AddSalary() {
                             </select>
                         </div>
 
-                        {/* Amount Field */}
                         <div>
                             <label className="block text-sm font-medium text-gray-700">Amount</label>
                             <input
@@ -126,7 +120,6 @@ function AddSalary() {
                             />
                         </div>
 
-                        {/* Submit Button */}
                         <button
                             type="submit"
                             className="w-full py-2 bg-green-600 text-white font-bold rounded-lg hover:bg-green-700 transition-all duration-300"

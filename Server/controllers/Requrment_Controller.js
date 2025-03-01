@@ -52,7 +52,9 @@ const updateRequrmentsEmpController = async (req, res) => {
         const {id} = req.params;
         const {name, reason} = req.body;
 
-        RequrmentsModel.findByIdAndUpdate(id, {name, reason})
+        RequrmentsModel.findByIdAndUpdate(id, {name, reason,
+            requrmentStatus: 'Pending'
+        })
             .then(() => res.status(200).send({message: "Requrment Update successfully"}))
             .catch((err) => res.status(500).send({message: "Fail to updtae Requrments : Controller ", err}));
     } catch (error) {

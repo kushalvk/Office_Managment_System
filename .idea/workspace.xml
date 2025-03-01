@@ -4,7 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="404eb4d8-f181-44b4-a139-a07b064bd629" name="Changes" comment="UPDATE: All Page Back Button.">
+    <list default="true" id="404eb4d8-f181-44b4-a139-a07b064bd629" name="Changes" comment="UPDATE: Improve UI">
+      <change afterPath="$PROJECT_DIR$/Client/src/Components/ConfirmetionAlerts/ApproveConfermetionAlert.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Client/src/Components/ConfirmetionAlerts/ComlateConfermetionAlert.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Client/src/Components/ConfirmetionAlerts/DeleteConfermetionAlert.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Client/src/Components/About_Us/About_Us.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/Components/About_Us/About_Us.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Client/src/Components/Add User/Add_User.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/Components/Add User/Add_User.jsx" afterDir="false" />
@@ -42,12 +45,8 @@
       <change beforePath="$PROJECT_DIR$/Client/src/Components/Task/Show_All_Task.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/Components/Task/Show_All_Task.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Client/src/Components/Task/View_Task.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/Components/Task/View_Task.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Client/src/Components/Terms_Condition/Terms_Condition.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/Components/Terms_Condition/Terms_Condition.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/src/Services/ReportService.js" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/Services/ReportService.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/src/Services/RequrmentService.js" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/Services/RequrmentService.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/controllers/Report_Controller.js" beforeDir="false" afterPath="$PROJECT_DIR$/Server/controllers/Report_Controller.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/Services/SalaryService.js" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/Services/SalaryService.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Server/controllers/Requrment_Controller.js" beforeDir="false" afterPath="$PROJECT_DIR$/Server/controllers/Requrment_Controller.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/routers/Report_Route.js" beforeDir="false" afterPath="$PROJECT_DIR$/Server/routers/Report_Route.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/routers/Requrment_Route.js" beforeDir="false" afterPath="$PROJECT_DIR$/Server/routers/Requrment_Route.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -57,9 +56,9 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="JSX File" />
         <option value="tsconfig.json" />
         <option value="JavaScript File" />
+        <option value="JSX File" />
       </list>
     </option>
   </component>
@@ -119,6 +118,7 @@
 }</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\Projects\Office_Managment_System\Client\src\Components\ConfirmetionAlerts" />
       <recent name="D:\Projects\Office_Managment_System\Storage" />
       <recent name="D:\Projects\Office Managment System\Client\src\Components\Header" />
       <recent name="D:\Projects\Office Managment System\Client\src\Components" />
@@ -188,23 +188,8 @@
       <workItem from="1740542759613" duration="983000" />
       <workItem from="1740665664022" duration="8918000" />
       <workItem from="1740717015386" duration="4961000" />
-      <workItem from="1740747883481" duration="22342000" />
-    </task>
-    <task id="LOCAL-00007" summary="ADD: Backend of Group all section and update frontend of add work">
-      <option name="closed" value="true" />
-      <created>1738687512789</created>
-      <option name="number" value="00007" />
-      <option name="presentableId" value="LOCAL-00007" />
-      <option name="project" value="LOCAL" />
-      <updated>1738687512789</updated>
-    </task>
-    <task id="LOCAL-00008" summary="ADD: Backend of Task, Projects &amp; Works.">
-      <option name="closed" value="true" />
-      <created>1738925308875</created>
-      <option name="number" value="00008" />
-      <option name="presentableId" value="LOCAL-00008" />
-      <option name="project" value="LOCAL" />
-      <updated>1738925308875</updated>
+      <workItem from="1740747883481" duration="22745000" />
+      <workItem from="1740803857445" duration="10919000" />
     </task>
     <task id="LOCAL-00009" summary="ADD: Backend of Reports.">
       <option name="closed" value="true" />
@@ -582,14 +567,29 @@
       <option name="project" value="LOCAL" />
       <updated>1740762515696</updated>
     </task>
-    <option name="localTasksCounter" value="56" />
+    <task id="LOCAL-00056" summary="UPDATE: Improve UI">
+      <option name="closed" value="true" />
+      <created>1740773142500</created>
+      <option name="number" value="00056" />
+      <option name="presentableId" value="LOCAL-00056" />
+      <option name="project" value="LOCAL" />
+      <updated>1740773142501</updated>
+    </task>
+    <task id="LOCAL-00057" summary="UPDATE: Improve UI">
+      <option name="closed" value="true" />
+      <created>1740773327129</created>
+      <option name="number" value="00057" />
+      <option name="presentableId" value="LOCAL-00057" />
+      <option name="project" value="LOCAL" />
+      <updated>1740773327129</updated>
+    </task>
+    <option name="localTasksCounter" value="58" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="ADD: Facility Back-end." />
     <MESSAGE value="ADD: FAQ Page Front-end &amp; Back-end also add MAP." />
     <MESSAGE value="UPDATE: FAQ Front-end." />
     <MESSAGE value="ADD: Apply Validation to Manager or Employee" />
@@ -614,6 +614,7 @@
     <MESSAGE value="UPDATE: on document click Redirection." />
     <MESSAGE value="UPDATE: All Notification using library react-hot-toast." />
     <MESSAGE value="UPDATE: All Page Back Button." />
-    <option name="LAST_COMMIT_MESSAGE" value="UPDATE: All Page Back Button." />
+    <MESSAGE value="UPDATE: Improve UI" />
+    <option name="LAST_COMMIT_MESSAGE" value="UPDATE: Improve UI" />
   </component>
 </project>

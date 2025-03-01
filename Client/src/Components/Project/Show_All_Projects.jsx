@@ -9,11 +9,21 @@ import {
 import { loggedUser } from "../../Services/AuthService.js";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import toast from "react-hot-toast";
+import DeleteConfirmationAlert from "../ConfirmetionAlerts/DeleteConfermetionAlert"; // Import if separate file
+import CompleteConfirmationAlert from "../ConfirmetionAlerts/ComlateConfermetionAlert.jsx";
 
 function AllProjects() {
     const [projects, setProjects] = useState([]);
-    const navigate = useNavigate();
     const [loggedIn, setLoggedIn] = useState(null);
+    const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
+    const [showCompleteConfirm, setShowCompleteConfirm] = useState(false);
+    const [deleteId, setDeleteId] = useState(null);
+    const [completeId, setCompleteId] = useState(null);
+    const [closingDelete, setClosingDelete] = useState(false);
+    const [closingComplete, setClosingComplete] = useState(false);
+    const [searchTerm, setSearchTerm] = useState("");
+    const [filterStatus, setFilterStatus] = useState("all");
+    const navigate = useNavigate();
     const username = localStorage.getItem("username");
 
     useEffect(() => {
@@ -32,24 +42,71 @@ function AllProjects() {
     useEffect(() => {
         const fetchProjects = async () => {
             try {
-                const response = loggedIn?.role === "Manager"
-                    ? await fetchallProjects()
-                    : await fetchemployeeProjects(username);
-                setProjects(response.projects || []);
+                if (!loggedIn) return;
+
+                let response;
+                if (loggedIn.role === "Manager") {
+                    response = await fetchallProjects();
+                } else {
+                    response = await fetchemployeeProjects(username);
+                }
+
+                // Apply filters after fetching
+                let filteredProjects = response.projects || [];
+
+                // Search filter (by title)
+                if (searchTerm) {
+                    filteredProjects = filteredProjects.filter(project =>
+                        project.title.toLowerCase().includes(searchTerm.toLowerCase())
+                    );
+                }
+
+                // Status filter (Complete/Not Complete)
+                if (filterStatus !== "all") {
+                    filteredProjects = filteredProjects.filter(project =>
+                        (filterStatus === "complete" ? project.workStatus === "complete" : project.workStatus !== "complete")
+                    );
+                }
+
+                setProjects(filteredProjects);
             } catch (e) {
                 console.log(e);
                 toast.error("Failed to fetch projects.");
             }
         };
-        if (loggedIn !== null) fetchProjects();
-    }, [loggedIn, username]);
 
-    const completeProject = async (id) => {
+        fetchProjects();
+    }, [loggedIn, username, searchTerm, filterStatus]); // Trigger fetch when these change
+
+    const handleDeleteClick = (id) => {
+        setDeleteId(id);
+        setShowDeleteConfirm(true);
+        setClosingDelete(false);
+    };
+
+    const handleDeleteConfirm = async () => {
         try {
-            await completeById(id);
+            await deleteWorkById(deleteId);
+            setProjects(prevProjects => prevProjects.filter(project => project._id !== deleteId));
+            toast.success("Project deleted successfully!");
+        } catch (e) {
+            console.log(e);
+            toast.error("Failed to delete project!");
+        }
+    };
+
+    const handleCompleteClick = (id) => {
+        setCompleteId(id);
+        setShowCompleteConfirm(true);
+        setClosingComplete(false);
+    };
+
+    const handleCompleteConfirm = async () => {
+        try {
+            await completeById(completeId);
             setProjects(prevProjects =>
                 prevProjects.map(project =>
-                    project._id === id ? { ...project, workStatus: "complete" } : project
+                    project._id === completeId ? { ...project, workStatus: "complete" } : project
                 )
             );
             toast.success("Project marked as complete!");
@@ -63,22 +120,9 @@ function AllProjects() {
         navigate(`/view-details/${id}`);
     };
 
-    const deleteProject = async (id) => {
-        if (window.confirm("Are you sure you want to delete this project?")) {
-            try {
-                await deleteWorkById(id);
-                setProjects(prevProjects => prevProjects.filter(project => project._id !== id));
-                toast.success("Project deleted successfully!");
-            } catch (e) {
-                console.log(e);
-                toast.error("Failed to delete project!");
-            }
-        }
-    };
-
     return (
         <div className="min-h-screen bg-gradient-to-r from-blue-600 to-indigo-500 p-6 pt-15">
-            {/* Back Button */}
+
             <button
                 className="fixed top-27 right-4 flex items-center gap-2 bg-white text-blue-600 px-4 py-2 rounded-full shadow-lg hover:bg-blue-50 transition-all duration-300 z-10"
                 onClick={() => navigate(-1)}
@@ -87,26 +131,40 @@ function AllProjects() {
                 <span className="text-sm font-medium">Back</span>
             </button>
 
-            {/* Header */}
             <div className="max-w-3xl mx-auto text-center pt-16 pb-8">
                 <h1 className="text-4xl md:text-5xl font-bold text-white drop-shadow-lg animate-fade-in">
                     All Projects
                 </h1>
             </div>
 
-            {/* Add Project Button (Manager Only) */}
-            {loggedIn?.role === "Manager" && (
-                <div className="flex justify-center mb-8">
+            <div className="max-w-4xl mx-auto mb-8 flex flex-col sm:flex-row gap-4 justify-between items-center">
+                <input
+                    type="text"
+                    placeholder="Search by title..."
+                    value={searchTerm}
+                    onChange={(e) => setSearchTerm(e.target.value)}
+                    className="w-full sm:w-1/2 p-3 rounded-lg shadow-md focus:outline-none focus:ring-2 focus:ring-blue-300 text-gray-700 bg-white/90 backdrop-blur-sm"
+                />
+                <select
+                    value={filterStatus}
+                    onChange={(e) => setFilterStatus(e.target.value)}
+                    className="w-full sm:w-1/4 p-3 rounded-lg shadow-md focus:outline-none focus:ring-2 focus:ring-blue-300 text-gray-700 bg-white/90 backdrop-blur-sm"
+                >
+                    <option value="all">All Status</option>
+                    <option value="complete">Complete</option>
+                    <option value="not-complete">Not Complete</option>
+                </select>
+
+                {loggedIn?.role === "Manager" && (
                     <button
                         onClick={() => navigate("/add-work")}
-                        className="px-6 py-2 bg-green-600 text-white rounded-lg shadow-md hover:bg-green-700 transition-all duration-300"
+                        className="w-full sm:w-auto px-6 py-3 bg-green-600 text-white rounded-lg shadow-md hover:bg-green-700 transition-all duration-300"
                     >
                         Add Project
                     </button>
-                </div>
-            )}
+                )}
+            </div>
 
-            {/* Project List */}
             <div className="max-w-4xl mx-auto">
                 {projects.length === 0 ? (
                     <p className="text-center text-lg text-gray-200 font-semibold py-4 bg-white rounded-lg shadow-md">
@@ -117,9 +175,8 @@ function AllProjects() {
                         {projects.map((project, idx) => (
                             <div
                                 key={idx}
-                                className="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-all duration-300 flex flex-col sm:flex-row justify-between items-start sm:items-center"
+                                className="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-all duration-300 flex flex-col sm:flex-row justify-between items-start sm:items-center transform hover:scale-105"
                             >
-                                {/* Project Details */}
                                 <div className="flex-grow">
                                     <h4 className="text-xl font-semibold text-gray-800">{project.title}</h4>
                                     <p className="text-sm text-gray-600 mt-1">
@@ -134,7 +191,6 @@ function AllProjects() {
                                     </p>
                                 </div>
 
-                                {/* Buttons */}
                                 <div className="flex gap-3 mt-4 sm:mt-0">
                                     <button
                                         onClick={() => viewProjectDetails(project._id)}
@@ -146,14 +202,14 @@ function AllProjects() {
                                         <>
                                             {project.workStatus !== "complete" && (
                                                 <button
-                                                    onClick={() => completeProject(project._id)}
+                                                    onClick={() => handleCompleteClick(project._id)}
                                                     className="px-4 py-2 bg-green-600 text-white rounded-lg shadow-md hover:bg-green-700 transition-all duration-300"
                                                 >
                                                     Complete
                                                 </button>
                                             )}
                                             <button
-                                                onClick={() => deleteProject(project._id)}
+                                                onClick={() => handleDeleteClick(project._id)}
                                                 className="px-4 py-2 bg-red-600 text-white rounded-lg shadow-md hover:bg-red-700 transition-all duration-300"
                                             >
                                                 Delete
@@ -166,6 +222,28 @@ function AllProjects() {
                     </div>
                 )}
             </div>
+
+            {/* Delete Confirmation Modal */}
+            <DeleteConfirmationAlert
+                showConfirm={showDeleteConfirm}
+                setShowConfirm={setShowDeleteConfirm}
+                deleteId={deleteId}
+                setDeleteId={setDeleteId}
+                closing={closingDelete}
+                setClosing={setClosingDelete}
+                onConfirm={handleDeleteConfirm}
+            />
+
+            {/* Complete Confirmation Modal */}
+            <CompleteConfirmationAlert
+                showConfirm={showCompleteConfirm}
+                setShowConfirm={setShowCompleteConfirm}
+                completeId={completeId}
+                setCompleteId={setCompleteId}
+                closing={closingComplete}
+                setClosing={setClosingComplete}
+                onConfirm={handleCompleteConfirm}
+            />
         </div>
     );
 }

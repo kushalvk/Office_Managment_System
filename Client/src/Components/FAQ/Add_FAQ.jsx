@@ -21,7 +21,7 @@ function Add_FAQ() {
 
     return (
         <div className="min-h-screen bg-gradient-to-r from-blue-600 to-indigo-500 p-5 pt-15">
-            {/* Back Button */}
+
             <button
                 className="fixed top-27 right-4 flex items-center gap-2 bg-white text-blue-600 px-4 py-2 rounded-full shadow-lg hover:bg-blue-50 transition-all duration-300 z-10"
                 onClick={() => navigate(-1)}
@@ -30,19 +30,17 @@ function Add_FAQ() {
                 <span className="text-sm font-medium">Back</span>
             </button>
 
-            {/* Header */}
             <div className="max-w-3xl mx-auto text-center pt-16 pb-8">
                 <h1 className="text-4xl md:text-5xl font-bold text-white drop-shadow-lg animate-fade-in">
                     Add FAQ
                 </h1>
             </div>
 
-            {/* Form */}
             <div className="max-w-4xl mx-auto">
                 <div className="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-all duration-300">
                     <h2 className="text-xl font-bold text-gray-800 mb-6">Add a New FAQ</h2>
                     <div className="space-y-6">
-                        {/* Question Field */}
+
                         <div>
                             <label htmlFor="question" className="block text-sm font-medium text-gray-700">
                                 Question
@@ -58,7 +56,6 @@ function Add_FAQ() {
                             />
                         </div>
 
-                        {/* Answer Field */}
                         <div>
                             <label htmlFor="answer" className="block text-sm font-medium text-gray-700">
                                 Answer
@@ -74,7 +71,6 @@ function Add_FAQ() {
                             ></textarea>
                         </div>
 
-                        {/* Submit Button */}
                         <div className="flex justify-center">
                             <button
                                 onClick={handleAddFaq}

@@ -9,11 +9,21 @@ import {
 import { loggedUser } from "../../Services/AuthService.js";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import toast from "react-hot-toast";
+import DeleteConfirmationAlert from "../ConfirmetionAlerts/DeleteConfermetionAlert"; // Import if separate file
+import CompleteConfirmationAlert from "../ConfirmetionAlerts/ComlateConfermetionAlert.jsx"; // Import if separate file
 
 function ShowTask() {
     const [tasks, setTasks] = useState([]);
-    const navigate = useNavigate();
     const [loggedIn, setLoggedIn] = useState(null);
+    const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
+    const [showCompleteConfirm, setShowCompleteConfirm] = useState(false);
+    const [deleteId, setDeleteId] = useState(null);
+    const [completeId, setCompleteId] = useState(null);
+    const [closingDelete, setClosingDelete] = useState(false);
+    const [closingComplete, setClosingComplete] = useState(false);
+    const [searchTerm, setSearchTerm] = useState("");
+    const [filterStatus, setFilterStatus] = useState("all");
+    const navigate = useNavigate();
     const username = localStorage.getItem("username");
 
     useEffect(() => {
@@ -32,24 +42,71 @@ function ShowTask() {
     useEffect(() => {
         const fetchTasks = async () => {
             try {
-                const response = loggedIn?.role === "Manager"
-                    ? await fetchallTasks()
-                    : await fetchemployeeTasks(username);
-                setTasks(response.tasks || []);
+                if (!loggedIn) return;
+
+                let response;
+                if (loggedIn.role === "Manager") {
+                    response = await fetchallTasks();
+                } else {
+                    response = await fetchemployeeTasks(username);
+                }
+
+                // Apply filters after fetching
+                let filteredTasks = response.tasks || [];
+
+                // Search filter (by title)
+                if (searchTerm) {
+                    filteredTasks = filteredTasks.filter(task =>
+                        task.title.toLowerCase().includes(searchTerm.toLowerCase())
+                    );
+                }
+
+                // Status filter (Complete/Not Complete)
+                if (filterStatus !== "all") {
+                    filteredTasks = filteredTasks.filter(task =>
+                        (filterStatus === "complete" ? task.workStatus === "complete" : task.workStatus !== "complete")
+                    );
+                }
+
+                setTasks(filteredTasks);
             } catch (e) {
                 console.log(e);
                 toast.error("Failed to fetch tasks.");
             }
         };
-        if (loggedIn !== null) fetchTasks();
-    }, [loggedIn, username]);
 
-    const completeTask = async (id) => {
+        fetchTasks();
+    }, [loggedIn, username, searchTerm, filterStatus]); // Trigger fetch when these change
+
+    const handleDeleteClick = (id) => {
+        setDeleteId(id);
+        setShowDeleteConfirm(true);
+        setClosingDelete(false);
+    };
+
+    const handleDeleteConfirm = async () => {
         try {
-            await completeById(id);
+            await deleteWorkById(deleteId);
+            setTasks(prevTasks => prevTasks.filter(task => task._id !== deleteId));
+            toast.success("Task deleted successfully!");
+        } catch (e) {
+            console.log(e);
+            toast.error("Failed to delete task!");
+        }
+    };
+
+    const handleCompleteClick = (id) => {
+        setCompleteId(id);
+        setShowCompleteConfirm(true);
+        setClosingComplete(false);
+    };
+
+    const handleCompleteConfirm = async () => {
+        try {
+            await completeById(completeId);
             setTasks(prevTasks =>
                 prevTasks.map(task =>
-                    task._id === id ? { ...task, workStatus: "complete" } : task
+                    task._id === completeId ? { ...task, workStatus: "complete" } : task
                 )
             );
             toast.success("Task marked as complete!");
@@ -63,22 +120,9 @@ function ShowTask() {
         navigate(`/view-details/${id}`);
     };
 
-    const deleteTask = async (id) => {
-        if (window.confirm("Are you sure you want to delete this task?")) {
-            try {
-                await deleteWorkById(id);
-                setTasks(prevTasks => prevTasks.filter(task => task._id !== id));
-                toast.success("Task deleted successfully!");
-            } catch (e) {
-                console.log(e);
-                toast.error("Failed to delete task!");
-            }
-        }
-    };
-
     return (
         <div className="min-h-screen bg-gradient-to-r from-blue-600 to-indigo-500 p-5 pt-15">
-            {/* Back Button */}
+
             <button
                 className="fixed top-27 right-4 flex items-center gap-2 bg-white text-blue-600 px-4 py-2 rounded-full shadow-lg hover:bg-blue-50 transition-all duration-300 z-10"
                 onClick={() => navigate(-1)}
@@ -87,26 +131,40 @@ function ShowTask() {
                 <span className="text-sm font-medium">Back</span>
             </button>
 
-            {/* Header */}
             <div className="max-w-3xl mx-auto text-center pt-16 pb-8">
                 <h1 className="text-4xl md:text-5xl font-bold text-white drop-shadow-lg animate-fade-in">
                     All Tasks
                 </h1>
             </div>
 
-            {/* Add Task Button (Manager Only) */}
-            {loggedIn?.role === "Manager" && (
-                <div className="flex justify-center mb-8">
+            <div className="max-w-4xl mx-auto mb-8 flex flex-col sm:flex-row gap-4 justify-between items-center">
+                <input
+                    type="text"
+                    placeholder="Search by title..."
+                    value={searchTerm}
+                    onChange={(e) => setSearchTerm(e.target.value)}
+                    className="w-full sm:w-1/2 p-3 rounded-lg shadow-md focus:outline-none focus:ring-2 focus:ring-blue-300 text-gray-700 bg-white/90 backdrop-blur-sm"
+                />
+                <select
+                    value={filterStatus}
+                    onChange={(e) => setFilterStatus(e.target.value)}
+                    className="w-full sm:w-1/4 p-3 rounded-lg shadow-md focus:outline-none focus:ring-2 focus:ring-blue-300 text-gray-700 bg-white/90 backdrop-blur-sm"
+                >
+                    <option value="all">All Status</option>
+                    <option value="complete">Complete</option>
+                    <option value="not-complete">Not Complete</option>
+                </select>
+
+                {loggedIn?.role === "Manager" && (
                     <button
                         onClick={() => navigate("/add-work")}
-                        className="px-6 py-2 bg-green-600 text-white rounded-lg shadow-md hover:bg-green-700 transition-all duration-300"
+                        className="w-full sm:w-auto px-6 py-3 bg-green-600 text-white rounded-lg shadow-md hover:bg-green-700 transition-all duration-300"
                     >
                         Add Task
                     </button>
-                </div>
-            )}
+                )}
+            </div>
 
-            {/* Task List */}
             <div className="max-w-4xl mx-auto">
                 {!loggedIn ? (
                     <p className="text-center text-xl text-red-200 font-semibold py-4 bg-white rounded-lg shadow-md">
@@ -121,9 +179,8 @@ function ShowTask() {
                         {tasks.map((task, idx) => (
                             <div
                                 key={idx}
-                                className="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-all duration-300 flex flex-col sm:flex-row justify-between items-start sm:items-center"
+                                className="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-all duration-300 flex flex-col sm:flex-row justify-between items-start sm:items-center transform hover:scale-105"
                             >
-                                {/* Task Details */}
                                 <div className="flex-grow">
                                     <h4 className="text-xl font-semibold text-gray-800">{task.title}</h4>
                                     <p className="text-sm text-gray-600 mt-1">
@@ -138,7 +195,6 @@ function ShowTask() {
                                     </p>
                                 </div>
 
-                                {/* Buttons */}
                                 <div className="flex gap-3 mt-4 sm:mt-0">
                                     <button
                                         onClick={() => viewTaskDetails(task._id)}
@@ -150,14 +206,14 @@ function ShowTask() {
                                         <>
                                             {task.workStatus !== "complete" && (
                                                 <button
-                                                    onClick={() => completeTask(task._id)}
+                                                    onClick={() => handleCompleteClick(task._id)}
                                                     className="px-4 py-2 bg-green-600 text-white rounded-lg shadow-md hover:bg-green-700 transition-all duration-300"
                                                 >
                                                     Complete
                                                 </button>
                                             )}
                                             <button
-                                                onClick={() => deleteTask(task._id)}
+                                                onClick={() => handleDeleteClick(task._id)}
                                                 className="px-4 py-2 bg-red-600 text-white rounded-lg shadow-md hover:bg-red-700 transition-all duration-300"
                                             >
                                                 Delete
@@ -170,6 +226,26 @@ function ShowTask() {
                     </div>
                 )}
             </div>
+
+            <DeleteConfirmationAlert
+                showConfirm={showDeleteConfirm}
+                setShowConfirm={setShowDeleteConfirm}
+                deleteId={deleteId}
+                setDeleteId={setDeleteId}
+                closing={closingDelete}
+                setClosing={setClosingDelete}
+                onConfirm={handleDeleteConfirm}
+            />
+
+            <CompleteConfirmationAlert
+                showConfirm={showCompleteConfirm}
+                setShowConfirm={setShowCompleteConfirm}
+                completeId={completeId}
+                setCompleteId={setCompleteId}
+                closing={closingComplete}
+                setClosing={setClosingComplete}
+                onConfirm={handleCompleteConfirm}
+            />
         </div>
     );
 }
