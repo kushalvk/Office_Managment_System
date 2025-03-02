@@ -168,11 +168,17 @@ function ShowAllReports() {
                                     <h4 className="text-xl font-semibold text-gray-800">{report.title}</h4>
                                     <p className="text-gray-600 mt-1">{report.description}</p>
                                     <p className="text-sm text-gray-500 mt-1">
-                                        <span className="font-medium">Start Date:</span> {new Date(report.startDate).toLocaleDateString()} |{' '}
-                                        <span className="font-medium">End Date:</span> {new Date(report.endDate).toLocaleDateString()}
+                                        <span
+                                            className="font-medium">Start Date:</span> {new Date(report.startDate).toLocaleDateString()} |{' '}
+                                        <span
+                                            className="font-medium">End Date:</span> {new Date(report.endDate).toLocaleDateString()}
                                     </p>
-                                    <p className="text-sm text-gray-500 mt-1">
-                                        <span className="font-medium">Status:</span> {report.approve ? "Approved" : "Not Approved"}
+                                    <p
+                                        className={`text-sm mt-1 font-medium ${
+                                            report.approve ? "text-green-500" : "text-red-500"
+                                        }`}
+                                    >
+                                        Status: {report.approve ? "Approved" : "Not Approved"}
                                     </p>
                                 </div>
 
