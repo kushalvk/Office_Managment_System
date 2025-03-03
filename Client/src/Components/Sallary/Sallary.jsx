@@ -10,8 +10,6 @@ function SalaryPage() {
     const [editingSalaryId, setEditingSalaryId] = useState(null);
     const [amountInputs, setAmountInputs] = useState({});
     const navigate = useNavigate();
-
-    // State variables for the delete confirmation alert
     const [showConfirm, setShowConfirm] = useState(false);
     const [deleteId, setDeleteId] = useState(null);
     const [closing, setClosing] = useState(false);

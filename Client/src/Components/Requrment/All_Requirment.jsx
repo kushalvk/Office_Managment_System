@@ -1,12 +1,12 @@
-import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import React, {useEffect, useState} from "react";
+import {useNavigate} from "react-router-dom";
 import {
     allRequrments,
     allRequrmentsByUsername,
     updteRequrments,
     updteRequrmentsEmp
 } from "../../Services/RequrmentService.js";
-import { loggedUser } from "../../Services/AuthService.js";
+import {loggedUser} from "../../Services/AuthService.js";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import toast from "react-hot-toast";
 import DeleteConfirmationAlert from "../ConfirmetionAlerts/DeleteConfermetionAlert";
@@ -16,15 +16,16 @@ function AllRequirements() {
     const [requirements, setRequirements] = useState([]);
     const [loggedin, setLoggedin] = useState(null);
     const [editRequirement, setEditRequirement] = useState(null);
-    const [editedData, setEditedData] = useState({ name: "", reason: "" });
+    const [editedData, setEditedData] = useState({name: "", reason: ""});
     const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
     const [showApproveConfirm, setShowApproveConfirm] = useState(false);
     const [deleteId, setDeleteId] = useState(null);
     const [approveId, setApproveId] = useState(null);
+    const [closingDelete, setClosingDelete] = useState(false);  // Added closing state
+    const [closingApprove, setClosingApprove] = useState(false);  // Added closing state
     const [searchTerm, setSearchTerm] = useState("");
     const [filterStatus, setFilterStatus] = useState("all");
-    const [isUpdating, setIsUpdating] = useState(false);  // Track updating state
-
+    const [isUpdating, setIsUpdating] = useState(false);
 
     useEffect(() => {
         const fetchLoggedUser = async () => {
@@ -79,90 +80,80 @@ function AllRequirements() {
     const handleDeleteClick = (id) => {
         setDeleteId(id);
         setShowDeleteConfirm(true);
+        setClosingDelete(false);  // Reset closing state
     };
 
     const handleDeleteConfirm = async () => {
         try {
-            await updteRequrments(deleteId, "Cancelled");
-            setRequirements(prevRequirements =>
-                prevRequirements.map(req =>
-                    req._id === deleteId ? { ...req, requrmentStatus: "Cancelled" } : req
+            await updteRequrments(deleteId, "Cancelled");  // Assuming this is the delete equivalent
+            setRequirements(prev =>
+                prev.map(req =>
+                    req._id === deleteId ? {...req, requrmentStatus: "Cancelled"} : req
                 )
             );
-            toast.success("Requirement cancelled successfully.");
+            toast.success("Requirement deleted successfully!");
         } catch (e) {
             console.log(e);
-            toast.error("Failed to cancel requirement. Please try again.");
-        } finally {
-            setShowDeleteConfirm(false);
-            setDeleteId(null);
+            toast.error("Failed to delete requirement.");
         }
     };
 
     const handleApproveClick = (id) => {
         setApproveId(id);
         setShowApproveConfirm(true);
+        setClosingApprove(false);  // Reset closing state
     };
 
     const handleApproveConfirm = async () => {
         try {
             await updteRequrments(approveId, "Approved");
-            setRequirements(prevRequirements =>
-                prevRequirements.map(req =>
-                    req._id === approveId ? { ...req, requrmentStatus: "Approved" } : req
+            setRequirements(prev =>
+                prev.map(req =>
+                    req._id === approveId ? {...req, requrmentStatus: "Approved"} : req
                 )
             );
-            toast.success("Requirement approved successfully.");
+            toast.success("Requirement approved successfully!");
         } catch (e) {
             console.log(e);
-            toast.error("Failed to approve requirement. Please try again.");
-        } finally {
-            setShowApproveConfirm(false);
-            setApproveId(null);
+            toast.error("Failed to approve requirement.");
         }
     };
 
     const handleUpdateConfirm = async (id) => {
-        setIsUpdating(true);  // Start updating
-
+        setIsUpdating(true);
         try {
             await updteRequrmentsEmp(id, editedData);
-
-            // Optimistic update: Update the UI immediately
             setRequirements(prevRequirements =>
                 prevRequirements.map(req =>
-                    req._id === id ? { ...req, ...editedData, requrmentStatus: "Pending" } : req  // Set status to "Pending"
+                    req._id === id ? {...req, ...editedData, requrmentStatus: "Pending"} : req
                 )
             );
             toast.success("Requirement updated successfully.");
         } catch (e) {
             console.log(e);
             toast.error("Failed to update requirement. Please try again.");
-
-            //Revert optimistic update, show old data
-            const oldData = await allRequrments()
+            const oldData = await allRequrments();
             setRequirements(oldData);
         } finally {
-            setIsUpdating(false); // Finish updating
+            setIsUpdating(false);
             setEditRequirement(null);
-            setEditedData({ name: "", reason: "" });
+            setEditedData({name: "", reason: ""});
         }
     };
 
-
     const handleEdit = (requirement) => {
         setEditRequirement(requirement._id);
-        setEditedData({ name: requirement.name, reason: requirement.reason });
+        setEditedData({name: requirement.name, reason: requirement.reason});
     };
 
     const handleCancelEdit = () => {
         setEditRequirement(null);
-        setEditedData({ name: "", reason: "" });
+        setEditedData({name: "", reason: ""});
     };
 
     const handleChange = (e) => {
-        const { name, value } = e.target;
-        setEditedData(prev => ({ ...prev, [name]: value }));
+        const {name, value} = e.target;
+        setEditedData(prev => ({...prev, [name]: value}));
     };
 
     const handleSave = (id) => {
@@ -175,7 +166,7 @@ function AllRequirements() {
                 className="fixed top-27 right-4 flex items-center gap-2 bg-white text-blue-600 px-4 py-2 rounded-full shadow-lg hover:bg-blue-50 transition-all duration-300 z-10"
                 onClick={() => navigate(-1)}
             >
-                <ArrowBackIcon sx={{ fontSize: 20 }} />
+                <ArrowBackIcon sx={{fontSize: 20}}/>
                 <span className="text-sm font-medium">Back</span>
             </button>
 
@@ -251,8 +242,7 @@ function AllRequirements() {
                                     <p className="text-sm text-gray-500 mt-1">Username: {requirement.username}</p>
                                     <p className="text-sm text-gray-500 mt-1">Date: {new Date(requirement.date).toLocaleDateString()}</p>
                                     <p
-                                        className={`text-sm font-medium mt-1 ${requirement.requrmentStatus === "Approved" ? "text-green-600" : requirement.requrmentStatus === "Cancelled" ? "text-red-600" : "text-gray-600"
-                                        }`}
+                                        className={`text-sm font-medium mt-1 ${requirement.requrmentStatus === "Approved" ? "text-green-600" : requirement.requrmentStatus === "Cancelled" ? "text-red-600" : "text-gray-600"}`}
                                     >
                                         Status: {requirement.requrmentStatus}
                                     </p>
@@ -261,7 +251,7 @@ function AllRequirements() {
                                 <div className="flex gap-4 mt-4 sm:mt-0">
                                     {loggedin?.role === "Manager" ? (
                                         <>
-                                            {requirement.requrmentStatus === "Pending" && (
+                                            {requirement.requrmentStatus === "Pending" ? (
                                                 <>
                                                     <button
                                                         onClick={() => handleApproveClick(requirement._id)}
@@ -273,10 +263,10 @@ function AllRequirements() {
                                                         onClick={() => handleDeleteClick(requirement._id)}
                                                         className="px-4 py-2 bg-red-600 text-white rounded-lg shadow-md hover:bg-red-700 transition-all duration-300"
                                                     >
-                                                        Cancel
+                                                        Delete
                                                     </button>
                                                 </>
-                                            )}
+                                            ) : null}
                                         </>
                                     ) : (
                                         <>
@@ -318,6 +308,8 @@ function AllRequirements() {
                 setShowConfirm={setShowDeleteConfirm}
                 deleteId={deleteId}
                 setDeleteId={setDeleteId}
+                closing={closingDelete}
+                setClosing={setClosingDelete}
                 onConfirm={handleDeleteConfirm}
             />
 
@@ -326,6 +318,8 @@ function AllRequirements() {
                 setShowConfirm={setShowApproveConfirm}
                 approveId={approveId}
                 setApproveId={setApproveId}
+                closing={closingApprove}
+                setClosing={setClosingApprove}
                 onConfirm={handleApproveConfirm}
             />
         </div>

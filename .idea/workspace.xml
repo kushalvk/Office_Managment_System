@@ -4,7 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="404eb4d8-f181-44b4-a139-a07b064bd629" name="Changes" comment="UPDATE: Final Commit." />
+    <list default="true" id="404eb4d8-f181-44b4-a139-a07b064bd629" name="Changes" comment="UPDATE: Final Commit.">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/Components/About_Us/About_Us.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/Components/About_Us/About_Us.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/Components/Requrment/All_Requirment.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/Components/Requrment/All_Requirment.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/Components/Sallary/Sallary.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/Components/Sallary/Sallary.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/Services/SalaryService.js" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/Services/SalaryService.js" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -150,15 +156,9 @@
       <workItem from="1740832240884" duration="3169000" />
       <workItem from="1740892068348" duration="41000" />
       <workItem from="1740893871860" duration="315000" />
-      <workItem from="1740900857489" duration="371000" />
-    </task>
-    <task id="LOCAL-00011" summary="ADD: Backed of requrments.">
-      <option name="closed" value="true" />
-      <created>1738938614474</created>
-      <option name="number" value="00011" />
-      <option name="presentableId" value="LOCAL-00011" />
-      <option name="project" value="LOCAL" />
-      <updated>1738938614474</updated>
+      <workItem from="1740900857489" duration="511000" />
+      <workItem from="1741006226234" duration="857000" />
+      <workItem from="1741009306976" duration="3407000" />
     </task>
     <task id="LOCAL-00012" summary="ADD: Backed of for logged User Task and Project.">
       <option name="closed" value="true" />
@@ -544,7 +544,15 @@
       <option name="project" value="LOCAL" />
       <updated>1740836937198</updated>
     </task>
-    <option name="localTasksCounter" value="60" />
+    <task id="LOCAL-00060" summary="UPDATE: Final Commit.">
+      <option name="closed" value="true" />
+      <created>1740901325241</created>
+      <option name="number" value="00060" />
+      <option name="presentableId" value="LOCAL-00060" />
+      <option name="project" value="LOCAL" />
+      <updated>1740901325242</updated>
+    </task>
+    <option name="localTasksCounter" value="61" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

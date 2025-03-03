@@ -6,7 +6,7 @@ function AboutUs() {
     const navigate = useNavigate();
 
     return (
-        <div className="min-h-screen bg-gradient-to-r from-blue-600 to-indigo-500 p-6 pt-15">
+        <div className="min-h-screen bg-gradient-to-r from-blue-600 to-indigo-500 p-6 pt-29">
 
             <button
                 className="fixed top-27 right-4 flex items-center gap-2 bg-white text-blue-600 px-4 py-2 rounded-full shadow-lg hover:bg-blue-50 transition-all duration-300 z-10"

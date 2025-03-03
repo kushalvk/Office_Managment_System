@@ -65,17 +65,7 @@ export const paysalary = async (salary) => {
                 alert(`Payment Successful! Payment ID: ${response.razorpay_payment_id}`);
             },
             prefill: {name: salary.name, email: salary.email, contact: salary.contact},
-            theme: {color: "blue"},
-            // ✅ Enable UPI Payment Directly
-            method: {
-                upi: true,  // Enables UPI Payment
-                card: false, // Disables card payment
-                netbanking: false, // Disables net banking
-            },
-            // ✅ Force Payment via UPI ID (Google Pay, PhonePe, Paytm)
-            upi: {
-                flow: "intent", // Opens UPI apps like Google Pay, Paytm, PhonePe
-            },
+            theme: {color: "blue"}
         };
 
         const rzp = new window.Razorpay(options);
