@@ -1,6 +1,8 @@
 const bcrypt = require('bcrypt');
 const UserModel = require('../models/UserSchema');
 const {uploadOnCloudinary} = require("../cloudinary/Cloudinary");
+const {sendMail} = require("../sendingEmail/SendEmail");
+const {registerEmailHtml} = require("../sendingEmail/RagisterEmailHtml")
 
 const addUserController = async (req, res) => {
     try {
@@ -61,6 +63,13 @@ const addUserController = async (req, res) => {
             profilePhoto: profilePhoto ? profilePhoto.url : null,
             resume: resume.url,
         });
+
+        await sendMail(
+            email,
+            `Welcome ${fullName} to Prime Hub – Your Journey Starts Here!`,
+            "Welcome to Prime Hub! Log in at https://office-ms-two.vercel.app/ with your username and password.",
+            registerEmailHtml(fullName, username, password)
+        );
 
         res.status(201).json({message: "User added successfully", user: newUser});
 

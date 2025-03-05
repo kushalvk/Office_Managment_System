@@ -5,11 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="404eb4d8-f181-44b4-a139-a07b064bd629" name="Changes" comment="UPDATE: Final Commit.">
+      <change afterPath="$PROJECT_DIR$/Server/sendingEmail/RagisterEmailHtml.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Server/sendingEmail/SendEmail.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/src/Components/About_Us/About_Us.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/Components/About_Us/About_Us.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/src/Components/Requrment/All_Requirment.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/Components/Requrment/All_Requirment.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/src/Components/Sallary/Sallary.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/Components/Sallary/Sallary.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/src/Services/SalaryService.js" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/Services/SalaryService.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/controllers/Auth_Controller.js" beforeDir="false" afterPath="$PROJECT_DIR$/Server/controllers/Auth_Controller.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/Server/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/Server/package.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -20,8 +21,8 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="tsconfig.json" />
-        <option value="JavaScript File" />
         <option value="JSX File" />
+        <option value="JavaScript File" />
       </list>
     </option>
   </component>
@@ -158,15 +159,10 @@
       <workItem from="1740893871860" duration="315000" />
       <workItem from="1740900857489" duration="511000" />
       <workItem from="1741006226234" duration="857000" />
-      <workItem from="1741009306976" duration="3407000" />
-    </task>
-    <task id="LOCAL-00012" summary="ADD: Backed of for logged User Task and Project.">
-      <option name="closed" value="true" />
-      <created>1739023021973</created>
-      <option name="number" value="00012" />
-      <option name="presentableId" value="LOCAL-00012" />
-      <option name="project" value="LOCAL" />
-      <updated>1739023021973</updated>
+      <workItem from="1741009306976" duration="3768000" />
+      <workItem from="1741022491473" duration="37000" />
+      <workItem from="1741184880249" duration="3864000" />
+      <workItem from="1741193698855" duration="2652000" />
     </task>
     <task id="LOCAL-00013" summary="ADD: Intigrate Ai In add work description.">
       <option name="closed" value="true" />
@@ -552,7 +548,15 @@
       <option name="project" value="LOCAL" />
       <updated>1740901325242</updated>
     </task>
-    <option name="localTasksCounter" value="61" />
+    <task id="LOCAL-00061" summary="UPDATE: Final Commit.">
+      <option name="closed" value="true" />
+      <created>1741022271754</created>
+      <option name="number" value="00061" />
+      <option name="presentableId" value="LOCAL-00061" />
+      <option name="project" value="LOCAL" />
+      <updated>1741022271754</updated>
+    </task>
+    <option name="localTasksCounter" value="62" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
