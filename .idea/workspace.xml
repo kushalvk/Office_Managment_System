@@ -4,13 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="404eb4d8-f181-44b4-a139-a07b064bd629" name="Changes" comment="UPDATE: Final Commit.">
-      <change afterPath="$PROJECT_DIR$/Server/sendingEmail/RagisterEmailHtml.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Server/sendingEmail/SendEmail.js" afterDir="false" />
+    <list default="true" id="404eb4d8-f181-44b4-a139-a07b064bd629" name="Changes" comment="UPDATE: Send Email to register User with login credentials.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/controllers/Auth_Controller.js" beforeDir="false" afterPath="$PROJECT_DIR$/Server/controllers/Auth_Controller.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/Server/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/Server/package.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -162,15 +157,7 @@
       <workItem from="1741009306976" duration="3768000" />
       <workItem from="1741022491473" duration="37000" />
       <workItem from="1741184880249" duration="3864000" />
-      <workItem from="1741193698855" duration="2652000" />
-    </task>
-    <task id="LOCAL-00013" summary="ADD: Intigrate Ai In add work description.">
-      <option name="closed" value="true" />
-      <created>1739647171938</created>
-      <option name="number" value="00013" />
-      <option name="presentableId" value="LOCAL-00013" />
-      <option name="project" value="LOCAL" />
-      <updated>1739647171938</updated>
+      <workItem from="1741193698855" duration="3738000" />
     </task>
     <task id="LOCAL-00014" summary="UPDATE: Ai generated responce.">
       <option name="closed" value="true" />
@@ -556,14 +543,21 @@
       <option name="project" value="LOCAL" />
       <updated>1741022271754</updated>
     </task>
-    <option name="localTasksCounter" value="62" />
+    <task id="LOCAL-00062" summary="UPDATE: Send Email to register User with login credentials.">
+      <option name="closed" value="true" />
+      <created>1741196771154</created>
+      <option name="number" value="00062" />
+      <option name="presentableId" value="LOCAL-00062" />
+      <option name="project" value="LOCAL" />
+      <updated>1741196771155</updated>
+    </task>
+    <option name="localTasksCounter" value="63" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="ADD: Apply Validation to Manager or Employee" />
     <MESSAGE value="UPDATE: Validation to Manager and Employee." />
     <MESSAGE value="ADD: Back-end of blog &amp; news page." />
     <MESSAGE value="UPDATE: Dynamic Manager Dashboard &amp; Add One page with Dynamic Employee(Particular) Details." />
@@ -588,6 +582,7 @@
     <MESSAGE value="UPDATE: Improve UI" />
     <MESSAGE value="ADD: Customization Alert." />
     <MESSAGE value="UPDATE: Final Commit." />
-    <option name="LAST_COMMIT_MESSAGE" value="UPDATE: Final Commit." />
+    <MESSAGE value="UPDATE: Send Email to register User with login credentials." />
+    <option name="LAST_COMMIT_MESSAGE" value="UPDATE: Send Email to register User with login credentials." />
   </component>
 </project>

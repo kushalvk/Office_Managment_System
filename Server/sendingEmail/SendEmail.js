@@ -8,10 +8,7 @@ const transporter = nodemailer.createTransport({
     auth: {
         user: process.env.EMAIL,
         pass: process.env.EMAIL_PASSWORD, // Use an App Password if 2FA is enabled
-    },
-    tls: {
-        rejectUnauthorized: false, // Optional: Only for testing, remove in production
-    },
+    }
 });
 
 // Verify transporter setup
