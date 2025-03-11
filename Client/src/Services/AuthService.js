@@ -1,5 +1,5 @@
 import axios from "axios";
-import { error } from "./Error";
+import {error} from "./Error";
 
 export const addUser = async (form) => {
     try {
@@ -85,3 +85,27 @@ export const newAddedUsers = async () => {
         error(err)
     }
 }
+
+export const verifyEmail = async (email) => {
+    const apiKey = import.meta.env.VITE_MAILBOXLAYER_API_KEY;
+    const url = `http://apilayer.net/api/check?access_key=${apiKey}&email=${email}&smtp=1&format=1`;
+
+    try {
+        const response = await axios.get(url);
+        const data = response.data;
+
+        if (!data.format_valid) {
+            throw new Error("Email address does not exist.");
+        }
+        if (!data.mx_found) {
+            throw new Error("Email address does not exist.");
+        }
+        if (!data.smtp_check) {
+            throw new Error("Email address does not exist.");
+        }
+
+        return "Email exists!";
+    } catch (error) {
+        throw new Error(error.message || "Email verification failed.");
+    }
+};

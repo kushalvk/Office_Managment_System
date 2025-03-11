@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import UserIcon from '../../../../Storage/Add_User.jpg';
-import { addUser } from '../../Services/AuthService';
+import {addUser, verifyEmail} from '../../Services/AuthService';
 import { useNavigate } from 'react-router-dom';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import toast from "react-hot-toast";
@@ -69,6 +69,7 @@ function Add_User() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        setError("");
         if (formData.password !== formData.confirmPassword) {
             setError("Passwords don't match");
             toast.error("Passwords don't match");
@@ -85,6 +86,7 @@ function Add_User() {
         Object.entries(formData).forEach(([key, value]) => form.append(key, value));
 
         try {
+            await verifyEmail(formData.email);
             await addUser(form);
             toast.success("User Added Successfully");
             navigate("/all-staff");
@@ -149,6 +151,10 @@ function Add_User() {
                     ]} />
                     <FormField label="Profile Photo" name="profilePhoto" type="file" onChange={handleChange} accept="image/*" required />
                     <FormField label="Resume" name="resume" type="file" onChange={handleChange} accept=".pdf,.doc,.docx" required />
+
+                    {error && (
+                        <p className="text-red-600 font-semibold text-center mb-4">{error}</p>
+                    )}
 
                     <div className="md:col-span-2 flex justify-center">
                         <button

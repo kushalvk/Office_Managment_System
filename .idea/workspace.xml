@@ -6,6 +6,8 @@
   <component name="ChangeListManager">
     <list default="true" id="404eb4d8-f181-44b4-a139-a07b064bd629" name="Changes" comment="UPDATE: Send Email to register User with login credentials.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/Components/Add User/Add_User.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/Components/Add User/Add_User.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/Services/AuthService.js" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/Services/AuthService.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -157,15 +159,8 @@
       <workItem from="1741009306976" duration="3768000" />
       <workItem from="1741022491473" duration="37000" />
       <workItem from="1741184880249" duration="3864000" />
-      <workItem from="1741193698855" duration="3738000" />
-    </task>
-    <task id="LOCAL-00014" summary="UPDATE: Ai generated responce.">
-      <option name="closed" value="true" />
-      <created>1739681037945</created>
-      <option name="number" value="00014" />
-      <option name="presentableId" value="LOCAL-00014" />
-      <option name="project" value="LOCAL" />
-      <updated>1739681037945</updated>
+      <workItem from="1741193698855" duration="4171000" />
+      <workItem from="1741698801814" duration="2234000" />
     </task>
     <task id="LOCAL-00015" summary="ADD: Notifiaction Page with font-end and back-end and change other pages..">
       <option name="closed" value="true" />
@@ -551,7 +546,15 @@
       <option name="project" value="LOCAL" />
       <updated>1741196771155</updated>
     </task>
-    <option name="localTasksCounter" value="63" />
+    <task id="LOCAL-00063" summary="UPDATE: Send Email to register User with login credentials.">
+      <option name="closed" value="true" />
+      <created>1741197654266</created>
+      <option name="number" value="00063" />
+      <option name="presentableId" value="LOCAL-00063" />
+      <option name="project" value="LOCAL" />
+      <updated>1741197654266</updated>
+    </task>
+    <option name="localTasksCounter" value="64" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
