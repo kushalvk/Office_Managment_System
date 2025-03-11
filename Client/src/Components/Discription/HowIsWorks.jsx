@@ -25,9 +25,9 @@ function HowItWorks() {
             <div className="max-w-4xl mx-auto bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-all duration-300">
 
                 <section className="mb-8">
-                    <h2 className="text-2xl font-semibold text-gray-800 mb-2">1. User Registration & Login</h2>
+                    <h2 className="text-2xl font-semibold text-gray-800 mb-2">1. User Registration By Manager & Login</h2>
                     <p className="text-gray-600">
-                        New users can sign up with their details. Once registered, they can log in securely to access personalized features.
+                        New users can sign up with their details through the Manager. Once registered, their login credentials are automatically sent to their email. After that, they can log in securely to access personalized features.
                     </p>
                 </section>
 

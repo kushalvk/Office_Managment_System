@@ -4,7 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="404eb4d8-f181-44b4-a139-a07b064bd629" name="Changes" comment="UPDATE: Email Validation Email is Exist or not." />
+    <list default="true" id="404eb4d8-f181-44b4-a139-a07b064bd629" name="Changes" comment="UPDATE: Email Validation Email is Exist or not.">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/Components/Discription/HowIsWorks.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/Components/Discription/HowIsWorks.jsx" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -157,15 +160,8 @@
       <workItem from="1741184880249" duration="3864000" />
       <workItem from="1741193698855" duration="4171000" />
       <workItem from="1741698801814" duration="2704000" />
-      <workItem from="1741703151661" duration="428000" />
-    </task>
-    <task id="LOCAL-00017" summary="ADD: Salary Page and Payment Gateway.">
-      <option name="closed" value="true" />
-      <created>1739729672417</created>
-      <option name="number" value="00017" />
-      <option name="presentableId" value="LOCAL-00017" />
-      <option name="project" value="LOCAL" />
-      <updated>1739729672417</updated>
+      <workItem from="1741703151661" duration="1014000" />
+      <workItem from="1741704496030" duration="368000" />
     </task>
     <task id="LOCAL-00018" summary="ADD: Facility Back-end.">
       <option name="closed" value="true" />
@@ -551,7 +547,15 @@
       <option name="project" value="LOCAL" />
       <updated>1741703275587</updated>
     </task>
-    <option name="localTasksCounter" value="66" />
+    <task id="LOCAL-00066" summary="UPDATE: Email Validation Email is Exist or not.">
+      <option name="closed" value="true" />
+      <created>1741703666393</created>
+      <option name="number" value="00066" />
+      <option name="presentableId" value="LOCAL-00066" />
+      <option name="project" value="LOCAL" />
+      <updated>1741703666394</updated>
+    </task>
+    <option name="localTasksCounter" value="67" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
