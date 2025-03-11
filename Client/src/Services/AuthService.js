@@ -87,7 +87,7 @@ export const newAddedUsers = async () => {
 }
 
 export const verifyEmail = async (email) => {
-    const apiKey = import.meta.env.VITE_MAILBOXLAYER_API_KEY;
+    const apiKey = import.meta.env.VITE_REACT_APP_MAILBOXLAYER_API_KEY;
     const url = `http://apilayer.net/api/check?access_key=${apiKey}&email=${email}&smtp=1&format=1`;
 
     try {
