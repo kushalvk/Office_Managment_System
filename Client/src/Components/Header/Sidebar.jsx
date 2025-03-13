@@ -91,7 +91,7 @@ function Sidebar() {
                         </div>
                     </div>
 
-                    <ul className="space-y-2 sm:space-y-3 text-xs sm:text-sm md:text-base flex-grow">
+                    <ul className="space-y-2 sm:space-y-3 text-lg sm:text-sm md:text-base flex-grow">
                         {[
                             {path: "/dashboard", label: "Dashboard"},
                             {path: "/all-staff", label: "My Staff"},

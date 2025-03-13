@@ -4,9 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="404eb4d8-f181-44b4-a139-a07b064bd629" name="Changes" comment="UPDATE: Email Validation Email is Exist or not.">
+    <list default="true" id="404eb4d8-f181-44b4-a139-a07b064bd629" name="Changes" comment="UPDATE: Solving Grammatical Error.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/src/Components/Discription/HowIsWorks.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/Components/Discription/HowIsWorks.jsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -161,15 +160,8 @@
       <workItem from="1741193698855" duration="4171000" />
       <workItem from="1741698801814" duration="2704000" />
       <workItem from="1741703151661" duration="1014000" />
-      <workItem from="1741704496030" duration="368000" />
-    </task>
-    <task id="LOCAL-00018" summary="ADD: Facility Back-end.">
-      <option name="closed" value="true" />
-      <created>1739734188638</created>
-      <option name="number" value="00018" />
-      <option name="presentableId" value="LOCAL-00018" />
-      <option name="project" value="LOCAL" />
-      <updated>1739734188638</updated>
+      <workItem from="1741704496030" duration="597000" />
+      <workItem from="1741837696088" duration="300000" />
     </task>
     <task id="LOCAL-00019" summary="ADD: FAQ Page Front-end &amp; Back-end also add MAP.">
       <option name="closed" value="true" />
@@ -555,14 +547,21 @@
       <option name="project" value="LOCAL" />
       <updated>1741703666394</updated>
     </task>
-    <option name="localTasksCounter" value="67" />
+    <task id="LOCAL-00067" summary="UPDATE: Solving Grammatical Error.">
+      <option name="closed" value="true" />
+      <created>1741704881344</created>
+      <option name="number" value="00067" />
+      <option name="presentableId" value="LOCAL-00067" />
+      <option name="project" value="LOCAL" />
+      <updated>1741704881344</updated>
+    </task>
+    <option name="localTasksCounter" value="68" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="ADD: Back-end of blog &amp; news page." />
     <MESSAGE value="UPDATE: Dynamic Manager Dashboard &amp; Add One page with Dynamic Employee(Particular) Details." />
     <MESSAGE value="UPDATE: Salary page to custom Amount." />
     <MESSAGE value="ADD: Add page of description and Update Requrment." />
@@ -587,6 +586,7 @@
     <MESSAGE value="UPDATE: Final Commit." />
     <MESSAGE value="UPDATE: Send Email to register User with login credentials." />
     <MESSAGE value="UPDATE: Email Validation Email is Exist or not." />
-    <option name="LAST_COMMIT_MESSAGE" value="UPDATE: Email Validation Email is Exist or not." />
+    <MESSAGE value="UPDATE: Solving Grammatical Error." />
+    <option name="LAST_COMMIT_MESSAGE" value="UPDATE: Solving Grammatical Error." />
   </component>
 </project>
