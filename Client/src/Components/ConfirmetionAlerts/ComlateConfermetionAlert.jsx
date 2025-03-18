@@ -57,7 +57,7 @@ function CompleteConfirmationAlert({
 
                     {/* Confirmation Text */}
                     <h3 className="text-lg font-semibold text-white text-center mb-6 px-4">
-                        Are you sure you want to mark this task as complete?
+                        Are you sure you want to mark this work as complete?
                     </h3>
 
                     {/* Buttons */}

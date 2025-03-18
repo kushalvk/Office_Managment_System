@@ -58,7 +58,7 @@ function DeleteConfirmationAlert({
 
                     {/* Confirmation Text */}
                     <h3 className="text-lg font-semibold text-white text-center mb-6 px-4">
-                        Are you sure you want to delete this staff member?
+                        Are you sure you want to delete this Data?
                     </h3>
 
                     {/* Buttons */}

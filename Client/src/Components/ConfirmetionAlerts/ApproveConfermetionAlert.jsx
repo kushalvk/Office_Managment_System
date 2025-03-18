@@ -57,7 +57,7 @@ function ApproveConfirmationAlert({
 
                     {/* Confirmation Text */}
                     <h3 className="text-lg font-semibold text-white text-center mb-6 px-4">
-                        Are you sure you want to approve this report?
+                        Are you sure you want to approve this?
                     </h3>
 
                     {/* Buttons */}
