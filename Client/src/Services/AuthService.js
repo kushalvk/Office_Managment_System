@@ -94,17 +94,12 @@ export const verifyEmail = async (email) => {
         const response = await axios.get(url);
         const data = response.data;
 
-        if (!data.format_valid) {
-            throw new Error("Email address does not exist.");
-        }
-        if (!data.mx_found) {
-            throw new Error("Email address does not exist.");
-        }
-        if (!data.smtp_check) {
-            throw new Error("Email address does not exist.");
+        // smtp_check
+        if (data.format_valid && data.mx_found) {
+            return "Email exists!";
         }
 
-        return "Email exists!";
+        throw new Error("Email address does not exist.");
     } catch (error) {
         throw new Error(error.message || "Email verification failed.");
     }
