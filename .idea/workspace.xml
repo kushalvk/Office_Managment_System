@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="404eb4d8-f181-44b4-a139-a07b064bd629" name="Changes" comment="UPDATE: Customize alert.">
+    <list default="true" id="404eb4d8-f181-44b4-a139-a07b064bd629" name="Changes" comment="UPDATE: Toaster on Add Staff Page.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Client/src/Components/Add User/Add_User.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/Components/Add User/Add_User.jsx" afterDir="false" />
     </list>
@@ -168,15 +168,7 @@
       <workItem from="1742352777287" duration="2568000" />
       <workItem from="1742362690417" duration="2444000" />
       <workItem from="1742369429485" duration="616000" />
-      <workItem from="1742391813681" duration="596000" />
-    </task>
-    <task id="LOCAL-00022" summary="UPDATE: Validation to Manager and Employee.">
-      <option name="closed" value="true" />
-      <created>1740024722755</created>
-      <option name="number" value="00022" />
-      <option name="presentableId" value="LOCAL-00022" />
-      <option name="project" value="LOCAL" />
-      <updated>1740024722755</updated>
+      <workItem from="1742391813681" duration="3838000" />
     </task>
     <task id="LOCAL-00023" summary="ADD: Back-end of blog &amp; news page.">
       <option name="closed" value="true" />
@@ -562,14 +554,21 @@
       <option name="project" value="LOCAL" />
       <updated>1742316488772</updated>
     </task>
-    <option name="localTasksCounter" value="71" />
+    <task id="LOCAL-00071" summary="UPDATE: Toaster on Add Staff Page.">
+      <option name="closed" value="true" />
+      <created>1742392736164</created>
+      <option name="number" value="00071" />
+      <option name="presentableId" value="LOCAL-00071" />
+      <option name="project" value="LOCAL" />
+      <updated>1742392736164</updated>
+    </task>
+    <option name="localTasksCounter" value="72" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="ADD: Add Upadte Facility to work and group section" />
     <MESSAGE value="UPDATE: Back button every pages." />
     <MESSAGE value="ADD: vercel.json file" />
     <MESSAGE value="UPDATE: vercel.json file" />
@@ -594,6 +593,7 @@
     <MESSAGE value="UPDATE: Sidebar CSS" />
     <MESSAGE value="UPDATE: SMTP Validation" />
     <MESSAGE value="UPDATE: Customize alert." />
-    <option name="LAST_COMMIT_MESSAGE" value="UPDATE: Customize alert." />
+    <MESSAGE value="UPDATE: Toaster on Add Staff Page." />
+    <option name="LAST_COMMIT_MESSAGE" value="UPDATE: Toaster on Add Staff Page." />
   </component>
 </project>
