@@ -69,16 +69,20 @@ function Add_User() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+
+        const loadingToastId = toast.loading("Loading...!");
         setError("");
         if (formData.password !== formData.confirmPassword) {
             setError("Passwords don't match");
             toast.error("Passwords don't match");
+            toast.dismiss(loadingToastId);
             return;
         }
 
         if (formData?.profilePhoto?.size > 10 * 1024 * 1024 || formData?.resume?.size > 10 * 1024 * 1024) {
             setError("File size too large! Maximum 10MB limit per file.");
             toast.error("File size too large! Maximum 10MB limit per file.");
+            toast.dismiss(loadingToastId);
             return;
         }
 
@@ -89,10 +93,12 @@ function Add_User() {
             await verifyEmail(formData.email);
             await addUser(form);
             toast.success("User Added Successfully");
+            toast.dismiss(loadingToastId);
             navigate("/all-staff");
         } catch (e) {
             setError(e.message);
             toast.error(e.message);
+            toast.dismiss(loadingToastId);
         }
     };
 
@@ -149,7 +155,7 @@ function Add_User() {
                         { value: "Employee", label: "Employee" },
                         { value: "Manager", label: "Manager" },
                     ]} />
-                    <FormField label="Profile Photo" name="profilePhoto" type="file" onChange={handleChange} accept="image/*" required />
+                    <FormField label="Profile Photo" name="profilePhoto" type="file" onChange={handleChange} accept="image/*" />
                     <FormField label="Resume" name="resume" type="file" onChange={handleChange} accept=".pdf,.doc,.docx" required />
 
                     {error && (
