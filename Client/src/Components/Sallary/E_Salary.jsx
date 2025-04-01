@@ -21,7 +21,6 @@ function E_Salary() {
         fetchEmployeeData();
     }, []);
 
-    // Calculate total salary
     const totalSalary = employee
         ? (employee.sallary_per_day) * (employee.total_days || 0)
         : 0;
@@ -37,7 +36,7 @@ function E_Salary() {
                     <p className="text-center text-gray-600 text-base sm:text-lg">Loading salary details...</p>
                 ) : employee ? (
                     <div className="space-y-6 sm:space-y-8">
-                        {/* Employee Details */}
+
                         <div className="space-y-3 sm:space-y-4">
                             <div className="flex flex-col sm:flex-row items-start sm:items-center space-y-2 sm:space-y-0 sm:space-x-3">
                                 <span className="text-gray-600 font-medium text-base sm:text-lg">Full Name:</span>
@@ -53,7 +52,6 @@ function E_Salary() {
                             </div>
                         </div>
 
-                        {/* Salary Details */}
                         <div className="space-y-3 sm:space-y-4">
                             <div className="flex flex-col sm:flex-row items-start sm:items-center space-y-2 sm:space-y-0 sm:space-x-3">
                                 <span className="text-gray-600 font-medium text-base sm:text-lg">Salary per Day:</span>
