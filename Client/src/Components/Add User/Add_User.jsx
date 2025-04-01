@@ -53,6 +53,7 @@ function Add_User() {
         workLocation: '',
         department: '',
         role: '',
+        sallary_per_day: 0,
         profilePhoto: null,
         resume: null,
     });
@@ -198,6 +199,8 @@ function Add_User() {
                         {value: "Employee", label: "Employee"},
                         {value: "Manager", label: "Manager"},
                     ]}/>
+                    <FormField label="Sallary per day" name="sallary_per_day" type="number" value={formData.sallary_per_day}
+                               onChange={handleChange} required/>
                     <FormField label="Profile Photo" name="profilePhoto" type="file" onChange={handleChange}
                                accept="image/*"/>
                     <FormField label="Resume" name="resume" type="file" onChange={handleChange} accept=".pdf,.doc,.docx"

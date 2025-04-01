@@ -4,9 +4,27 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="404eb4d8-f181-44b4-a139-a07b064bd629" name="Changes" comment="UPDATE: Toaster on Add Staff Page.">
+    <list default="true" id="404eb4d8-f181-44b4-a139-a07b064bd629" name="Changes" comment="UPDATE: Add User page Password validation and other.">
+      <change afterPath="$PROJECT_DIR$/Client/src/Components/Attendance/Attendance.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Client/src/Components/Sallary/E_Salary.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Client/src/Services/Attendance.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Server/controllers/Attendance_Controller.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Server/models/Attendance.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Server/routers/Attendance_Route.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Client/src/Components/Add User/Add_User.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/Components/Add User/Add_User.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/Components/Dashbored/Dashbored.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/Components/Dashbored/Dashbored.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/Components/Header/Header.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/Components/Header/Header.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/Components/Sallary/Add_Salary.jsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/Components/Sallary/Sallary.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/Components/Sallary/Sallary.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/Services/SalaryService.js" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/Services/SalaryService.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/main.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/main.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/controllers/Auth_Controller.js" beforeDir="false" afterPath="$PROJECT_DIR$/Server/controllers/Auth_Controller.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/controllers/Salary_Controller.js" beforeDir="false" afterPath="$PROJECT_DIR$/Server/controllers/Salary_Controller.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/Server/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/models/SalarySchema.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/models/UserSchema.js" beforeDir="false" afterPath="$PROJECT_DIR$/Server/models/UserSchema.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/routers/Salary_Route.js" beforeDir="false" afterPath="$PROJECT_DIR$/Server/routers/Salary_Route.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -17,8 +35,8 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="tsconfig.json" />
-        <option value="JSX File" />
         <option value="JavaScript File" />
+        <option value="JSX File" />
       </list>
     </option>
   </component>
@@ -168,15 +186,9 @@
       <workItem from="1742352777287" duration="2568000" />
       <workItem from="1742362690417" duration="2444000" />
       <workItem from="1742369429485" duration="616000" />
-      <workItem from="1742391813681" duration="3838000" />
-    </task>
-    <task id="LOCAL-00023" summary="ADD: Back-end of blog &amp; news page.">
-      <option name="closed" value="true" />
-      <created>1740076948356</created>
-      <option name="number" value="00023" />
-      <option name="presentableId" value="LOCAL-00023" />
-      <option name="project" value="LOCAL" />
-      <updated>1740076948356</updated>
+      <workItem from="1742391813681" duration="4605000" />
+      <workItem from="1743510716559" duration="21000" />
+      <workItem from="1743510783196" duration="15859000" />
     </task>
     <task id="LOCAL-00024" summary="UPDATE: Dynamic Manager Dashboard &amp; Add One page with Dynamic Employee(Particular) Details.">
       <option name="closed" value="true" />
@@ -562,14 +574,21 @@
       <option name="project" value="LOCAL" />
       <updated>1742392736164</updated>
     </task>
-    <option name="localTasksCounter" value="72" />
+    <task id="LOCAL-00072" summary="UPDATE: Add User page Password validation and other.">
+      <option name="closed" value="true" />
+      <created>1742395782389</created>
+      <option name="number" value="00072" />
+      <option name="presentableId" value="LOCAL-00072" />
+      <option name="project" value="LOCAL" />
+      <updated>1742395782389</updated>
+    </task>
+    <option name="localTasksCounter" value="73" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="UPDATE: Back button every pages." />
     <MESSAGE value="ADD: vercel.json file" />
     <MESSAGE value="UPDATE: vercel.json file" />
     <MESSAGE value="UPDATE: file Access Permition." />
@@ -594,6 +613,7 @@
     <MESSAGE value="UPDATE: SMTP Validation" />
     <MESSAGE value="UPDATE: Customize alert." />
     <MESSAGE value="UPDATE: Toaster on Add Staff Page." />
-    <option name="LAST_COMMIT_MESSAGE" value="UPDATE: Toaster on Add Staff Page." />
+    <MESSAGE value="UPDATE: Add User page Password validation and other." />
+    <option name="LAST_COMMIT_MESSAGE" value="UPDATE: Add User page Password validation and other." />
   </component>
 </project>

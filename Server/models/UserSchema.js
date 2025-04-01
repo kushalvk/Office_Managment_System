@@ -74,6 +74,24 @@ const UserSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+
+    sallary_per_day: {
+        type: Number,
+        required: true,
+    },
+
+    total_days: {
+        type: Number,
+        default: 0
+    },
+
+    last_payemnt_date: {
+        type: Date,
+    },
+
+    amount: {
+        type: Number,
+    }
 },{timestamps:true})
 
 UserSchema.methods.generateAuthToken = async function () {

@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import LOGO from "../../../../Storage/LOGO1.svg";
 import { loggedUser } from "../../Services/AuthService.js";
+import Attendance from "../Attendance/Attendance.jsx";
 
 function Header() {
     const navigate = useNavigate();
@@ -83,7 +84,7 @@ function Header() {
                     </button>
                 </div>
 
-                <div className="hidden lg:flex lg:gap-x-8">
+                <div className="hidden lg:flex lg:gap-x-7">
                     <a href="/" className="text-md font-semibold text-gray-900 hover:text-blue-600 transition-colors">
                         Home
                     </a>
@@ -100,6 +101,12 @@ function Header() {
                             </a>
                             <a href="/Show-all-project" className="text-md font-semibold text-gray-900 hover:text-blue-600 transition-colors">
                                 Projects
+                            </a>
+                            <a href="/attendance" className="text-md font-semibold text-gray-900 hover:text-blue-600 transition-colors">
+                                Attendance
+                            </a>
+                            <a href="/e-salary" className="text-md font-semibold text-gray-900 hover:text-blue-600 transition-colors">
+                                Salary
                             </a>
                         </>
                     )}
@@ -198,6 +205,12 @@ function Header() {
                             </a>
                             <a href="/Show-all-project" className="block text-base font-semibold text-gray-900 hover:text-blue-600">
                                 Projects
+                            </a>
+                            <a href="/attendance" className="block text-base font-semibold text-gray-900 hover:text-blue-600">
+                                Attendance
+                            </a>
+                            <a href="/e-salary" className="block text-base font-semibold text-gray-900 hover:text-blue-600">
+                                Salary
                             </a>
                         </>
                     )}

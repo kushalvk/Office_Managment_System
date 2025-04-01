@@ -13,6 +13,7 @@ import { allReports, newlyReports, pendingApprovalReports } from "../../Services
 import { fetchallTasks, fetchComplatedProject } from "../../Services/WorkService.js";
 import { formatDistanceToNow } from "date-fns";
 import toast from "react-hot-toast";
+import {pastAttendanceData} from "../../Services/Attendance.js";
 
 function AdminDashboard() {
     const username = localStorage.getItem("username");
@@ -50,6 +51,15 @@ function AdminDashboard() {
             }
         };
         fetchData();
+
+        const oldAtendances = async () => {
+            try {
+                await pastAttendanceData();
+            } catch (e) {
+                console.log(e)
+            }
+        }
+        oldAtendances();
     }, []);
 
     return (

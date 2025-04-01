@@ -19,6 +19,7 @@ const addUserController = async (req, res) => {
             workLocation,
             department,
             role,
+            sallary_per_day
         } = req.body;
 
         if (!username || !email || !password) {
@@ -60,6 +61,7 @@ const addUserController = async (req, res) => {
             workLocation,
             department,
             role,
+            sallary_per_day,
             profilePhoto: profilePhoto ? profilePhoto.url : null,
             resume: resume.url,
         });

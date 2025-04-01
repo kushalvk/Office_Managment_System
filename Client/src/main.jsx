@@ -33,12 +33,13 @@ import Terms_Condition from "./Components/Terms_Condition/Terms_Condition.jsx";
 import View_Task from "./Components/Task/View_Task.jsx";
 import GroupDetails from "./Components/Group/Group_Details.jsx";
 import ForgotPassword from './Components/Login/Forgate_Password.jsx';
-import Add_Salary from "./Components/Sallary/Add_Salary.jsx";
 import AddFacility from "./Components/Facilities/Add_Facilities.jsx";
 import FAQ from "./Components/FAQ/FAQ.jsx";
 import Add_FAQ from "./Components/FAQ/Add_FAQ.jsx";
 import UserDetails from "./Components/All_Staff/UserDetails.jsx";
 import HowIsWorks from "./Components/Discription/HowIsWorks.jsx";
+import Attendance from "./Components/Attendance/Attendance.jsx";
+import E_Salary from "./Components/Sallary/E_Salary.jsx";
 
 const router = createBrowserRouter(
     createRoutesFromElements(
@@ -73,12 +74,13 @@ const router = createBrowserRouter(
             <Route path="/group-details/:id" element={<GroupDetails />} />
             <Route path="/forgot-password" element={<ForgotPassword />} />
             <Route path="/dashboard" element={<AdminDashboard />} />
-            <Route path="/add-salary" element={<Add_Salary />} />
             <Route path="/add-facility" element={<AddFacility />} />
             <Route path="/faq" element={<FAQ />} />
             <Route path="/add-faq" element={<Add_FAQ />} />
             <Route path="/user-details/:id" element={<UserDetails />} />
             <Route path="/how-it-works" element={<HowIsWorks />} />
+            <Route path="/attendance" element={<Attendance />} />
+            <Route path="/e-salary" element={<E_Salary />} />
         </Route>
     )
 )

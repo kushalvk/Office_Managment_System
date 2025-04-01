@@ -1,90 +1,82 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { fetchSalary, deleteSalary, paysalary } from "../../Services/SalaryService.js";
+import { allStaff, loggedUser } from "../../Services/AuthService.js";
+import { paysalary } from "../../Services/SalaryService.js";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import toast from "react-hot-toast";
-import DeleteConfirmationAlert from "../ConfirmetionAlerts/DeleteConfermetionAlert.jsx";
 
 function SalaryPage() {
-    const [salaries, setSalaries] = useState([]);
+    const [staff, setStaff] = useState([]);
     const [editingSalaryId, setEditingSalaryId] = useState(null);
-    const [amountInputs, setAmountInputs] = useState({});
     const navigate = useNavigate();
-    const [showConfirm, setShowConfirm] = useState(false);
-    const [deleteId, setDeleteId] = useState(null);
-    const [closing, setClosing] = useState(false);
 
     useEffect(() => {
-        const fetchSalaries = async () => {
+        const fetchData = async () => {
             try {
-                const response = await fetchSalary();
-                setSalaries(response);
-                const amounts = {};
-                response.forEach(salary => {
-                    amounts[salary._id] = salary.amount;
-                });
-                setAmountInputs(amounts);
+                const user = await loggedUser();
+
+                const response = await allStaff();
+                const employees = response.employees || [];
+
+                if (user && user._id) {
+                    setStaff(employees.filter(emp => emp._id !== user._id));
+                } else {
+                    setStaff(employees);
+                }
             } catch (e) {
-                console.error(e);
-                toast.error("Error fetching salaries.");
+                console.error("Error fetching data:", e);
+                toast.error("Failed to fetch staff data");
             }
         };
-        fetchSalaries();
+        fetchData();
     }, []);
 
-    const handleEditAmount = (id, amount) => {
-        setEditingSalaryId(id);
-        setAmountInputs(prev => ({ ...prev, [id]: amount }));
+    const handlePayNow = (staffMember) => {
+        setEditingSalaryId(staffMember.username);
     };
 
-    const handleAmountChange = (id, value) => {
-        setAmountInputs(prev => ({ ...prev, [id]: value }));
-    };
+    const handleConfirmPayment = async (staffMember) => {
+        const amount = (staffMember.sallary_per_day || 700) * (staffMember.total_days || 0);
 
-    const handleConfirmPayment = async (salary) => {
-        const amount = parseFloat(amountInputs[salary._id]);
         if (isNaN(amount) || amount <= 0) {
-            toast.error("Please enter a valid amount.");
+            toast.error("No payment due (total days is 0 or salary is invalid).");
+            setEditingSalaryId(null);
             return;
         }
 
         try {
-            await paysalary({ ...salary, amount });
+            const paymentData = {
+                _id: staffMember._id,
+                username: staffMember.username,
+                name: staffMember.fullName,
+                email: staffMember.email,
+                contact: staffMember.mobNo,
+                amount,
+                last_payment_date: new Date().toISOString(),
+            };
+
+            await paysalary(paymentData);
+
+            setStaff(prev =>
+                prev.map(s =>
+                    s.username === staffMember.username
+                        ? { ...s, last_payemnt_date: new Date().toISOString() }
+                        : s
+                )
+            );
+
             setEditingSalaryId(null);
-            toast.success("Payment processed successfully.");
+            toast.success(`Payment of ${amount} processed successfully for ${staffMember.fullName}.`);
         } catch (error) {
             console.error("Error processing payment:", error);
             toast.error("Failed to process payment.");
         }
     };
 
-    // Updated handleDelete function to open the confirmation alert
-    const handleDelete = (id) => {
-        setDeleteId(id);
-        setShowConfirm(true);
-    };
-
-    // Function to perform the actual deletion after confirmation
-    const onConfirmDelete = async () => {
-        try {
-            await deleteSalary(deleteId);
-            setSalaries(salaries.filter((salary) => salary._id !== deleteId));
-            toast.success("Salary record deleted successfully.");
-        } catch (error) {
-            console.error("Error deleting salary:", error);
-            toast.error("Failed to delete salary record.");
-        } finally {
-            // Reset the state variables
-            setDeleteId(null);
-            setShowConfirm(false); // Close the modal
-        }
-    };
-
     return (
         <div className="min-h-screen bg-gradient-to-r from-blue-600 to-indigo-500 p-5 pt-15">
-
             <button
-                className="fixed top-27 right-4 flex items-center gap-2 bg-white text-blue-600 px-4 py-2 rounded-full shadow-lg hover:bg-blue-50 transition-all duration-300 z-10"
+                className="fixed top-4 right-4 flex items-center gap-2 bg-white text-blue-600 px-4 py-2 rounded-full shadow-lg hover:bg-blue-50 transition-all duration-300 z-10"
                 onClick={() => navigate(-1)}
             >
                 <ArrowBackIcon sx={{ fontSize: 20 }} />
@@ -97,52 +89,43 @@ function SalaryPage() {
                 </h1>
             </div>
 
-            <div className="flex justify-center mb-8">
-                <button
-                    onClick={() => navigate("/add-salary")}
-                    className="px-6 py-2 bg-green-600 text-white rounded-lg shadow-md hover:bg-green-700 transition-all duration-300"
-                >
-                    Add Salary
-                </button>
-            </div>
-
             <div className="max-w-6xl mx-auto">
-                {salaries.length === 0 ? (
+                {staff.length === 0 ? (
                     <p className="text-center text-lg text-gray-200 font-semibold py-4 bg-white rounded-lg shadow-md">
-                        No salary records found.
+                        No staff records found.
                     </p>
                 ) : (
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                        {salaries.map((salary) => (
+                        {staff.map((staffMember) => (
                             <div
-                                key={salary._id}
-                                className="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-all duration-300"
+                                key={staffMember.username}
+                                className="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-all duration-300 flex flex-col h-full"
                             >
-                                <h4 className="text-xl font-bold text-gray-800">{salary.name}</h4>
-                                <p className="text-sm text-gray-600">Occupation: {salary.occupation}</p>
-                                <p className="text-sm text-gray-500 mt-2">
-                                    Last Payment Date: {new Date(salary.updatedAt).toLocaleString()}
-                                </p>
-                                <p className="text-sm text-gray-500 mt-2">Email: {salary.email}</p>
-                                <p className="text-sm text-gray-500 mt-2">Mobile No: {salary.contact}</p>
-                                <p className="text-sm text-gray-500 mt-2">
-                                    Last Payment Amount: {salary.amount}
-                                </p>
-                                {editingSalaryId === salary._id ? (
-                                    <div className="mt-4 space-y-3">
-                                        <input
-                                            type="number"
-                                            value={amountInputs[salary._id]}
-                                            onChange={(e) => handleAmountChange(salary._id, e.target.value)}
-                                            className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                                            placeholder="Enter Amount"
-                                        />
+                                <div className="flex-grow">
+                                    <h4 className="text-xl font-bold text-gray-800">{staffMember.fullName}</h4>
+                                    <p className="text-sm text-gray-600">Department: {staffMember.department}</p>
+                                    <p className="text-sm text-gray-500 mt-2">Email: {staffMember.email}</p>
+                                    <p className="text-sm text-gray-500 mt-2">Mobile No: {staffMember.mobNo}</p>
+                                    <p className="text-sm text-gray-500 mt-2">
+                                        Total Days: {staffMember.total_days || 0}
+                                    </p>
+                                    <p className="text-sm text-gray-500 mt-2">
+                                        Salary per Day: {staffMember.sallary_per_day || 0}
+                                    </p>
+                                    {staffMember.last_payemnt_date && (
+                                        <p className="text-sm text-gray-500 mt-2">
+                                            Last Payment: {new Date(staffMember.last_payemnt_date).toLocaleString()}
+                                        </p>
+                                    )}
+                                </div>
+                                {editingSalaryId === staffMember.username ? (
+                                    <div className="mt-6 space-y-3">
                                         <div className="flex gap-3">
                                             <button
-                                                onClick={() => handleConfirmPayment(salary)}
+                                                onClick={() => handleConfirmPayment(staffMember)}
                                                 className="flex-1 py-2 bg-green-600 text-white rounded-md hover:bg-green-700 transition-all duration-300"
                                             >
-                                                ✅ Confirm
+                                                ✅ Confirm Payment
                                             </button>
                                             <button
                                                 onClick={() => setEditingSalaryId(null)}
@@ -153,38 +136,20 @@ function SalaryPage() {
                                         </div>
                                     </div>
                                 ) : (
-                                    <>
-                                        <div className="flex gap-3 mt-6">
-                                            <button
-                                                onClick={() => handleEditAmount(salary._id, salary.amount)}
-                                                className="flex-1 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-all duration-300"
-                                            >
-                                                Pay Now
-                                            </button>
-                                            <button
-                                                onClick={() => handleDelete(salary._id)}
-                                                className="flex-1 py-2 bg-red-600 text-white rounded-md hover:bg-red-700 transition-all duration-300"
-                                            >
-                                                Delete
-                                            </button>
-                                        </div>
-                                    </>
+                                    <div className="mt-6">
+                                        <button
+                                            onClick={() => handlePayNow(staffMember)}
+                                            className="w-full py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-all duration-300"
+                                        >
+                                            Pay Now
+                                        </button>
+                                    </div>
                                 )}
                             </div>
                         ))}
                     </div>
                 )}
             </div>
-
-            <DeleteConfirmationAlert
-                showConfirm={showConfirm}
-                setShowConfirm={setShowConfirm}
-                deleteId={deleteId}
-                setDeleteId={setDeleteId}
-                closing={closing}
-                setClosing={setClosing}
-                onConfirm={onConfirmDelete}
-            />
         </div>
     );
 }
