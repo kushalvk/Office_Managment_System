@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { allStaff, loggedUser } from "../../Services/AuthService.js";
 import { paysalary } from "../../Services/SalaryService.js";
 import Back_Button from "../BackButton/Back_Button";

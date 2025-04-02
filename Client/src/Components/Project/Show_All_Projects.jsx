@@ -9,7 +9,7 @@ import {
 import { loggedUser } from "../../Services/AuthService.js";
 import Back_Button from "../BackButton/Back_Button";
 import toast from "react-hot-toast";
-import DeleteConfirmationAlert from "../ConfirmetionAlerts/DeleteConfermetionAlert"; // Import if separate file
+import DeleteConfirmationAlert from "../ConfirmetionAlerts/DeleteConfermetionAlert";
 import CompleteConfirmationAlert from "../ConfirmetionAlerts/ComlateConfermetionAlert.jsx";
 import Loader from "../Loader/Loader.jsx";
 

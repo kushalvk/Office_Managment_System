@@ -4,7 +4,7 @@ import { fetchGroupById, deleteGroup, updateGroup } from "../../Services/GroupSe
 import { loggedUser } from "../../Services/AuthService.js";
 import Back_Button from "../BackButton/Back_Button";
 import toast from "react-hot-toast";
-import DeleteConfirmationAlert from "../ConfirmetionAlerts/DeleteConfermetionAlert"; // Import if separate file
+import DeleteConfirmationAlert from "../ConfirmetionAlerts/DeleteConfermetionAlert";
 
 function GroupDetails() {
     const { id } = useParams();

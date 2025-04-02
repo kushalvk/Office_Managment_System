@@ -1,9 +1,7 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
 import Back_Button from "../BackButton/Back_Button";
 
 function PrivacyPolicies() {
-    const navigate = useNavigate();
     const policies = [
         {
             id: 1,

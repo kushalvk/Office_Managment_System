@@ -1,9 +1,7 @@
 import React from "react";
 import Back_Button from "../BackButton/Back_Button";
-import { useNavigate } from "react-router-dom";
 
 function OfficeGallery() {
-    const navigate = useNavigate();
 
     const images = [
         "https://images.pexels.com/photos/3184360/pexels-photo-3184360.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=300&w=400",

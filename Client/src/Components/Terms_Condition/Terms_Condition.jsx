@@ -1,9 +1,7 @@
 import React from "react";
 import Back_Button from "../BackButton/Back_Button";
-import { useNavigate } from "react-router-dom";
 
 function TermsConditions() {
-    const navigate = useNavigate();
     const terms = [
         {
             id: 1,

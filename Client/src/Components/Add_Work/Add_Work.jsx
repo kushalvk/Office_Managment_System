@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { allStaff } from "../../Services/AuthService.js";
 import { addWork, generateWorkDescription } from "../../Services/WorkService.js";
 import Back_Button from "../BackButton/Back_Button";
-import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 import {allGroups} from "../../Services/GroupService.js";
 
@@ -19,7 +18,6 @@ function AddTask() {
         username: 'Select an employee',
         profilePhoto: 'https://www.pngmart.com/files/23/Profile-PNG-Photo.png'
     });
-    const navigate = useNavigate();
 
     const [task, setTask] = useState({
         title: "",

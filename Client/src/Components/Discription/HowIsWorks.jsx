@@ -1,9 +1,7 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
 import Back_Button from "../BackButton/Back_Button";
 
 function HowItWorks() {
-    const navigate = useNavigate();
 
     return (
         <div className="min-h-screen bg-gradient-to-r from-blue-600 to-indigo-500 p-5 pt-15">

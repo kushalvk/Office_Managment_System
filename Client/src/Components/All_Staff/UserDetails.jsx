@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { UserById } from "../../Services/AuthService.js";
 import toast from "react-hot-toast";
 import Back_Button from "../BackButton/Back_Button.jsx";
@@ -7,7 +7,6 @@ import Back_Button from "../BackButton/Back_Button.jsx";
 const UserDetails = () => {
     const { id } = useParams();
     const [user, setUser] = useState({});
-    const navigate = useNavigate();
 
     useEffect(() => {
         const userDetails = async () => {

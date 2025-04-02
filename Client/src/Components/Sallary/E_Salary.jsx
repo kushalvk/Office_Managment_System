@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { loggedUser } from "../../Services/AuthService.js"; // Assuming this fetches the current user
+import { loggedUser } from "../../Services/AuthService.js";
 import toast from "react-hot-toast";
 import Back_Button from "../BackButton/Back_Button.jsx";
 
