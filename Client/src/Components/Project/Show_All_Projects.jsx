@@ -7,10 +7,11 @@ import {
     fetchemployeeProjects
 } from "../../Services/WorkService.js";
 import { loggedUser } from "../../Services/AuthService.js";
-import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import Back_Button from "../BackButton/Back_Button";
 import toast from "react-hot-toast";
 import DeleteConfirmationAlert from "../ConfirmetionAlerts/DeleteConfermetionAlert"; // Import if separate file
 import CompleteConfirmationAlert from "../ConfirmetionAlerts/ComlateConfermetionAlert.jsx";
+import Loader from "../Loader/Loader.jsx";
 
 function AllProjects() {
     const [projects, setProjects] = useState([]);
@@ -23,6 +24,7 @@ function AllProjects() {
     const [closingComplete, setClosingComplete] = useState(false);
     const [searchTerm, setSearchTerm] = useState("");
     const [filterStatus, setFilterStatus] = useState("all");
+    const [isLoading, setIsLoading] = useState(true);
     const navigate = useNavigate();
     const username = localStorage.getItem("username");
 
@@ -42,6 +44,7 @@ function AllProjects() {
     useEffect(() => {
         const fetchProjects = async () => {
             try {
+                setIsLoading(true);
                 if (!loggedIn) return;
 
                 let response;
@@ -51,32 +54,31 @@ function AllProjects() {
                     response = await fetchemployeeProjects(username);
                 }
 
-                // Apply filters after fetching
                 let filteredProjects = response.projects || [];
 
-                // Search filter (by title)
                 if (searchTerm) {
                     filteredProjects = filteredProjects.filter(project =>
                         project.title.toLowerCase().includes(searchTerm.toLowerCase())
                     );
                 }
 
-                // Status filter (Complete/Not Complete)
                 if (filterStatus !== "all") {
                     filteredProjects = filteredProjects.filter(project =>
                         (filterStatus === "complete" ? project.workStatus === "complete" : project.workStatus !== "complete")
                     );
                 }
-
+                await new Promise(resolve => setTimeout(resolve, 1000));
                 setProjects(filteredProjects);
             } catch (e) {
                 console.log(e);
                 toast.error("Failed to fetch projects.");
+            } finally {
+                setIsLoading(false);
             }
         };
 
         fetchProjects();
-    }, [loggedIn, username, searchTerm, filterStatus]); // Trigger fetch when these change
+    }, [loggedIn, username, searchTerm, filterStatus]);
 
     const handleDeleteClick = (id) => {
         setDeleteId(id);
@@ -120,16 +122,14 @@ function AllProjects() {
         navigate(`/view-details/${id}`);
     };
 
+    if (isLoading) {
+        return <Loader />
+    }
+
     return (
         <div className="min-h-screen bg-gradient-to-r from-blue-600 to-indigo-500 p-6 pt-15">
 
-            <button
-                className="fixed top-27 right-4 flex items-center gap-2 bg-white text-blue-600 px-4 py-2 rounded-full shadow-lg hover:bg-blue-50 transition-all duration-300 z-10"
-                onClick={() => navigate(-1)}
-            >
-                <ArrowBackIcon sx={{ fontSize: 20 }} />
-                <span className="text-sm font-medium">Back</span>
-            </button>
+            <Back_Button />
 
             <div className="max-w-3xl mx-auto text-center pt-16 pb-8">
                 <h1 className="text-4xl md:text-5xl font-bold text-white drop-shadow-lg animate-fade-in">

@@ -7,10 +7,11 @@ import {
     updteRequrmentsEmp
 } from "../../Services/RequrmentService.js";
 import {loggedUser} from "../../Services/AuthService.js";
-import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import Back_Button from "../BackButton/Back_Button";
 import toast from "react-hot-toast";
 import DeleteConfirmationAlert from "../ConfirmetionAlerts/DeleteConfermetionAlert";
 import ApproveConfirmationAlert from "../ConfirmetionAlerts/ApproveConfermetionAlert";
+import Loader from "../Loader/Loader.jsx";
 
 function AllRequirements() {
     const [requirements, setRequirements] = useState([]);
@@ -21,11 +22,12 @@ function AllRequirements() {
     const [showApproveConfirm, setShowApproveConfirm] = useState(false);
     const [deleteId, setDeleteId] = useState(null);
     const [approveId, setApproveId] = useState(null);
-    const [closingDelete, setClosingDelete] = useState(false);  // Added closing state
-    const [closingApprove, setClosingApprove] = useState(false);  // Added closing state
+    const [closingDelete, setClosingDelete] = useState(false);
+    const [closingApprove, setClosingApprove] = useState(false);
     const [searchTerm, setSearchTerm] = useState("");
     const [filterStatus, setFilterStatus] = useState("all");
     const [isUpdating, setIsUpdating] = useState(false);
+    const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
         const fetchLoggedUser = async () => {
@@ -41,6 +43,7 @@ function AllRequirements() {
 
     useEffect(() => {
         const fetchRequirements = async () => {
+            setIsLoading(true);
             try {
                 if (!loggedin) return;
 
@@ -64,11 +67,13 @@ function AllRequirements() {
                         req.requrmentStatus.toLowerCase() === filterStatus.toLowerCase()
                     );
                 }
-
+                await new Promise(resolve => setTimeout(resolve, 1000));
                 setRequirements(filteredRequirements);
             } catch (e) {
                 console.log(e);
                 toast.error("Failed to fetch requirements");
+            } finally {
+                setIsLoading(false);
             }
         };
 
@@ -80,12 +85,12 @@ function AllRequirements() {
     const handleDeleteClick = (id) => {
         setDeleteId(id);
         setShowDeleteConfirm(true);
-        setClosingDelete(false);  // Reset closing state
+        setClosingDelete(false);
     };
 
     const handleDeleteConfirm = async () => {
         try {
-            await updteRequrments(deleteId, "Cancelled");  // Assuming this is the delete equivalent
+            await updteRequrments(deleteId, "Cancelled");
             setRequirements(prev =>
                 prev.map(req =>
                     req._id === deleteId ? {...req, requrmentStatus: "Cancelled"} : req
@@ -101,7 +106,7 @@ function AllRequirements() {
     const handleApproveClick = (id) => {
         setApproveId(id);
         setShowApproveConfirm(true);
-        setClosingApprove(false);  // Reset closing state
+        setClosingApprove(false);
     };
 
     const handleApproveConfirm = async () => {
@@ -160,15 +165,13 @@ function AllRequirements() {
         handleUpdateConfirm(id);
     };
 
+    if (isLoading) {
+        return <Loader />
+    }
+
     return (
         <div className="min-h-screen bg-gradient-to-r from-blue-600 to-indigo-500 p-5 pt-15">
-            <button
-                className="fixed top-27 right-4 flex items-center gap-2 bg-white text-blue-600 px-4 py-2 rounded-full shadow-lg hover:bg-blue-50 transition-all duration-300 z-10"
-                onClick={() => navigate(-1)}
-            >
-                <ArrowBackIcon sx={{fontSize: 20}}/>
-                <span className="text-sm font-medium">Back</span>
-            </button>
+            <Back_Button />
 
             <div className="max-w-3xl mx-auto text-center pt-16 pb-8">
                 <h1 className="text-4xl md:text-5xl font-bold text-white drop-shadow-lg animate-fade-in">

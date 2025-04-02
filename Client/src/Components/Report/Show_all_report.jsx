@@ -2,10 +2,11 @@ import { useNavigate } from "react-router-dom";
 import React, { useEffect, useState } from "react";
 import { allReports, allReportsByUsername, approveReports, deleteReports } from "../../Services/ReportService.js";
 import { loggedUser } from "../../Services/AuthService.js";
-import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import Back_Button from "../BackButton/Back_Button";
 import toast from "react-hot-toast";
 import DeleteConfirmationAlert from "../ConfirmetionAlerts/DeleteConfermetionAlert.jsx";
 import ApproveConfirmationAlert from "../ConfirmetionAlerts/ApproveConfermetionAlert.jsx";
+import Loader from "../Loader/Loader.jsx";
 
 function ShowAllReports() {
     const [reports, setReports] = useState([]);
@@ -18,6 +19,7 @@ function ShowAllReports() {
     const [closingApprove, setClosingApprove] = useState(false);
     const [searchTerm, setSearchTerm] = useState("");
     const [filterStatus, setFilterStatus] = useState("all");
+    const [isLoading, setIsLoading] = useState(true);
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -35,6 +37,7 @@ function ShowAllReports() {
 
     useEffect(() => {
         const fetchReports = async () => {
+            setIsLoading(true);
             try {
                 if (!loggedIn) return;
 
@@ -58,11 +61,13 @@ function ShowAllReports() {
                         (filterStatus === "approved" ? report.approve : !report.approve)
                     );
                 }
-
+                await new Promise(resolve => setTimeout(resolve, 3000));
                 setReports(filteredReports);
             } catch (e) {
                 console.log(e);
                 toast.error("Failed to load reports.");
+            } finally {
+                setIsLoading(false);
             }
         };
 
@@ -107,16 +112,14 @@ function ShowAllReports() {
         }
     };
 
+    if (isLoading) {
+        return <Loader />
+    }
+
     return (
         <div className="min-h-screen bg-gradient-to-r from-blue-600 to-indigo-500 p-5 pt-15">
 
-            <button
-                className="fixed top-27 right-4 flex items-center gap-2 bg-white text-blue-600 px-4 py-2 rounded-full shadow-lg hover:bg-blue-50 transition-all duration-300 z-10"
-                onClick={() => navigate(-1)}
-            >
-                <ArrowBackIcon sx={{ fontSize: 20 }} />
-                <span className="text-sm font-medium">Back</span>
-            </button>
+            <Back_Button />
 
             <div className="max-w-3xl mx-auto text-center pt-16 pb-8">
                 <h1 className="text-4xl md:text-5xl font-bold text-white drop-shadow-lg animate-fade-in">
@@ -174,9 +177,8 @@ function ShowAllReports() {
                                             className="font-medium">End Date:</span> {new Date(report.endDate).toLocaleDateString()}
                                     </p>
                                     <p
-                                        className={`text-sm mt-1 font-medium ${
-                                            report.approve ? "text-green-500" : "text-red-500"
-                                        }`}
+                                        className={`text-sm mt-1 font-medium ${report.approve ? "text-green-500" : "text-red-500"
+                                            }`}
                                     >
                                         Status: {report.approve ? "Approved" : "Not Approved"}
                                     </p>

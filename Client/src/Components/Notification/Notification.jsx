@@ -2,9 +2,10 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { fetchNotifications, deleteNotification } from "../../Services/NotificationService.js";
 import { loggedUser } from "../../Services/AuthService.js";
-import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import Back_Button from "../BackButton/Back_Button";
 import toast from "react-hot-toast";
 import DeleteConfirmationAlert from "../ConfirmetionAlerts/DeleteConfermetionAlert.jsx";
+import Loader from "../Loader/Loader.jsx";
 
 function Notification() {
     const [notifications, setNotifications] = useState([]);
@@ -13,32 +14,29 @@ function Notification() {
     const [showConfirm, setShowConfirm] = useState(false);
     const [deleteId, setDeleteId] = useState(null);
     const [closing, setClosing] = useState(false);
+    const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
-        const fetchLoggedInUser = async () => {
+        const fetchData = async () => {
+            setIsLoading(true);
             try {
                 const user = await loggedUser();
                 setLoggedIn(user);
-            } catch (e) {
-                console.log(e.message);
-                setLoggedIn(null);
-            }
-        };
-        fetchLoggedInUser();
-    }, []);
 
-    useEffect(() => {
-        const getNotifications = async () => {
-            try {
                 const response = await fetchNotifications();
+                await new Promise(resolve => setTimeout(resolve, 1000));
                 setNotifications(response || []);
             } catch (e) {
                 console.log(e);
                 toast.error("Failed to fetch notifications.");
+                setLoggedIn(null);
+            } finally {
+                setIsLoading(false);
             }
         };
-        if (loggedIn !== null) getNotifications(); // Wait for loggedIn to be set
-    }, [loggedIn]);
+
+        fetchData();
+    }, []);
 
     const handleDelete = (id) => {
         setDeleteId(id);
@@ -54,22 +52,18 @@ function Notification() {
             console.error("Error deleting notification:", err);
             toast.error("Failed to delete notification.");
         } finally {
-            // Reset state
             setDeleteId(null);
             setShowConfirm(false);
         }
     };
 
+    if (isLoading) {
+        return <Loader />;
+    }
+
     return (
         <div className="min-h-screen bg-gradient-to-r from-blue-600 to-indigo-500 p-6 pt-15">
-
-            <button
-                className="fixed top-27 right-4 flex items-center gap-2 bg-white text-blue-600 px-4 py-2 rounded-full shadow-lg hover:bg-blue-50 transition-all duration-300 z-10"
-                onClick={() => navigate(-1)}
-            >
-                <ArrowBackIcon sx={{ fontSize: 20 }} />
-                <span className="text-sm font-medium">Back</span>
-            </button>
+            <Back_Button />
 
             <div className="max-w-3xl mx-auto text-center pt-16 pb-8">
                 <h1 className="text-4xl md:text-5xl font-bold text-white drop-shadow-lg animate-fade-in">

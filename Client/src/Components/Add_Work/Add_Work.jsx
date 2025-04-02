@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { allStaff } from "../../Services/AuthService.js";
 import { addWork, generateWorkDescription } from "../../Services/WorkService.js";
-import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import Back_Button from "../BackButton/Back_Button";
 import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 import {allGroups} from "../../Services/GroupService.js";
@@ -159,13 +159,7 @@ function AddTask() {
     return (
         <div className="min-h-screen bg-gradient-to-r from-blue-600 to-indigo-500 p-6 pt-15">
 
-            <button
-                className="fixed top-4 right-4 flex items-center gap-2 bg-white text-blue-600 px-4 py-2 rounded-full shadow-lg hover:bg-blue-50 transition-all duration-300 z-10"
-                onClick={() => navigate(-1)}
-            >
-                <ArrowBackIcon sx={{ fontSize: 20 }} />
-                <span className="text-sm font-medium">Back</span>
-            </button>
+            <Back_Button />
 
             <div className="max-w-3xl mx-auto bg-white rounded-xl shadow-2xl p-8">
                 <h1 className="text-3xl font-bold text-gray-800 mb-6 animate-fade-in">Add Work</h1>

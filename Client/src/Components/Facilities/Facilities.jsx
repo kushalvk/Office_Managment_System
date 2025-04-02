@@ -2,22 +2,27 @@ import { useNavigate } from "react-router-dom";
 import React, { useEffect, useState } from "react";
 import { fetchFacilities } from "../../Services/FacilitiesService.js";
 import { loggedUser } from "../../Services/AuthService.js";
-import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import Back_Button from "../BackButton/Back_Button";
 import toast from "react-hot-toast";
+import Loader from "../Loader/Loader.jsx";
 
 function Facilities() {
     const navigate = useNavigate();
     const [facilities, setFacilities] = useState([]);
     const [loggedin, setLoggedin] = useState(null);
+    const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
         const logged = async () => {
             try {
+                await new Promise(resolve => setTimeout(resolve, 1000));
                 setLoggedin(await loggedUser());
             } catch (e) {
                 console.log(e.message);
                 toast.error(e.message);
                 setLoggedin(null);
+            } finally {
+                setIsLoading(false);
             }
         };
         logged();
@@ -36,16 +41,14 @@ function Facilities() {
         fetchFacilitiesData();
     }, []);
 
+    if (isLoading) {
+        return <Loader />
+    }
+
     return (
         <div className="min-h-screen bg-gradient-to-r from-blue-600 to-indigo-500 p-5 pt-15">
 
-            <button
-                className="fixed top-27 right-4 flex items-center gap-2 bg-white text-blue-600 px-4 py-2 rounded-full shadow-lg hover:bg-blue-50 transition-all duration-300 z-10"
-                onClick={() => navigate(-1)}
-            >
-                <ArrowBackIcon sx={{ fontSize: 20 }} />
-                <span className="text-sm font-medium">Back</span>
-            </button>
+            <Back_Button />
 
             <div className="max-w-3xl mx-auto text-center pt-16 pb-8">
                 <h1 className="text-4xl md:text-5xl font-bold text-white drop-shadow-lg animate-fade-in">

@@ -13,7 +13,8 @@ import { allReports, newlyReports, pendingApprovalReports } from "../../Services
 import { fetchallTasks, fetchComplatedProject } from "../../Services/WorkService.js";
 import { formatDistanceToNow } from "date-fns";
 import toast from "react-hot-toast";
-import {pastAttendanceData} from "../../Services/Attendance.js";
+import { pastAttendanceData } from "../../Services/Attendance.js";
+import Loader from "../Loader/Loader.jsx";
 
 function AdminDashboard() {
     const username = localStorage.getItem("username");
@@ -24,6 +25,7 @@ function AdminDashboard() {
     const [newUsers, setNewUsers] = useState([]);
     const [newReports, setNewReports] = useState([]);
     const [pendingApprovReports, setPendingApprovReports] = useState([]);
+    const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -38,6 +40,9 @@ function AdminDashboard() {
                         newlyReports(),
                         pendingApprovalReports(),
                     ]);
+
+                await new Promise(resolve => setTimeout(resolve, 2000));
+
                 setUsers(usersRes.employees);
                 setReports(reportsRes.reports);
                 setTasks(tasksRes.tasks);
@@ -48,6 +53,8 @@ function AdminDashboard() {
             } catch (e) {
                 console.log(e.message);
                 toast.error(e.message);
+            } finally {
+                setIsLoading(false);
             }
         };
         fetchData();
@@ -61,6 +68,10 @@ function AdminDashboard() {
         }
         oldAtendances();
     }, []);
+
+    if (isLoading) {
+        return <Loader />;
+    }
 
     return (
         <div className="min-h-screen bg-gradient-to-br from-gray-50 to-blue-50 p-6">

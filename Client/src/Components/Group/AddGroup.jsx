@@ -3,7 +3,7 @@ import GroupIcon from '../../../../Storage/Group_Icon.jpg';
 import { allStaff } from "../../Services/AuthService.js";
 import { addGroup } from "../../Services/GroupService.js";
 import { useNavigate } from "react-router-dom";
-import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import Back_Button from "../BackButton/Back_Button";
 import toast from "react-hot-toast";
 
 function Add_Group() {
@@ -99,13 +99,7 @@ function Add_Group() {
     return (
         <div className="min-h-screen bg-gradient-to-r from-blue-600 to-indigo-500 p-6 pt-15">
 
-            <button
-                className="fixed top-4 right-4 flex items-center gap-2 bg-white text-blue-600 px-4 py-2 rounded-full shadow-lg hover:bg-blue-50 transition-all duration-300 z-10"
-                onClick={() => navigate(-1)}
-            >
-                <ArrowBackIcon sx={{ fontSize: 20 }} />
-                <span className="text-sm font-medium">Back</span>
-            </button>
+            <Back_Button />
 
             <div className="max-w-3xl mx-auto text-center mb-10">
                 <h1 className="text-4xl md:text-5xl font-bold text-white drop-shadow-lg">Add New Group</h1>

@@ -1,9 +1,10 @@
 import { useNavigate } from "react-router-dom";
 import React, { useEffect, useState } from "react";
 import { allStaff, deleteStaff } from "../../Services/AuthService.js";
-import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import toast from "react-hot-toast";
 import DeleteConfirmationAlert from "../ConfirmetionAlerts/DeleteConfermetionAlert.jsx";
+import Back_Button from "../BackButton/Back_Button.jsx";
+import Loader from "../Loader/Loader.jsx";
 
 function All_Staff() {
     const [staff, setStaff] = useState([]);
@@ -13,34 +14,35 @@ function All_Staff() {
     const [showConfirm, setShowConfirm] = useState(false);
     const [deleteId, setDeleteId] = useState(null);
     const [closing, setClosing] = useState(false);
+    const [isLoading, setIsLoading] = useState(true);
     const navigate = useNavigate();
 
     useEffect(() => {
         const fetchData = async () => {
             try {
                 const response = await allStaff();
+                await new Promise(resolve => setTimeout(resolve, 1000));
                 setStaff(response.employees);
                 setFilteredStaff(response.employees);
             } catch (e) {
                 console.log(e);
                 toast.error("Failed to fetch staff data");
+            } finally {
+                setIsLoading(false);
             }
         };
         fetchData();
     }, []);
 
-    // Search and Filter Logic
     useEffect(() => {
         let result = staff;
 
-        // Search filter
         if (searchTerm) {
             result = result.filter(employee =>
                 employee.fullName.toLowerCase().includes(searchTerm.toLowerCase())
             );
         }
 
-        // Department filter
         if (selectedDept !== "all") {
             result = result.filter(employee =>
                 employee.department.toLowerCase() === selectedDept.toLowerCase()
@@ -50,13 +52,12 @@ function All_Staff() {
         setFilteredStaff(result);
     }, [searchTerm, selectedDept, staff]);
 
-    // Get unique departments for filter dropdown
     const departments = ["all", ...new Set(staff.map(emp => emp.department))];
 
     const handleDeleteClick = (id) => {
         setDeleteId(id);
         setShowConfirm(true);
-        setClosing(false); // Reset closing state when opening
+        setClosing(false);
     };
 
     const handleDeleteConfirm = async () => {
@@ -71,16 +72,14 @@ function All_Staff() {
         }
     };
 
+    if (isLoading) {
+        return <Loader />
+    }
+
     return (
         <div className="min-h-screen bg-gradient-to-r from-blue-600 to-indigo-500 p-5 pt-15">
 
-            <button
-                className="fixed top-27 right-4 flex items-center gap-2 bg-white text-blue-600 px-4 py-2 rounded-full shadow-lg hover:bg-blue-50 transition-all duration-300 z-10"
-                onClick={() => navigate(-1)}
-            >
-                <ArrowBackIcon sx={{ fontSize: 20 }} />
-                <span className="text-sm font-medium">Back</span>
-            </button>
+            <Back_Button />
 
             <div className="max-w-3xl mx-auto text-center pt-16 pb-8">
                 <h1 className="text-4xl md:text-5xl font-bold text-white drop-shadow-lg animate-fade-in">

@@ -2,6 +2,7 @@ import {useEffect, useState} from "react";
 import {loggedUser} from "../../Services/AuthService.js";
 import toast from "react-hot-toast";
 import {checkIn, checkOut, getAttendanceData} from "../../Services/Attendance.js";
+import Back_Button from "../BackButton/Back_Button.jsx";
 
 const Attendance = () => {
     const [status, setStatus] = useState('Not Marked');
@@ -48,7 +49,7 @@ const Attendance = () => {
         try {
             const now = new Date();
             const currentHour = now.getHours();
-
+            
             if (currentHour < 8 || currentHour >= 9) {
                 toast.error("Check-in allowed only between 8:00 AM and 9:00 AM.");
                 return;
@@ -70,7 +71,7 @@ const Attendance = () => {
         try {
             const now = new Date();
             const currentHour = now.getHours();
-
+            
             if (currentHour < 18 || currentHour >= 19) {
                 toast.error("Check-out allowed only between 6:00 PM and 7:00 PM.");
                 return;
@@ -90,6 +91,9 @@ const Attendance = () => {
     return (
         <div className="min-h-screen bg-gray-100 flex items-center justify-center p-4 sm:p-6 lg:p-8">
             <div className="bg-white rounded-xl shadow-xl p-4 sm:p-6 lg:p-8 w-full max-w-full sm:max-w-md lg:max-w-lg">
+
+                <Back_Button />
+
                 <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-800 mb-6 sm:mb-8 text-center">
                     Attendance
                 </h2>

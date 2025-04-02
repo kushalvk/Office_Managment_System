@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { loggedUser } from "../../Services/AuthService.js"; // Assuming this fetches the current user
 import toast from "react-hot-toast";
+import Back_Button from "../BackButton/Back_Button.jsx";
 
 function E_Salary() {
     const [employee, setEmployee] = useState(null);
@@ -28,6 +29,9 @@ function E_Salary() {
     return (
         <div className="min-h-screen bg-gray-100 flex items-center justify-center p-4 sm:p-6 lg:p-8">
             <div className="bg-white rounded-xl shadow-xl p-4 sm:p-6 lg:p-8 w-full max-w-full sm:max-w-md lg:max-w-lg">
+
+                <Back_Button />
+
                 <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-800 mb-6 sm:mb-8 text-center">
                     Employee Salary
                 </h1>

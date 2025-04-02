@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { loggedUser, updateUserProfile } from "../../Services/AuthService.js";
-import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import Back_Button from "../BackButton/Back_Button";
 import toast from "react-hot-toast";
+import Loader from "../Loader/Loader.jsx";
 
 function UserProfile() {
     const qualificationOptions = [
@@ -40,16 +41,20 @@ function UserProfile() {
 
     const [loggedIn, setLoggedIn] = useState({});
     const [isEditing, setIsEditing] = useState(false);
+    const [isLoading, setIsLoading] = useState(true);
     const navigate = useNavigate();
 
     useEffect(() => {
         const fetchLoggedInUser = async () => {
             try {
                 const user = await loggedUser();
+                await new Promise(resolve => setTimeout(resolve, 1000));
                 setLoggedIn(user);
             } catch (e) {
                 console.log(e.message);
                 toast.error("Failed to load user profile.");
+            } finally {
+                setIsLoading(false);
             }
         };
         fetchLoggedInUser();
@@ -76,23 +81,21 @@ function UserProfile() {
             setLoggedIn(response);
             setIsEditing(false);
             toast.success("Profile updated successfully!");
-            navigate(0); // Refresh the page instead of `location.reload()` for React Router compatibility
+            navigate(0);
         } catch (error) {
             console.error("Error updating profile:", error.message);
             toast.error("Failed to update profile. Please try again.");
         }
     };
 
+    if (isLoading) {
+        return <Loader />
+    }
+
     return (
         <div className="min-h-screen bg-gradient-to-r from-blue-600 to-indigo-500 p-6 pt-15">
 
-            <button
-                className="fixed top-27 right-4 flex items-center gap-2 bg-white text-blue-600 px-4 py-2 rounded-full shadow-lg hover:bg-blue-50 transition-all duration-300 z-10"
-                onClick={() => navigate(-1)}
-            >
-                <ArrowBackIcon sx={{ fontSize: 20 }} />
-                <span className="text-sm font-medium">Back</span>
-            </button>
+            <Back_Button />
 
             <div className="max-w-3xl mx-auto text-center pt-16 pb-8">
                 <h1 className="text-4xl md:text-5xl font-bold text-white drop-shadow-lg animate-fade-in">
