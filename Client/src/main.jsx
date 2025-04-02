@@ -40,6 +40,8 @@ import UserDetails from "./Components/All_Staff/UserDetails.jsx";
 import HowIsWorks from "./Components/Discription/HowIsWorks.jsx";
 import Attendance from "./Components/Attendance/Attendance.jsx";
 import E_Salary from "./Components/Sallary/E_Salary.jsx";
+import M_Attendance from "./Components/Attendance/M_Attendance.jsx";
+import M_Today_Attendance from "./Components/Attendance/M_Today_Attendance.jsx";
 
 const router = createBrowserRouter(
     createRoutesFromElements(
@@ -81,6 +83,8 @@ const router = createBrowserRouter(
             <Route path="/how-it-works" element={<HowIsWorks />} />
             <Route path="/attendance" element={<Attendance />} />
             <Route path="/e-salary" element={<E_Salary />} />
+            <Route path="/a-attendance" element={<M_Attendance />} />
+            <Route path="/daily-attendance" element={<M_Today_Attendance />} />
         </Route>
     )
 )

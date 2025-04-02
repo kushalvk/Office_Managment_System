@@ -13,7 +13,7 @@ import { allReports, newlyReports, pendingApprovalReports } from "../../Services
 import { fetchallTasks, fetchComplatedProject } from "../../Services/WorkService.js";
 import { formatDistanceToNow } from "date-fns";
 import toast from "react-hot-toast";
-import { pastAttendanceData } from "../../Services/Attendance.js";
+import { pastAttendanceData } from "../../Services/AttendanceService.js";
 import Loader from "../Loader/Loader.jsx";
 
 function AdminDashboard() {

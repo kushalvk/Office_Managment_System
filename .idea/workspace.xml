@@ -4,18 +4,18 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="404eb4d8-f181-44b4-a139-a07b064bd629" name="Changes" comment="UPDATE: Dynamic Attendance &amp; Salary based on attendance(auto calculate)">
-      <change beforePath="$PROJECT_DIR$/Client/src/Components/About_Us/About_Us.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/Components/About_Us/About_Us.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/src/Components/Add_Work/Add_Work.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/Components/Add_Work/Add_Work.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/src/Components/All_Staff/UserDetails.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/Components/All_Staff/UserDetails.jsx" afterDir="false" />
+    <list default="true" id="404eb4d8-f181-44b4-a139-a07b064bd629" name="Changes" comment="UPDATE: Change CSS.">
+      <change afterPath="$PROJECT_DIR$/Client/src/Components/Attendance/M_Attendance.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Client/src/Components/Attendance/M_Today_Attendance.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/Client/package-lock.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Client/src/Components/Attendance/Attendance.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/Components/Attendance/Attendance.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/src/Components/Contact_Us/Contact_Us.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/Components/Contact_Us/Contact_Us.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/src/Components/Discription/HowIsWorks.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/Components/Discription/HowIsWorks.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/src/Components/Group/Group_Details.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/Components/Group/Group_Details.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/src/Components/Photos/Photos.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/Components/Photos/Photos.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/src/Components/Polices/Policies.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/Components/Polices/Policies.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/src/Components/Privacy_Policies/Privacy_Policies.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/Components/Privacy_Policies/Privacy_Policies.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/Components/Dashbored/Dashbored.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/Components/Dashbored/Dashbored.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/Components/Header/Sidebar.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/Components/Header/Sidebar.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/Services/Attendance.js" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/Services/AttendanceService.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/main.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/main.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Server/controllers/Attendance_Controller.js" beforeDir="false" afterPath="$PROJECT_DIR$/Server/controllers/Attendance_Controller.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/routers/Attendance_Route.js" beforeDir="false" afterPath="$PROJECT_DIR$/Server/routers/Attendance_Route.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -181,23 +181,9 @@
       <workItem from="1743510716559" duration="21000" />
       <workItem from="1743510783196" duration="16829000" />
       <workItem from="1743569818384" duration="690000" />
-      <workItem from="1743575254935" duration="361000" />
-    </task>
-    <task id="LOCAL-00026" summary="ADD: Add page of description and Update Requrment.">
-      <option name="closed" value="true" />
-      <created>1740249165600</created>
-      <option name="number" value="00026" />
-      <option name="presentableId" value="LOCAL-00026" />
-      <option name="project" value="LOCAL" />
-      <updated>1740249165600</updated>
-    </task>
-    <task id="LOCAL-00027" summary="ADD: Add Upadte Facility to work and group section">
-      <option name="closed" value="true" />
-      <created>1740293556635</created>
-      <option name="number" value="00027" />
-      <option name="presentableId" value="LOCAL-00027" />
-      <option name="project" value="LOCAL" />
-      <updated>1740293556635</updated>
+      <workItem from="1743575254935" duration="797000" />
+      <workItem from="1743576349913" duration="293000" />
+      <workItem from="1743596644786" duration="6171000" />
     </task>
     <task id="LOCAL-00028" summary="UPDATE: Back button every pages.">
       <option name="closed" value="true" />
@@ -575,15 +561,29 @@
       <option name="project" value="LOCAL" />
       <updated>1743532537944</updated>
     </task>
-    <option name="localTasksCounter" value="75" />
+    <task id="LOCAL-00075" summary="UPDATE: Remove Unnecessary data.">
+      <option name="closed" value="true" />
+      <created>1743575984071</created>
+      <option name="number" value="00075" />
+      <option name="presentableId" value="LOCAL-00075" />
+      <option name="project" value="LOCAL" />
+      <updated>1743575984071</updated>
+    </task>
+    <task id="LOCAL-00076" summary="UPDATE: Change CSS.">
+      <option name="closed" value="true" />
+      <created>1743576611789</created>
+      <option name="number" value="00076" />
+      <option name="presentableId" value="LOCAL-00076" />
+      <option name="project" value="LOCAL" />
+      <updated>1743576611789</updated>
+    </task>
+    <option name="localTasksCounter" value="77" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="UPDATE: vercel.json file" />
-    <MESSAGE value="UPDATE: file Access Permition." />
     <MESSAGE value="UPDATE: file Load Permition." />
     <MESSAGE value="UPDATE: Website Icon." />
     <MESSAGE value="UPDATE: Limit File size." />
@@ -607,6 +607,8 @@
     <MESSAGE value="UPDATE: Toaster on Add Staff Page." />
     <MESSAGE value="UPDATE: Add User page Password validation and other." />
     <MESSAGE value="UPDATE: Dynamic Attendance &amp; Salary based on attendance(auto calculate)" />
-    <option name="LAST_COMMIT_MESSAGE" value="UPDATE: Dynamic Attendance &amp; Salary based on attendance(auto calculate)" />
+    <MESSAGE value="UPDATE: Remove Unnecessary data." />
+    <MESSAGE value="UPDATE: Change CSS." />
+    <option name="LAST_COMMIT_MESSAGE" value="UPDATE: Change CSS." />
   </component>
 </project>

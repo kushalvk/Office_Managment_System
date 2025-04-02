@@ -102,6 +102,8 @@ function Sidebar() {
                             {path: "/show-group", label: "Group"},
                             {path: "/show-requirement", label: "Requirement"},
                             {path: "/salary", label: "Salary"},
+                            {path: "/a-attendance", label: "Emp. Attendance"},
+                            {path: "/daily-attendance", label: "Daily Attendance"},
                         ].map(({path, label}) => (
                             <li key={path}>
                                 <Link

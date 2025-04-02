@@ -36,3 +36,12 @@ export const pastAttendanceData = async () => {
         error(err)
     }
 }
+
+export const dailyAttendanceData = async () => {
+    try {
+        const response = await axios.get(`${import.meta.env.VITE_REACT_APP_BACKEND_BASEURL}/get-daily-attendances`)
+        return response.data;
+    } catch (err) {
+        error(err)
+    }
+}

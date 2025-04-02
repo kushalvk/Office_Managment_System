@@ -1,7 +1,7 @@
 import {useEffect, useState} from "react";
 import {loggedUser} from "../../Services/AuthService.js";
 import toast from "react-hot-toast";
-import {checkIn, checkOut, getAttendanceData} from "../../Services/Attendance.js";
+import {checkIn, checkOut, getAttendanceData} from "../../Services/AttendanceService.js";
 import Back_Button from "../BackButton/Back_Button.jsx";
 
 const Attendance = () => {
@@ -86,7 +86,6 @@ const Attendance = () => {
             toast.error(e.message);
         }
     };
-
 
     return (
         <div className="min-h-screen bg-gradient-to-r from-blue-600 to-indigo-500 flex items-center justify-center sm:p-6 lg:p-8 p-6 pt-29">

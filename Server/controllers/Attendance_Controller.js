@@ -86,6 +86,16 @@ const getAttendanceController = async (req, res) => {
     }
 }
 
+const getAllAttendanceController = async (req, res) => {
+    try {
+        AttendanceModel.find()
+            .then((attendance) => res.status(200).json(attendance))
+            .catch((err) => res.status(500).json({message: "Error To fetch attendance", err}));
+    } catch (e) {
+        res.status(500).json({message: "Something Wrong", e});
+    }
+}
+
 const deletePastAttendanceController = async (req, res) => {
     try {
         const date = new Date();
@@ -125,4 +135,4 @@ const deletePastAttendanceController = async (req, res) => {
     }
 };
 
-module.exports = {checkInController, checkOutController, getAttendanceController, deletePastAttendanceController};
+module.exports = {checkInController, checkOutController, getAttendanceController, deletePastAttendanceController, getAllAttendanceController};
