@@ -27,7 +27,7 @@ function E_Salary() {
         : 0;
 
     return (
-        <div className="min-h-screen bg-gray-100 flex items-center justify-center p-4 sm:p-6 lg:p-8">
+        <div className="min-h-screen bg-gradient-to-r from-blue-600 to-indigo-500 flex items-center justify-center sm:p-6 lg:p-8 p-6 pt-29">
             <div className="bg-white rounded-xl shadow-xl p-4 sm:p-6 lg:p-8 w-full max-w-full sm:max-w-md lg:max-w-lg">
 
                 <Back_Button />
