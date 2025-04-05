@@ -63,7 +63,7 @@ const Attendance = () => {
             const currentHourIST = istTime.getHours();
             const currentMinuteIST = istTime.getMinutes();
 
-            if (currentHourIST !== 10 || currentMinuteIST >= 60) {
+            if (currentHourIST !== 8 || currentMinuteIST >= 60) {
                 toast.error("Check-in allowed only between 8:00 AM and 9:00 AM IST.");
                 return;
             }
@@ -98,7 +98,7 @@ const Attendance = () => {
             const currentHourIST = istTime.getHours();
             const currentMinuteIST = istTime.getMinutes();
 
-            if (currentHourIST !== 10 || currentMinuteIST >= 60) {
+            if (currentHourIST !== 18 || currentMinuteIST >= 60) {
                 toast.error("Check-out allowed only between 6:00 PM and 7:00 PM IST.");
                 return;
             }

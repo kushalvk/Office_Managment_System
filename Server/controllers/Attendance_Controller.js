@@ -18,7 +18,7 @@ const checkInController = async (req, res) => {
         const currentHour = istTime.getHours();
         const currentMinute = istTime.getMinutes();
 
-        if (currentHour < 10 || (currentHour === 11 && currentMinute > 0)) {
+        if (currentHour < 8 || (currentHour === 9 && currentMinute > 0)) {
             return res.status(400).json({ message: "Check-in allowed only between 8:00 AM and 9:00 AM IST." });
         }
 
@@ -53,7 +53,7 @@ const checkOutController = async (req, res) => {
         const currentHour = istTime.getHours();
         const currentMinute = istTime.getMinutes();
 
-        if (currentHour < 10 || (currentHour === 11 && currentMinute > 0) || currentHour >= 11) {
+        if (currentHour < 18 || (currentHour === 19 && currentMinute > 0) || currentHour >= 19) {
             return res.status(403).json({ message: "Check-out allowed only between 6:00 PM and 7:00 PM IST." });
         }
 
