@@ -7,11 +7,19 @@ const checkInController = async (req, res) => {
         const date = new Date().toISOString().split('T')[0];
 
         const now = new Date();
-        const currentHour = now.getHours();
-        const currentMinute = now.getMinutes();
+        // const currentHour = now.getHours();
+        // const currentMinute = now.getMinutes();
 
-        if (currentHour < 8 || (currentHour === 9 && currentMinute > 0)) {
-            return res.status(400).json({ message: "Check-in allowed only between 8:00 AM and 9:00 AM." });
+        // Convert to IST
+        const istOffset = 5.5 * 60; // 330 minutes
+        const utc = now.getTime() + now.getTimezoneOffset() * 60000;
+        const istTime = new Date(utc + 60000 * istOffset);
+
+        const currentHour = istTime.getHours();
+        const currentMinute = istTime.getMinutes();
+
+        if (currentHour < 10 || (currentHour === 11 && currentMinute > 0)) {
+            return res.status(400).json({ message: "Check-in allowed only between 8:00 AM and 9:00 AM IST." });
         }
 
         AttendanceModel.create({ username, date, check_in: now, at_status: 'Present' })
@@ -29,11 +37,24 @@ const checkOutController = async (req, res) => {
             return res.status(400).json({ message: "Username is required" });
         }
 
-        const now = new Date();
-        const currentHour = now.getHours();
+        // const now = new Date();
+        // const currentHour = now.getHours();
+        //
+        // if (currentHour < 18 || currentHour >= 19) {
+        //     return res.status(403).json({ message: "Check-out allowed only between 6:00 PM and 7:00 PM." });
+        // }
 
-        if (currentHour < 18 || currentHour >= 19) {
-            return res.status(403).json({ message: "Check-out allowed only between 6:00 PM and 7:00 PM." });
+        // Get current time and convert to IST
+        const now = new Date();
+        const istOffset = 5.5 * 60; // IST is UTC+5:30
+        const utc = now.getTime() + now.getTimezoneOffset() * 60000;
+        const istTime = new Date(utc + 60000 * istOffset);
+
+        const currentHour = istTime.getHours();
+        const currentMinute = istTime.getMinutes();
+
+        if (currentHour < 10 || (currentHour === 11 && currentMinute > 0) || currentHour >= 11) {
+            return res.status(403).json({ message: "Check-out allowed only between 6:00 PM and 7:00 PM IST." });
         }
 
         const date = now.toISOString().split('T')[0];

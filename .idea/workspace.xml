@@ -4,18 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="404eb4d8-f181-44b4-a139-a07b064bd629" name="Changes" comment="UPDATE: Change CSS.">
-      <change afterPath="$PROJECT_DIR$/Client/src/Components/Attendance/M_Attendance.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Client/src/Components/Attendance/M_Today_Attendance.jsx" afterDir="false" />
+    <list default="true" id="404eb4d8-f181-44b4-a139-a07b064bd629" name="Changes" comment="ADD: Attendance Details on Admin side">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/Client/package-lock.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Client/src/Components/Attendance/Attendance.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/Components/Attendance/Attendance.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/src/Components/Dashbored/Dashbored.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/Components/Dashbored/Dashbored.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/src/Components/Header/Sidebar.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/Components/Header/Sidebar.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/src/Services/Attendance.js" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/Services/AttendanceService.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/src/main.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/main.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/Components/Attendance/M_Attendance.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/Components/Attendance/M_Attendance.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Server/controllers/Attendance_Controller.js" beforeDir="false" afterPath="$PROJECT_DIR$/Server/controllers/Attendance_Controller.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/routers/Attendance_Route.js" beforeDir="false" afterPath="$PROJECT_DIR$/Server/routers/Attendance_Route.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -183,15 +176,13 @@
       <workItem from="1743569818384" duration="690000" />
       <workItem from="1743575254935" duration="797000" />
       <workItem from="1743576349913" duration="293000" />
-      <workItem from="1743596644786" duration="6171000" />
-    </task>
-    <task id="LOCAL-00028" summary="UPDATE: Back button every pages.">
-      <option name="closed" value="true" />
-      <created>1740296465419</created>
-      <option name="number" value="00028" />
-      <option name="presentableId" value="LOCAL-00028" />
-      <option name="project" value="LOCAL" />
-      <updated>1740296465419</updated>
+      <workItem from="1743596644786" duration="6366000" />
+      <workItem from="1743605166322" duration="181000" />
+      <workItem from="1743605680258" duration="674000" />
+      <workItem from="1743606401472" duration="7000" />
+      <workItem from="1743661366450" duration="1221000" />
+      <workItem from="1743770146352" duration="881000" />
+      <workItem from="1743825082071" duration="2416000" />
     </task>
     <task id="LOCAL-00029" summary="ADD: vercel.json file">
       <option name="closed" value="true" />
@@ -577,14 +568,21 @@
       <option name="project" value="LOCAL" />
       <updated>1743576611789</updated>
     </task>
-    <option name="localTasksCounter" value="77" />
+    <task id="LOCAL-00077" summary="ADD: Attendance Details on Admin side">
+      <option name="closed" value="true" />
+      <created>1743604760129</created>
+      <option name="number" value="00077" />
+      <option name="presentableId" value="LOCAL-00077" />
+      <option name="project" value="LOCAL" />
+      <updated>1743604760130</updated>
+    </task>
+    <option name="localTasksCounter" value="78" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="UPDATE: file Load Permition." />
     <MESSAGE value="UPDATE: Website Icon." />
     <MESSAGE value="UPDATE: Limit File size." />
     <MESSAGE value="UPDATE: file upload setup." />
@@ -609,6 +607,7 @@
     <MESSAGE value="UPDATE: Dynamic Attendance &amp; Salary based on attendance(auto calculate)" />
     <MESSAGE value="UPDATE: Remove Unnecessary data." />
     <MESSAGE value="UPDATE: Change CSS." />
-    <option name="LAST_COMMIT_MESSAGE" value="UPDATE: Change CSS." />
+    <MESSAGE value="ADD: Attendance Details on Admin side" />
+    <option name="LAST_COMMIT_MESSAGE" value="ADD: Attendance Details on Admin side" />
   </component>
 </project>

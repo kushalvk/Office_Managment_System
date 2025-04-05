@@ -48,10 +48,23 @@ const Attendance = () => {
     const handleCheckIn = async () => {
         try {
             const now = new Date();
-            const currentHour = now.getHours();
+            // const currentHour = now.getHours();
+            //
+            // if (currentHour < 8 || currentHour >= 9) {
+            //     toast.error("Check-in allowed only between 8:00 AM and 9:00 AM.");
+            //     return;
+            // }
 
-            if (currentHour < 8 || currentHour >= 9) {
-                toast.error("Check-in allowed only between 8:00 AM and 9:00 AM.");
+            // Convert current time to IST
+            const istOffset = 5.5 * 60; // IST is UTC+5:30
+            const utc = now.getTime() + now.getTimezoneOffset() * 60000;
+            const istTime = new Date(utc + 60000 * istOffset);
+
+            const currentHourIST = istTime.getHours();
+            const currentMinuteIST = istTime.getMinutes();
+
+            if (currentHourIST !== 10 || currentMinuteIST >= 60) {
+                toast.error("Check-in allowed only between 8:00 AM and 9:00 AM IST.");
                 return;
             }
 
@@ -70,10 +83,23 @@ const Attendance = () => {
     const handleCheckOut = async () => {
         try {
             const now = new Date();
-            const currentHour = now.getHours();
+            // const currentHour = now.getHours();
+            //
+            // if (currentHour < 18 || currentHour >= 19) {
+            //     toast.error("Check-out allowed only between 6:00 PM and 7:00 PM.");
+            //     return;
+            // }
 
-            if (currentHour < 18 || currentHour >= 19) {
-                toast.error("Check-out allowed only between 6:00 PM and 7:00 PM.");
+            // Convert to IST
+            const istOffset = 5.5 * 60; // IST is UTC+5:30
+            const utc = now.getTime() + now.getTimezoneOffset() * 60000;
+            const istTime = new Date(utc + 60000 * istOffset);
+
+            const currentHourIST = istTime.getHours();
+            const currentMinuteIST = istTime.getMinutes();
+
+            if (currentHourIST !== 10 || currentMinuteIST >= 60) {
+                toast.error("Check-out allowed only between 6:00 PM and 7:00 PM IST.");
                 return;
             }
 

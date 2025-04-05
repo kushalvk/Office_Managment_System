@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React, {useEffect, useState} from "react";
 import toast from "react-hot-toast";
-import { allStaff } from "../../Services/AuthService.js";
+import {allStaff} from "../../Services/AuthService.js";
 import Back_Button from "../BackButton/Back_Button.jsx";
 
 function M_Attendance() {
@@ -86,28 +86,30 @@ function M_Attendance() {
                                 </thead>
                                 <tbody>
                                 {filteredRecords.map((record) => (
-                                    <tr
-                                        key={`${record.username}-${record.date}`}
-                                        className="border-t text-gray-700 text-sm sm:text-base hover:bg-gray-200 transition-colors duration-200 snap-start"
-                                    >
-                                        <td className="py-4 px-6 truncate">
-                                            {record.fullName || record.username}
-                                        </td>
-                                        <td className="py-4 px-6 truncate">
-                                            {record.department || "N/A"}
-                                        </td>
-                                        <td className="py-4 px-6 truncate">
-                                            {record.workLocation || "N/A"}
-                                        </td>
-                                        <td className="py-4 px-6 truncate">
-                                            {record.sallary_per_day || "N/A"}
-                                        </td>
-                                        <td className="py-4 px-6">
+                                    record.role === "Manager" ? null : (
+                                        <tr
+                                            key={`${record.username}-${record.date}`}
+                                            className="border-t text-gray-700 text-sm sm:text-base hover:bg-gray-200 transition-colors duration-200 snap-start"
+                                        >
+                                            <td className="py-4 px-6 truncate">
+                                                {record.fullName || record.username}
+                                            </td>
+                                            <td className="py-4 px-6 truncate">
+                                                {record.department || "N/A"}
+                                            </td>
+                                            <td className="py-4 px-6 truncate">
+                                                {record.workLocation || "N/A"}
+                                            </td>
+                                            <td className="py-4 px-6 truncate">
+                                                {record.sallary_per_day || "N/A"}
+                                            </td>
+                                            <td className="py-4 px-6">
                                                 <span className="font-semibold text-green-600">
                                                     {record.total_days}
                                                 </span>
-                                        </td>
-                                    </tr>
+                                            </td>
+                                        </tr>
+                                    )
                                 ))}
                                 </tbody>
                             </table>
