@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
-import { UserById } from "../../Services/AuthService.js";
+import React, {useEffect, useState} from "react";
+import {useParams} from "react-router-dom";
+import {UserById} from "../../Services/AuthService.js";
 import toast from "react-hot-toast";
 import Back_Button from "../BackButton/Back_Button.jsx";
 
 const UserDetails = () => {
-    const { id } = useParams();
+    const {id} = useParams();
     const [user, setUser] = useState({});
 
     useEffect(() => {
@@ -24,7 +24,7 @@ const UserDetails = () => {
     return (
         <div className="min-h-screen bg-gradient-to-r from-blue-600 to-indigo-500 p-5 pt-15">
 
-            <Back_Button />
+            <Back_Button/>
 
             <div className="max-w-3xl mx-auto text-center pt-16 pb-8">
                 <h1 className="text-4xl md:text-5xl font-bold text-white drop-shadow-lg animate-fade-in">
@@ -32,7 +32,8 @@ const UserDetails = () => {
                 </h1>
             </div>
 
-            <div className="max-w-4xl mx-auto bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-all duration-300">
+            <div
+                className="max-w-4xl mx-auto bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-all duration-300">
 
                 <div className="flex flex-col items-center mb-6">
                     <img
@@ -54,10 +55,11 @@ const UserDetails = () => {
                             key !== "profilePhoto" &&
                             key !== "__v" &&
                             key !== "updatedAt" &&
-                            key !== "createdAt" && (
+                            key !== "createdAt" &&
+                            key !== "last_payemnt_date" && (
                                 <div key={key} className="flex justify-between">
                                     <span className="font-semibold text-gray-700 capitalize">
-                                        {key.replace(/([A-Z])/g, " $1").trim()}:
+                                        {key.replace(/([A-Z])|_/g, (match, p1) => p1 ? ` ${p1}` : ' ').trim()}:
                                     </span>
                                     {key === "resume" && user[key] ? (
                                         <a
@@ -89,6 +91,15 @@ const UserDetails = () => {
                             <span className="font-semibold text-gray-700">Last Updated:</span>
                             <span className="text-gray-600">
                                 {new Date(user.updatedAt).toLocaleDateString()}
+                            </span>
+                        </div>
+                    )}
+
+                    {user.last_payemnt_date && (
+                        <div className="flex justify-between">
+                            <span className="font-semibold text-gray-700">Last Payment Date:</span>
+                            <span className="text-gray-600">
+                                {new Date(user.last_payemnt_date).toLocaleDateString()}
                             </span>
                         </div>
                     )}

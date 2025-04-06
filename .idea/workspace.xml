@@ -4,10 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="404eb4d8-f181-44b4-a139-a07b064bd629" name="Changes" comment="ADD: Attendance Details on Admin side">
+    <list default="true" id="404eb4d8-f181-44b4-a139-a07b064bd629" name="Changes" comment="UPDATE: Handle Timezone at attendance IST.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/Components/All_Staff/UserDetails.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/Components/All_Staff/UserDetails.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Client/src/Components/Attendance/Attendance.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/Components/Attendance/Attendance.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/src/Components/Attendance/M_Attendance.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/Components/Attendance/M_Attendance.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/Components/Profile/Profile.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/Components/Profile/Profile.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Server/controllers/Attendance_Controller.js" beforeDir="false" afterPath="$PROJECT_DIR$/Server/controllers/Attendance_Controller.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -182,23 +183,9 @@
       <workItem from="1743606401472" duration="7000" />
       <workItem from="1743661366450" duration="1221000" />
       <workItem from="1743770146352" duration="881000" />
-      <workItem from="1743825082071" duration="2416000" />
-    </task>
-    <task id="LOCAL-00029" summary="ADD: vercel.json file">
-      <option name="closed" value="true" />
-      <created>1740319131372</created>
-      <option name="number" value="00029" />
-      <option name="presentableId" value="LOCAL-00029" />
-      <option name="project" value="LOCAL" />
-      <updated>1740319131372</updated>
-    </task>
-    <task id="LOCAL-00030" summary="UPDATE: vercel.json file">
-      <option name="closed" value="true" />
-      <created>1740324280352</created>
-      <option name="number" value="00030" />
-      <option name="presentableId" value="LOCAL-00030" />
-      <option name="project" value="LOCAL" />
-      <updated>1740324280352</updated>
+      <workItem from="1743825082071" duration="3381000" />
+      <workItem from="1743860405927" duration="1223000" />
+      <workItem from="1743921863687" duration="986000" />
     </task>
     <task id="LOCAL-00031" summary="UPDATE: vercel.json file">
       <option name="closed" value="true" />
@@ -576,14 +563,29 @@
       <option name="project" value="LOCAL" />
       <updated>1743604760130</updated>
     </task>
-    <option name="localTasksCounter" value="78" />
+    <task id="LOCAL-00078" summary="UPDATE: Handle Timezone at attendance IST.">
+      <option name="closed" value="true" />
+      <created>1743828154230</created>
+      <option name="number" value="00078" />
+      <option name="presentableId" value="LOCAL-00078" />
+      <option name="project" value="LOCAL" />
+      <updated>1743828154231</updated>
+    </task>
+    <task id="LOCAL-00079" summary="UPDATE: Handle Timezone at attendance IST.">
+      <option name="closed" value="true" />
+      <created>1743828586413</created>
+      <option name="number" value="00079" />
+      <option name="presentableId" value="LOCAL-00079" />
+      <option name="project" value="LOCAL" />
+      <updated>1743828586413</updated>
+    </task>
+    <option name="localTasksCounter" value="80" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="UPDATE: Website Icon." />
     <MESSAGE value="UPDATE: Limit File size." />
     <MESSAGE value="UPDATE: file upload setup." />
     <MESSAGE value="UPDATE: file upload error." />
@@ -608,6 +610,7 @@
     <MESSAGE value="UPDATE: Remove Unnecessary data." />
     <MESSAGE value="UPDATE: Change CSS." />
     <MESSAGE value="ADD: Attendance Details on Admin side" />
-    <option name="LAST_COMMIT_MESSAGE" value="ADD: Attendance Details on Admin side" />
+    <MESSAGE value="UPDATE: Handle Timezone at attendance IST." />
+    <option name="LAST_COMMIT_MESSAGE" value="UPDATE: Handle Timezone at attendance IST." />
   </component>
 </project>

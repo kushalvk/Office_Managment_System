@@ -293,7 +293,7 @@ function UserProfile() {
                                 key !== "_id" && key !== "password" && key !== "profilePhoto" && key !== "__v" && (
                                     <div key={key} className="flex justify-between">
                                         <span className="font-semibold text-gray-700 capitalize">
-                                            {key.replace(/([A-Z])/g, ' $1').trim()}:
+                                            {key.replace(/([A-Z])|_/g, (match, p1) => p1 ? ` ${p1}` : ' ').trim()}:
                                         </span>
                                         {key === "resume" ? (
                                             <a
@@ -306,7 +306,7 @@ function UserProfile() {
                                             </a>
                                         ) : (
                                             <span className="text-gray-600">
-                                                {key === "createdAt" || key === "updatedAt"
+                                                {key === "createdAt" || key === "updatedAt" || key === "last_payemnt_date"
                                                     ? new Date(loggedIn[key]).toLocaleDateString()
                                                     : loggedIn[key]}
                                             </span>
