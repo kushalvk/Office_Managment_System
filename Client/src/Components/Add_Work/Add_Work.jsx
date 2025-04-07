@@ -287,7 +287,7 @@ function AddTask() {
                                                     alt={option.username}
                                                     className="w-6 h-6 rounded-full"
                                                 />
-                                                {option.username}
+                                                {option.username} <span className={"text-gray-400 text-sm"}>({option.department})</span>
                                             </li>
                                         ))}
                                     </ul>

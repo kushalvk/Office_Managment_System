@@ -4,11 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="404eb4d8-f181-44b4-a139-a07b064bd629" name="Changes" comment="UPDATE: Handle Timezone at attendance IST.">
+    <list default="true" id="404eb4d8-f181-44b4-a139-a07b064bd629" name="Changes" comment="UPDATE: Solving Error at Profile Page.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/src/Components/All_Staff/UserDetails.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/Components/All_Staff/UserDetails.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/Components/Add_Work/Add_Work.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/Components/Add_Work/Add_Work.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Client/src/Components/Attendance/Attendance.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/Components/Attendance/Attendance.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/src/Components/Profile/Profile.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/Components/Profile/Profile.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Server/controllers/Attendance_Controller.js" beforeDir="false" afterPath="$PROJECT_DIR$/Server/controllers/Attendance_Controller.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -185,15 +184,9 @@
       <workItem from="1743770146352" duration="881000" />
       <workItem from="1743825082071" duration="3381000" />
       <workItem from="1743860405927" duration="1223000" />
-      <workItem from="1743921863687" duration="986000" />
-    </task>
-    <task id="LOCAL-00031" summary="UPDATE: vercel.json file">
-      <option name="closed" value="true" />
-      <created>1740324372485</created>
-      <option name="number" value="00031" />
-      <option name="presentableId" value="LOCAL-00031" />
-      <option name="project" value="LOCAL" />
-      <updated>1740324372485</updated>
+      <workItem from="1743921863687" duration="1409000" />
+      <workItem from="1743985056177" duration="1643000" />
+      <workItem from="1743992938879" duration="1092000" />
     </task>
     <task id="LOCAL-00032" summary="UPDATE: file Access Permition.">
       <option name="closed" value="true" />
@@ -579,14 +572,21 @@
       <option name="project" value="LOCAL" />
       <updated>1743828586413</updated>
     </task>
-    <option name="localTasksCounter" value="80" />
+    <task id="LOCAL-00080" summary="UPDATE: Solving Error at Profile Page.">
+      <option name="closed" value="true" />
+      <created>1743923143423</created>
+      <option name="number" value="00080" />
+      <option name="presentableId" value="LOCAL-00080" />
+      <option name="project" value="LOCAL" />
+      <updated>1743923143423</updated>
+    </task>
+    <option name="localTasksCounter" value="81" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="UPDATE: Limit File size." />
     <MESSAGE value="UPDATE: file upload setup." />
     <MESSAGE value="UPDATE: file upload error." />
     <MESSAGE value="ADD: Apply a Cloudinary." />
@@ -611,6 +611,7 @@
     <MESSAGE value="UPDATE: Change CSS." />
     <MESSAGE value="ADD: Attendance Details on Admin side" />
     <MESSAGE value="UPDATE: Handle Timezone at attendance IST." />
-    <option name="LAST_COMMIT_MESSAGE" value="UPDATE: Handle Timezone at attendance IST." />
+    <MESSAGE value="UPDATE: Solving Error at Profile Page." />
+    <option name="LAST_COMMIT_MESSAGE" value="UPDATE: Solving Error at Profile Page." />
   </component>
 </project>
