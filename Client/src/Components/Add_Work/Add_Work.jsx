@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from "react";
-import { allStaff } from "../../Services/AuthService.js";
-import { addWork, generateWorkDescription } from "../../Services/WorkService.js";
+import React, {useEffect, useState} from "react";
+import {allStaff} from "../../Services/AuthService.js";
+import {addWork, generateWorkDescription} from "../../Services/WorkService.js";
 import Back_Button from "../BackButton/Back_Button";
 import toast from "react-hot-toast";
 import {allGroups} from "../../Services/GroupService.js";
@@ -52,9 +52,9 @@ function AddTask() {
         fetchStaff();
     }, []);
 
-    const handleInputChange = ({ target: { name, value } }) => {
-        setTask(prevTask => ({ ...prevTask, [name]: value }));
-        setFormErrors(prev => ({ ...prev, [name]: '' })); // Clear error on change
+    const handleInputChange = ({target: {name, value}}) => {
+        setTask(prevTask => ({...prevTask, [name]: value}));
+        setFormErrors(prev => ({...prev, [name]: ''})); // Clear error on change
     };
 
     const addGroup = () => {
@@ -68,7 +68,7 @@ function AddTask() {
             toast.error("This group has already been added.");
             return;
         }
-        setTask(prevTask => ({ ...prevTask, groupName: [...prevTask.groupName, selectedGroup] }));
+        setTask(prevTask => ({...prevTask, groupName: [...prevTask.groupName, selectedGroup]}));
         setSelectedGroup("");
         setError("");
     };
@@ -116,7 +116,7 @@ function AddTask() {
         if (!validateForm()) return;
 
         const usernames = members.map(member => member.username);
-        const finalTask = { ...task, empoyeeName: usernames };
+        const finalTask = {...task, empoyeeName: usernames};
 
         try {
             await addWork(finalTask);
@@ -145,7 +145,7 @@ function AddTask() {
         setLoading(true);
         try {
             const response = await generateWorkDescription(task.title);
-            setTask(prev => ({ ...prev, description: response.trim() }));
+            setTask(prev => ({...prev, description: response.trim()}));
         } catch (error) {
             console.error("Error fetching AI description:", error);
             toast.error("Error generating description. Please try again.");
@@ -157,7 +157,7 @@ function AddTask() {
     return (
         <div className="min-h-screen bg-gradient-to-r from-blue-600 to-indigo-500 p-6 pt-15">
 
-            <Back_Button />
+            <Back_Button/>
 
             <div className="max-w-3xl mx-auto bg-white rounded-xl shadow-2xl p-8">
                 <h1 className="text-3xl font-bold text-gray-800 mb-6 animate-fade-in">Add Work</h1>
@@ -208,7 +208,8 @@ function AddTask() {
                             min={new Date().toISOString().split("T")[0]}
                             className={`w-full p-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none ${formErrors.completionDate ? 'border-red-500' : 'border-gray-300'}`}
                         />
-                        {formErrors.completionDate && <p className="text-red-500 text-sm mt-1">{formErrors.completionDate}</p>}
+                        {formErrors.completionDate &&
+                            <p className="text-red-500 text-sm mt-1">{formErrors.completionDate}</p>}
                     </div>
 
                     <div>
@@ -266,29 +267,34 @@ function AddTask() {
                                         />
                                         {selectedOption.username}
                                     </span>
-                                    <svg className="w-4 h-4 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                                    <svg className="w-4 h-4 text-gray-500" fill="none" viewBox="0 0 24 24"
+                                         stroke="currentColor">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
+                                              d="M19 9l-7 7-7-7"/>
                                     </svg>
                                 </button>
                                 {isOpen && (
                                     <ul className="absolute z-10 w-full mt-2 bg-white border rounded-lg shadow-lg max-h-60 overflow-auto">
                                         {employeeOptions.map((option, index) => (
-                                            <li
-                                                key={index}
-                                                className="flex items-center gap-2 p-3 hover:bg-blue-50 cursor-pointer transition-all duration-200"
-                                                onClick={() => handleSelect(option)}
-                                            >
-                                                <img
-                                                    src={
-                                                        option.profilePhoto
-                                                            ? `${option.profilePhoto}`
-                                                            : "https://www.pngmart.com/files/23/Profile-PNG-Photo.png"
-                                                    }
-                                                    alt={option.username}
-                                                    className="w-6 h-6 rounded-full"
-                                                />
-                                                {option.username} <span className={"text-gray-400 text-sm"}>({option.department})</span>
-                                            </li>
+                                            option.role !== "Manager" && (
+                                                <li
+                                                    key={index}
+                                                    className="flex items-center gap-2 p-3 hover:bg-blue-50 cursor-pointer transition-all duration-200"
+                                                    onClick={() => handleSelect(option)}
+                                                >
+                                                    <img
+                                                        src={
+                                                            option.profilePhoto
+                                                                ? `${option.profilePhoto}`
+                                                                : "https://www.pngmart.com/files/23/Profile-PNG-Photo.png"
+                                                        }
+                                                        alt={option.username}
+                                                        className="w-6 h-6 rounded-full"
+                                                    />
+                                                    {option.username} <span
+                                                    className={"text-gray-400 text-sm"}>({option.department})</span>
+                                                </li>
+                                            )
                                         ))}
                                     </ul>
                                 )}
@@ -310,7 +316,8 @@ function AddTask() {
                                     <h3 className="text-gray-700 font-semibold mb-2">Groups</h3>
                                     <div className="space-y-2">
                                         {task.groupName.map((group, index) => (
-                                            <div key={index} className="flex justify-between items-center p-2 bg-gray-100 rounded-lg">
+                                            <div key={index}
+                                                 className="flex justify-between items-center p-2 bg-gray-100 rounded-lg">
                                                 <span>{group}</span>
                                                 <button
                                                     onClick={() => removeItem('groupName', group)}
@@ -328,7 +335,8 @@ function AddTask() {
                                     <h3 className="text-gray-700 font-semibold mb-2">Assigned Employees</h3>
                                     <div className="space-y-2">
                                         {members.map((employee, index) => (
-                                            <div key={index} className="flex justify-between items-center p-2 bg-gray-100 rounded-lg">
+                                            <div key={index}
+                                                 className="flex justify-between items-center p-2 bg-gray-100 rounded-lg">
                                                 <span className="flex items-center gap-2">
                                                     <img
                                                         src={employee.profilePhoto}
