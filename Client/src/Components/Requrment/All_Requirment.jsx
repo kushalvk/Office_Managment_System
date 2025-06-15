@@ -15,6 +15,7 @@ import Loader from "../Loader/Loader.jsx";
 
 function AllRequirements() {
     const [requirements, setRequirements] = useState([]);
+    const [allRequirements, setAllRequirements] = useState([]);
     const [loggedin, setLoggedin] = useState(null);
     const [editRequirement, setEditRequirement] = useState(null);
     const [editedData, setEditedData] = useState({name: "", reason: ""});
@@ -54,21 +55,9 @@ function AllRequirements() {
                     response = await allRequrmentsByUsername(loggedin.username);
                 }
 
-                let filteredRequirements = response || [];
-
-                if (searchTerm) {
-                    filteredRequirements = filteredRequirements.filter(req =>
-                        req.name.toLowerCase().includes(searchTerm.toLowerCase())
-                    );
-                }
-
-                if (filterStatus !== "all") {
-                    filteredRequirements = filteredRequirements.filter(req =>
-                        req.requrmentStatus.toLowerCase() === filterStatus.toLowerCase()
-                    );
-                }
-                await new Promise(resolve => setTimeout(resolve, 1000));
-                setRequirements(filteredRequirements);
+                const fetched = response || [];
+                setAllRequirements(fetched);
+                setRequirements(fetched);
             } catch (e) {
                 console.log(e);
                 toast.error("Failed to fetch requirements");
@@ -78,7 +67,26 @@ function AllRequirements() {
         };
 
         fetchRequirements();
-    }, [loggedin?.role, loggedin?.username, searchTerm, filterStatus]);
+    }, [loggedin]);
+
+    useEffect(() => {
+        let filtered = [...allRequirements];
+
+        if (searchTerm.trim() !== "") {
+            filtered = filtered.filter(req =>
+                req.name.toLowerCase().includes(searchTerm.toLowerCase())
+            );
+        }
+
+        if (filterStatus !== "all") {
+            filtered = filtered.filter(req =>
+                req.requrmentStatus.toLowerCase() === filterStatus.toLowerCase()
+            );
+        }
+
+        setRequirements(filtered);
+    }, [searchTerm, filterStatus, allRequirements]);
+
 
     const navigate = useNavigate();
 

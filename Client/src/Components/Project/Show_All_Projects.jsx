@@ -15,6 +15,7 @@ import Loader from "../Loader/Loader.jsx";
 
 function AllProjects() {
     const [projects, setProjects] = useState([]);
+    const [allProjects, setAllProjects] = useState([]);
     const [loggedIn, setLoggedIn] = useState(null);
     const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
     const [showCompleteConfirm, setShowCompleteConfirm] = useState(false);
@@ -54,21 +55,9 @@ function AllProjects() {
                     response = await fetchemployeeProjects(username);
                 }
 
-                let filteredProjects = response.projects || [];
-
-                if (searchTerm) {
-                    filteredProjects = filteredProjects.filter(project =>
-                        project.title.toLowerCase().includes(searchTerm.toLowerCase())
-                    );
-                }
-
-                if (filterStatus !== "all") {
-                    filteredProjects = filteredProjects.filter(project =>
-                        (filterStatus === "complete" ? project.workStatus === "complete" : project.workStatus !== "complete")
-                    );
-                }
-                await new Promise(resolve => setTimeout(resolve, 1000));
-                setProjects(filteredProjects);
+                const fetched = response.projects || [];
+                setAllProjects(fetched);
+                setProjects(fetched);
             } catch (e) {
                 console.log(e);
                 toast.error("Failed to fetch projects.");
@@ -78,7 +67,27 @@ function AllProjects() {
         };
 
         fetchProjects();
-    }, [loggedIn, username, searchTerm, filterStatus]);
+    }, [loggedIn, username]);
+
+    useEffect(() => {
+        let filtered = [...allProjects];
+
+        if (searchTerm.trim() !== "") {
+            filtered = filtered.filter(project =>
+                project.title.toLowerCase().includes(searchTerm.toLowerCase())
+            );
+        }
+
+        if (filterStatus !== "all") {
+            filtered = filtered.filter(project =>
+                filterStatus === "complete"
+                    ? project.workStatus === "complete"
+                    : project.workStatus !== "complete"
+            );
+        }
+
+        setProjects(filtered);
+    }, [searchTerm, filterStatus, allProjects]);
 
     const handleDeleteClick = (id) => {
         setDeleteId(id);

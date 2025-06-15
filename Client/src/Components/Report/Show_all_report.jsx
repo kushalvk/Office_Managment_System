@@ -1,7 +1,7 @@
-import { useNavigate } from "react-router-dom";
-import React, { useEffect, useState } from "react";
-import { allReports, allReportsByUsername, approveReports, deleteReports } from "../../Services/ReportService.js";
-import { loggedUser } from "../../Services/AuthService.js";
+import {useNavigate} from "react-router-dom";
+import React, {useEffect, useState} from "react";
+import {allReports, allReportsByUsername, approveReports, deleteReports} from "../../Services/ReportService.js";
+import {loggedUser} from "../../Services/AuthService.js";
 import Back_Button from "../BackButton/Back_Button";
 import toast from "react-hot-toast";
 import DeleteConfirmationAlert from "../ConfirmetionAlerts/DeleteConfermetionAlert.jsx";
@@ -10,6 +10,7 @@ import Loader from "../Loader/Loader.jsx";
 
 function ShowAllReports() {
     const [reports, setReports] = useState([]);
+    const [allReport, setAllReports] = useState([]);
     const [loggedIn, setLoggedIn] = useState(null);
     const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
     const [showApproveConfirm, setShowApproveConfirm] = useState(false);
@@ -48,21 +49,9 @@ function ShowAllReports() {
                     response = await allReportsByUsername(loggedIn.username);
                 }
 
-                let filteredReports = response.reports || [];
-
-                if (searchTerm) {
-                    filteredReports = filteredReports.filter(report =>
-                        report.title.toLowerCase().includes(searchTerm.toLowerCase())
-                    );
-                }
-
-                if (filterStatus !== "all") {
-                    filteredReports = filteredReports.filter(report =>
-                        (filterStatus === "approved" ? report.approve : !report.approve)
-                    );
-                }
-                await new Promise(resolve => setTimeout(resolve, 3000));
-                setReports(filteredReports);
+                const fetchedReports = response.reports || [];
+                setAllReports(fetchedReports);
+                setReports(fetchedReports);
             } catch (e) {
                 console.log(e);
                 toast.error("Failed to load reports.");
@@ -72,7 +61,26 @@ function ShowAllReports() {
         };
 
         fetchReports();
-    }, [loggedIn, searchTerm, filterStatus]);
+    }, [loggedIn]);
+
+    useEffect(() => {
+        let filtered = [...allReport];
+
+        if (searchTerm.trim() !== "") {
+            const term = searchTerm.trim().toLowerCase();
+            filtered = filtered.filter(report =>
+                report.title.toLowerCase().includes(term)
+            );
+        }
+
+        if (filterStatus !== "all") {
+            filtered = filtered.filter(report =>
+                filterStatus === "approved" ? report.approve : !report.approve
+            );
+        }
+
+        setReports(filtered);
+    }, [searchTerm, filterStatus, allReports]);
 
     const handleDeleteClick = (id) => {
         setDeleteId(id);
@@ -102,7 +110,7 @@ function ShowAllReports() {
             await approveReports(approveId);
             setReports(prev =>
                 prev.map(report =>
-                    report._id === approveId ? { ...report, approve: true } : report
+                    report._id === approveId ? {...report, approve: true} : report
                 )
             );
             toast.success("Report approved successfully!");
@@ -113,13 +121,13 @@ function ShowAllReports() {
     };
 
     if (isLoading) {
-        return <Loader />
+        return <Loader/>
     }
 
     return (
         <div className="min-h-screen bg-gradient-to-r from-blue-600 to-indigo-500 p-5 pt-15">
 
-            <Back_Button />
+            <Back_Button/>
 
             <div className="max-w-3xl mx-auto text-center pt-16 pb-8">
                 <h1 className="text-4xl md:text-5xl font-bold text-white drop-shadow-lg animate-fade-in">
@@ -178,7 +186,7 @@ function ShowAllReports() {
                                     </p>
                                     <p
                                         className={`text-sm mt-1 font-medium ${report.approve ? "text-green-500" : "text-red-500"
-                                            }`}
+                                        }`}
                                     >
                                         Status: {report.approve ? "Approved" : "Not Approved"}
                                     </p>

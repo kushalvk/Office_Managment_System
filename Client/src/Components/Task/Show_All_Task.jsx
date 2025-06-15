@@ -9,11 +9,12 @@ import {
 import { loggedUser } from "../../Services/AuthService.js";
 import Back_Button from "../BackButton/Back_Button";
 import toast from "react-hot-toast";
-import DeleteConfirmationAlert from "../ConfirmetionAlerts/DeleteConfermetionAlert"; // Import if separate file
-import CompleteConfirmationAlert from "../ConfirmetionAlerts/ComlateConfermetionAlert.jsx"; // Import if separate file
+import DeleteConfirmationAlert from "../ConfirmetionAlerts/DeleteConfermetionAlert";
+import CompleteConfirmationAlert from "../ConfirmetionAlerts/ComlateConfermetionAlert.jsx";
 import Loader from "../Loader/Loader.jsx";
 
 function ShowTask() {
+    const [allTasks, setAllTasks] = useState([]);
     const [tasks, setTasks] = useState([]);
     const [loggedIn, setLoggedIn] = useState(null);
     const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
@@ -43,32 +44,17 @@ function ShowTask() {
 
     useEffect(() => {
         const fetchTasks = async () => {
+            if (!loggedIn) return;
             try {
                 setIsLoading(true);
-                if (!loggedIn) return;
-
                 let response;
                 if (loggedIn.role === "Manager") {
                     response = await fetchallTasks();
                 } else {
                     response = await fetchemployeeTasks(username);
                 }
-
-                let filteredTasks = response.tasks || [];
-
-                if (searchTerm) {
-                    filteredTasks = filteredTasks.filter(task =>
-                        task.title.toLowerCase().includes(searchTerm.toLowerCase())
-                    );
-                }
-
-                if (filterStatus !== "all") {
-                    filteredTasks = filteredTasks.filter(task =>
-                        (filterStatus === "complete" ? task.workStatus === "complete" : task.workStatus !== "complete")
-                    );
-                }
-                await new Promise(resolve => setTimeout(resolve, 1000));
-                setTasks(filteredTasks);
+                const fetchedTasks = response.tasks || [];
+                setAllTasks(fetchedTasks);
             } catch (e) {
                 console.log(e);
                 toast.error("Failed to fetch tasks.");
@@ -78,7 +64,27 @@ function ShowTask() {
         };
 
         fetchTasks();
-    }, [loggedIn, username, searchTerm, filterStatus]); // Trigger fetch when these change
+    }, [loggedIn, username]);
+
+    useEffect(() => {
+        let filtered = [...allTasks];
+
+        if (searchTerm.trim() !== "") {
+            filtered = filtered.filter(task =>
+                task.title.toLowerCase().includes(searchTerm.toLowerCase())
+            );
+        }
+
+        if (filterStatus !== "all") {
+            filtered = filtered.filter(task =>
+                filterStatus === "complete"
+                    ? task.workStatus === "complete"
+                    : task.workStatus !== "complete"
+            );
+        }
+
+        setTasks(filtered);
+    }, [searchTerm, filterStatus, allTasks]);
 
     const handleDeleteClick = (id) => {
         setDeleteId(id);
@@ -89,7 +95,7 @@ function ShowTask() {
     const handleDeleteConfirm = async () => {
         try {
             await deleteWorkById(deleteId);
-            setTasks(prevTasks => prevTasks.filter(task => task._id !== deleteId));
+            setAllTasks(prev => prev.filter(task => task._id !== deleteId));
             toast.success("Task deleted successfully!");
         } catch (e) {
             console.log(e);
@@ -106,8 +112,8 @@ function ShowTask() {
     const handleCompleteConfirm = async () => {
         try {
             await completeById(completeId);
-            setTasks(prevTasks =>
-                prevTasks.map(task =>
+            setAllTasks(prev =>
+                prev.map(task =>
                     task._id === completeId ? { ...task, workStatus: "complete" } : task
                 )
             );
@@ -123,12 +129,11 @@ function ShowTask() {
     };
 
     if (isLoading) {
-        return <Loader />
+        return <Loader />;
     }
 
     return (
         <div className="min-h-screen bg-gradient-to-r from-blue-600 to-indigo-500 p-5 pt-15">
-
             <Back_Button />
 
             <div className="max-w-3xl mx-auto text-center pt-16 pb-8">
@@ -184,7 +189,8 @@ function ShowTask() {
                                 <div className="flex-grow">
                                     <h4 className="text-xl font-semibold text-gray-800">{task.title}</h4>
                                     <p className="text-sm text-gray-600 mt-1">
-                                        <span className="font-medium">Completion Date:</span> {new Date(task.completionDate).toLocaleDateString()}
+                                        <span className="font-medium">Completion Date:</span>{" "}
+                                        {new Date(task.completionDate).toLocaleDateString()}
                                     </p>
                                     <p
                                         className={`text-sm font-medium mt-1 ${

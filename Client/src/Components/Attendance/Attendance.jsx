@@ -56,17 +56,17 @@ const Attendance = () => {
             // }
 
             // Convert current time to IST
-            const istOffset = 5.5 * 60; // IST is UTC+5:30
-            const utc = now.getTime() + now.getTimezoneOffset() * 60000;
-            const istTime = new Date(utc + 60000 * istOffset);
-
-            const currentHourIST = istTime.getHours();
-            const currentMinuteIST = istTime.getMinutes();
-
-            if (currentHourIST !== 8 || currentMinuteIST >= 60) {
-                toast.error("Check-in allowed only between 8:00 AM and 9:00 AM IST.");
-                return;
-            }
+            // const istOffset = 5.5 * 60; // IST is UTC+5:30
+            // const utc = now.getTime() + now.getTimezoneOffset() * 60000;
+            // const istTime = new Date(utc + 60000 * istOffset);
+            //
+            // const currentHourIST = istTime.getHours();
+            // const currentMinuteIST = istTime.getMinutes();
+            //
+            // if (currentHourIST !== 8 || currentMinuteIST >= 60) {
+            //     toast.error("Check-in allowed only between 8:00 AM and 9:00 AM IST.");
+            //     return;
+            // }
 
             const response = await checkIn({ username: loggedIn.username });
             toast.success(response.message);
@@ -79,7 +79,6 @@ const Attendance = () => {
         }
     };
 
-
     const handleCheckOut = async () => {
         try {
             const now = new Date();
@@ -91,17 +90,17 @@ const Attendance = () => {
             // }
 
             // Convert to IST
-            const istOffset = 5.5 * 60; // IST is UTC+5:30
-            const utc = now.getTime() + now.getTimezoneOffset() * 60000;
-            const istTime = new Date(utc + 60000 * istOffset);
-
-            const currentHourIST = istTime.getHours();
-            const currentMinuteIST = istTime.getMinutes();
-
-            if (currentHourIST !== 18 || currentMinuteIST >= 60) {
-                toast.error("Check-out allowed only between 6:00 PM and 7:00 PM IST.");
-                return;
-            }
+            // const istOffset = 5.5 * 60; // IST is UTC+5:30
+            // const utc = now.getTime() + now.getTimezoneOffset() * 60000;
+            // const istTime = new Date(utc + 60000 * istOffset);
+            //
+            // const currentHourIST = istTime.getHours();
+            // const currentMinuteIST = istTime.getMinutes();
+            //
+            // if (currentHourIST !== 18 || currentMinuteIST >= 60) {
+            //     toast.error("Check-out allowed only between 6:00 PM and 7:00 PM IST.");
+            //     return;
+            // }
 
             const response = await checkOut({ username: loggedIn.username });
             toast.success(response.message);
