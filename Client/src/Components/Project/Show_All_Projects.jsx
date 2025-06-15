@@ -44,6 +44,7 @@ function AllProjects() {
 
     useEffect(() => {
         const fetchProjects = async () => {
+            if (!loggedIn) return;
             try {
                 setIsLoading(true);
                 if (!loggedIn) return;

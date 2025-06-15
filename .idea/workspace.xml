@@ -4,15 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="404eb4d8-f181-44b4-a139-a07b064bd629" name="Changes" comment="UPDATE: Update add Work Page.">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/src/Components/Attendance/Attendance.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/Components/Attendance/Attendance.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/src/Components/Project/Show_All_Projects.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/Components/Project/Show_All_Projects.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/src/Components/Report/Show_all_report.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/Components/Report/Show_all_report.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/src/Components/Requrment/All_Requirment.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/Components/Requrment/All_Requirment.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/src/Components/Task/Show_All_Task.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/Components/Task/Show_All_Task.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/controllers/Attendance_Controller.js" beforeDir="false" afterPath="$PROJECT_DIR$/Server/controllers/Attendance_Controller.js" afterDir="false" />
-    </list>
+    <list default="true" id="404eb4d8-f181-44b4-a139-a07b064bd629" name="Changes" comment="UPDATE: solving Error in search &amp; filter facility." />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -190,15 +182,7 @@
       <workItem from="1743921863687" duration="1409000" />
       <workItem from="1743985056177" duration="1643000" />
       <workItem from="1743992938879" duration="4422000" />
-      <workItem from="1749997281913" duration="2741000" />
-    </task>
-    <task id="LOCAL-00034" summary="UPDATE: file Access Permition.">
-      <option name="closed" value="true" />
-      <created>1740326154159</created>
-      <option name="number" value="00034" />
-      <option name="presentableId" value="LOCAL-00034" />
-      <option name="project" value="LOCAL" />
-      <updated>1740326154159</updated>
+      <workItem from="1749997281913" duration="3112000" />
     </task>
     <task id="LOCAL-00035" summary="UPDATE: file Access Permition.">
       <option name="closed" value="true" />
@@ -584,14 +568,21 @@
       <option name="project" value="LOCAL" />
       <updated>1743995954064</updated>
     </task>
-    <option name="localTasksCounter" value="83" />
+    <task id="LOCAL-00083" summary="UPDATE: solving Error in search &amp; filter facility.">
+      <option name="closed" value="true" />
+      <created>1750001422455</created>
+      <option name="number" value="00083" />
+      <option name="presentableId" value="LOCAL-00083" />
+      <option name="project" value="LOCAL" />
+      <updated>1750001422455</updated>
+    </task>
+    <option name="localTasksCounter" value="84" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="UPDATE: file upload error." />
     <MESSAGE value="ADD: Apply a Cloudinary." />
     <MESSAGE value="ADD: handle error to large file size at report." />
     <MESSAGE value="ADD: Files Upload on cloudinary completed for all page." />
@@ -616,6 +607,7 @@
     <MESSAGE value="UPDATE: Handle Timezone at attendance IST." />
     <MESSAGE value="UPDATE: Solving Error at Profile Page." />
     <MESSAGE value="UPDATE: Update add Work Page." />
-    <option name="LAST_COMMIT_MESSAGE" value="UPDATE: Update add Work Page." />
+    <MESSAGE value="UPDATE: solving Error in search &amp; filter facility." />
+    <option name="LAST_COMMIT_MESSAGE" value="UPDATE: solving Error in search &amp; filter facility." />
   </component>
 </project>
