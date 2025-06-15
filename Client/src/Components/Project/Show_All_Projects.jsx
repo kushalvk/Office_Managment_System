@@ -47,7 +47,6 @@ function AllProjects() {
             if (!loggedIn) return;
             try {
                 setIsLoading(true);
-                if (!loggedIn) return;
 
                 let response;
                 if (loggedIn.role === "Manager") {

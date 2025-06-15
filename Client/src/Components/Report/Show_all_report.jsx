@@ -38,9 +38,9 @@ function ShowAllReports() {
 
     useEffect(() => {
         const fetchReports = async () => {
-            setIsLoading(true);
+            if (!loggedIn) return;
             try {
-                if (!loggedIn) return;
+                setIsLoading(true);
 
                 let response;
                 if (loggedIn.role === "Manager") {

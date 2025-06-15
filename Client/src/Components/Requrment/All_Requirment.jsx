@@ -44,9 +44,9 @@ function AllRequirements() {
 
     useEffect(() => {
         const fetchRequirements = async () => {
-            setIsLoading(true);
+            if (!loggedin) return;
             try {
-                if (!loggedin) return;
+                setIsLoading(true);
 
                 let response;
                 if (loggedin.role === "Manager") {
